@@ -31,7 +31,7 @@
 
 
 <body>
-<header style="height: 100vh;">
+<header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
 <div class="container">
     <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
@@ -77,13 +77,16 @@
 
 </nav>
     <div class="view intro-2"
-         style="background: url('/img/首页.jpg')no-repeat center center;background-size: cover;">
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
         <div class="full-bg-img">
             <div class="mask rgba-black-light flex-center">
                 <div class="container text-center white-text wow fadeInUp">
                     <span class="h2" id="subtitle">
                         
                     </span>
+                    
+                        <br>
+                        <p>Friday, August 23rd 2019, 9:45 pm</p>
                     
                 </div>
             </div>
@@ -93,46 +96,53 @@
 
 <main>
     
-        <div class="container nopadding-md">
-            <div class="py-5 z-depth-3 board">
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-10 m-auto">
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
                             
-
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/08/23/test/">
-                <p class="h4 index-header"></p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1"></div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-23
-                    &nbsp;&nbsp;
-                    
-                    
-                </div>
-            
-        </div>
-    </div>
-
-
-
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
                         </div>
                     </div>
                 </div>
             </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
         </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+
     
 </main>
 
@@ -177,6 +187,11 @@
   <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
   <script src="/js/main.js"></script>
   
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
   
     <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
     <script>
@@ -192,7 +207,7 @@
         var typed = new Typed('#subtitle', {
           strings: [
             '  ',
-            "儒哥牛逼&nbsp;",
+            "&nbsp;",
         ],
         cursorChar: "_",
         typeSpeed: 70,
