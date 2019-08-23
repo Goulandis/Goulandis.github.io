@@ -14,7 +14,7 @@
     <meta name="description" content>
     <meta name="author" content="John Doe">
     <meta name="keywords" content>
-    <title>Archives ~ Hexo</title>
+    <title>【Unity3d】简单的存档与读档 ~ Hexo</title>
     <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
@@ -31,7 +31,7 @@
 
 
 <body>
-<header style="height: 80vh;">
+<header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
 <div class="container">
     <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
@@ -77,13 +77,16 @@
 
 </nav>
     <div class="view intro-2"
-         style="background: url('/img/归档.jpg')no-repeat center center;background-size: cover;">
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
         <div class="full-bg-img">
             <div class="mask rgba-black-light flex-center">
                 <div class="container text-center white-text wow fadeInUp">
                     <span class="h2" id="subtitle">
                         
                     </span>
+                    
+                        <br>
+                        <p>Friday, August 23rd 2019, 10:24 pm</p>
                     
                 </div>
             </div>
@@ -93,58 +96,85 @@
 
 <main>
     
-        <div class="container nopadding-md">
-            <div class="py-5 z-depth-3 board">
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-10 m-auto">
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <p>﻿在Unity3d中，游戏的存档与读档主要由PlayerPrefs类来完成，在Windows下PlayerPrefs存档主要存储在注册表中，路径为HKCU\Software[company name][product name] ，这里的company name和product name由作者自己确定，在Edit-&gt;Project Settings-&gt;Player中可以设置<br><img src="https://img-blog.csdnimg.cn/20190622143530421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>PlayerSettings视图<br><img src="https://img-blog.csdnimg.cn/20190622143747327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>那么如何设计游戏存档呢？<br>以笔者个人的经验而言，在游戏设计之初，我们就应该想好需要存档的数据，为需要保存的数据或状态设计可供读取的状态标志，以便以后在设计存档时，提供给PlayerPrefs类的方法使用。<br>PlayerPrefs类提供如下方法供设计者使用<br><img src="https://img-blog.csdnimg.cn/20190622144312778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>可以看到，PlayerPrefs类中没有提供对bool型数据的存储方法，由此可以看出为需要保存的数据或状态设计可供读取的状态标志的重要性，否则那些由bool型数据确定的状态将无法被存档。<br><img src="https://img-blog.csdnimg.cn/20190622151126795.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下面给一段示例代码：</p>
+<pre><code> /*
+     * inventory.charge--int--能量电池数量
+     * inventory.playerTransform--float--玩家位置
+     * talk.yeshu--int--man的任务进度
+     * talk.wyeshu--int--women的任务进度
+      */
+    void gameSave() {
+        PlayerPrefs.SetInt(&quot;charge&quot;, inventory.charge);
+        PlayerPrefs.SetInt(&quot;yeshu&quot;, talk.yeshu);
+        PlayerPrefs.SetInt(&quot;wyeshu&quot;, talk.wyeshu);
+        PlayerPrefs.SetFloat(&quot;playerPosition.x&quot;, inventory.playerTransform.position.x);
+        PlayerPrefs.SetFloat(&quot;playerPosition.y&quot;, inventory.playerTransform.position.y);
+        PlayerPrefs.SetFloat(&quot;playerPosition.z&quot;, inventory.playerTransform.position.z);
+        PlayerPrefs.Save();
+    }
+    void gameRead() {
+        if (PlayerPrefs.HasKey(&quot;charge&quot;))//存档读取的一般方式
+            inventory.charge = PlayerPrefs.GetInt(&quot;charge&quot;);
+        if (PlayerPrefs.HasKey(&quot;yeshu&quot;))
+            talk.yeshu = PlayerPrefs.GetInt(&quot;yehsu&quot;);
+        if (PlayerPrefs.HasKey(&quot;wyeshu&quot;))
+            talk.wyeshu = PlayerPrefs.GetInt(&quot;wyeshu&quot;);
+        if (PlayerPrefs.HasKey(&quot;playerPosition.x&quot;))
+            x = PlayerPrefs.GetFloat(&quot;playerPosition.x&quot;);
+        if (PlayerPrefs.HasKey(&quot;playerPosition.y&quot;))
+            y = PlayerPrefs.GetFloat(&quot;playerPosition.y&quot;);
+        if (PlayerPrefs.HasKey(&quot;playerPosition.z&quot;))
+            z = PlayerPrefs.GetFloat(&quot;playerPosition.z&quot;);
+        inventory.playerTransform.position = new Vector3(x, y, z);
+
+    }</code></pre><p>那么对于已经产生的注册表我们如何查看呢？<br>在Windows下通过注册表编辑器查看注册表，通过Win+R将呼出“运行”，输入“regedit”即可打开注册表编辑器在HKCU\Software[company name][product name] 路径下即可找到我们已经生成的注册表<br><img src="https://img-blog.csdnimg.cn/20190622151747405.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
                             
-
-<div class="list-group">
-    <p class="h4">Total: 5</p>
-    <hr>
-    
-        
-            
-            <p class="h5">2019</p>
-        
-        <a href="/2019/08/23/【C++】C++进阶/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【C++】C++进阶</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【Unity3d】游戏截屏/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【Unity3d】游戏截屏</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【Unity3d】存档与读档/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【Unity3d】简单的存档与读档</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【Unity3d】Animation/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【Unity3d】Animation</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【计算机图形学】多变形填充算法原理/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【计算机图形学】多边形填充算法</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-</div>
-
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
                         </div>
                     </div>
                 </div>
             </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
         </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+
     
 </main>
 
@@ -189,6 +219,11 @@
   <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
   <script src="/js/main.js"></script>
   
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
   
     <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
     <script>
@@ -204,7 +239,7 @@
         var typed = new Typed('#subtitle', {
           strings: [
             '  ',
-            "Archives&nbsp;",
+            "【Unity3d】简单的存档与读档&nbsp;",
         ],
         cursorChar: "_",
         typeSpeed: 70,
