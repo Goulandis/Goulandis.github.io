@@ -14,7 +14,7 @@
     <meta name="description" content>
     <meta name="author" content="John Doe">
     <meta name="keywords" content>
-    <title>Category - 学习笔记 ~ Goulandis</title>
+    <title>【C++】普通全局变量、静态全局变量、普通局部变量与静态局部变量 ~ Goulandis</title>
     <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
@@ -31,7 +31,7 @@
 
 
 <body>
-<header style="height: 80vh;">
+<header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
 <div class="container">
     <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
@@ -77,13 +77,16 @@
 
 </nav>
     <div class="view intro-2"
-         style="background: url('/img/QQ图片20190823190944.jpg')no-repeat center center;background-size: cover;">
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
         <div class="full-bg-img">
             <div class="mask rgba-black-light flex-center">
                 <div class="container text-center white-text wow fadeInUp">
                     <span class="h2" id="subtitle">
                         
                     </span>
+                    
+                        <br>
+                        <p>Wednesday, September 11th 2019, 8:58 pm</p>
                     
                 </div>
             </div>
@@ -93,69 +96,93 @@
 
 <main>
     
-        <div class="container nopadding-md">
-            <div class="py-5 z-depth-3 board">
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-10 m-auto">
-                            
+        
 
-<div class="list-group">
-    <p class="h4">Total: 7</p>
-    <hr>
-    
-        
-            
-            <p class="h5">2019</p>
-        
-        <a href="/2019/08/25/【C#】C#高级/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">C#高级</span>
-            <span style="float: right;">08-25</span>
-        </a>
-    
-        
-        <a href="/2019/08/25/【C#】C#中级/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">C#中级</span>
-            <span style="float: right;">08-25</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【C++】C++进阶/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【C++】C++进阶</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【Unity3d】游戏截屏/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【Unity3d】游戏截屏</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【Unity3d】存档与读档/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【Unity3d】简单的存档与读档</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【Unity3d】Animation/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【Unity3d】Animation</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【计算机图形学】多变形填充算法原理/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【计算机图形学】多边形填充算法</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <p>1.普通全局变量</p>
+<p>​    普通全局变量是定义在函数和类外的或由extern标识或直接定义没有static标识的变量。</p>
+<p>​    各个类型的变量之间最主要的区别就是作用域的不同了，普通全局变量的作用域在整个源程序中，全局变量对整个源程序中都是可见的，无论源程序是由单个文件还是多个文件组成，普通全局变量具有external链接属性，所以普通全局变量在整个源程序的各个文件中都可以被引用。</p>
+<p>2.静态全局变量</p>
+<p>​    静态全局变量是定义在函数和类外的由static标识的变量。</p>
+<p>​    静态全局变量具有文件作用域，具有internal链接属性，只能在定义的文件中使用，在其他文件中可以定义同名的变量，而全局变量则不行，这里要注意静态全局变量与类静态全局变量是不同的，类静态全局变量受到类权限限制，不同的访问权限就之间决定了类静态全局变量的作用域，类全局变量的使用与类一致，能使用类的地方就能使用类全局变量。</p>
+<p>​    关于普通全局变量和静态全局变量的区别，我一直没有弄得很清楚，我有在网上查阅很多bolg，大家的说法都出奇的一致，我上面写的也是在查阅很多blog后总结的，但是我实际测试时，普通全局变量和静态全局变量似乎都可以被其他文件使用，并且 在其他文件中定义静态全局变量似乎也没有报错，没有弄明白这个其他文件指的是什么文件。</p>
+<p><img src="/2019/09/11/【C++】全局变量、静态全局变量、局部变量与静态局部变量/Snipaste_2019-09-11_21-36-28.png" alt></p>
+<p><img src="/2019/09/11/【C++】全局变量、静态全局变量、局部变量与静态局部变量/Snipaste_2019-09-11_21-36-28.png" alt></p>
+<p>3.普通局部变量</p>
+<p>​    普通局部变量是定义在函数内的没有static标识的变量。</p>
+<p>​    普通局部变量具有块作用域，生命周期从定义开始到跳出函数结束，普通局部变量每次使用都会初始化一次。</p>
+<p>4.静态局部变量</p>
+<p>​    静态局部变量的作用于和普通局部变量一致，但是静态局部变量的内存地址在函数结束后不会被销毁，且会保存赋值结果，静态局部变量和静态全局变量一样会一直驻留在静态区，静态局部变量只会初始化一次，在下一次函数被调用时不会再初始化而是直接调用。</p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/C++">C++</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
                         </div>
                     </div>
                 </div>
             </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
         </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+            <br><br>
+            
+            
+    <script src="https://utteranc.es/client.js"
+            repo="Goulandis/Comments"
+            issue-term="pathname"
+            
+            label="utterances"
+            
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+	    
+        
+    </div>
+</div>
+
     
 </main>
 
@@ -200,6 +227,11 @@
   <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
   <script src="/js/main.js"></script>
   
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
   
     <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
     <script>
@@ -215,7 +247,7 @@
         var typed = new Typed('#subtitle', {
           strings: [
             '  ',
-            "Category - 学习笔记&nbsp;",
+            "【C++】普通全局变量、静态全局变量、普通局部变量与静态局部变量&nbsp;",
         ],
         cursorChar: "_",
         typeSpeed: 70,

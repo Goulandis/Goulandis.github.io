@@ -14,7 +14,7 @@
     <meta name="description" content>
     <meta name="author" content="John Doe">
     <meta name="keywords" content>
-    <title>Hexo</title>
+    <title>Goulandis</title>
     <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
@@ -106,6 +106,200 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/14/【C++】高级/">
+                <p class="h4 index-header">【C++】高级</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">一、多态​    在C++的几个特性中，封装、继承和抽象都相对好理解，而多态则不太好理解，这里就说说C++的多态。
+1.多态分两种：​    静态多态：静态多态指的就是函数重载和运算符重载。
+class Animal
+{
+public:
+    string name = &quot;动物&quot;;
+    virtual void speak()
+    {
+        cout &lt;&lt; name &lt;&lt; &quot;在叫&quot; &lt;&lt; endl;
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    string name = &quot;狗&quot;;
+    void speak()
+    {
+        cout &lt;&lt; name &lt;&lt; &quot;在叫&quot; &lt;&lt;endl;
+    }
+};
+
+string operator+(Animal animal,Dog dog)
+{
+    return animal.name + &quot;</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-14
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/12/【C++】C++中的四种转换类型/">
+                <p class="h4 index-header">【C++】C++中的四种类型转换</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">C++提供四种类型转换：const_cast、static_cast、dynamic_cast、reinterpret_cast
+1.const_cast
+​    const_cast的存在主要就是针对const字段，C++提供const_cast的目的就是为了消除const字段的const属性，让const字段也可以修改。
+​    const_cast的用法：
+​        const_cast只能将常指针转换为非常指针，不能直接将常字段转换为非常字段，只能通过指针类间接的修改常字段所在的内存的内容。
+​        例：
+const int a = 1;
+const int* n = &amp;a;
+int* m = const_cast&lt;int*&gt;(n) ;
+*m = 2;
+​    最终的输出结果：
+a = 1,*n = 2,*m = 2
+&amp;a=n=m​        奇怪，指针n，m的确指向了地址&amp;a，之中的内容的确也修改成了2，可为什么字段a的值依旧是1？
+​        经过多方查阅资料和自己的试验，原来对于常字段在预编译的过程中编</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-12
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/11/【C++】全局变量、静态全局变量、局部变量与静态局部变量/">
+                <p class="h4 index-header">【C++】普通全局变量、静态全局变量、普通局部变量与静态局部变量</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">1.普通全局变量
+​    普通全局变量是定义在函数和类外的或由extern标识或直接定义没有static标识的变量。
+​    各个类型的变量之间最主要的区别就是作用域的不同了，普通全局变量的作用域在整个源程序中，全局变量对整个源程序中都是可见的，无论源程序是由单个文件还是多个文件组成，普通全局变量具有external链接属性，所以普通全局变量在整个源程序的各个文件中都可以被引用。
+2.静态全局变量
+​    静态全局变量是定义在函数和类外的由static标识的变量。
+​    静态全局变量具有文件作用域，具有internal链接属性，只能在定义的文件中使用，在其他文件中可以定义同名的变量，而全局变量则不行，这里要注意静态全局变量与类静态全局变量是不同的，类静态全局变量受到类权限限制，不同的访问权限就之间决定了类静态全局变量的作用域，类全局变量的使用与类一致，能使用类的地方就能使用类全局变量。
+​    关于普通全局变量和静态全局变量的区别，我一直没有弄得很清楚，我有在网上查阅很多bolg，大家的说法都出奇的一致，我上面写的也是在查阅很多blog后总结的，但是我实际测试时，普通全局变</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-11
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/11/【C#】C#两种数组定义的区别/">
+                <p class="h4 index-header">【C#】C#两种二维数组的区别</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">C#支持两种二维数组的定义方式（以int数组为例）：
+
+int[,] array = new int[1,2];这种方式形式上较为简便，要注意的是new之后的[]里面是一定要注明数组大小的，不注明会报错，也就是说这种方式定义的数组是确定大小的。
+数组的赋值：
+int[,] array = new int[2,3]{{1,2,3},{4,5,6}};
+
+int[][] array = new int[2][];这种方式需要注明行数，列数不能注明，注明会报错，这种方式定义的是一个函数确定而列数不确定的不确定大小的数组。
+数组的赋值：
+int[][] array = new int[2][]{new int[]{1,2,3},new int[]{4,5,6}}
+
+两种二维数组是不能兼容的，即使用方式1定义的二维数组不能使用方式2来使用，反之亦然。
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-11
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C#">C#</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2019/09/09/【Lua】Lua基础/">
                 <p class="h4 index-header">【Lua】Lua基础</p>
                 <div class="index-excerpt">
@@ -134,67 +328,6 @@ XMind源文件：https://github.com/Goulandis/XMinds-2019.8.27/tree/master/Lua
                         
                             <a href="/tags/Lua">Lua</a>&nbsp;
                         
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/09/07/成长日记/">
-                <p class="h4 index-header">成长日记</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">2019年9月7日，我和儒哥来到武汉已经第二天了，今天是我们在武汉跑秋招的第一天，今天的行程：
-武汉街道口公交站
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-07
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E6%88%90%E9%95%BF%E6%97%A5%E8%AE%B0">成长日记</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/2019.9">2019.9</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/09/07/在武汉秋招的日子/">
-                <p class="h4 index-header">成长日记</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1"></div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-07
-                    &nbsp;&nbsp;
-                    
                     
                 </div>
             
@@ -242,7 +375,7 @@ XMind源文件：https://github.com/Goulandis/XMinds-2019.8.27/tree/master/Lua
         
         <div class="col-12 col-md-8 m-auto">
             <a href="/2019/08/25/【Unity3d】Space/">
-                <p class="h4 index-header">Space</p>
+                <p class="h4 index-header">【Unity3d】Space</p>
                 <div class="index-excerpt">
                     
                         <div class="index-text mb-1">
@@ -278,7 +411,7 @@ XMind源文件：https://github.com/Goulandis/XMinds-2019.8.27/tree/master/Lua
         
         <div class="col-12 col-md-8 m-auto">
             <a href="/2019/08/25/【Unity3d】Lightmap/">
-                <p class="h4 index-header">Lightmap</p>
+                <p class="h4 index-header">【Unity3d】Lightmap</p>
                 <div class="index-excerpt">
                     
                         <div class="index-text mb-1">
@@ -374,78 +507,6 @@ XMind源文件：https://github.com/Goulandis/XMinds-2019.8.27/tree/master/Lua
                         |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
                         
                             <a href="/tags/%E7%A8%8B%E5%BA%8F%E7%BC%96%E7%A8%8B%E5%8E%9F%E7%90%86">程序编程原理</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/08/25/【网络通信】物联网通信基础/">
-                <p class="h4 index-header">物联网通信基础</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-25
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1">网络通信</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/08/25/【Qt】Qt基础/">
-                <p class="h4 index-header">Qt基础</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">﻿
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-25
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Qt">Qt</a>&nbsp;
                         
                     
                 </div>

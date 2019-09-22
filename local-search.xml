@@ -4,6 +4,106 @@
   
     
     <entry>
+      <title>【C++】高级</title>
+      <link href="undefined2019/09/14/%E3%80%90C++%E3%80%91%E9%AB%98%E7%BA%A7/"/>
+      <url>2019/09/14/%E3%80%90C++%E3%80%91%E9%AB%98%E7%BA%A7/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、多态"><a href="#一、多态" class="headerlink" title="一、多态"></a>一、多态</h1><p>​    在C++的几个特性中，封装、继承和抽象都相对好理解，而多态则不太好理解，这里就说说C++的多态。</p><h2 id="1-多态分两种："><a href="#1-多态分两种：" class="headerlink" title="1.多态分两种："></a>1.多态分两种：</h2><p>​    静态多态：静态多态指的就是函数重载和运算符重载。</p><pre><code class="c++">class Animal{public:    string name = &quot;动物&quot;;    virtual void speak()    {        cout &lt;&lt; name &lt;&lt; &quot;在叫&quot; &lt;&lt; endl;    }};class Dog : public Animal{public:    string name = &quot;狗&quot;;    void speak()    {        cout &lt;&lt; name &lt;&lt; &quot;在叫&quot; &lt;&lt;endl;    }};string operator+(Animal animal,Dog dog){    return animal.name + &quot;是&quot; + dog.name + &quot;的父类&quot;;}void Run(Animal animal){    cout &lt;&lt; animal.name &lt;&lt;&quot;在跑&quot; &lt;&lt; endl;}void Run(Dog dog){    cout &lt;&lt; dog.name &lt;&lt; &quot;在跑&quot; &lt;&lt; endl;}int main(){    Animal animal;    Dog dog;    Run(animal);    Run(dog);    cout&lt;&lt;animal+dog&lt;&lt;endl;    system(&quot;pause&quot;);}</code></pre><p>​    动态多态：动态多态则是通过继承和虚函数实现标签相同的函数因为传入不同的对象来实现不同的功能。</p><pre><code class="c++">class Animal{public:    string name = &quot;动物&quot;;    virtual void speak()    {        cout &lt;&lt; name &lt;&lt; &quot;在叫&quot; &lt;&lt; endl;    }};class Dog : public Animal{public:    string name = &quot;狗&quot;;    void speak()    {        cout &lt;&lt; name &lt;&lt; &quot;在叫&quot; &lt;&lt;endl;    }};void Speak(Animal *animal){    animal-&gt;speak();}int main(){    Animal animal;    Dog dog;    Speak(&amp;animal);    Speak(&amp;dog);    system(&quot;pause&quot;);    return 0;}</code></pre><p>​    动态多态中只能用父类对象的指针或引用来指向子类或自身对象。</p><h2 id="2-多态的实现原理"><a href="#2-多态的实现原理" class="headerlink" title="2.多态的实现原理"></a>2.多态的实现原理</h2><p>​    C++多态的实现依赖于类的虚函数表，当一个类中定义了虚函数，那么这个类就拥有的了一个记录这个虚函数入口地址的虚函数表，子类继承父类时也会继承父类的虚函数表，当子类重写父类的虚函数时，则子类的虚函数入口地址将覆盖父类的地址，如此当子类对象调用此函数时则从子类的虚函数表中寻找入口地址，当父类的对象调用此函数时则从父类的虚函数表中寻找入口地址。</p><h2 id="3-纯虚函数和抽象类"><a href="#3-纯虚函数和抽象类" class="headerlink" title="3.纯虚函数和抽象类"></a>3.纯虚函数和抽象类</h2><p>​    纯虚函数的定义：</p><pre><code class="c++">virtual void speak() = 0</code></pre><p>​    定义了纯虚函数的类就被成为抽象类，C++引入纯虚函数和抽象类的概念就是为了更好的使用多态，抽象类不能实例化对象，这个特性就规范了继承这个抽象类的子类必须重写父类的虚函数，因为如果继承了抽象类的子类不重写父类的虚函数，那么子类也是一个抽象类，子类便也不能实例化对象，如此便规范了多态实现，防止当子类很多时，出现某个子类在编写时忘记重写父类的虚函数，而导致这个子类没有实现多态。</p><h2 id="4-虚析构函数和纯虚析构函数"><a href="#4-虚析构函数和纯虚析构函数" class="headerlink" title="4.虚析构函数和纯虚析构函数"></a>4.虚析构函数和纯虚析构函数</h2><ul><li>虚析构函数的定义：</li></ul><pre><code class="c++">virtual ~Animal();</code></pre><ul><li>纯虚析构函数的定义：</li></ul><pre><code class="c++">virtual ~Animal() = 0;//纯虚析构函数必须要有申明也要有实现Animal：：~Animal(){    //代码实现}</code></pre><p>​    如果子类在堆区中定义了数据，那么我们使用父类指针或引用来使用多态时，父类指针或引用是无法无法寻找到子在堆区中的数据并释放的。C++引入虚析构函数和纯虚析构函数就是为了解决此类问题。</p><p>​    我们来看一个例子：</p><pre><code class="c++">class Animal{public:    Animal()    {        cout &lt;&lt; &quot;这是Animal的构造函数&quot; &lt;&lt; endl;    }    ~Animal()    {        cout &lt;&lt; &quot;这是Animal的析构函数&quot; &lt;&lt; endl;    }};class Dog : public Animal{public:    int *p;    Dog()    {        p = new int;        cout &lt;&lt; &quot;这是Dog的构造函数&quot; &lt;&lt; endl;    }    ~Dog()    {        cout &lt;&lt; &quot;这是Dog的析构函数&quot; &lt;&lt; endl;        if (p != NULL)        {                    cout &lt;&lt; &quot;释放堆区的p&quot; &lt;&lt; endl;            delete p;            p = NULL;        }    }};int main(){    Animal *animal = new Dog();    delete animal;    system(&quot;pause&quot;);    return 0;}</code></pre><p>输出结果：</p><pre><code>这是Animal的构造函数这是Dog的构造函数这是Animal的析构函数</code></pre><p>可以看到，delete animal后并没有调用Dog的析构函数，释放子类Dog在堆区申请的空间。</p><p>此时虚析构函数和纯虚析构函数便可以起作用了，我们再看一个例子：</p><pre><code class="c++">class Animal{public:    Animal()    {        cout &lt;&lt; &quot;这是Animal的构造函数&quot; &lt;&lt; endl;    }    virtual ~Animal()//把父类的析构函数改为虚析构函数    {        cout &lt;&lt; &quot;这是Animal的析构函数&quot; &lt;&lt; endl;    }};class Dog : public Animal{public:    int *p;    Dog()    {        p = new int;        cout &lt;&lt; &quot;这是Dog的构造函数&quot; &lt;&lt; endl;    }    ~Dog()    {        cout &lt;&lt; &quot;这是Dog的析构函数&quot; &lt;&lt; endl;        if (p != NULL)        {                    cout &lt;&lt; &quot;释放堆区的p&quot; &lt;&lt; endl;            delete p;            p = NULL;        }    }};int main(){    Animal *animal = new Dog();    delete animal;    system(&quot;pause&quot;);    return 0;}</code></pre><p>​    输出结果：</p><pre><code>这是Animal的构造函数这是Dog的构造函数这是Dog的析构函数释放堆区的p这是Animal的析构函数</code></pre><p>​    如此便可以释放子类Dog在堆区申请的空间了，纯虚析构函数和虚析构函数的作用是一样，只是纯虚析构函数有一个和纯虚函数一样的特性，即定义看纯虚析构函数的类也属于抽象类，纯虚析构函数必须实现，如果不实现所有继承了拥有纯虚析构函数的抽象类的派生类都属于抽象类。需要注意的是，因为纯虚析构函数的特性，纯虚析构函数的实现就必须在类外实现了。</p><hr><h1 id="二、文件操作"><a href="#二、文件操作" class="headerlink" title="二、文件操作"></a>二、文件操作</h1><p>​    文件操作相对来说比较简单，总的来说就是5个步骤，即</p><h2 id="1-操作步骤"><a href="#1-操作步骤" class="headerlink" title="1.操作步骤"></a>1.操作步骤</h2><ul><li><p>​    包含头文件<font color="red">#include<ftream></ftream></font></p></li><li><p>​    创建流对象</p></li><li><p>​    打开文件</p></li><li><p>​    读写文件</p><p>​    <font color="red">需要注意的是C++中文件写的方式是使用符号“&lt;&lt;”，如：fout &lt;&lt; “文件内容”&lt;&lt;endl;</font></p><p>​    <font color="red">同理文件读也可以使用“&gt;&gt;”来读。</font></p></li><li><p>​    关闭文件</p><h3 id="文件写"><a href="#文件写" class="headerlink" title="文件写"></a>文件写</h3></li></ul><pre><code class="c++">#include &lt;iostream&gt;#include &lt;string&gt;#include &lt;fstream&gt;using namespace std;void test(){    ofstream fout;    fout.open(&quot;文件测试.txt&quot;, ios::out);    fout &lt;&lt; &quot;姓名：张三&quot; &lt;&lt; endl;    fout &lt;&lt; &quot;性别：男&quot; &lt;&lt; endl;    fout.close();}int main(){    test();    system(&quot;pause&quot;);    return 0;}</code></pre><p>​    输出结果：    </p><p><img src="/2019/09/14/【C++】高级/Snipaste_2019-09-14_16-29-43.png" alt></p><h3 id="4种文件读的方式"><a href="#4种文件读的方式" class="headerlink" title="4种文件读的方式"></a>4种文件读的方式</h3><pre><code class="c++">#include &lt;iostream&gt;#include &lt;string&gt;#include &lt;fstream&gt;using namespace std;void test(){    ifstream fin;    fin.open(&quot;文件测试.txt&quot;, ios::in);    if (!fin.is_open())//文件读需要多添加一步判断文件是否打开成功的步骤    {        cout &lt;&lt; &quot;文件打开失败&quot; &lt;&lt; endl;    }    char str[1024];    string strs;    char chr;    //第一中方式    //while (fin &gt;&gt; str)//操作符&quot;&gt;&gt;&quot;每次只能读取一行数据，读到文件尾“EOF”时结束    //{    //    cout &lt;&lt; str &lt;&lt; endl;    //}    //第二种方式    //while (fin.getline(str, 50))//ifstream::getline(char *str,int num);这个函数只支持字符数组，参数num指的是需要读取的字节数    //{    //    cout &lt;&lt; str &lt;&lt; endl;    //}    //第三种方式    //while (getline(fin, strs))//与第二种方式不同的是，这个getline函数是全局的，且只支持输出到string类型的对象中    //{    //    cout &lt;&lt; strs &lt;&lt; endl;    //}    //第四中方式    while ((chr = fin.get()) != EOF)//get()函数每次只能读取一个字符    {        cout &lt;&lt; chr ;    }    fin.close();}int main(){    test();    system(&quot;pause&quot;);    return 0;}</code></pre><h2 id="2-文件的打开模式"><a href="#2-文件的打开模式" class="headerlink" title="2.文件的打开模式"></a>2.文件的打开模式</h2><p>​    C++提供6中文件的打开方式</p><table><thead><tr><th>打开方式</th><th>解释</th></tr></thead><tbody><tr><td>ios::in</td><td>以读的形式打开</td></tr><tr><td>ios::out</td><td>以写的形式打开，会覆盖源文件</td></tr><tr><td>ios::ate</td><td>以写的形式打开并初始文件位置：文件尾，会覆盖源文件</td></tr><tr><td>ios::app</td><td>以追加的方式打开文件</td></tr><tr><td>ios::trunc</td><td>如果文件存在先删除再创建</td></tr><tr><td>ios::binary</td><td>以二进制的形式打开</td></tr></tbody></table><h2 id="3-读写二进制文件"><a href="#3-读写二进制文件" class="headerlink" title="3.读写二进制文件"></a>3.读写二进制文件</h2><pre><code class="c++">#include &lt;iostream&gt;#include &lt;string&gt;#include &lt;fstream&gt;using namespace std;class Person{public:    string name = &quot;张三&quot;;    string sex = &quot;男&quot;;};void test(){    ofstream fout;    fout.open(&quot;二进制文件测试.txt&quot;, ios::out | ios::binary);    Person p;    fout.write((char *)&amp;p, sizeof(Person));//注意这里使用ofstream::write()来写    fout.close;    ifstream fin;    fin.open(&quot;二进制文件测试.txt&quot;, ios::in | ios::binary);    if (!fin.is_open())    {        cout &lt;&lt; &quot;文件打开错误&quot; &lt;&lt; endl;        return;    }    Person pin;    fin.read((char *)&amp;pin, sizeof(Person));//注意这里使用ofstream::read()来读    cout &lt;&lt; &quot;姓名：&quot; &lt;&lt; pin.name &lt;&lt; endl;    cout &lt;&lt; &quot;性别：&quot; &lt;&lt; pin.sex &lt;&lt; endl;    fin.close();}int main(){    test();    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【C++】C++中的四种类型转换</title>
+      <link href="undefined2019/09/12/%E3%80%90C++%E3%80%91C++%E4%B8%AD%E7%9A%84%E5%9B%9B%E7%A7%8D%E8%BD%AC%E6%8D%A2%E7%B1%BB%E5%9E%8B/"/>
+      <url>2019/09/12/%E3%80%90C++%E3%80%91C++%E4%B8%AD%E7%9A%84%E5%9B%9B%E7%A7%8D%E8%BD%AC%E6%8D%A2%E7%B1%BB%E5%9E%8B/</url>
+      
+        <content type="html"><![CDATA[<p>C++提供四种类型转换：const_cast、static_cast、dynamic_cast、reinterpret_cast</p><p>1.const_cast</p><p>​    const_cast的存在主要就是针对const字段，C++提供const_cast的目的就是为了消除const字段的const属性，让const字段也可以修改。</p><p>​    const_cast的用法：</p><p>​        const_cast只能将常指针转换为非常指针，不能直接将常字段转换为非常字段，只能通过指针类间接的修改常字段所在的内存的内容。</p><p>​        例：</p><pre><code class="C++">const int a = 1;const int* n = &amp;a;int* m = const_cast&lt;int*&gt;(n) ;*m = 2;</code></pre><p>​    最终的输出结果：</p><pre><code>a = 1,*n = 2,*m = 2&amp;a=n=m</code></pre><p>​        奇怪，指针n，m的确指向了地址&amp;a，之中的内容的确也修改成了2，可为什么字段a的值依旧是1？</p><p>​        经过多方查阅资料和自己的试验，原来对于常字段在预编译的过程中编译器就会给常字段预定义为初始化的值，类似宏定义一般，尽管内存的内容被改变了，但是常字段的值依旧被预定义为初始化的值。</p><p>​        但是，我就疑问了，既然const_cast就是用来修改const字段的，可是只是改变了其内存的值，字段的值依旧没变，那么程序里使用该字段的地方的值依旧没有改变，如此const_cast似乎没有达到想要的结果。</p><p>​        $\color{red}{不过const_cast似乎可以修改const标识的结构体对象中没有再用const标识的字段，也可以修改用const标识的类对象中没有用const标识的公有字段，但是在结构体或类中用const标识的字段就不能再修改了。}$</p><p><img src="/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_10-44-16.png" alt></p><p>2.static_cast</p><p>​    static_cast类型转换的用法几乎和C中的基本类型转换的用法一致，而C++的static_cast类型转换增加的类型检查，在安全性上较C要强。</p><p>​    static_cast支持所有类型之间的转换包括类，对于类在继承过程中的类型转换有两点是需要注意的，一、static_cast类型转换在上行转换是安全的，在下行转换是不安全，（上行转换：从子类转换到父类，下行转换：从父类转换到子类），二、static_cast类型转换在类的转换中因该使用指针转换，即通过指针间接的实现转换，直接对类的对象进行转换类型会被裁剪，并且在下行转换中不使用指针会报错。</p><p><img src="/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_11-51-30.png" alt></p><p>3.dynamic_cast</p><p>​    dynamic_cast类型转换用于类之间的上下行转换，与static_cast不同的是，dynamic_cast类型转换无论上下行都具有类型检查，都可以进行安全的类型转换。上行转换dynamic_cast与static_cast完全一致，下行转换dynamic_cast比static_cast更安全</p><p>4.reinterpret_cast</p><p>​    reinterpret_cast类型转换只能对指针进行操作，reinterpret_cast类型转换提供的是一种更底层的转换模式–比特位上的重新解释，即对某一类型的内存地址的比特位以另一种类型来解释，这可能不好理解，在这放一张图来辅助理解。</p><p><img src="/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_16-32-44.png" alt></p><p>​    p是指向字符串的char类型指针，i是指向整型的指针，i = reinterpret_cast&lt;int*&gt;(p)则将p所指向的内存里的比特位以int类型来重新解释并复制到i所指向的内存地址上，于是在输出 *i 时，输出的是一个整型的数值。</p><p>​    至于为什么cout&lt;&lt;p时不是输出的p所指向的地址而是地址里的内容，我始终没有弄明白，不过不影响对reinterpret_cast类型转换的理解。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 知识记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【C++】普通全局变量、静态全局变量、普通局部变量与静态局部变量</title>
+      <link href="undefined2019/09/11/%E3%80%90C++%E3%80%91%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E3%80%81%E9%9D%99%E6%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E3%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E4%B8%8E%E9%9D%99%E6%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/"/>
+      <url>2019/09/11/%E3%80%90C++%E3%80%91%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E3%80%81%E9%9D%99%E6%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E3%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E4%B8%8E%E9%9D%99%E6%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/</url>
+      
+        <content type="html"><![CDATA[<p>1.普通全局变量</p><p>​    普通全局变量是定义在函数和类外的或由extern标识或直接定义没有static标识的变量。</p><p>​    各个类型的变量之间最主要的区别就是作用域的不同了，普通全局变量的作用域在整个源程序中，全局变量对整个源程序中都是可见的，无论源程序是由单个文件还是多个文件组成，普通全局变量具有external链接属性，所以普通全局变量在整个源程序的各个文件中都可以被引用。</p><p>2.静态全局变量</p><p>​    静态全局变量是定义在函数和类外的由static标识的变量。</p><p>​    静态全局变量具有文件作用域，具有internal链接属性，只能在定义的文件中使用，在其他文件中可以定义同名的变量，而全局变量则不行，这里要注意静态全局变量与类静态全局变量是不同的，类静态全局变量受到类权限限制，不同的访问权限就之间决定了类静态全局变量的作用域，类全局变量的使用与类一致，能使用类的地方就能使用类全局变量。</p><p>​    关于普通全局变量和静态全局变量的区别，我一直没有弄得很清楚，我有在网上查阅很多bolg，大家的说法都出奇的一致，我上面写的也是在查阅很多blog后总结的，但是我实际测试时，普通全局变量和静态全局变量似乎都可以被其他文件使用，并且 在其他文件中定义静态全局变量似乎也没有报错，没有弄明白这个其他文件指的是什么文件。</p><p><img src="/2019/09/11/【C++】全局变量、静态全局变量、局部变量与静态局部变量/Snipaste_2019-09-11_21-36-28.png" alt></p><p><img src="/2019/09/11/【C++】全局变量、静态全局变量、局部变量与静态局部变量/Snipaste_2019-09-11_21-36-28.png" alt></p><p>3.普通局部变量</p><p>​    普通局部变量是定义在函数内的没有static标识的变量。</p><p>​    普通局部变量具有块作用域，生命周期从定义开始到跳出函数结束，普通局部变量每次使用都会初始化一次。</p><p>4.静态局部变量</p><p>​    静态局部变量的作用于和普通局部变量一致，但是静态局部变量的内存地址在函数结束后不会被销毁，且会保存赋值结果，静态局部变量和静态全局变量一样会一直驻留在静态区，静态局部变量只会初始化一次，在下一次函数被调用时不会再初始化而是直接调用。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 知识记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【C#】C#两种二维数组的区别</title>
+      <link href="undefined2019/09/11/%E3%80%90C#%E3%80%91C#%E4%B8%A4%E7%A7%8D%E6%95%B0%E7%BB%84%E5%AE%9A%E4%B9%89%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+      <url>2019/09/11/%E3%80%90C#%E3%80%91C#%E4%B8%A4%E7%A7%8D%E6%95%B0%E7%BB%84%E5%AE%9A%E4%B9%89%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[<p>C#支持两种二维数组的定义方式（以int数组为例）：</p><ol><li><pre><code>int[,] array = new int[1,2];</code></pre><p>这种方式形式上较为简便，要注意的是new之后的[]里面是一定要注明数组大小的，不注明会报错，也就是说这种方式定义的数组是确定大小的。</p><p>数组的赋值：</p><p>int[,] array = new int[2,3]{{1,2,3},{4,5,6}};</p></li><li><pre><code>int[][] array = new int[2][];</code></pre><p>这种方式需要注明行数，列数不能注明，注明会报错，这种方式定义的是一个函数确定而列数不确定的不确定大小的数组。</p><p>数组的赋值：</p><pre><code>int[][] array = new int[2][]{new int[]{1,2,3},new int[]{4,5,6}}</code></pre></li></ol><p>两种二维数组是不能兼容的，即使用方式1定义的二维数组不能使用方式2来使用，反之亦然。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 知识记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C# </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Lua】Lua基础</title>
       <link href="undefined2019/09/09/%E3%80%90Lua%E3%80%91Lua%E5%9F%BA%E7%A1%80/"/>
       <url>2019/09/09/%E3%80%90Lua%E3%80%91Lua%E5%9F%BA%E7%A1%80/</url>
@@ -23,44 +123,6 @@
             <tag> Lua </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>成长日记</title>
-      <link href="undefined2019/09/07/%E6%88%90%E9%95%BF%E6%97%A5%E8%AE%B0/"/>
-      <url>2019/09/07/%E6%88%90%E9%95%BF%E6%97%A5%E8%AE%B0/</url>
-      
-        <content type="html"><![CDATA[<p>2019年9月7日，我和儒哥来到武汉已经第二天了，今天是我们在武汉跑秋招的第一天，今天的行程：</p><p>武汉街道口公交站</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 成长日记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 2019.9 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>成长日记</title>
-      <link href="undefined2019/09/07/%E5%9C%A8%E6%AD%A6%E6%B1%89%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%97%A5%E5%AD%90/"/>
-      <url>2019/09/07/%E5%9C%A8%E6%AD%A6%E6%B1%89%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%97%A5%E5%AD%90/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
       
     </entry>
     
@@ -92,7 +154,7 @@
     
     
     <entry>
-      <title>Space</title>
+      <title>【Unity3d】Space</title>
       <link href="undefined2019/08/25/%E3%80%90Unity3d%E3%80%91Space/"/>
       <url>2019/08/25/%E3%80%90Unity3d%E3%80%91Space/</url>
       
@@ -117,7 +179,7 @@
     
     
     <entry>
-      <title>Lightmap</title>
+      <title>【Unity3d】Lightmap</title>
       <link href="undefined2019/08/25/%E3%80%90Unity3d%E3%80%91Lightmap/"/>
       <url>2019/08/25/%E3%80%90Unity3d%E3%80%91Lightmap/</url>
       
