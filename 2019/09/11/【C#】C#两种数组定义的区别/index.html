@@ -106,15 +106,14 @@
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
                             <p>C#支持两种二维数组的定义方式（以int数组为例）：</p>
-<ol>
-<li><pre><code>int[,] array = new int[1,2];</code></pre><p>这种方式形式上较为简便，要注意的是new之后的[]里面是一定要注明数组大小的，不注明会报错，也就是说这种方式定义的数组是确定大小的。</p>
+<h1 id="1-普通数组"><a href="#1-普通数组" class="headerlink" title="1.普通数组"></a>1.普通数组</h1><pre><code class="c#">int[,] array = new int[1,2];</code></pre>
+<p>这种方式形式上较为简便，要注意的是new之后的[]里面是一定要注明数组大小的，不注明会报错，也就是说这种方式定义的数组是确定大小的。</p>
 <p>数组的赋值：</p>
-<p>int[,] array = new int[2,3]{{1,2,3},{4,5,6}};</p>
-</li>
-<li><pre><code>int[][] array = new int[2][];</code></pre><p>这种方式需要注明行数，列数不能注明，注明会报错，这种方式定义的是一个函数确定而列数不确定的不确定大小的数组。</p>
+<pre><code class="c#">int[,] array = new int[2,3]{{1,2,3},{4,5,6}};</code></pre>
+<h1 id="2-多播数组"><a href="#2-多播数组" class="headerlink" title="2.多播数组"></a>2.多播数组</h1><pre><code class="c#">int[][] array = new int[2][];</code></pre>
+<p>这种方式需要注明行数，列数不能注明，注明会报错，这种方式定义的是一个函数确定而列数不确定的不确定大小的数组。</p>
 <p>数组的赋值：</p>
-<pre><code>int[][] array = new int[2][]{new int[]{1,2,3},new int[]{4,5,6}}</code></pre></li>
-</ol>
+<pre><code class="c#">int[][] array = new int[2][]{new int[]{1,2,3},new int[]{4,5,6}}</code></pre>
 <p>两种二维数组是不能兼容的，即使用方式1定义的二维数组不能使用方式2来使用，反之亦然。</p>
 
                             <hr>
