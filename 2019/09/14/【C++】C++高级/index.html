@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>【C++】高级 ~ Goulandis</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">主页</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">归档</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">分类</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">标签</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">关于</a>
+            </li>
+            
+            
+                <li class="nav-item" id="search-btn">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/illust_65047754_20190521_215637.png')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Saturday, September 14th 2019, 9:01 am</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="一、类"><a href="#一、类" class="headerlink" title="一、类"></a>一、类</h1><h2 id="1-浅拷贝与深拷贝"><a href="#1-浅拷贝与深拷贝" class="headerlink" title="1.浅拷贝与深拷贝"></a>1.浅拷贝与深拷贝</h2><h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p><font color="red"> C++在进行浅拷贝时，只拷贝栈区的内存空间，不拷贝堆区的内存空间，即浅拷贝只拷贝非指针的成员变量和指针本身，而不拷贝指针所指向的堆区的内容。</font></p>
+<p>我们代码1.1为例</p>
+<pre><code class="c++">//代码1.1
+class Obj
+{
+public:
+    Obj(char *tp)
+    {
+        len = strlen(tp);
+        p = (char*)malloc(len + 1);
+        strcpy_s(p, len+1, tp);
+    }
+    ~Obj()
+    {
+        if (p != NULL)
+        {
+            free(p);
+            p = NULL;
+            len = 0;
+        }
+    }
+    void Show()
+    {
+        cout &lt;&lt; *p &lt;&lt; *(p + 1) &lt;&lt; *(p + 2) &lt;&lt; endl;
+    }
+private:
+    char *p;
+    int len;
+};
+
+void text(Obj &amp;obj)
+{
+    Obj obj2 = obj;
+}
+
+int main()
+{
+    Obj obj1(&quot;asd&quot;);
+    text(obj1);
+    obj1.Show();
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p>我们作一个图示：</p>
+<p><img src="/2019/09/14/【C++】C++高级/B:%5CGit%5CBlog%5Csource_posts%5C%E3%80%90C++%E3%80%91C++%E9%AB%98%E7%BA%A7%5CSnipaste_2019-10-01_16-21-15.png" alt></p>
+<p>​    我们没有自定义Obj类的拷贝构造函数，所以当代码执行到<code>Obj obj2 = obj1;</code>时，编译器将调用默认的拷贝构造函数，然而，<font color="red"> 编译器默认的拷贝构造函数是一个浅拷贝</font>，所以新创建的对象obj2没有自己的堆区空间，obj2.p指向的是obj1.p所指向的内存地址。</p>
+<p>​    上面的代码编译是通不过的，<font color="red"> 原因在于，对象析构时，同一个内存地址<code>0x0001</code>被对象obj1和obj2一起析构了两次</font>。当代码执行完<code>test(obj1)</code>时，对象obj2被析构，指针obj2.p所指向的内存地址<code>0x0001</code>被释放，所以当代码执行到<code>obj1.Show()</code>时，使用了已经被释放掉的内存<code>0x0001</code>地址，从而导致运行错误。</p>
+<p>​    <font color="green"> <strong>这里我有一个疑问，既然浅拷贝在拷贝有指针的对象时，会出现两次析构而出错，所以浅拷贝只能拷贝没有指针成员的对象，那么浅拷贝和深拷贝似乎没有什么区别了，那么浅拷贝存在的意义是什么呢？</strong></font></p>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>C++没有提供给开发者预定义的深拷贝方法，所以要想使用深拷贝，我们需要字写一个拷贝构造函数。</p>
+<p>深拷贝可以解决上面遇到的浅拷贝的问题，因为，<font color="red"> 深拷贝会申请一新的内存空间用于存放拷贝过来的内容，即深拷贝拷贝对象的所有成员，包括指针所指向的内存空间也会一起被拷贝，被拷贝过来的指针会指向一个新的内存地址</font>。</p>
+<p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-10-01_16-52-53.png" alt></p>
+<h3 id="定义深拷贝构造函数"><a href="#定义深拷贝构造函数" class="headerlink" title="定义深拷贝构造函数"></a>定义深拷贝构造函数</h3><pre><code class="c++">//代码1.2
+class Obj
+{
+public:
+    Obj(char *tp)
+    {
+        len = strlen(tp);
+        p = (char*)malloc(len + 1);
+        strcpy_s(p, len+1, tp);
+    }
+    //------------------------------
+    //拷贝构造函数--深拷贝
+    Obj(const Obj &amp;obj)
+    {
+        len = obj.len;
+        p = (char*)malloc(len + 1);
+        strcpy_s(p, len + 1, obj.p);
+    }
+    //------------------------------
+    ~Obj()
+    {
+        if (p != NULL)
+        {
+            free(p);
+            p = NULL;
+            len = 0;
+        }
+    }
+    void Show()
+    {
+        cout &lt;&lt; *p &lt;&lt; *(p + 1) &lt;&lt; *(p + 2) &lt;&lt; endl;
+    }
+private:
+    char *p;
+    int len;
+};</code></pre>
+<p>当一个类中定义了拷贝构造函数，则在对象拷贝时，编译器就不会在调用默认的拷贝构造函数转而调用自定义的拷贝构造函数，当我们把代码1.1中类的定义改为代码1.2中类的定义后，程序就可以正常执行了。</p>
+<p><font color="red">使用深拷贝时，我们还需要注意下面的情况：</font></p>
+<pre><code class="c++">Obj obj1(&quot;asd&quot;);
+Obj obj3(&quot;fgh&quot;);
+obj3 = obj1;</code></pre>
+<p>此时，在<code>obj3=obj1;</code>处依旧调用默认的拷贝构造函数，这里我们要弄清楚<code>obj3=obj1</code>和<code>Obj obj3 = obj1</code>之间的区别，<code>obj3=obj1</code>是将<font color="red">obj1赋值给obj3</font>，<code>=</code>赋值与拷贝构造函数没有什么关联，<code>=</code>在赋值时是C++编译器自己调用默认的拷贝构造函数—浅拷贝，和类中有无定义深拷贝无关；而<code>Obj obj3=obj1</code>则是<font color="red">使用obj1来构造obj3</font>，此时如果类中定义了深拷贝构造函数，就会使用深拷贝。要解决这个问题，就需要显示重载<code>=</code>运算符了。</p>
+<h3 id="小知识"><a href="#小知识" class="headerlink" title="小知识"></a><font color="blue"><strong>小知识</strong></font></h3><ul>
+<li><font color="blue">在定义拷贝构造函数时，必须使用引用传递，否则会出现无限拷贝的情况，因为，如果我们使用传值传递的话，在传递对象到拷贝构造函数时，又会调用拷贝构造函数将实参拷贝给形参，而这个过程又会将对象传递给拷贝构造函数，从而在此调用拷贝构造函数将实参拷贝给形参，如此无限循环</font></li>
+<li><font color="blue">拷贝构造函数只能有一个参数，且必须是自身类的引用，否则编译器将识别被普通构造函数</font></li>
+</ul>
+<h2 id="2-初始化参数列表"><a href="#2-初始化参数列表" class="headerlink" title="2.初始化参数列表"></a>2.初始化参数列表</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>我们以下面的代码1.3来说明初始化参数列表</p>
+<pre><code class="C++">class A
+{
+public:
+    A(int a)
+    {
+        this-&gt;a = a;
+    }
+private:
+    int a;
+};
+class B
+{
+public :
+    B(int i)
+    {
+        this-&gt;i = i;
+    }
+    int i;
+    A a;
+
+};
+int main()
+{
+    B b(1);
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code>错误    C2512    “A”: 没有合适的默认构造函数可用</code></pre><p>​    这个问题就在于，在类B中组合了一个A类的成员，编译器在构造B类对象时，同时会构造一个A类对象作为B类的成员，然而，因为A类自定义了一个有参的构造函数，所以在构造A类时，编译器不会使用默认构造函数，而是使用自定义的有参构造函数，问题就出在这里，编译器在构造A类时，没有参数传递到A类的有参构造函数中。初始化参数列表就是用于解决这种问题的。</p>
+<p>​    需要说明的是，如果A类中没有自定义有参的构造函数，则在B类构造对象时编译器自动调用A类的默认构造函数构造A类对象成员，就不会报错。</p>
+<p>​    初始化参数列表可以让我们在构造B类对象时，根据参数列表来构造不同的A类成员。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>初始化参数列表的使用如下面的<code>B(int i):a1(1),a2(2,&quot;asd&quot;)</code>：</p>
+<pre><code class="c++">class A
+{
+public:
+    A(int a)
+    {
+        this-&gt;a = a;
+        cout &lt;&lt; &quot;构造小A&quot; &lt;&lt; endl;
+    }
+    A(int a, string str)
+    {
+        this-&gt;a = a;
+        this-&gt;str = str;
+        cout &lt;&lt; &quot;构造大A&quot; &lt;&lt; endl;
+    }
+    ~A()
+    {
+        cout &lt;&lt; &quot;析构A&quot; &lt;&lt; endl;
+    }
+    int a;
+    string str;
+};
+class B
+{
+public :
+    B(int i):a1(1),a2(2,&quot;asd&quot;)
+    {
+        this-&gt;i = i;
+        cout &lt;&lt; &quot;构造B&quot; &lt;&lt; endl;
+    }
+    ~B()
+    {
+        cout &lt;&lt; &quot;析构B&quot; &lt;&lt; endl;
+    }
+
+    int i;
+    A a1;
+    A a2;
+};
+void test()
+{
+    B b(1);
+    cout &lt;&lt; b.a1.str &lt;&lt; endl;
+    cout &lt;&lt; b.a2.str &lt;&lt; endl;
+}
+int main()
+{
+    test();
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p><strong>输出结果：</strong></p>
+<pre><code>构造小A
+构造大A
+构造B
+
+asd
+析构B
+析构A
+析构A</code></pre><p>​    值得注意的是<font color="red"> A类对象的构造顺序不是由初始化参数列表的顺序决定的，而是由对象的申明的前后顺序决定的</font>，如：<code>B(int i):a1(1),a2(2,&quot;asd&quot;)</code>和<code>B(int i):a2(2,&quot;asd&quot;),a1(1)</code>的构造顺序是一样的，但是当我们将类B中组合的A类对象的申明顺序改为如下</p>
+<pre><code class="c++">class B
+{
+public :
+    B(int i):a1(1),a2(2,&quot;asd&quot;)
+    {
+        this-&gt;i = i;
+        cout &lt;&lt; &quot;构造B&quot; &lt;&lt; endl;
+    }
+    ~B()
+    {
+        cout &lt;&lt; &quot;析构B&quot; &lt;&lt; endl;
+    }
+
+    int i;
+    A a2;
+    A a1;
+};</code></pre>
+<p>则构造顺序就变为“先构造a2再构造a1”了。</p>
+<p><font color="red"> 析构的顺序和构造的顺序相反。</font></p>
+<h3 id="小知识-1"><a href="#小知识-1" class="headerlink" title=" 小知识"></a><font color="blue"> 小知识</font></h3><ul>
+<li><font color="blue"> 当一个类中组合了其他的类对象作为成员时，拷贝构造函数也必须使用初始化参数列表，来构造对象成员然后拷贝</font></li>
+</ul>
+<h2 id="3-匿名对象的生命周期"><a href="#3-匿名对象的生命周期" class="headerlink" title="3.匿名对象的生命周期"></a>3.匿名对象的生命周期</h2><h3 id="什么是匿名对象"><a href="#什么是匿名对象" class="headerlink" title="什么是匿名对象"></a>什么是匿名对象</h3><pre><code class="C++">calss A
+{
+public:
+    int a;
+    A(int a)
+    {
+        this-&gt;a = a;
+    }
+}
+void main()
+{
+    A(1);
+}</code></pre>
+<p>上面的语句<code>A(1)</code>创建的就是一个匿名临时的对象，<font color="red"> 需要注意，如果一个类只有无参的构造函数，那么这个类将无法构建匿名对象</font>，匿名对象的生命周期就只在创建匿名对象的这条语句内，如果我们不使用一个对象来接收这个匿名对象，那么匿名对象会在语句结束时被销毁，当我们使用<code>A a = A(1);</code>不会出现匿名对象拷贝到类B对象b的情况，这种语句已经被C++优化成了类B的构造语句。说这么多其实匿名对象没什么卵用。</p>
+<h1 id="二、new和delete"><a href="#二、new和delete" class="headerlink" title="二、new和delete"></a>二、new和delete</h1><h2 id="1-new和delete的用法"><a href="#1-new和delete的用法" class="headerlink" title="1.new和delete的用法"></a>1.new和delete的用法</h2><p><code>new</code>可以为<strong>基础类型</strong>、<strong>数组</strong>、<strong>类</strong>分配内存空间，<code>new</code>分配的内存空间都分配在<strong>堆</strong>上。随意<code>new</code>出来的内存空间必须使用一个指针来指向，不能使用同类型的变量来接收，也禁止不接受。</p>
+<p><strong>new 基础类型</strong></p>
+<pre><code class="c++">int *p = new int;
+delete p;</code></pre>
+<p><strong>new 数组</strong></p>
+<pre><code class="c++">int *p = new int[10];
+delete[] p;</code></pre>
+<p><strong>new 类</strong></p>
+<pre><code class="c++">//C++
+A *p = new A();
+delete p;
+//C
+A *pc = (A*)malloc(A);
+free(pc);</code></pre>
+<h2 id="2-new-delete和malloc-free的区别"><a href="#2-new-delete和malloc-free的区别" class="headerlink" title="2.new delete和malloc free的区别"></a>2.<code>new delete</code>和<code>malloc free</code>的区别</h2><ul>
+<li><p>在基础类型和基础类型数组方面<code>new delete</code>和<code>malloc free</code>几乎没有什么区别</p>
+</li>
+<li><p><code>new</code>不仅会分配内存还会调用构造函数，而<code>malloc</code>只会分配内存</p>
+</li>
+<li><p><code>delete</code>会调用析构函数来销毁对象，而<code>free</code>只是单纯的释放内存</p>
+</li>
+</ul>
+<h2 id="小知识-2"><a href="#小知识-2" class="headerlink" title=" 小知识"></a><font color="blue"> <strong>小知识</strong></font></h2><p><font color="blue"> <code>new delete</code>和<code>malloc free</code>是可以穿插使用的，即<code>new</code>可以和<code>free</code>搭配使用，<code>malloc</code>可以和<code>delete</code>搭配使用。</font></p>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>​    在C++的几个特性中，封装、继承和抽象都相对好理解，而多态则不太好理解，这里就说说C++的多态。</p>
+<h2 id="1-多态分两种："><a href="#1-多态分两种：" class="headerlink" title="1.多态分两种："></a>1.多态分两种：</h2><p>​    静态多态：静态多态指的就是函数重载和运算符重载。</p>
+<pre><code class="c++">class Animal
+{
+public:
+    string name = &quot;动物&quot;;
+    virtual void speak()
+    {
+        cout &lt;&lt; name &lt;&lt; &quot;在叫&quot; &lt;&lt; endl;
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    string name = &quot;狗&quot;;
+    void speak()
+    {
+        cout &lt;&lt; name &lt;&lt; &quot;在叫&quot; &lt;&lt;endl;
+    }
+};
+
+string operator+(Animal animal,Dog dog)
+{
+    return animal.name + &quot;是&quot; + dog.name + &quot;的父类&quot;;
+}
+
+void Run(Animal animal)
+{
+    cout &lt;&lt; animal.name &lt;&lt;&quot;在跑&quot; &lt;&lt; endl;
+}
+
+void Run(Dog dog)
+{
+    cout &lt;&lt; dog.name &lt;&lt; &quot;在跑&quot; &lt;&lt; endl;
+}
+
+int main()
+{
+    Animal animal;
+    Dog dog;
+    Run(animal);
+    Run(dog);
+    cout&lt;&lt;animal+dog&lt;&lt;endl;
+    system(&quot;pause&quot;);
+}</code></pre>
+<p>​    动态多态：动态多态则是通过继承和虚函数实现标签相同的函数因为传入不同的对象来实现不同的功能。</p>
+<pre><code class="c++">class Animal
+{
+public:
+    string name = &quot;动物&quot;;
+    virtual void speak()
+    {
+        cout &lt;&lt; name &lt;&lt; &quot;在叫&quot; &lt;&lt; endl;
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    string name = &quot;狗&quot;;
+    void speak()
+    {
+        cout &lt;&lt; name &lt;&lt; &quot;在叫&quot; &lt;&lt;endl;
+    }
+};
+
+void Speak(Animal *animal)
+{
+    animal-&gt;speak();
+}
+
+int main()
+{
+    Animal animal;
+    Dog dog;
+    Speak(&amp;animal);
+    Speak(&amp;dog);
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p>​    动态多态中只能用父类对象的指针或引用来指向子类或自身对象。</p>
+<h2 id="2-多态的实现原理"><a href="#2-多态的实现原理" class="headerlink" title="2.多态的实现原理"></a>2.多态的实现原理</h2><p>​    C++多态的实现依赖于类的虚函数表，当一个类中定义了虚函数，那么这个类就拥有的了一个记录这个虚函数入口地址的虚函数表，子类继承父类时也会继承父类的虚函数表，当子类重写父类的虚函数时，则子类的虚函数入口地址将覆盖父类的地址，如此当子类对象调用此函数时则从子类的虚函数表中寻找入口地址，当父类的对象调用此函数时则从父类的虚函数表中寻找入口地址。</p>
+<h2 id="3-纯虚函数和抽象类"><a href="#3-纯虚函数和抽象类" class="headerlink" title="3.纯虚函数和抽象类"></a>3.纯虚函数和抽象类</h2><p>​    纯虚函数的定义：</p>
+<pre><code class="c++">virtual void speak() = 0</code></pre>
+<p>​    定义了纯虚函数的类就被成为抽象类，C++引入纯虚函数和抽象类的概念就是为了更好的使用多态，抽象类不能实例化对象，这个特性就规范了继承这个抽象类的子类必须重写父类的虚函数，因为如果继承了抽象类的子类不重写父类的虚函数，那么子类也是一个抽象类，子类便也不能实例化对象，如此便规范了多态实现，防止当子类很多时，出现某个子类在编写时忘记重写父类的虚函数，而导致这个子类没有实现多态。</p>
+<h2 id="4-虚析构函数和纯虚析构函数"><a href="#4-虚析构函数和纯虚析构函数" class="headerlink" title="4.虚析构函数和纯虚析构函数"></a>4.虚析构函数和纯虚析构函数</h2><ul>
+<li>虚析构函数的定义：</li>
+</ul>
+<pre><code class="c++">virtual ~Animal();</code></pre>
+<ul>
+<li>纯虚析构函数的定义：</li>
+</ul>
+<pre><code class="c++">virtual ~Animal() = 0;
+//纯虚析构函数必须要有申明也要有实现
+Animal：：~Animal()
+{
+    //代码实现
+}</code></pre>
+<p>​    如果子类在堆区中定义了数据，那么我们使用父类指针或引用来使用多态时，父类指针或引用是无法无法寻找到子在堆区中的数据并释放的。C++引入虚析构函数和纯虚析构函数就是为了解决此类问题。</p>
+<p>​    我们来看一个例子：</p>
+<pre><code class="c++">class Animal
+{
+public:
+    Animal()
+    {
+        cout &lt;&lt; &quot;这是Animal的构造函数&quot; &lt;&lt; endl;
+    }
+    ~Animal()
+    {
+        cout &lt;&lt; &quot;这是Animal的析构函数&quot; &lt;&lt; endl;
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    int *p;
+    Dog()
+    {
+        p = new int;
+        cout &lt;&lt; &quot;这是Dog的构造函数&quot; &lt;&lt; endl;
+    }
+    ~Dog()
+    {
+        cout &lt;&lt; &quot;这是Dog的析构函数&quot; &lt;&lt; endl;
+        if (p != NULL)
+        {        
+            cout &lt;&lt; &quot;释放堆区的p&quot; &lt;&lt; endl;
+            delete p;
+            p = NULL;
+        }
+    }
+};
+
+int main()
+{
+    Animal *animal = new Dog();
+    delete animal;
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p>输出结果：</p>
+<pre><code>这是Animal的构造函数
+这是Dog的构造函数
+这是Animal的析构函数</code></pre><p>可以看到，delete animal后并没有调用Dog的析构函数，释放子类Dog在堆区申请的空间。</p>
+<p>此时虚析构函数和纯虚析构函数便可以起作用了，我们再看一个例子：</p>
+<pre><code class="c++">class Animal
+{
+public:
+    Animal()
+    {
+        cout &lt;&lt; &quot;这是Animal的构造函数&quot; &lt;&lt; endl;
+    }
+    virtual ~Animal()//把父类的析构函数改为虚析构函数
+    {
+        cout &lt;&lt; &quot;这是Animal的析构函数&quot; &lt;&lt; endl;
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    int *p;
+    Dog()
+    {
+        p = new int;
+        cout &lt;&lt; &quot;这是Dog的构造函数&quot; &lt;&lt; endl;
+    }
+    ~Dog()
+    {
+        cout &lt;&lt; &quot;这是Dog的析构函数&quot; &lt;&lt; endl;
+        if (p != NULL)
+        {        
+            cout &lt;&lt; &quot;释放堆区的p&quot; &lt;&lt; endl;
+            delete p;
+            p = NULL;
+        }
+    }
+};
+
+int main()
+{
+    Animal *animal = new Dog();
+    delete animal;
+    system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre>
+<p>​    输出结果：</p>
+<pre><code>这是Animal的构造函数
+这是Dog的构造函数
+这是Dog的析构函数
+释放堆区的p
+这是Animal的析构函数</code></pre><p>​    如此便可以释放子类Dog在堆区申请的空间了，纯虚析构函数和虚析构函数的作用是一样，只是纯虚析构函数有一个和纯虚函数一样的特性，即定义看纯虚析构函数的类也属于抽象类，纯虚析构函数必须实现，如果不实现所有继承了拥有纯虚析构函数的抽象类的派生类都属于抽象类。需要注意的是，因为纯虚析构函数的特性，纯虚析构函数的实现就必须在类外实现了。</p>
+<hr>
+<h1 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h1><p>​    文件操作相对来说比较简单，总的来说就是5个步骤，即</p>
+<h2 id="1-操作步骤"><a href="#1-操作步骤" class="headerlink" title="1.操作步骤"></a>1.操作步骤</h2><ul>
+<li><p>​    包含头文件<font color="red">#include<ftream></ftream></font></p>
+</li>
+<li><p>​    创建流对象</p>
+</li>
+<li><p>​    打开文件</p>
+</li>
+<li><p>​    读写文件</p>
+<p>​    <font color="red">需要注意的是C++中文件写的方式是使用符号“&lt;&lt;”，如：fout &lt;&lt; “文件内容”&lt;&lt;endl;</font></p>
+<p>​    <font color="red">同理文件读也可以使用“&gt;&gt;”来读。</font></p>
+</li>
+<li><p>​    关闭文件</p>
+<h3 id="文件写"><a href="#文件写" class="headerlink" title="文件写"></a>文件写</h3></li>
+</ul>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;fstream&gt;
+
+using namespace std;
+
+void test()
+{
+    ofstream fout;
+    fout.open(&quot;文件测试.txt&quot;, ios::out);
+    fout &lt;&lt; &quot;姓名：张三&quot; &lt;&lt; endl;
+    fout &lt;&lt; &quot;性别：男&quot; &lt;&lt; endl;
+    fout.close();
+}
+
+int main()
+{
+    test();
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p>​    输出结果：    </p>
+<p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-09-14_16-29-43.png" alt></p>
+<h3 id="4种文件读的方式"><a href="#4种文件读的方式" class="headerlink" title="4种文件读的方式"></a>4种文件读的方式</h3><pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;fstream&gt;
+
+using namespace std;
+
+void test()
+{
+    ifstream fin;
+    fin.open(&quot;文件测试.txt&quot;, ios::in);
+    if (!fin.is_open())//文件读需要多添加一步判断文件是否打开成功的步骤
+    {
+        cout &lt;&lt; &quot;文件打开失败&quot; &lt;&lt; endl;
+    }
+    char str[1024];
+    string strs;
+    char chr;
+    //第一中方式
+    //while (fin &gt;&gt; str)//操作符&quot;&gt;&gt;&quot;每次只能读取一行数据，读到文件尾“EOF”时结束
+    //{
+    //    cout &lt;&lt; str &lt;&lt; endl;
+    //}
+
+    //第二种方式
+    //while (fin.getline(str, 50))//ifstream::getline(char *str,int num);这个函数只支持字符数组，参数num指的是需要读取的字节数
+    //{
+    //    cout &lt;&lt; str &lt;&lt; endl;
+    //}
+
+    //第三种方式
+    //while (getline(fin, strs))//与第二种方式不同的是，这个getline函数是全局的，且只支持输出到string类型的对象中
+    //{
+    //    cout &lt;&lt; strs &lt;&lt; endl;
+    //}
+
+    //第四中方式
+    while ((chr = fin.get()) != EOF)//get()函数每次只能读取一个字符
+    {
+        cout &lt;&lt; chr ;
+    }
+    fin.close();
+}
+
+int main()
+{
+    test();
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<h2 id="2-文件的打开模式"><a href="#2-文件的打开模式" class="headerlink" title="2.文件的打开模式"></a>2.文件的打开模式</h2><p>​    C++提供6中文件的打开方式</p>
+<table>
+<thead>
+<tr>
+<th>打开方式</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ios::in</td>
+<td>以读的形式打开</td>
+</tr>
+<tr>
+<td>ios::out</td>
+<td>以写的形式打开，会覆盖源文件</td>
+</tr>
+<tr>
+<td>ios::ate</td>
+<td>以写的形式打开并初始文件位置：文件尾，会覆盖源文件</td>
+</tr>
+<tr>
+<td>ios::app</td>
+<td>以追加的方式打开文件</td>
+</tr>
+<tr>
+<td>ios::trunc</td>
+<td>如果文件存在先删除再创建</td>
+</tr>
+<tr>
+<td>ios::binary</td>
+<td>以二进制的形式打开</td>
+</tr>
+</tbody></table>
+<h2 id="3-读写二进制文件"><a href="#3-读写二进制文件" class="headerlink" title="3.读写二进制文件"></a>3.读写二进制文件</h2><pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;fstream&gt;
+
+using namespace std;
+
+class Person
+{
+public:
+    string name = &quot;张三&quot;;
+    string sex = &quot;男&quot;;
+};
+
+void test()
+{
+    ofstream fout;
+    fout.open(&quot;二进制文件测试.txt&quot;, ios::out | ios::binary);
+    Person p;
+    fout.write((char *)&amp;p, sizeof(Person));//注意这里使用ofstream::write()来写
+    fout.close;
+
+    ifstream fin;
+    fin.open(&quot;二进制文件测试.txt&quot;, ios::in | ios::binary);
+    if (!fin.is_open())
+    {
+        cout &lt;&lt; &quot;文件打开错误&quot; &lt;&lt; endl;
+        return;
+    }
+    Person pin;
+    fin.read((char *)&amp;pin, sizeof(Person));//注意这里使用ofstream::read()来读
+    cout &lt;&lt; &quot;姓名：&quot; &lt;&lt; pin.name &lt;&lt; endl;
+    cout &lt;&lt; &quot;性别：&quot; &lt;&lt; pin.sex &lt;&lt; endl;
+    fin.close();
+}
+
+int main()
+{
+    test();
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/C++">C++</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+            <br><br>
+            
+            
+    <script src="https://utteranc.es/client.js"
+            repo="Goulandis/Comments"
+            issue-term="pathname"
+            
+            label="utterances"
+            
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+	    
+        
+    </div>
+</div>
+
+    
+</main>
+
+
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="None" data-success="success" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "【C++】高级&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      var el = "h1,h2,h3,h4,h5,h6".split(",")
+      var res = []
+      for (item of el) {
+        res.push(".markdown-body > " + item)
+      }
+      anchors.add(res.join(", "))
+    </script>
+  
+
+  
+    <script src="/js/local-search.js"></script>
+    <script>
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function(){ getSearchFile(path); this.onclick = null }
+    </script>
+  
+</body>
+</html>
