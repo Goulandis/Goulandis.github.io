@@ -330,7 +330,8 @@ void main()
     A(1);
 }</code></pre>
 <p>上面的语句<code>A(1)</code>创建的就是一个匿名临时的对象，<font color="red"> 需要注意，如果一个类只有无参的构造函数，那么这个类将无法构建匿名对象</font>，匿名对象的生命周期就只在创建匿名对象的这条语句内，如果我们不使用一个对象来接收这个匿名对象，那么匿名对象会在语句结束时被销毁，当我们使用<code>A a = A(1);</code>不会出现匿名对象拷贝到类B对象b的情况，这种语句已经被C++优化成了类B的构造语句。说这么多其实匿名对象没什么卵用。</p>
-<h1 id="二、new和delete"><a href="#二、new和delete" class="headerlink" title="二、new和delete"></a>二、new和delete</h1><h2 id="1-new和delete的用法"><a href="#1-new和delete的用法" class="headerlink" title="1.new和delete的用法"></a>1.new和delete的用法</h2><p><code>new</code>可以为<strong>基础类型</strong>、<strong>数组</strong>、<strong>类</strong>分配内存空间，<code>new</code>分配的内存空间都分配在<strong>堆</strong>上。随意<code>new</code>出来的内存空间必须使用一个指针来指向，不能使用同类型的变量来接收，也禁止不接受。</p>
+<h2 id="4-new和delete"><a href="#4-new和delete" class="headerlink" title="4.new和delete"></a>4.new和delete</h2><p>1.new和delete的用法</p>
+<p><code>new</code>可以为<strong>基础类型</strong>、<strong>数组</strong>、<strong>类</strong>分配内存空间，<code>new</code>分配的内存空间都分配在<strong>堆</strong>上。随意<code>new</code>出来的内存空间必须使用一个指针来指向，不能使用同类型的变量来接收，也禁止不接受。</p>
 <p><strong>new 基础类型</strong></p>
 <pre><code class="c++">int *p = new int;
 delete p;</code></pre>
@@ -344,7 +345,7 @@ delete p;
 //C
 A *pc = (A*)malloc(A);
 free(pc);</code></pre>
-<h2 id="2-new-delete和malloc-free的区别"><a href="#2-new-delete和malloc-free的区别" class="headerlink" title="2.new delete和malloc free的区别"></a>2.<code>new delete</code>和<code>malloc free</code>的区别</h2><ul>
+<h3 id="new-delete和malloc-free的区别"><a href="#new-delete和malloc-free的区别" class="headerlink" title="new delete和malloc free的区别"></a><code>new delete</code>和<code>malloc free</code>的区别</h3><ul>
 <li><p>在基础类型和基础类型数组方面<code>new delete</code>和<code>malloc free</code>几乎没有什么区别</p>
 </li>
 <li><p><code>new</code>不仅会分配内存还会调用构造函数，而<code>malloc</code>只会分配内存</p>
@@ -352,8 +353,42 @@ free(pc);</code></pre>
 <li><p><code>delete</code>会调用析构函数来销毁对象，而<code>free</code>只是单纯的释放内存</p>
 </li>
 </ul>
-<h2 id="小知识-2"><a href="#小知识-2" class="headerlink" title=" 小知识"></a><font color="blue"> <strong>小知识</strong></font></h2><p><font color="blue"> <code>new delete</code>和<code>malloc free</code>是可以穿插使用的，即<code>new</code>可以和<code>free</code>搭配使用，<code>malloc</code>可以和<code>delete</code>搭配使用。</font></p>
-<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>​    在C++的几个特性中，封装、继承和抽象都相对好理解，而多态则不太好理解，这里就说说C++的多态。</p>
+<h3 id="小知识-2"><a href="#小知识-2" class="headerlink" title=" 小知识"></a><font color="blue"> <strong>小知识</strong></font></h3><p><font color="blue"> <code>new delete</code>和<code>malloc free</code>是可以穿插使用的，即<code>new</code>可以和<code>free</code>搭配使用，<code>malloc</code>可以和<code>delete</code>搭配使用。</font></p>
+<h1 id="二、继承"><a href="#二、继承" class="headerlink" title="二、继承"></a>二、继承</h1><p>继承这边主要分析一下<code>虚继承</code></p>
+<h2 id="1-虚继承"><a href="#1-虚继承" class="headerlink" title="1.虚继承"></a>1.虚继承</h2><p>虚继承的出现主要是为解决如下的继承关系中的二义性问题</p>
+<p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-10-02_15-50-39.png" alt="图1"></p>
+<p>当我们的类的继承过程中出现这种继承关系时，我们需要使类B和类C分别虚继承类A来解决二义性，具体操作如下：</p>
+<pre><code class="c++">class A
+{
+   public:
+        int a;
+};
+class B : virtual public A
+{
+    public:
+        int b;
+};
+class C : virtual public A
+{
+    public:
+        int c;
+};
+class D : public B,C
+{
+    public:
+        int d;
+};
+void main()
+{
+    D d;
+    d.a = 1;
+}</code></pre>
+<p>这里有一点要注意，虚继承的应用场景有限，虚继承只能解决这种情况：</p>
+<p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-10-02_15-50-39.png" alt></p>
+<p>而不能解决这种情况：</p>
+<p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-10-02_16-10-55.png" alt></p>
+<h2 id="2-继承中的static关键字"><a href="#2-继承中的static关键字" class="headerlink" title="2.继承中的static关键字"></a>2.继承中的static关键字</h2><p><font color="red"> 类中的静态成员变量被类的所有对象共享，同时也被类的派生类的所有对象共享。</font></p>
+<h1 id="三、多态"><a href="#三、多态" class="headerlink" title="三、多态"></a>三、多态</h1><p>​    在C++的几个特性中，封装、继承和抽象都相对好理解，而多态则不太好理解，这里就说说C++的多态。</p>
 <h2 id="1-多态分两种："><a href="#1-多态分两种：" class="headerlink" title="1.多态分两种："></a>1.多态分两种：</h2><p>​    静态多态：静态多态指的就是函数重载和运算符重载。</p>
 <pre><code class="c++">class Animal
 {
@@ -436,6 +471,19 @@ int main()
 }</code></pre>
 <p>​    动态多态中只能用父类对象的指针或引用来指向子类或自身对象。</p>
 <h2 id="2-多态的实现原理"><a href="#2-多态的实现原理" class="headerlink" title="2.多态的实现原理"></a>2.多态的实现原理</h2><p>​    C++多态的实现依赖于类的虚函数表，当一个类中定义了虚函数，那么这个类就拥有的了一个记录这个虚函数入口地址的虚函数表，子类继承父类时也会继承父类的虚函数表，当子类重写父类的虚函数时，则子类的虚函数入口地址将覆盖父类的地址，如此当子类对象调用此函数时则从子类的虚函数表中寻找入口地址，当父类的对象调用此函数时则从父类的虚函数表中寻找入口地址。</p>
+<pre><code>当类生命虚函数时，编译器会在类中生成一个虚函数表
+虚函数表是一个存储类成员函数指针的数据结构
+虚函数表有编译器自动生成和维护
+虚成员函数会被编译器放入虚函数表中
+存在虚函数时，每一个对象中都会拥有一个指向虚函数表的虚函数表指针(vptr)</code></pre><p>简单来说，多态实现的条件有三：</p>
+<ul>
+<li><p>要有继承</p>
+</li>
+<li><p>要有虚函数重写</p>
+</li>
+<li><p>要有父类指针(或引用)指向子类对象</p>
+</li>
+</ul>
 <h2 id="3-纯虚函数和抽象类"><a href="#3-纯虚函数和抽象类" class="headerlink" title="3.纯虚函数和抽象类"></a>3.纯虚函数和抽象类</h2><p>​    纯虚函数的定义：</p>
 <pre><code class="c++">virtual void speak() = 0</code></pre>
 <p>​    定义了纯虚函数的类就被成为抽象类，C++引入纯虚函数和抽象类的概念就是为了更好的使用多态，抽象类不能实例化对象，这个特性就规范了继承这个抽象类的子类必须重写父类的虚函数，因为如果继承了抽象类的子类不重写父类的虚函数，那么子类也是一个抽象类，子类便也不能实例化对象，如此便规范了多态实现，防止当子类很多时，出现某个子类在编写时忘记重写父类的虚函数，而导致这个子类没有实现多态。</p>
@@ -452,7 +500,7 @@ Animal：：~Animal()
 {
     //代码实现
 }</code></pre>
-<p>​    如果子类在堆区中定义了数据，那么我们使用父类指针或引用来使用多态时，父类指针或引用是无法无法寻找到子在堆区中的数据并释放的。C++引入虚析构函数和纯虚析构函数就是为了解决此类问题。</p>
+<p>​    如果子类在堆区中定义了数据，那么我们使用父类指针或引用来使用多态时，父类指针或引用是无法寻找到子在堆区中的数据并释放的。C++引入虚析构函数和纯虚析构函数就是为了解决此类问题。</p>
 <p>​    我们来看一个例子：</p>
 <pre><code class="c++">class Animal
 {
@@ -498,7 +546,7 @@ int main()
 <p>输出结果：</p>
 <pre><code>这是Animal的构造函数
 这是Dog的构造函数
-这是Animal的析构函数</code></pre><p>可以看到，delete animal后并没有调用Dog的析构函数，释放子类Dog在堆区申请的空间。</p>
+这是Animal的析构函数</code></pre><p>可以看到，delete animal后并没有调用Dog的析构函数，释放子类Dog在堆区申请的空间。这样便出现了内存泄漏。</p>
 <p>此时虚析构函数和纯虚析构函数便可以起作用了，我们再看一个例子：</p>
 <pre><code class="c++">class Animal
 {
@@ -548,6 +596,80 @@ int main()
 这是Dog的析构函数
 释放堆区的p
 这是Animal的析构函数</code></pre><p>​    如此便可以释放子类Dog在堆区申请的空间了，纯虚析构函数和虚析构函数的作用是一样，只是纯虚析构函数有一个和纯虚函数一样的特性，即定义看纯虚析构函数的类也属于抽象类，纯虚析构函数必须实现，如果不实现所有继承了拥有纯虚析构函数的抽象类的派生类都属于抽象类。需要注意的是，因为纯虚析构函数的特性，纯虚析构函数的实现就必须在类外实现了。</p>
+<h2 id="5-重载、重写、重定义"><a href="#5-重载、重写、重定义" class="headerlink" title="5.重载、重写、重定义"></a>5.重载、重写、重定义</h2><p><strong>重载</strong></p>
+<p>重载发生在一个类的内部，拥有相同函数名，相同返回值而参数列表不同的函数之间互为重载关系。如：</p>
+<pre><code class="c++">class A
+{
+    public:
+        void fun(){}
+        void fun(int a){}
+};</code></pre>
+<p><font color="red"> 只有相同函数名而参数列表的函数才是重载，函数名相同参数列表也相同而返回值不同的函数在C++中是不允许的。</font></p>
+<p><strong>重写</strong></p>
+<p>重写发生在基类和派生类之间，基类中定义虚函数(纯虚函数)，派生类中定义和虚函数拥有<strong>相同函数名，相同参数列表和相同返回值</strong>的函数，这种情况下发生函数重写。如：</p>
+<pre><code class="c++">class A
+{
+    public:
+        virtual void fun(){}
+};
+class B : public A
+{
+    public:
+        void fun(){}//重写A类的fun函数
+        void fun(int a){}//重定义一个新函数
+        int fun(){return 0;}//这种情况C++不允许
+};</code></pre>
+<p><strong>重定义</strong></p>
+<p>重定义也是发生在基类和派生类之间，派生类拥有与基类函数名相同，返回值相同，而参数列表不同的函数，此时发生重定义。如：</p>
+<pre><code class="c++">class A
+{
+  public:
+    void fun(){}
+};
+class B : public A
+{
+    public:
+        void fun(int a){}//发生重定义
+};</code></pre>
+<p><font color="red"> 派生类中可以重定义基类的任何函数，包括虚函数和纯虚函数。</font></p>
+<h2 id="6-父类指针和子类指针步长不一致问题"><a href="#6-父类指针和子类指针步长不一致问题" class="headerlink" title="6.父类指针和子类指针步长不一致问题"></a>6.父类指针和子类指针步长不一致问题</h2><p>问题出现的场景是这样的：</p>
+<pre><code class="c++">class A
+{
+public:
+    int a;
+    virtual void print() {}
+};
+class B : virtual public A
+{
+public:
+    int b;
+    B(int b)
+    {
+        this-&gt;b = b;
+    }
+    void print()
+    {
+        cout &lt;&lt; b &lt;&lt; endl;
+    }
+};
+int main()
+{
+    A *a = NULL;
+    B *b = NULL;
+    B array[2]{ B(1),B(2) };
+    a = array;
+    b = array;
+    a-&gt;print();
+    b-&gt;print();
+    a++; b++;
+    a-&gt;print();//这一步会出现异常
+    b-&gt;print();
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p>即父类指针a和子类指针b都指向一个子类对象数组，于是我们可以通过指针++的自增运算来逐步访问数组元素，问题就出在这，使用<code>sizeof()</code>计算两个类的大小分别得出，sizeof(A)=8;sizeof(B)=20;这就导致A类指针a每一次移步时只移动了8个字节，这个距离还远远没有达到下一个元素的首地址，所以访问会出错，这是因为指针每次移步移动的距离是指针类型的空间大小，如：A类大小为8，所以A类指针每移步一次走8个字节。</p>
+<p>可能会有疑问，为什么类B的大小是20？</p>
+<p>我们可以算一算，类B继承至类A所以类A中拥有的成员变量，类B也拥有，占8字节，这8字节分别是int变量4字节和虚函数表指针4字节；类B自身定义了一个int变量占4字节，由于类B重写了类A的虚函数，所以类B也拥有一个自己的虚函数表指针，占4字节；类B虚继承了类A，在这个过程中，C++编译器会给类B增加一个属性，占4字节，于是，<strong>8+4+4+4+4=20</strong>。</p>
 <hr>
 <h1 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h1><p>​    文件操作相对来说比较简单，总的来说就是5个步骤，即</p>
 <h2 id="1-操作步骤"><a href="#1-操作步骤" class="headerlink" title="1.操作步骤"></a>1.操作步骤</h2><ul>
