@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>【C++】C++中的四种个智能指针.md ~ Goulandis</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">主页</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">归档</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">分类</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">标签</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">关于</a>
+            </li>
+            
+            
+                <li class="nav-item" id="search-btn">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/illust_65047754_20190521_215637.png')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Tuesday, October 8th 2019, 10:24 pm</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <p>智能指针的出现的目的就是为了解决c++中出现异常安全资源管理问题，智能指针的实现原理是依据RAII机制(Resource Acquisition Is Initialization)，这是的智能指针本质上是一个对象，行为表现上是一个指针。</p>
+<p>智能指针都是类模板使用时是必须指定类型参数的，如：<code>auto_ptr&lt;int&gt; ptr</code></p>
+<h1 id="1-auto-ptr"><a href="#1-auto-ptr" class="headerlink" title="1.auto_ptr"></a>1.auto_ptr</h1><ul>
+<li>auto_ptr采用所有权的模式，指针内不做引用计数，因此一个对象只能由一个auto_ptr指针所拥有，在给其他auto_ptr指针赋值时，所有权会转移</li>
+<li>auto_ptr中使用delete来释放资源，所以auto_ptr不能指向数组，因为数组的释放使用的是delete[]</li>
+<li>auto_ptr指针的判空使用auto_ptr.get()==NULL来判断</li>
+</ul>
+<p>auto_ptr是C++98中的标准，在C++11中已经被弃用。</p>
+<p>auto_ptr由于是所有权模式，所在在auto_ptr做参数时，会转移所有权，即将函数外的auto_ptr的所有权转义给函数内的auto_ptr的所有权，如果函数内不做所有权转移的话，函数外的auto_ptr将变为空指针，而导致引用出错。如：</p>
+<p><strong>不转移所有权</strong></p>
+<pre><code class="C++">void Test(auto_ptr&lt;int&gt; apt)
+{
+    cout &lt;&lt; *apt &lt;&lt; endl;
+    return apt;
+}
+
+int main()
+{
+    auto_ptr&lt;int&gt; ptr(new int(1));
+    Test(ptr);
+    if (ptr.get() == NULL)
+        cout &lt;&lt; &quot;NULL&quot; &lt;&lt; endl;
+    else
+        cout &lt;&lt; &quot;NO NULL&quot; &lt;&lt; endl;
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p><strong>输出结果：</strong></p>
+<pre><code>1
+NULL</code></pre><p><strong>转移所有权</strong></p>
+<pre><code class="C++">auto_ptr&lt;int&gt; Test(auto_ptr&lt;int&gt; apt)
+{
+    cout &lt;&lt; *apt &lt;&lt; endl;
+    return apt;
+}
+
+int main()
+{
+    auto_ptr&lt;int&gt; ptr(new int(1));
+    ptr = Test(ptr);
+    if (ptr.get() == NULL)
+        cout &lt;&lt; &quot;NULL&quot; &lt;&lt; endl;
+    else
+        cout &lt;&lt; &quot;NO NULL&quot; &lt;&lt; endl;
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p><strong>输出结果：</strong></p>
+<pre><code>1
+NO NULL</code></pre><h1 id="2-unique-ptr"><a href="#2-unique-ptr" class="headerlink" title="2.unique_ptr"></a>2.unique_ptr</h1><ul>
+<li><p>unique_ptr是C++11中对C++98中的auto_ptr的替换与强化</p>
+</li>
+<li><p>unique_ptr也是使用独占所有权模式，即一个unique_ptr指针指向一个对象后，不可以在把这个对象赋予给另一个unique_ptr指针，后来出于一些考虑C++又提供了srd::move()函数来做所有权的移交，被移交所有权的unique_ptr指针会指向空，这时再使用这个指针就会报错</p>
+</li>
+<li><p>unique_ptr指针支持直接使用对用判空，如：</p>
+</li>
+</ul>
+<pre><code class="C++">unique_ptr&lt;int&gt; ptr;
+if(ptr == NULL)
+    cout&lt;&lt;&quot;NULL&quot;&lt;&lt;endl;</code></pre>
+<p>当然unique_ptr依旧支持unique_ptr.get()==NULL来判空。</p>
+<ul>
+<li>当unique_ptr作为实参进行传递时，必须使用std::move()来移交所有权，这是unique_ptr的独占所有权性质决定的。如：</li>
+</ul>
+<pre><code class="C++">void Test(unique_ptr&lt;int&gt; apt)
+{
+    cout &lt;&lt; *apt &lt;&lt; endl;
+}
+
+int main()
+{
+    unique_ptr&lt;int&gt; ptr(new int(1));
+    unique_ptr&lt;int&gt; pt = move(ptr);
+    Test(std::move(ptr));
+    if (ptr == NULL)
+        cout &lt;&lt; &quot;NULL&quot; &lt;&lt; endl;
+    else
+        cout &lt;&lt; &quot;NO NULL&quot; &lt;&lt; endl;
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<h1 id="3-shared-ptr"><a href="#3-shared-ptr" class="headerlink" title="3.shared_ptr"></a>3.shared_ptr</h1><ul>
+<li><p>shared_ptr指针支持一个对象被多个指针指向</p>
+</li>
+<li><p>shared_ptr使用计数机制来记录对象被多少个shared_ptr指针所指向，可以使用share_ptr.reset()函数来释放当前指针，对象的引用技术减一，当引用计数减为0时，释放对象资源</p>
+</li>
+<li><p>可以使用shared_ptr.use_count()来获取当前对象的引用计数</p>
+</li>
+</ul>
+<p>我们来看一个例子：</p>
+<pre><code class="C++">void Test(shared_ptr&lt;int&gt; ptr)
+{
+    cout &lt;&lt; &quot;count_1:&quot;&lt;&lt; ptr.use_count() &lt;&lt; endl;
+}
+
+int main()
+{
+    shared_ptr&lt;int&gt; ptr(new int(1));
+    shared_ptr&lt;int&gt; pt = ptr;
+    Test(ptr);
+    pt.reset();
+    cout &lt;&lt; &quot;count_2:&quot;&lt;&lt; ptr.use_count() &lt;&lt; endl;
+    if (ptr == NULL)
+        cout &lt;&lt; &quot;NULL&quot; &lt;&lt; endl;
+    else
+        cout &lt;&lt; &quot;NO NULL&quot; &lt;&lt; endl;
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p><strong>输出结果：</strong></p>
+<pre><code>count_1:3
+count_2:1
+NO NULL</code></pre><p>咦！为什么引用计数count_1是3呢？这是因为在函数内形参<code>shared_ptr&lt;int&gt; ptr</code>也指向了同一个对象。而当函数Test结束形参指针释放，同时又使用reset()函数释放pt指针，所以count_2:1</p>
+<h1 id="4-weak-ptr"><a href="#4-weak-ptr" class="headerlink" title="4.weak_ptr"></a>4.weak_ptr</h1><p>虽然shared_ptr使用起来更接近C的原生指针，但是当shared_ptr指针作为类成员时，可能会出现互相引用的而形成死锁，导致引用计数永远无法将为0的现象，如：</p>
+<pre><code class="C++">class B;
+class A
+{
+public:
+    shared_ptr&lt;B&gt; pa;
+};
+class B
+{
+public:
+    shared_ptr&lt;A&gt; pb;
+};
+int main()
+{
+    shared_ptr&lt;A&gt; pa(new A());
+    shared_ptr&lt;B&gt; pb(new B());
+    pa-&gt;pa = pb;
+    pb-&gt;pb = pa;
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p>这种情况是，pa是指向A类型的shared_ptr指针指向A类型对象，而pa指向的内存里面又有一个shared_ptr指针指向B类型对象，同理pb也是如此，这样就导致，当A要被释放时，要先释放B，而B要释放时又要先释放A，如此便形成了一个互相等待的死循环。weak_ptr的存在就是为了解决这种问题。</p>
+<p>weak_ptr指针是一种若引用，它指向对象和释放时不会引起引用计数的变化，这样既可以打破shared_ptr的这种死循环了，我们将上面的代码改成如下，就可以解死循环了。</p>
+<pre><code class="C++">class B;
+class A
+{
+public:
+    weak_ptr&lt;B&gt; pa;
+};
+class B
+{
+public:
+    shared_ptr&lt;A&gt; pb;
+};
+int main()
+{
+    shared_ptr&lt;A&gt; pa(new A());
+    shared_ptr&lt;B&gt; pb(new B());
+    pa-&gt;pa = pb;
+    pb-&gt;pb = pa;
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/C++">C++</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">学！永不止步</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+            <br><br>
+            
+            
+    <script src="https://utteranc.es/client.js"
+            repo="Goulandis/Comments"
+            issue-term="pathname"
+            
+            label="utterances"
+            
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+	    
+        
+    </div>
+</div>
+
+    
+</main>
+
+
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="None" data-success="success" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "【C++】C++中的四种个智能指针.md&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      var el = "h1,h2,h3,h4,h5,h6".split(",")
+      var res = []
+      for (item of el) {
+        res.push(".markdown-body > " + item)
+      }
+      anchors.add(res.join(", "))
+    </script>
+  
+
+  
+    <script src="/js/local-search.js"></script>
+    <script>
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function(){ getSearchFile(path); this.onclick = null }
+    </script>
+  
+</body>
+</html>

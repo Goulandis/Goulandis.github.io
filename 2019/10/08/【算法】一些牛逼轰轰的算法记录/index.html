@@ -14,7 +14,7 @@
     <meta name="description" content>
     <meta name="author" content="John Doe">
     <meta name="keywords" content>
-    <title>Archives ~ Goulandis</title>
+    <title>【算法】一些牛逼轰轰的算法记录 ~ Goulandis</title>
     <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
@@ -31,7 +31,7 @@
 
 
 <body>
-<header style="height: 80vh;">
+<header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
 <div class="container">
     <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
@@ -77,13 +77,16 @@
 
 </nav>
     <div class="view intro-2"
-         style="background: url('/img/QQ图片20190823190944.jpg')no-repeat center center;background-size: cover;">
+         style="background: url('/img/illust_65047754_20190521_215637.png')no-repeat center center;background-size: cover;">
         <div class="full-bg-img">
             <div class="mask rgba-black-light flex-center">
                 <div class="container text-center white-text wow fadeInUp">
                     <span class="h2" id="subtitle">
                         
                     </span>
+                    
+                        <br>
+                        <p>Tuesday, October 8th 2019, 10:07 pm</p>
                     
                 </div>
             </div>
@@ -93,81 +96,134 @@
 
 <main>
     
-        <div class="container nopadding-md">
-            <div class="py-5 z-depth-3 board">
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-10 m-auto">
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="1-判断点是否在三角形内"><a href="#1-判断点是否在三角形内" class="headerlink" title="1.判断点是否在三角形内"></a>1.判断点是否在三角形内</h1><h2 id="衍生：快速计算三角形面积"><a href="#衍生：快速计算三角形面积" class="headerlink" title="衍生：快速计算三角形面积"></a>衍生：快速计算三角形面积</h2><pre><code class="C++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;math.h&gt;
+#define S_FLOAT 0.00000001
+
+using namespace std;
+//点类型
+typedef struct Point
+{
+    float x;
+    float y;
+    Point() {}
+    Point(float x,float y)
+    {
+        this-&gt;x = x;
+        this-&gt;y = y;
+    }
+};
+//计算三角形面积
+float GetTriangleSquar(const Point a, const Point b, const Point c)
+{
+    Point AB, BC;
+    AB.x = b.x - a.x;
+    AB.y = b.y - a.y;
+    BC.x = c.x - b.x;
+    BC.y = c.y - b.y;
+    return fabs(AB.x*BC.y - AB.y*BC.x) / 2;
+}
+//判断点是否在三角形内
+string IsInTriang(Point a, Point b, Point c, Point d)
+{
+    float Sabc, Sabd, Sacd, Sbcd;
+    Sabc = GetTriangleSquar(a, b, c);
+    Sabd = GetTriangleSquar(a, b, d);
+    Sacd = GetTriangleSquar(a, c, d);
+    Sbcd = GetTriangleSquar(b, c, d);
+    float Sums = Sabd + Sacd + Sbcd;
+    cout &lt;&lt; &quot;Sabd:&quot; &lt;&lt; Sabd &lt;&lt; endl &lt;&lt; &quot;Sacd:&quot; &lt;&lt; Sacd &lt;&lt; endl &lt;&lt; &quot;Sbcd:&quot; &lt;&lt; Sbcd &lt;&lt; endl;
+    cout&lt;&lt; &quot;Sabc:&quot;&lt;&lt;Sabc&lt;&lt;endl&lt;&lt;&quot;Sums:&quot;&lt;&lt;Sums &lt;&lt; endl;
+    if ((-S_FLOAT &lt; (Sabc - Sums) &amp;&amp; (Sabc - Sums) &lt; S_FLOAT))
+        return &quot;Yes&quot;;
+    else return &quot;No&quot;;
+}
+//测试函数
+void Test()
+{
+    Point a(2, 2), b(0, 0), c(4, 0), d(2, 1);
+    cout &lt;&lt; IsInTriang(a, b, c, d) &lt;&lt; endl;
+}
+int main()
+{
+    Test();
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
                             
-
-<div class="list-group">
-    <p class="h4">Total: 27</p>
-    <hr>
-    
-        
-            
-            <p class="h5">2019</p>
-        
-        <a href="/2019/08/25/【C#】C#高级/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">C#高级</span>
-            <span style="float: right;">08-25</span>
-        </a>
-    
-        
-        <a href="/2019/08/25/【C#】C#中级/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">C#中级</span>
-            <span style="float: right;">08-25</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【C++】C++进阶/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【C++】C++进阶</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【Unity3d】游戏截屏/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【Unity3d】游戏截屏</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【Unity3d】存档与读档/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【Unity3d】简单的存档与读档</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【Unity3d】Animation/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【Unity3d】Animation</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【计算机图形学】多变形填充算法原理/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【计算机图形学】多边形填充算法</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-</div>
-
-<nav aria-label="index posts navigation">
-<ul class="pagination pg-blue justify-content-center mt-5">
-    
-        <li class="page-item">
-        <a class="page-link" href="/archives/page/2/">Previous</a>
-        </li>
-    
-    
-</ul>
-</nav>
-
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95">算法</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">学！永不止步</p>
+                            
                         </div>
                     </div>
                 </div>
             </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
         </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+            <br><br>
+            
+            
+    <script src="https://utteranc.es/client.js"
+            repo="Goulandis/Comments"
+            issue-term="pathname"
+            
+            label="utterances"
+            
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+	    
+        
+    </div>
+</div>
+
     
 </main>
 
@@ -212,6 +268,11 @@
   <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
   <script src="/js/main.js"></script>
   
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
   
     <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
     <script>
@@ -227,7 +288,7 @@
         var typed = new Typed('#subtitle', {
           strings: [
             '  ',
-            "Archives&nbsp;",
+            "【算法】一些牛逼轰轰的算法记录&nbsp;",
         ],
         cursorChar: "_",
         typeSpeed: 70,
