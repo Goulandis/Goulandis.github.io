@@ -106,53 +106,6 @@
         
         
         <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/10/28/【UE4】蓝图基础/">
-                <p class="h4 index-header">【UE4】UE4蓝图基础</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">一、蓝图可视化脚本与蓝图系统1.蓝图脚本蓝图可视化脚本简称“蓝图”或“蓝图脚本”，是一种需要编译的面向对象的可视化编程语言，蓝图完全集成在UE4中，蓝图通过节点与连线工作。
-蓝图脚本的节点
-触发事件，在蓝图脚本中以红色的节点出现
-函数，在看图脚本中以蓝色的节点出现
-变量，在蓝图脚本中中以黄色节点出现
-
-2.蓝图系统蓝图系统又称“蓝图”或“蓝图类”，蓝图类可以看成是一个包含游戏内容的容器，其中可以包含组件、脚本或可以仅仅包含数据。
-蓝图类有点类似Unity3d中的预设(prefb)，蓝图类可以类似预设一般保存对象状态，可以随时拖入场景中使用，只是在其他功能上不如预设，如预设在U3D中的打包中可以发挥出优秀的效果，但是蓝图类只能作为容器使用。
- 蓝图类包含蓝图脚本，每一个蓝图类都包含一个默认的蓝图脚本。
-蓝图类的分类
-关卡蓝图：关卡蓝图在每个Level中只能存在一个，负责整个关卡的运行逻辑，关卡的初始化，帧更新都在关卡蓝图里进行；
-普通蓝图：普通蓝图就是UE4的预设，在普通蓝图中我们可以对其中的对象进行一些的配置，如设置网格，贴图，粒子特效，添加相机，添加物理材质和挂载蓝图脚本等等；
-游戏</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-28
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/UE4">UE4</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
             <a href="/2019/10/21/【MyQSL】MyQSL存储过程/">
                 <p class="h4 index-header">【MyQSL】MyQSL存储过程</p>
                 <div class="index-excerpt">
@@ -560,6 +513,70 @@ p就是一个指向类型为整型且长度为5的数组的指针变量。
                         |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
                         
                             <a href="/tags/C">C</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/10/01/【C++】C++面向对象模型初探/">
+                <p class="h4 index-header">【C++】C++面向对象模型初探</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">1.成员的分开存储C++通过将类的成员分开存储的方式来实现面向对象
+
+
+
+成员
+存储位置
+
+
+
+普通成员变量
+栈区，与struct变量有相同的内存布局和字节对齐方式
+
+
+静态成员变量
+全局数据区，如此便可以使用类名和类所有的对象都可以访问
+
+
+成员函数
+代码段，包括静态成员函数和非静态成员函数
+
+
+虚函数
+虚函数表指针(vfptr)存放在栈区，其指向的虚函数表有自身的内存存储空间
+
+
+2.C++类的内存分布要想更好的了解这些，我们还需了解C++类的内存分布
+
+Stack：栈，存放Automatic Variables，按内存地址由高到低方向生长，其最大大小由编译时确定，速度快，但自由性差，最大空间不大。保存程序中的局部变量。
+Heap：堆，自由申请的空间，按内存地址由低到高方向生长，其大小由系统内存/虚拟内存上限决定，速度较慢，但自由性大，可用空间大。 动态分配的内存在调用malloc（）或者相关函数产生，在调用free()时释放，由程序员决定而不是一系列规则规定内存持续时间，因此内存块可在一个函数中创建，在另一个函数中释放。由于这点，动态内存分配容易导致堆区内存碎片化。
+.Data：</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-01
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
                         
                     
                 </div>
