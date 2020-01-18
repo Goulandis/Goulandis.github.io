@@ -106,6 +106,55 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2020/01/18/【UE4】UE4Socket编程/">
+                <p class="h4 index-header">【UE4】UE4Socket编程</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">一、基于C++的服务器当然服务器也是可以使用UE4写的，不过对于一般的不需要UI的服务器来说，直接使用C++控制台程序编写要方便得多。
+1.所需头文件和静态库#include &lt;winsock.h&gt;
+#pragma comment(lib &quot;ws2_32.lib&quot;)
+ 需要注意的是，winsock.h是Windows环境使用的头文件，对于其他的环境需要使用其他的头文件，如在Linux下使用的是socket.h。
+有的时候也是用winsock2.h，winsockt2.h是winsockt.h的升级版，一个文件中不可同时存在winsockt.h和winsockt2.h，因为winsockt2.h中有重定义winsockt.h中的内容。
+2.创建套接字Server.h
+#include &lt;winsock.h&gt;
+
+#pragma comment(lib, &quot;ws2_32.lib&quot;)
+
+class Server
+{
+public:
+    WSADATA wsd;//存放套接字的属性，如：版本信息等
+    SOCKET serv</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-18
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/UE4">UE4</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2020/01/18/【UE4】UE4内嵌Web及与Web通信/">
                 <p class="h4 index-header">【UE4】UE4内嵌Web及与Web通信</p>
                 <div class="index-excerpt">
@@ -526,63 +575,6 @@ create procedure Test(in parameter01 int , out parameter02 vachar(45)):创建一
                         |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
                         
                             <a href="/tags/%E5%A4%A7%E4%BA%8B%E4%BB%B6">大事件</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/10/10/【待解决】一些待解决的难题/">
-                <p class="h4 index-header">【待解决】一些待解决的难题</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">这里记录一些待解决的程序难题
-1.1.这两种内存分配的方式，有什么不一样，2.初始化的s最后结果有什么不一样
-int main()
-{
-    struct a {
-        int id;
-        string s;
-    };
-    a *ptr1 = new a();
-    ptr1-&gt;s = &quot;hello&quot;;
-    a *ptr2 = (a*)malloc(sizeof(a));
-    ptr2-&gt;s = &quot;hello&quot;;//这一句却会报异常，为什么？
-    system(&quot;pause&quot;);
-    return 0;
-}
-2.List容器中empty()判空和size()==0判空有什么不同
-3.为什么函数外的指针的值没有变化
-void getmemory(char *p)
-{
-    p = new char[100];
-    strcpy_s(p,12, &quot;hello world&quot;);
-    printf(&quot;%s\n&quot;, p);
- </div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-10
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E5%BE%85%E8%A7%A3%E5%86%B3">待解决</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/%E7%A8%8B%E5%BA%8F%E9%97%AE%E9%A2%98">程序问题</a>&nbsp;
                         
                     
                 </div>

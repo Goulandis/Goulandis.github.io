@@ -106,6 +106,63 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/10/10/【待解决】一些待解决的难题/">
+                <p class="h4 index-header">【待解决】一些待解决的难题</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">这里记录一些待解决的程序难题
+1.1.这两种内存分配的方式，有什么不一样，2.初始化的s最后结果有什么不一样
+int main()
+{
+    struct a {
+        int id;
+        string s;
+    };
+    a *ptr1 = new a();
+    ptr1-&gt;s = &quot;hello&quot;;
+    a *ptr2 = (a*)malloc(sizeof(a));
+    ptr2-&gt;s = &quot;hello&quot;;//这一句却会报异常，为什么？
+    system(&quot;pause&quot;);
+    return 0;
+}
+2.List容器中empty()判空和size()==0判空有什么不同
+3.为什么函数外的指针的值没有变化
+void getmemory(char *p)
+{
+    p = new char[100];
+    strcpy_s(p,12, &quot;hello world&quot;);
+    printf(&quot;%s\n&quot;, p);
+ </div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-10
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E5%BE%85%E8%A7%A3%E5%86%B3">待解决</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/%E7%A8%8B%E5%BA%8F%E9%97%AE%E9%A2%98">程序问题</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2019/10/08/【C++】C++中的四种个智能指针/">
                 <p class="h4 index-header">【C++】C++中的四种个智能指针.md</p>
                 <div class="index-excerpt">
@@ -545,45 +602,6 @@ a = 1,*n = 2,*m = 2
             
                 <div>
                     <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-12
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/C++">C++</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/09/11/【C++】全局变量、静态全局变量、局部变量与静态局部变量/">
-                <p class="h4 index-header">【C++】普通全局变量、静态全局变量、普通局部变量与静态局部变量</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">1.普通全局变量​    普通全局变量是定义在函数和类外的或由extern标识或直接定义没有static标识的变量。
-​    各个类型的变量之间最主要的区别就是作用域的不同了，普通全局变量的作用域在整个源程序中，全局变量对整个源程序中都是可见的，无论源程序是由单个文件还是多个文件组成，普通全局变量具有external链接属性，所以普通全局变量在整个源程序的各个文件中都可以被引用。
-2.静态全局变量​    静态全局变量是定义在函数和类外的由static标识的变量。
-​    静态全局变量具有文件作用域，具有internal链接属性，只能在定义的文件中使用，在其他文件中可以定义同名的变量，而全局变量则不行，这里要注意静态全局变量与类静态全局变量是不同的，类静态全局变量受到类权限限制，不同的访问权限就之间决定了类静态全局变量的作用域，类全局变量的使用与类一致，能使用类的地方就能使用类全局变量。
-​    关于普通全局变量和静态全局变量的区别，我一直没有弄得很清楚，我有在网上查阅很多bolg，大家的说法都出奇的一致，我上面写的也是在查阅很多blog后总结的，但是我实际测试时，普通全局变量和</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-11
                     &nbsp;&nbsp;
                     
                         |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
