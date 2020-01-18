@@ -106,6 +106,89 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/11/【C#】C#两种数组定义的区别/">
+                <p class="h4 index-header">【C#】C#两种二维数组的区别</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">C#支持两种二维数组的定义方式（以int数组为例）：
+1.普通数组int[,] array = new int[1,2];
+这种方式形式上较为简便，要注意的是new之后的[]里面是一定要注明数组大小的，不注明会报错，也就是说这种方式定义的数组是确定大小的。
+数组的赋值：
+int[,] array = new int[2,3]{{1,2,3},{4,5,6}};
+2.多播数组int[][] array = new int[2][];
+这种方式需要注明行数，列数不能注明，注明会报错，这种方式定义的是一个函数确定而列数不确定的不确定大小的数组。
+数组的赋值：
+int[][] array = new int[2][]{new int[]{1,2,3},new int[]{4,5,6}}
+两种二维数组是不能兼容的，即使用方式1定义的二维数组不能使用方式2来使用，反之亦然。
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-11
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C#">C#</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/09/【Lua】Lua基础/">
+                <p class="h4 index-header">【Lua】Lua基础</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">参考博文：https://www.cnblogs.com/cjswwdz/p/5634442.html
+XMind源文件：https://github.com/Goulandis/XMinds-2019.8.27/tree/master/Lua
+学习地址：https://www.bilibili.com/video/av50685253?from=search&amp;seid=12754355294240767428
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-09
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/Lua">Lua</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2019/08/27/【Unity3d】Unity常用技巧笔记/">
                 <p class="h4 index-header">【Unity3d】Unity常用技巧笔记</p>
                 <div class="index-excerpt">
@@ -465,79 +548,6 @@ linux启动时，需要的文件
                         |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
                         
                             <a href="/tags/Linux">Linux</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/08/25/【C#】C#高级/">
-                <p class="h4 index-header">C#高级</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">
-
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-25
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/C#">C#</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/08/25/【C#】C#中级/">
-                <p class="h4 index-header">C#中级</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">﻿
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-25
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/C#">C#</a>&nbsp;
                         
                     
                 </div>

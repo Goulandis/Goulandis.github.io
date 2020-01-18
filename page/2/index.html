@@ -106,6 +106,110 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/10/08/【C++】C++中的四种个智能指针/">
+                <p class="h4 index-header">【C++】C++中的四种个智能指针.md</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">智能指针的出现的目的就是为了解决c++中出现异常安全资源管理问题，智能指针的实现原理是依据RAII机制(Resource Acquisition Is Initialization)，这是的智能指针本质上是一个对象，行为表现上是一个指针。
+智能指针都是类模板使用时是必须指定类型参数的，如：auto_ptr&lt;int&gt; ptr
+1.auto_ptr
+auto_ptr采用所有权的模式，指针内不做引用计数，因此一个对象只能由一个auto_ptr指针所拥有，在给其他auto_ptr指针赋值时，所有权会转移
+auto_ptr中使用delete来释放资源，所以auto_ptr不能指向数组，因为数组的释放使用的是delete[]
+auto_ptr指针的判空使用auto_ptr.get()==NULL来判断
+
+auto_ptr是C++98中的标准，在C++11中已经被弃用。
+auto_ptr由于是所有权模式，所在在auto_ptr做参数时，会转移所有权，即将函数外的auto_ptr的所有权转义给函数内的auto_ptr的所有权，如果函数内不做所有权转移的话，函数外的auto_ptr将变为空指</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-08
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/10/08/【算法】一些牛逼轰轰的算法记录/">
+                <p class="h4 index-header">【算法】一些牛逼轰轰的算法记录</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">1.判断点是否在三角形内衍生：快速计算三角形面积#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;math.h&gt;
+#define S_FLOAT 0.00000001
+
+using namespace std;
+//点类型
+typedef struct Point
+{
+    float x;
+    float y;
+    Point() {}
+    Point(float x,float y)
+    {
+        this-&gt;x = x;
+        this-&gt;y = y;
+    }
+};
+//计算三角形面积
+float GetTriangleSquar(const Point a, const Point b, const Point c)
+{
+    Point AB, BC;
+    AB.x = b.x - a.x;
+    AB.y = b.y - a.y;
+    BC.x = c.x - b.x;
+    BC.y = c.y - b.y;
+    ret</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-08
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2019/10/06/【C++】C++STL标准模板库/">
                 <p class="h4 index-header">【C++】C++STL标准模板库</p>
                 <div class="index-excerpt">
@@ -492,89 +596,6 @@ a = 1,*n = 2,*m = 2
                         |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
                         
                             <a href="/tags/C++">C++</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/09/11/【C#】C#两种数组定义的区别/">
-                <p class="h4 index-header">【C#】C#两种二维数组的区别</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">C#支持两种二维数组的定义方式（以int数组为例）：
-1.普通数组int[,] array = new int[1,2];
-这种方式形式上较为简便，要注意的是new之后的[]里面是一定要注明数组大小的，不注明会报错，也就是说这种方式定义的数组是确定大小的。
-数组的赋值：
-int[,] array = new int[2,3]{{1,2,3},{4,5,6}};
-2.多播数组int[][] array = new int[2][];
-这种方式需要注明行数，列数不能注明，注明会报错，这种方式定义的是一个函数确定而列数不确定的不确定大小的数组。
-数组的赋值：
-int[][] array = new int[2][]{new int[]{1,2,3},new int[]{4,5,6}}
-两种二维数组是不能兼容的，即使用方式1定义的二维数组不能使用方式2来使用，反之亦然。
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-11
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/C#">C#</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/09/09/【Lua】Lua基础/">
-                <p class="h4 index-header">【Lua】Lua基础</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">参考博文：https://www.cnblogs.com/cjswwdz/p/5634442.html
-XMind源文件：https://github.com/Goulandis/XMinds-2019.8.27/tree/master/Lua
-学习地址：https://www.bilibili.com/video/av50685253?from=search&amp;seid=12754355294240767428
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-09
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Lua">Lua</a>&nbsp;
                         
                     
                 </div>
