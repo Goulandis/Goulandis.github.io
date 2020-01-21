@@ -106,6 +106,53 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/12/【C++】C++中的四种转换类型/">
+                <p class="h4 index-header">【C++】C++中的四种类型转换</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">C++提供四种类型转换：const_cast、static_cast、dynamic_cast、reinterpret_cast
+1.const_cast​    const_cast的存在主要就是针对const字段，C++提供const_cast的目的就是为了消除const字段的const属性，让const字段也可以修改。
+​    const_cast的用法：
+​        const_cast只能将常指针转换为非常指针，不能直接将常字段转换为非常字段，只能通过指针类间接的修改常字段所在的内存的内容。
+​        例：
+const int a = 1;
+const int* n = &amp;a;
+int* m = const_cast&lt;int*&gt;(n) ;
+*m = 2;
+​    最终的输出结果：
+a = 1,*n = 2,*m = 2
+&amp;a=n=m​        奇怪，指针n，m的确指向了地址&amp;a，之中的内容的确也修改成了2，可为什么字段a的值依旧是1？
+​        经过多方查阅资料和自己的试验，原来对于常字段在预编译的过程中编译</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-12
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2019/09/11/【C++】全局变量、静态全局变量、局部变量与静态局部变量/">
                 <p class="h4 index-header">【C++】普通全局变量、静态全局变量、普通局部变量与静态局部变量</p>
                 <div class="index-excerpt">
@@ -433,42 +480,6 @@ XMind源文件：https://github.com/Goulandis/XMinds-2019.8.27/tree/master/Lua
                         |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
                         
                             <a href="/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1">网络通信</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/08/25/【Qt】Qt基础/">
-                <p class="h4 index-header">Qt基础</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">﻿
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-25
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Qt">Qt</a>&nbsp;
                         
                     
                 </div>

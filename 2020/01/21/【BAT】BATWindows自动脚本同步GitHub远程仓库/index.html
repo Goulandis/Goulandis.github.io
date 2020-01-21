@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>【BAT】BATWindows自动脚本同步GitHub远程仓库 ~ Goulandis</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">主页</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">归档</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">分类</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">标签</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">关于</a>
+            </li>
+            
+            
+                <li class="nav-item" id="search-btn">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/2.png')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Tuesday, January 21st 2020, 8:01 pm</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <p>Windows自动脚本，我已自动同步GitHub仓库为例。</p>
+<h1 id="一、编写自动脚本"><a href="#一、编写自动脚本" class="headerlink" title="一、编写自动脚本"></a>一、编写自动脚本</h1><p>先上源码，可以直接用TXT写，然后将文件后缀改为.bat。</p>
+<pre><code class="shell">start &quot;C:\Windows\System32\cmd.exe&quot;
+cd /
+G:
+cd Goulandis\Git\Temp
+git add .
+git commit -m &quot;From Auto Updata&quot;
+git push
+pause</code></pre>
+<ul>
+<li>start “C:\Windows\System32\cmd.exe”：打开Windows CMD控制台</li>
+<li>cd /：切换到根目录，加这一句的目的在于可以不需要将脚本放在仓库的所在的文件夹下运行，这样就可以将脚本放在任意位置运行</li>
+<li>G：切换到G盘，因为我的Git仓库放在G盘</li>
+<li>cd Git\Temp：进入远程仓库所在的文件夹Temp，我的远程仓库放在G:/Goulandis/Git/Temp文件夹下</li>
+<li><code>git add .</code>到<code>git push</code>是git同步远程仓库的命令</li>
+<li>pause：pause命令用于暂停命令继续执行，本例中可有可无，这里加上主要是为了方便查看执行过程</li>
+<li>taskkill /f /im cmd.exe：自动关闭CMD</li>
+</ul>
+<p>双击运行，测试一下执行效果：</p>
+<p><img src="/2020/01/21/【BAT】BATWindows自动脚本同步GitHub远程仓库/Git/Temp/%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/Snipaste_2020-01-21_16-04-19.png" alt></p>
+<p>如果想要脚本在CMD命令行的任意位置都可以调用执行的话，可以给脚本专门创建一个文件夹，将脚本放入其中，然后再将此路径添加到Windows的环境变量中。</p>
+<p><img src="/2020/01/21/【BAT】BATWindows自动脚本同步GitHub远程仓库/Git/Temp/%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/Snipaste_2020-01-21_16-29-49.png" alt></p>
+<p>然后，我们再测试运行一下：</p>
+<p><img src="/2020/01/21/【BAT】BATWindows自动脚本同步GitHub远程仓库/Git/Temp/%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/Snipaste_2020-01-21_16-31-22.png" alt></p>
+<p>我的脚本名字叫GitPushTemp.bat，执行成功</p>
+<h1 id="二、让脚本自动执行"><a href="#二、让脚本自动执行" class="headerlink" title="二、让脚本自动执行"></a>二、让脚本自动执行</h1><p>要向让脚本定时自动自行，我就需要用的Windows的自动任务计划程序，Windows实现自动任务有三种常用的方法：</p>
+<ul>
+<li>Windows任务计划程序</li>
+<li>Windows Service</li>
+<li>SQL Agent的Job</li>
+</ul>
+<p>我这里使用Windows任务计划程序为例。</p>
+<p>只需要将我们的脚本程序添加到Windows任务计划程序中，设定好执行时间，就可以实现脚本的定时自动执行了。</p>
+<p><img src="/2020/01/21/【BAT】BATWindows自动脚本同步GitHub远程仓库/Git/Temp/%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/Snipaste_2020-01-21_16-37-15.png" alt></p>
+<p>创建一个定时任务按照提示添加进入脚本，就可以了，到点之后脚本就会自动执行。</p>
+<h1 id="三、DOS语法"><a href="#三、DOS语法" class="headerlink" title="三、DOS语法"></a>三、DOS语法</h1><p>上面的脚本算是极其简单的脚本了，要想编写功能更为强大脚本，我们就需要了解一些DOS语法了。</p>
+<p>我先来看一个复杂点的脚本，这里以脚本为例，选择一些较为常用的语法来介绍</p>
+<p><strong>Test.bat</strong></p>
+<pre><code class="shell">rem Test.bat
+start &quot;C:\Windows\System32\cmd.exe&quot;
+for %%i in (1,2,3) do call l1.bat</code></pre>
+<p><strong>l1.bat</strong></p>
+<pre><code class="shell">rem l1.bat
+choice /C 123 /M &quot;选择执行分路md&quot;
+if errorlevel 3 goto l3
+if errorlevel 2 goto l2
+if errorlevel 1 goto l1
+:l3
+call l1.bat
+goto end
+:l2
+echo &quot;你选择了支路2&quot;
+goto end
+:l1
+echo &quot;你选择了支路1&quot;
+goto end
+:end
+pause</code></pre>
+<p><font color="red"> </font></p>
+<ul>
+<li>rem Test.bat：rem是DOS中注释标识符。</li>
+<li>for %%i in (1,2,3) do call l1.bat：类是python中<code>for i in list：</code>%%i就是i参数，<code>%%</code>后的字母可以是任何字母不一定非要是i，<code>(1,2,3)</code>就是list，括号中有几个元素for循环就循环几次，每次执行将括号中的元素复值给%%i，do之后能且仅能接一句DOS命令作为循环体语句，%%i可以在 do之后的循环体语句中使用，DOS的for循环必须使用多脚本调用的形式才能实现多执行体的循环。</li>
+<li>choice /C 123 /M “选择执行分路md”：控制台输入，默认输入为Y/N，使用/C可以自定义输入，123就是我们的自定义的输入。choice之后可以很多参数，各有不同的功能，这里不多累述。</li>
+<li>if errorlevel 3 goto l3：if和for一样之后也能且只能接一句执行语句，所以多和goto配合执行多执行体的条件语句，errorlevel是配合choice使用的参数，用于接受choice的输入值，其后跟判断值，这样就可以实现判断输入值是否符合条件。</li>
+<li>goto：DOS的goto使用方法和C语言的goto是一样的。</li>
+</ul>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/.bat">.bat</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">学！永不止步</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+            <br><br>
+            
+            
+    <script src="https://utteranc.es/client.js"
+            repo="Goulandis/Comments"
+            issue-term="pathname"
+            
+            label="utterances"
+            
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+	    
+        
+    </div>
+</div>
+
+    
+</main>
+
+
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="None" data-success="success" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "【BAT】BATWindows自动脚本同步GitHub远程仓库&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      var el = "h1,h2,h3,h4,h5,h6".split(",")
+      var res = []
+      for (item of el) {
+        res.push(".markdown-body > " + item)
+      }
+      anchors.add(res.join(", "))
+    </script>
+  
+
+  
+    <script src="/js/local-search.js"></script>
+    <script>
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function(){ getSearchFile(path); this.onclick = null }
+    </script>
+  
+</body>
+</html>
