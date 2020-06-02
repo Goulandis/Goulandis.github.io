@@ -125,11 +125,11 @@ pause</code></pre>
 <li>taskkill /f /im cmd.exe：自动关闭CMD</li>
 </ul>
 <p>双击运行，测试一下执行效果：</p>
-<p><img src="/2020/01/21/【BAT】BATWindows自动脚本同步GitHub远程仓库/Snipaste_2020-01-21_16-04-19.png" alt></p>
+<p><img src="%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/Snipaste_2020-01-21_16-04-19.png" alt></p>
 <p>如果想要脚本在CMD命令行的任意位置都可以调用执行的话，可以给脚本专门创建一个文件夹，将脚本放入其中，然后再将此路径添加到Windows的环境变量中。</p>
-<p><img src="/2020/01/21/【BAT】BATWindows自动脚本同步GitHub远程仓库/Snipaste_2020-01-21_16-29-49.png" alt></p>
+<p><img src="%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/Snipaste_2020-01-21_16-29-49.png" alt></p>
 <p>然后，我们再测试运行一下：</p>
-<p><img src="/2020/01/21/【BAT】BATWindows自动脚本同步GitHub远程仓库/Snipaste_2020-01-21_16-31-22.png" alt></p>
+<p><img src="%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/Snipaste_2020-01-21_16-31-22.png" alt></p>
 <p>我的脚本名字叫GitPushTemp.bat，执行成功</p>
 <h1 id="二、让脚本自动执行"><a href="#二、让脚本自动执行" class="headerlink" title="二、让脚本自动执行"></a>二、让脚本自动执行</h1><p>要向让脚本定时自动自行，我就需要用的Windows的自动任务计划程序，Windows实现自动任务有三种常用的方法：</p>
 <ul>
@@ -139,7 +139,7 @@ pause</code></pre>
 </ul>
 <p>我这里使用Windows任务计划程序为例。</p>
 <p>只需要将我们的脚本程序添加到Windows任务计划程序中，设定好执行时间，就可以实现脚本的定时自动执行了。</p>
-<p><img src="/2020/01/21/【BAT】BATWindows自动脚本同步GitHub远程仓库/Snipaste_2020-01-21_16-37-15.png" alt></p>
+<p><img src="%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/Snipaste_2020-01-21_16-37-15.png" alt></p>
 <p>创建一个定时任务按照提示添加进入脚本，就可以了，到点之后脚本就会自动执行。</p>
 <h1 id="三、DOS语法"><a href="#三、DOS语法" class="headerlink" title="三、DOS语法"></a>三、DOS语法</h1><p>上面的脚本算是极其简单的脚本了，要想编写功能更为强大脚本，我们就需要了解一些DOS语法了。</p>
 <p>我先来看一个复杂点的脚本，这里以脚本为例，选择一些较为常用的语法来介绍</p>
