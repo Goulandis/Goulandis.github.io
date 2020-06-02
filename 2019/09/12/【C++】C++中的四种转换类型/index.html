@@ -120,13 +120,13 @@ int* m = const_cast&lt;int*&gt;(n) ;
 <p>​        经过多方查阅资料和自己的试验，原来对于常字段在预编译的过程中编译器就会给常字段预定义为初始化的值，类似宏定义一般，尽管内存的内容被改变了，但是常字段的值依旧被预定义为初始化的值。</p>
 <p>​        但是，我就疑问了，既然const_cast就是用来修改const字段的，可是只是改变了其内存的值，字段的值依旧没变，那么程序里使用该字段的地方的值依旧没有改变，如此const_cast似乎没有达到想要的结果。</p>
 <p>​        $\color{red}{不过const_cast似乎可以修改const标识的结构体对象中没有再用const标识的字段，也可以修改用const标识的类对象中没有用const标识的公有字段，但是在结构体或类中用const标识的字段就不能再修改了。}$</p>
-<p><img src="//yoursite.com/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_10-44-16.png" alt></p>
+<p><img src="/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_10-44-16.png" alt></p>
 <h1 id="2-static-cast"><a href="#2-static-cast" class="headerlink" title="2.static_cast"></a>2.static_cast</h1><p>​    static_cast类型转换的用法几乎和C中的基本类型转换的用法一致，而C++的static_cast类型转换增加l类型检查，在安全性上较C要强。</p>
 <p>​    static_cast支持所有类型之间的转换包括类，对于类在继承过程中的类型转换有两点是需要注意的，一、static_cast类型转换在上行转换是安全的，在下行转换是不安全，（上行转换：从子类转换到父类，下行转换：从父类转换到子类），二、static_cast类型转换在类的转换中因该使用指针转换，即通过指针间接的实现转换，直接对类的对象进行转换类型会被裁剪，并且在下行转换中不使用指针会报错。</p>
-<p><img src="//yoursite.com/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_11-51-30.png" alt></p>
+<p><img src="/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_11-51-30.png" alt></p>
 <h1 id="3-dynamic-cast"><a href="#3-dynamic-cast" class="headerlink" title="3.dynamic_cast"></a>3.dynamic_cast</h1><p>​    dynamic_cast类型转换用于类之间的上下行转换，与static_cast不同的是，dynamic_cast类型转换无论上下行都具有类型检查，都可以进行安全的类型转换。上行转换dynamic_cast与static_cast完全一致，下行转换dynamic_cast比static_cast更安全</p>
 <h1 id="4-reinterpret-cast"><a href="#4-reinterpret-cast" class="headerlink" title="4.reinterpret_cast"></a>4.reinterpret_cast</h1><p>​    reinterpret_cast类型转换只能对指针进行操作，reinterpret_cast类型转换提供的是一种更底层的转换模式–比特位上的重新解释，即对某一类型的内存地址的比特位以另一种类型来解释，这可能不好理解，在这放一张图来辅助理解。</p>
-<p><img src="//yoursite.com/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_16-32-44.png" alt></p>
+<p><img src="/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_16-32-44.png" alt></p>
 <p>​    p是指向字符串的char类型指针，i是指向整型的指针，i = reinterpret_cast&lt;int*&gt;(p)则将p所指向的内存里的比特位以int类型来重新解释并复制到i所指向的内存地址上，于是在输出 *i 时，输出的是一个整型的数值。</p>
 <p>reinterret_cast可以说是一个安全的强制类型转换了。 </p>
 <p>​    至于为什么cout&lt;&lt;p时不是输出的p所指向的地址而是地址里的内容，我始终没有弄明白，不过不影响对reinterpret_cast类型转换的理解。</p>

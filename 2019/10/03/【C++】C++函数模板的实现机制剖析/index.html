@@ -106,7 +106,7 @@
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
                             <h1 id="函数模板的实现机制剖析"><a href="#函数模板的实现机制剖析" class="headerlink" title="函数模板的实现机制剖析"></a>函数模板的实现机制剖析</h1><p>要剖析函数模板的实现机制，我们要先了解程序的编译过程，这里以gcc为例</p>
-<p><img src="//yoursite.com/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_16-51-51.png" alt></p>
+<p><img src="/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_16-51-51.png" alt></p>
 <p>这里对下面代码进行剖析</p>
 <pre><code class="c++">#include &quot;stdafx.h&quot;//这是VS的固有头文件
 #include &lt;iostream&gt;
@@ -334,13 +334,13 @@ Fun(0.1, 0.2);</code></pre>
 <p><font color="red">编译器会对函数模板进行两次编译，在申明的地方对模板代码本身进行编译，在调用的地方对参数替换后的代码进行编译。</font></p>
 <p>g++命令的使用</p>
 <p>首先电脑里要有g++这个软件，我这里使用的是Qt里集成的g++软件</p>
-<p><img src="//yoursite.com/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_19-57-21.png" alt></p>
+<p><img src="/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_19-57-21.png" alt></p>
 <p>然后右键我的电脑–&gt;属性–&gt;高级环境设置–&gt;环境变量–&gt;系统变量/Path–&gt;编辑</p>
-<p><img src="//yoursite.com/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_20-07-41.png" alt></p>
+<p><img src="/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_20-07-41.png" alt></p>
 <p>再然后新建–&gt;将g++.exe所在的路径拷贝到新建的环境变量中</p>
-<p><img src="//yoursite.com/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_20-08-21.png" alt></p>
+<p><img src="/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_20-08-21.png" alt></p>
 <p>测试一下，win+r–&gt;cmd–&gt;任意目录键入g++</p>
-<p><img src="//yoursite.com/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_20-12-24.png" alt></p>
+<p><img src="/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_20-12-24.png" alt></p>
 <p>可以看到系统没有提示无此命令，说明配置成功</p>
 
                             <hr>
