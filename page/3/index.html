@@ -106,6 +106,65 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/10/03/【C++】C++函数模板的实现机制剖析/">
+                <p class="h4 index-header">【C++】C++函数模板的实现机制剖析</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">函数模板的实现机制剖析要剖析函数模板的实现机制，我们要先了解程序的编译过程，这里以gcc为例
+
+这里对下面代码进行剖析
+#include &quot;stdafx.h&quot;//这是VS的固有头文件
+#include &lt;iostream&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+void Fun(T a,T b)
+{
+    a = a + b;
+    cout &lt;&lt; &quot;我是函数模板&quot; &lt;&lt; endl;
+}
+int main()
+{
+    Fun(1, 2);
+    Fun(0.1, 0.2);
+    system(&quot;pause&quot;);
+    return 0;
+}
+打开控制台，使用命令生成汇编文件(当然环境变量里需要有g++编译器的路径才能这样使用，具体操作放在文末)
+g++ -S 1.cpp -o 1.s
+我们来查看汇编文件
+    .file    &quot;C++.cpp&quot;
+.lcomm __ZStL8__ioinit,</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-03
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2019/10/03/【C】C的typedef的妙用/">
                 <p class="h4 index-header">【C】C的typedef的妙用</p>
                 <div class="index-excerpt">
@@ -500,42 +559,6 @@ XMind源文件：https://github.com/Goulandis/XMinds-2019.8.27/tree/master/Lua
             
                 <div>
                     <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-27
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Unity3d">Unity3d</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/08/25/【Unity3d】Space/">
-                <p class="h4 index-header">【Unity3d】Space</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-25
                     &nbsp;&nbsp;
                     
                         |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>

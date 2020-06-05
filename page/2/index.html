@@ -106,6 +106,79 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/11/06/【UE4】UE4组件/">
+                <p class="h4 index-header">【UE4】UE4组件</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">不同的蓝图脚本拥有不同的组件集，蓝图脚本的组件集过于庞大，这里只对自己使用过的组件进行列举。
+说明：红色字体表示一级目录组件，绿色字体表示二级目录，黄色字体为三级目录(三级目录较为少见所以使用和二级目录相同的三级标题)，白色字体为具体组件说明。
+一、材质蓝图组件Constans(常量)
+
+
+
+组件
+作用
+
+
+
+Constans
+一维量，可以表示任何一维数据，如：小数、整数等
+
+
+Constans2Vector
+二维量，可以表示任何二维数据，如：二维坐标
+
+
+Constans3Vector
+三维量，可以表示任何三维数据，如：三维坐标、RBG等
+
+
+Constans4Vector
+四维量，可以表示任何四维数据，如：四元数
+
+
+Math(数学函数)Multiply(乘积)
+Lerp(插值)
+Lerp组件在Math的多个二级目录中存在，有各种类型的插值变化。
+输入：
+
+A：插值变化的起始值；
+B：插值变化的目标值；
+Alpha：插值的变化规则，连接Float的TimeLine插值将按照TimeLine的规则变化。
+
+输出：
+
+Return Value：返回变化后的插值，将Lerp放入帧函数中可</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-06
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/UE4">UE4</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2019/11/06/【UE4】UE4连接MySQL/">
                 <p class="h4 index-header">【UE4】UE4连接MySQL</p>
                 <div class="index-excerpt">
@@ -512,65 +585,6 @@ STL的从广义上讲分为三类: algorithm (算法)、container (容器)和ite
                         |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
                         
                             <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/C++">C++</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/10/03/【C++】C++函数模板的实现机制剖析/">
-                <p class="h4 index-header">【C++】C++函数模板的实现机制剖析</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">函数模板的实现机制剖析要剖析函数模板的实现机制，我们要先了解程序的编译过程，这里以gcc为例
-
-这里对下面代码进行剖析
-#include &quot;stdafx.h&quot;//这是VS的固有头文件
-#include &lt;iostream&gt;
-using namespace std;
-
-template &lt;typename T&gt;
-void Fun(T a,T b)
-{
-    a = a + b;
-    cout &lt;&lt; &quot;我是函数模板&quot; &lt;&lt; endl;
-}
-int main()
-{
-    Fun(1, 2);
-    Fun(0.1, 0.2);
-    system(&quot;pause&quot;);
-    return 0;
-}
-打开控制台，使用命令生成汇编文件(当然环境变量里需要有g++编译器的路径才能这样使用，具体操作放在文末)
-g++ -S 1.cpp -o 1.s
-我们来查看汇编文件
-    .file    &quot;C++.cpp&quot;
-.lcomm __ZStL8__ioinit,</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-03
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
                             &nbsp;&nbsp;
                         
                     
