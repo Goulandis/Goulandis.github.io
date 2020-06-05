@@ -131,7 +131,7 @@
 </tr>
 </tbody></table>
 <h1 id="2-C-类的内存分布"><a href="#2-C-类的内存分布" class="headerlink" title="2.C++类的内存分布"></a>2.C++类的内存分布</h1><p>要想更好的了解这些，我们还需了解C++类的内存分布</p>
-<p><img src="//yoursite.com/2019/10/01/【C++】C++面向对象模型初探/Snipaste_2019-10-02_09-07-09.png" alt></p>
+<p><img src="/2019/10/01/【C++】C++面向对象模型初探/Snipaste_2019-10-02_09-07-09.png" alt></p>
 <h2 id="Stack："><a href="#Stack：" class="headerlink" title="Stack："></a><strong>Stack：</strong></h2><p>栈，存放Automatic Variables，按内存地址由高到低方向生长，其最大大小由编译时确定，速度快，但自由性差，最大空间不大。保存程序中的局部变量。</p>
 <h2 id="Heap："><a href="#Heap：" class="headerlink" title="Heap："></a><strong>Heap：</strong></h2><p>堆，自由申请的空间，按内存地址由低到高方向生长，其大小由系统内存/虚拟内存上限决定，速度较慢，但自由性大，可用空间大。 动态分配的内存在调用malloc（）或者相关函数产生，在调用free()时释放，由程序员决定而不是一系列规则规定内存持续时间，因此内存块可在一个函数中创建，在另一个函数中释放。由于这点，动态内存分配容易导致堆区内存碎片化。</p>
 <h2 id="Data："><a href="#Data：" class="headerlink" title=".Data："></a><strong>.Data：</strong></h2><p> 存放程序中<font color="red"> 已经初始化的非零全局变量。静态分配。</font></p>
