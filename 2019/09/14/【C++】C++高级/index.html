@@ -149,13 +149,13 @@ int main()
     return 0;
 }</code></pre>
 <p>我们作一个图示：</p>
-<p><img src="/2019/09/14/【C++】C++高级/B:%5CGit%5CBlog%5Csource_posts%5C%E3%80%90C++%E3%80%91C++%E9%AB%98%E7%BA%A7%5CSnipaste_2019-10-01_16-21-15.png" alt></p>
+<p><img src="//yoursite.com/2019/09/14/【C++】C++高级/B:%5CGit%5CBlog%5Csource_posts%5C%E3%80%90C++%E3%80%91C++%E9%AB%98%E7%BA%A7%5CSnipaste_2019-10-01_16-21-15.png" alt></p>
 <p>​    我们没有自定义Obj类的拷贝构造函数，所以当代码执行到<code>Obj obj2 = obj1;</code>时，编译器将调用默认的拷贝构造函数，然而，<font color="red"> 编译器默认的拷贝构造函数是一个浅拷贝</font>，所以新创建的对象obj2没有自己的堆区空间，obj2.p指向的是obj1.p所指向的内存地址。</p>
 <p>​    上面的代码编译是通不过的，<font color="red"> 原因在于，对象析构时，同一个内存地址<code>0x0001</code>被对象obj1和obj2一起析构了两次</font>。当代码执行完<code>test(obj1)</code>时，对象obj2被析构，指针obj2.p所指向的内存地址<code>0x0001</code>被释放，所以当代码执行到<code>obj1.Show()</code>时，使用了已经被释放掉的内存<code>0x0001</code>地址，从而导致运行错误。</p>
 <p>​    <font color="green"> <strong>这里我有一个疑问，既然浅拷贝在拷贝有指针的对象时，会出现两次析构而出错，所以浅拷贝只能拷贝没有指针成员的对象，那么浅拷贝和深拷贝似乎没有什么区别了，那么浅拷贝存在的意义是什么呢？</strong></font></p>
 <h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>C++没有提供给开发者预定义的深拷贝方法，所以要想使用深拷贝，我们需要字写一个拷贝构造函数。</p>
 <p>深拷贝可以解决上面遇到的浅拷贝的问题，因为，<font color="red"> 深拷贝会申请一新的内存空间用于存放拷贝过来的内容，即深拷贝拷贝对象的所有成员，包括指针所指向的内存空间也会一起被拷贝，被拷贝过来的指针会指向一个新的内存地址</font>。</p>
-<p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-10-01_16-52-53.png" alt></p>
+<p><img src="//yoursite.com/2019/09/14/【C++】C++高级/Snipaste_2019-10-01_16-52-53.png" alt></p>
 <h3 id="定义深拷贝构造函数"><a href="#定义深拷贝构造函数" class="headerlink" title="定义深拷贝构造函数"></a>定义深拷贝构造函数</h3><pre><code class="c++">//代码1.2
 class Obj
 {
@@ -356,7 +356,7 @@ free(pc);</code></pre>
 <h3 id="小知识-2"><a href="#小知识-2" class="headerlink" title=" 小知识"></a><font color="blue"> <strong>小知识</strong></font></h3><p><font color="blue"> <code>new delete</code>和<code>malloc free</code>是可以穿插使用的，即<code>new</code>可以和<code>free</code>搭配使用，<code>malloc</code>可以和<code>delete</code>搭配使用。</font></p>
 <h1 id="二、继承"><a href="#二、继承" class="headerlink" title="二、继承"></a>二、继承</h1><p>继承这边主要分析一下<code>虚继承</code></p>
 <h2 id="1-虚继承"><a href="#1-虚继承" class="headerlink" title="1.虚继承"></a>1.虚继承</h2><p>虚继承的出现主要是为解决如下的继承关系中的二义性问题</p>
-<p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-10-02_15-50-39.png" alt="图1"></p>
+<p><img src="//yoursite.com/2019/09/14/【C++】C++高级/Snipaste_2019-10-02_15-50-39.png" alt="图1"></p>
 <p>当我们的类的继承过程中出现这种继承关系时，我们需要使类B和类C分别虚继承类A来解决二义性，具体操作如下：</p>
 <pre><code class="c++">class A
 {
@@ -384,9 +384,9 @@ void main()
     d.a = 1;
 }</code></pre>
 <p>这里有一点要注意，虚继承的应用场景有限，虚继承只能解决这种情况：</p>
-<p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-10-02_15-50-39.png" alt></p>
+<p><img src="//yoursite.com/2019/09/14/【C++】C++高级/Snipaste_2019-10-02_15-50-39.png" alt></p>
 <p>而不能解决这种情况：</p>
-<p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-10-02_16-10-55.png" alt></p>
+<p><img src="//yoursite.com/2019/09/14/【C++】C++高级/Snipaste_2019-10-02_16-10-55.png" alt></p>
 <h2 id="2-继承中的static关键字"><a href="#2-继承中的static关键字" class="headerlink" title="2.继承中的static关键字"></a>2.继承中的static关键字</h2><p><font color="red"> 类中的静态成员变量被类的所有对象共享，同时也被类的派生类的所有对象共享。</font></p>
 <h1 id="三、多态"><a href="#三、多态" class="headerlink" title="三、多态"></a>三、多态</h1><p>​    在C++的几个特性中，封装、继承和抽象都相对好理解，而多态则不太好理解，这里就说说C++的多态。</p>
 <h2 id="1-多态分两种："><a href="#1-多态分两种：" class="headerlink" title="1.多态分两种："></a>1.多态分两种：</h2><p>​    静态多态：静态多态指的就是函数重载和运算符重载。</p>
@@ -1120,7 +1120,7 @@ int main()
 }</code></pre>
 <p>可以看到我们的异常处理模块使用多态，繁杂程度被大幅缩水了，而我们的异常处理被集中在了异常处理类中，有时，如果我们的异常处理只对某一个类有效也是可以直接将异常处理类定义在抛出类里面的。</p>
 <h2 id="6-标准异常库"><a href="#6-标准异常库" class="headerlink" title="6.标准异常库"></a>6.标准异常库</h2><p>C++提供一些标准的异常库，头文件为：#include<stdexcep></stdexcep></p>
-<h1 id="六、标准IO流"><a href="#六、标准IO流" class="headerlink" title="六、标准IO流"></a>六、标准IO流</h1><h2 id="1-标准IO流流程"><a href="#1-标准IO流流程" class="headerlink" title="1.标准IO流流程"></a>1.标准IO流流程</h2><p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-10-06_10-03-47.png" alt></p>
+<h1 id="六、标准IO流"><a href="#六、标准IO流" class="headerlink" title="六、标准IO流"></a>六、标准IO流</h1><h2 id="1-标准IO流流程"><a href="#1-标准IO流流程" class="headerlink" title="1.标准IO流流程"></a>1.标准IO流流程</h2><p><img src="//yoursite.com/2019/09/14/【C++】C++高级/Snipaste_2019-10-06_10-03-47.png" alt></p>
 <h2 id="2-标准输入流"><a href="#2-标准输入流" class="headerlink" title="2.标准输入流"></a>2.标准输入流</h2><table>
 <thead>
 <tr>
@@ -1235,7 +1235,7 @@ int main()
     return 0;
 }</code></pre>
 <p>​    <strong>输出结果：</strong>    </p>
-<p><img src="/2019/09/14/【C++】C++高级/Snipaste_2019-09-14_16-29-43.png" alt></p>
+<p><img src="//yoursite.com/2019/09/14/【C++】C++高级/Snipaste_2019-09-14_16-29-43.png" alt></p>
 <h3 id="4种文件读的方式"><a href="#4种文件读的方式" class="headerlink" title="4种文件读的方式"></a>4种文件读的方式</h3><pre><code class="c++">#include &lt;iostream&gt;
 #include &lt;string&gt;
 #include &lt;fstream&gt;

@@ -106,6 +106,53 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2020/06/05/【UE4】实现自定义框选/">
+                <p class="h4 index-header">【UE4】实现自定义框选</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">要在UE4中实现自定义框选功能，首先我们来分析一下顶顶一框选插件需要些什么模块？
+
+绘制模块
+显示模块
+计算模块
+
+嗯，大概分这么三个模块，好，现在我们一个个模块来分析实现。首先分析实现一下显示模块。
+提示：
+如果功能需要打包成插件，请先浏览第四章
+一、显示模块首先我们需要做一些准备
+1.创建Wedgit作为显示载体UE4绘制直线的方式很多，这里我使用DrawLine在RenderTarget里绘制，绘制的实现放在后面说。
+然后我们需要让自定义框选的线显示在屏幕上，那么使用wedgit来显示是比较理想的，所以我们来创建一个widget，命名为CustomSelectUI，并为CustomSelectUI添加一个image作为显示的载体，命名为Background。
+2.创建Material作为RenderTarget的显示载体光一个image也是无法显示我们绘制的线的，因为我们的线是画在RenderTarget里的，而image没法直接使用RenderTarget，所以我们还需要创建一个Material来承载RenderTarget。这里创建一个Material命名为Mat_Paint</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-06-05
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/UE4">UE4</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2020/05/31/【日记】我毕业了/">
                 <p class="h4 index-header">【日记】我毕业了</p>
                 <div class="index-excerpt">
@@ -526,53 +573,6 @@ public class DATA_sys : ModuleRules
                         |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
                         
                             <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
-                            &nbsp;&nbsp;
-                        
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/UE4">UE4</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/10/28/【UE4】UE4蓝图基础/">
-                <p class="h4 index-header">【UE4】UE4蓝图基础</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">一、蓝图可视化脚本与蓝图系统1.蓝图脚本蓝图可视化脚本简称“蓝图”或“蓝图脚本”，是一种需要编译的面向对象的可视化编程语言，蓝图完全集成在UE4中，蓝图通过节点与连线工作。
-蓝图脚本的节点
-触发事件，在蓝图脚本中以红色的节点出现
-函数，在看图脚本中以蓝色的节点出现
-变量，在蓝图脚本中中以黄色节点出现
-
-2.蓝图系统蓝图系统又称“蓝图”或“蓝图类”，蓝图类可以看成是一个包含游戏内容的容器，其中可以包含组件、脚本或可以仅仅包含数据。
-蓝图类有点类似Unity3d中的预设(prefb)，蓝图类可以类似预设一般保存对象状态，可以随时拖入场景中使用，只是在其他功能上不如预设，如预设在U3D中的打包中可以发挥出优秀的效果，但是蓝图类只能作为容器使用。
- 蓝图类包含蓝图脚本，每一个蓝图类都包含一个默认的蓝图脚本。
-蓝图类的分类
-关卡蓝图：关卡蓝图在每个Level中只能存在一个，负责整个关卡的运行逻辑，关卡的初始化，帧更新都在关卡蓝图里进行；
-普通蓝图：普通蓝图就是UE4的预设，在普通蓝图中我们可以对其中的对象进行一些的配置，如设置网格，贴图，粒子特效，添加相机，添加物理材质和挂载蓝图脚本等等；
-游戏</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-28
-                    &nbsp;&nbsp;
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
-                        
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
                             &nbsp;&nbsp;
                         
                     

@@ -107,7 +107,7 @@
                         <div class="markdown-body">
                             <h1 id="一、STL的基本概念"><a href="#一、STL的基本概念" class="headerlink" title="一、STL的基本概念"></a>一、STL的基本概念</h1><h2 id="1-什么是STL"><a href="#1-什么是STL" class="headerlink" title="1.什么是STL"></a>1.什么是STL</h2><p> STL (Standard Template Librany）标准准模板庠是惠普实验室开发的一系列软件的统称。现在主要出现在C++中，但在被引入C++之前该技木就已存在了很长一段吋间了。</p>
 <p>STL的从广义上讲分为三类: algorithm (算法)、container (容器)和iterator (迭代器)，容器和算法通过迭代器可以进行无缝链接。几乎所有的代码都釆用了模板类和模板函数的方式,这相比于传统的由函数和类组成的库来说提供了更好的代码重用机会。在C++标准中，STL 被组织为下面的13个尖文件:<code>&lt;algorithm&gt;</code>、<code>&lt;deque&gt;</code>、<code>&lt;functional&gt;</code>、<code>&lt;iterator&gt;</code>、<code>&lt;vector&gt;</code>、<code>&lt;list&gt;</code>、 <code>&lt;map&gt;</code>、<code>&lt;memory&gt;</code>、<code>&lt;numerio&gt;</code>、<code>&lt;queue&gt;</code>、<code>&lt;set&gt;</code>、    <code>&lt;stack&gt;</code> 和<code>&lt;utility&gt;</code>。</p>
-<p><img src="/2019/10/06/【C++】C++STL标准模板库/Snipaste_2019-10-06_10-41-56.png" alt></p>
+<p><img src="//yoursite.com/2019/10/06/【C++】C++STL标准模板库/Snipaste_2019-10-06_10-41-56.png" alt></p>
 <p>我们详细的说六大组件：</p>
 <ul>
 <li>容器(Container)</li>
@@ -136,10 +136,10 @@
 <h1 id="二、容器"><a href="#二、容器" class="headerlink" title="二、容器"></a>二、容器</h1><h2 id="1-容器"><a href="#1-容器" class="headerlink" title="1.容器"></a>1.容器</h2><p>  在实际的开发过程中，数据结构本身的重要性不会逊于操作于数据结构的算法的重要性，当程序中存在着对时间要求很高的部分时，数据结构的选择就显得更加重要。</p>
 <p>  经典的数据结构数量有限，但是我们常常重复着一些为了实现向量、链表等结构而编写的代码，这些代码都十分相似，只是为了适应不同数据的变化而在细节上有所出入。STL容器就为我们提供了这样的方便，它允许我们重复利用己有的实现构造自己的特定类型下的数据结构，通过设置-些模板，STL 容器对最常用的数据结构提供了支持，这些模板的参数允许我们指定容器中元素的数据类型，可以将我们许多重复而乏味的工作简化。</p>
 <p>​    容器部分主要由头文件<code>&lt;vector&gt;</code>, <code>&lt;list&gt;</code>, <code>&lt;deque&gt;</code>, <code>&lt;set&gt;</code>, <code>&lt;map&gt;</code>, <code>&lt;stack&gt;</code>和<code>&lt;queue&gt;</code>组成。对于常用的一些容器和容器适配器(可以看作由其它容器实现的容器)，可以通过下表总结一:下它们和相应头文件的对应关系。</p>
-<p><img src="/2019/10/06/【C++】C++STL标准模板库/Snipaste_2019-10-06_10-41-56.png" alt></p>
+<p><img src="//yoursite.com/2019/10/06/【C++】C++STL标准模板库/Snipaste_2019-10-06_10-41-56.png" alt></p>
 <h2 id="2-容器的分类"><a href="#2-容器的分类" class="headerlink" title="2.容器的分类"></a>2.容器的分类</h2><h3 id="序列式容器-Sequence-containers"><a href="#序列式容器-Sequence-containers" class="headerlink" title="序列式容器(Sequence containers)"></a>序列式容器(Sequence containers)</h3><p>每个元素都有固定位置–取决于插入时机和地点，和元素值无关。如：vector、deque、 Iist。</p>
 <h3 id="关联式容器-Associated-containers"><a href="#关联式容器-Associated-containers" class="headerlink" title="关联式容器(Associated containers)"></a>关联式容器(Associated containers)</h3><p>元素位置取决于特定的排序准则，和插入顺序无关。如：sset、multiset、 map、multimapu。</p>
-<p><img src="/2019/10/06/【C++】C++STL标准模板库/Snipaste_2019-10-06_14-36-13.png" alt></p>
+<p><img src="//yoursite.com/2019/10/06/【C++】C++STL标准模板库/Snipaste_2019-10-06_14-36-13.png" alt></p>
 <h2 id="3-string类"><a href="#3-string类" class="headerlink" title="3.string类"></a>3.string类</h2><h3 id="string类的本质"><a href="#string类的本质" class="headerlink" title="string类的本质"></a>string类的本质</h3><p><code>string</code>类本质上其实就是<code>char*</code>的容器，是<code>cahr*</code>的封装。</p>
 <h3 id="string类的遍历"><a href="#string类的遍历" class="headerlink" title="string类的遍历"></a>string类的遍历</h3><p><strong>使用[]遍历：</strong></p>
 <pre><code class="C++">string str = &quot;string_str&quot;;
