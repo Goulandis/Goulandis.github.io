@@ -7,6 +7,16 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="UTF-8">
+    <script>
+    (function(){
+        if('{{ page.password }}'){
+            if (prompt('Goulandis') !== '{{ page.password }}'){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
@@ -102,12 +112,18 @@
                             
 
 <div class="list-group">
-    <p class="h4">Total: 41</p>
+    <p class="h4">Total: 42</p>
     <hr>
     
         
             
             <p class="h5">2019</p>
+        
+        <a href="/2019/08/25/【网络游戏】网络游戏基础/" class="list-group-item list-group-item-action">
+            <span class="archive-post-title">网络游戏基础</span>
+            <span style="float: right;">08-25</span>
+        </a>
+    
         
         <a href="/2019/08/25/【程序编程】程序编程高级/" class="list-group-item list-group-item-action">
             <span class="archive-post-title">程序编程高级</span>
@@ -159,12 +175,6 @@
         
         <a href="/2019/08/23/【Unity3d】存档与读档/" class="list-group-item list-group-item-action">
             <span class="archive-post-title">【Unity3d】简单的存档与读档</span>
-            <span style="float: right;">08-23</span>
-        </a>
-    
-        
-        <a href="/2019/08/23/【Unity3d】Animation/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【Unity3d】Animation</span>
             <span style="float: right;">08-23</span>
         </a>
     

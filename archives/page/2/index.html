@@ -7,6 +7,16 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="UTF-8">
+    <script>
+    (function(){
+        if('{{ page.password }}'){
+            if (prompt('Goulandis') !== '{{ page.password }}'){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
@@ -102,12 +112,18 @@
                             
 
 <div class="list-group">
-    <p class="h4">Total: 41</p>
+    <p class="h4">Total: 42</p>
     <hr>
     
         
             
             <p class="h5">2019</p>
+        
+        <a href="/2019/11/06/【UE4】UE4读写Json文件/" class="list-group-item list-group-item-action">
+            <span class="archive-post-title">【UE4】UE4读写Json文件</span>
+            <span style="float: right;">11-06</span>
+        </a>
+    
         
         <a href="/2019/10/28/【UE4】UE4蓝图基础/" class="list-group-item list-group-item-action">
             <span class="archive-post-title">【UE4】UE4蓝图基础</span>
@@ -160,12 +176,6 @@
         <a href="/2019/10/03/【C】C的typedef的妙用/" class="list-group-item list-group-item-action">
             <span class="archive-post-title">【C】C的typedef的妙用</span>
             <span style="float: right;">10-03</span>
-        </a>
-    
-        
-        <a href="/2019/10/01/【C++】C++面向对象模型初探/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">【C++】C++面向对象模型初探</span>
-            <span style="float: right;">10-01</span>
         </a>
     
 </div>
