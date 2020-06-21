@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>【C++】普通全局变量、静态全局变量、普通局部变量与静态局部变量 ~ Goulandis</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">主页</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">归档</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">分类</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">标签</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">关于</a>
+            </li>
+            
+            
+                <li class="nav-item" id="search-btn">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/2.png')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Wednesday, September 11th 2019, 8:58 pm</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="1-普通全局变量"><a href="#1-普通全局变量" class="headerlink" title="1.普通全局变量"></a>1.普通全局变量</h1><p>​    普通全局变量是定义在函数和类外的或由extern标识或直接定义没有static标识的变量。</p>
+<p>​    各个类型的变量之间最主要的区别就是作用域的不同了，普通全局变量的作用域在整个源程序中，全局变量对整个源程序中都是可见的，无论源程序是由单个文件还是多个文件组成，普通全局变量具有external链接属性，所以普通全局变量在整个源程序的各个文件中都可以被引用。</p>
+<h1 id="2-静态全局变量"><a href="#2-静态全局变量" class="headerlink" title="2.静态全局变量"></a>2.静态全局变量</h1><p>​    静态全局变量是定义在函数和类外的由static标识的变量。</p>
+<p>​    静态全局变量具有文件作用域，具有internal链接属性，只能在定义的文件中使用，在其他文件中可以定义同名的变量，而全局变量则不行，这里要注意静态全局变量与类静态全局变量是不同的，类静态全局变量受到类权限限制，不同的访问权限就之间决定了类静态全局变量的作用域，类全局变量的使用与类一致，能使用类的地方就能使用类全局变量。</p>
+<p>​    关于普通全局变量和静态全局变量的区别，我一直没有弄得很清楚，我有在网上查阅很多bolg，大家的说法都出奇的一致，我上面写的也是在查阅很多blog后总结的，但是我实际测试时，普通全局变量和静态全局变量似乎都可以被其他文件使用，并且 在其他文件中定义静态全局变量似乎也没有报错，没有弄明白这个其他文件指的是什么文件。</p>
+<p><img src="/2019/09/11/【C++】全局变量、静态全局变量、局部变量与静态局部变量/Snipaste_2019-09-11_21-36-28.png" alt></p>
+<p><img src="/2019/09/11/【C++】全局变量、静态全局变量、局部变量与静态局部变量/Snipaste_2019-09-11_21-36-38.png" alt></p>
+<h1 id="3-普通局部变量"><a href="#3-普通局部变量" class="headerlink" title="3.普通局部变量"></a>3.普通局部变量</h1><p>​    普通局部变量是定义在函数内的没有static标识的变量。</p>
+<p>​    普通局部变量具有块作用域，生命周期从定义开始到跳出函数结束，普通局部变量每次使用都会初始化一次。</p>
+<h1 id="4-静态局部变量"><a href="#4-静态局部变量" class="headerlink" title="4.静态局部变量"></a>4.静态局部变量</h1><p>​    静态局部变量的作用于和普通局部变量一致，但是静态局部变量的内存地址在函数结束后不会被销毁，且会保存赋值结果，静态局部变量和静态全局变量一样会一直驻留在静态区，静态局部变量只会初始化一次，在下一次函数被调用时不会再初始化而是直接调用。</p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/C++">C++</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">学！永不止步</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+            <br><br>
+            
+            
+    <script src="https://utteranc.es/client.js"
+            repo="Goulandis/Comments"
+            issue-term="pathname"
+            
+            label="utterances"
+            
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+	    
+        
+    </div>
+</div>
+
+    
+</main>
+
+
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="None" data-success="success" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "【C++】普通全局变量、静态全局变量、普通局部变量与静态局部变量&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      var el = "h1,h2,h3,h4,h5,h6".split(",")
+      var res = []
+      for (item of el) {
+        res.push(".markdown-body > " + item)
+      }
+      anchors.add(res.join(", "))
+    </script>
+  
+
+  
+    <script src="/js/local-search.js"></script>
+    <script>
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function(){ getSearchFile(path); this.onclick = null }
+    </script>
+  
+</body>
+</html>

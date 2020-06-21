@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>Goulandis</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">主页</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">归档</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">分类</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">标签</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">关于</a>
+            </li>
+            
+            
+                <li class="nav-item" id="search-btn">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/4.png')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        <div class="container nopadding-md">
+            <div class="py-5 z-depth-3 board">
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-10 m-auto">
+                            
+
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/10/01/【C++】C++面向对象模型初探/">
+                <p class="h4 index-header">【C++】C++面向对象模型初探</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">1.成员的分开存储C++通过将类的成员分开存储的方式来实现面向对象
+
+
+
+成员
+存储位置
+
+
+
+普通成员变量
+栈区，与struct变量有相同的内存布局和字节对齐方式
+
+
+静态成员变量
+全局数据区，如此便可以使用类名和类所有的对象都可以访问
+
+
+成员函数
+代码段，包括静态成员函数和非静态成员函数
+
+
+虚函数
+虚函数表指针(vfptr)存放在栈区，其指向的虚函数表有自身的内存存储空间
+
+
+2.C++类的内存分布要想更好的了解这些，我们还需了解C++类的内存分布
+
+Stack：栈，存放Automatic Variables，按内存地址由高到低方向生长，其最大大小由编译时确定，速度快，但自由性差，最大空间不大。保存程序中的局部变量。
+Heap：堆，自由申请的空间，按内存地址由低到高方向生长，其大小由系统内存/虚拟内存上限决定，速度较慢，但自由性大，可用空间大。 动态分配的内存在调用malloc（）或者相关函数产生，在调用free()时释放，由程序员决定而不是一系列规则规定内存持续时间，因此内存块可在一个函数中创建，在另一个函数中释放。由于这点，动态内存分配容易导致堆区内存碎片化。
+.Data：</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-01
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/30/【shell】shell基础/">
+                <p class="h4 index-header">【shell】shell基础</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">由于本文内有大量的markdwon转义未处理，导致远程同步不通过，所以本文引入外部ULR预览
+https://blog.csdn.net/qq_39108291/article/details/101797244
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-30
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/shell">shell</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/14/【C++】C++高级/">
+                <p class="h4 index-header">【C++】高级</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">一、类1.浅拷贝与深拷贝浅拷贝 C++在进行浅拷贝时，只拷贝栈区的内存空间，不拷贝堆区的内存空间，即浅拷贝只拷贝非指针的成员变量和指针本身，而不拷贝指针所指向的堆区的内容。
+我们代码1.1为例
+//代码1.1
+class Obj
+{
+public:
+    Obj(char *tp)
+    {
+        len = strlen(tp);
+        p = (char*)malloc(len + 1);
+        strcpy_s(p, len+1, tp);
+    }
+    ~Obj()
+    {
+        if (p != NULL)
+        {
+            free(p);
+            p = NULL;
+            len = 0;
+        }
+    }
+    void Show()
+    {
+        cout &lt;&lt; *p &lt;&lt; *(p + 1) &lt;&lt; *(p + 2) &lt;&lt; endl;
+    }
+private:
+    char</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-14
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/12/【C++】C++中的四种转换类型/">
+                <p class="h4 index-header">【C++】C++中的四种类型转换</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">C++提供四种类型转换：const_cast、static_cast、dynamic_cast、reinterpret_cast
+1.const_cast​    const_cast的存在主要就是针对const字段，C++提供const_cast的目的就是为了消除const字段的const属性，让const字段也可以修改。
+​    const_cast的用法：
+​        const_cast只能将常指针转换为非常指针，不能直接将常字段转换为非常字段，只能通过指针类间接的修改常字段所在的内存的内容。
+​        例：
+const int a = 1;
+const int* n = &amp;a;
+int* m = const_cast&lt;int*&gt;(n) ;
+*m = 2;
+​    最终的输出结果：
+a = 1,*n = 2,*m = 2
+&amp;a=n=m​        奇怪，指针n，m的确指向了地址&amp;a，之中的内容的确也修改成了2，可为什么字段a的值依旧是1？
+​        经过多方查阅资料和自己的试验，原来对于常字段在预编译的过程中编译</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-12
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/11/【C++】全局变量、静态全局变量、局部变量与静态局部变量/">
+                <p class="h4 index-header">【C++】普通全局变量、静态全局变量、普通局部变量与静态局部变量</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">1.普通全局变量​    普通全局变量是定义在函数和类外的或由extern标识或直接定义没有static标识的变量。
+​    各个类型的变量之间最主要的区别就是作用域的不同了，普通全局变量的作用域在整个源程序中，全局变量对整个源程序中都是可见的，无论源程序是由单个文件还是多个文件组成，普通全局变量具有external链接属性，所以普通全局变量在整个源程序的各个文件中都可以被引用。
+2.静态全局变量​    静态全局变量是定义在函数和类外的由static标识的变量。
+​    静态全局变量具有文件作用域，具有internal链接属性，只能在定义的文件中使用，在其他文件中可以定义同名的变量，而全局变量则不行，这里要注意静态全局变量与类静态全局变量是不同的，类静态全局变量受到类权限限制，不同的访问权限就之间决定了类静态全局变量的作用域，类全局变量的使用与类一致，能使用类的地方就能使用类全局变量。
+​    关于普通全局变量和静态全局变量的区别，我一直没有弄得很清楚，我有在网上查阅很多bolg，大家的说法都出奇的一致，我上面写的也是在查阅很多blog后总结的，但是我实际测试时，普通全局变量和</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-11
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C++">C++</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/11/【C#】C#两种数组定义的区别/">
+                <p class="h4 index-header">【C#】C#两种二维数组的区别</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">C#支持两种二维数组的定义方式（以int数组为例）：
+1.普通数组int[,] array = new int[1,2];
+这种方式形式上较为简便，要注意的是new之后的[]里面是一定要注明数组大小的，不注明会报错，也就是说这种方式定义的数组是确定大小的。
+数组的赋值：
+int[,] array = new int[2,3]{{1,2,3},{4,5,6}};
+2.多播数组int[][] array = new int[2][];
+这种方式需要注明行数，列数不能注明，注明会报错，这种方式定义的是一个函数确定而列数不确定的不确定大小的数组。
+数组的赋值：
+int[][] array = new int[2][]{new int[]{1,2,3},new int[]{4,5,6}}
+两种二维数组是不能兼容的，即使用方式1定义的二维数组不能使用方式2来使用，反之亦然。
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-11
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/C#">C#</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/09/09/【Lua】Lua基础/">
+                <p class="h4 index-header">【Lua】Lua基础</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">参考博文：https://www.cnblogs.com/cjswwdz/p/5634442.html
+XMind源文件：https://github.com/Goulandis/XMinds-2019.8.27/tree/master/Lua
+学习地址：https://www.bilibili.com/video/av50685253?from=search&amp;seid=12754355294240767428
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-09
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/Lua">Lua</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/08/27/【Unity3d】Unity常用技巧笔记/">
+                <p class="h4 index-header">【Unity3d】Unity常用技巧笔记</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">为Image组件添加sprite
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-27
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/Unity3d">Unity3d</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/08/25/【Unity3d】Space/">
+                <p class="h4 index-header">【Unity3d】Space</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-25
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/Unity3d">Unity3d</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/08/25/【Unity3d】Lightmap/">
+                <p class="h4 index-header">【Unity3d】Lightmap</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-25
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/Unity3d">Unity3d</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+
+
+<nav aria-label="index posts navigation">
+<ul class="pagination pg-blue justify-content-center mt-5">
+    
+        <li class="page-item">
+        <a class="page-link" href="/page/2/">Previous</a>
+        </li>
+    
+    
+        <li class="page-item">
+        <a class="page-link" href="/page/4/">Next</a>
+        </li>
+    
+</ul>
+</nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</main>
+
+
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="None" data-success="success" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "今晚熬夜+1&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      var el = "h1,h2,h3,h4,h5,h6".split(",")
+      var res = []
+      for (item of el) {
+        res.push(".markdown-body > " + item)
+      }
+      anchors.add(res.join(", "))
+    </script>
+  
+
+  
+    <script src="/js/local-search.js"></script>
+    <script>
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function(){ getSearchFile(path); this.onclick = null }
+    </script>
+  
+</body>
+</html>

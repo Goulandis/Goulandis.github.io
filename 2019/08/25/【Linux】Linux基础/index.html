@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>Linux基础 ~ Goulandis</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">主页</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">归档</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">分类</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">标签</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">关于</a>
+            </li>
+            
+            
+                <li class="nav-item" id="search-btn">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/2.png')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Sunday, August 25th 2019, 6:25 pm</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <p>## </p>
+<center>Linux学习笔记</center>
+
+<h1 id="l-pwd：查看当前所在路"><a href="#l-pwd：查看当前所在路" class="headerlink" title="l  pwd：查看当前所在路"></a>l  <strong>pwd</strong>：查看当前所在路</h1><p>命令格式：命令 -选项 -参数（目录）</p>
+<p>命令：</p>
+<p>ls：查看当前路径下的文件</p>
+<p>选项：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>-d</strong></td>
+<td>只查看当前目录的信息</td>
+</tr>
+<tr>
+<td><strong>-l</strong></td>
+<td>查看详细信息</td>
+</tr>
+<tr>
+<td><strong>-a</strong></td>
+<td>显示所有文件（包含隐藏文件）</td>
+</tr>
+<tr>
+<td><strong>-h</strong></td>
+<td>显示文件大小</td>
+</tr>
+</tbody></table>
+<p>例：ls -l     命令 -选项</p>
+<p>选项可以组合：ls -a -l/ls -al：查看所有文件的详细信息</p>
+<p>ls -al /etc/   命令 -选项 -参数 ：查看etc目录下的所有文件的详细信息</p>
+<h1 id="l-cd-：-路径切换"><a href="#l-cd-：-路径切换" class="headerlink" title="l  cd ： 路径切换"></a>l  <strong>cd</strong> <strong>：</strong> <strong>路径切换</strong></h1><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>“<strong>-</strong>”</td>
+<td>返回到之前目录</td>
+</tr>
+<tr>
+<td>“<strong>..</strong>”</td>
+<td>返回上一级目录（“.”当前目录，“..”上一级目录）</td>
+</tr>
+<tr>
+<td>“<strong>~</strong>”</td>
+<td>到用户所在的家目录（家目录：用户所在目录，如windowsC盘的用户目录）</td>
+</tr>
+</tbody></table>
+<p>touch ：cd到临时目录tmp下可创建新文件    touch 文件名</p>
+<h1 id="l-Linux目录结构"><a href="#l-Linux目录结构" class="headerlink" title="l  Linux目录结构"></a>l  <strong>Linux目录结构</strong></h1><table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/boot</td>
+<td>linux启动时，需要的文件</td>
+</tr>
+<tr>
+<td>/dve</td>
+<td>设备文件</td>
+</tr>
+<tr>
+<td>/etc</td>
+<td>配置文件</td>
+</tr>
+<tr>
+<td>/home</td>
+<td>用户家目录</td>
+</tr>
+<tr>
+<td>/media</td>
+<td>媒体文件</td>
+</tr>
+<tr>
+<td>/mnt</td>
+<td>挂载文件</td>
+</tr>
+<tr>
+<td>/opt</td>
+<td>第三方软件</td>
+</tr>
+<tr>
+<td>/proc</td>
+<td>虚拟化文件</td>
+</tr>
+<tr>
+<td>/root</td>
+<td>管理员的家目录</td>
+</tr>
+<tr>
+<td>/run</td>
+<td>远程文件</td>
+</tr>
+<tr>
+<td>/srv</td>
+<td>压缩过的文件</td>
+</tr>
+<tr>
+<td>/sys</td>
+<td>系统文件</td>
+</tr>
+<tr>
+<td>/usr</td>
+<td>安装的软件，</td>
+</tr>
+<tr>
+<td>/var</td>
+<td>可变数据、日志</td>
+</tr>
+<tr>
+<td>/tmp</td>
+<td>临时文件</td>
+</tr>
+<tr>
+<td>/usr/bin</td>
+<td>普通用户可以使用的命令</td>
+</tr>
+<tr>
+<td>/usr/sbin</td>
+<td>超级用户可以使用的命令</td>
+</tr>
+<tr>
+<td>/usr/lib</td>
+<td>32位库文件</td>
+</tr>
+<tr>
+<td>/usr/lib64</td>
+<td>64位库文件</td>
+</tr>
+</tbody></table>
+<h1 id="l-Linux文件处理"><a href="#l-Linux文件处理" class="headerlink" title="l  Linux文件处理"></a>l  <strong>Linux文件处理</strong></h1><h2 id="文件类型判断："><a href="#文件类型判断：" class="headerlink" title="文件类型判断："></a><strong>文件类型判断：</strong></h2><p>-ls -l</p>
+<p><img src="/2019/08/25/【Linux】Linux基础/1.png" alt="img"></p>
+<table>
+<thead>
+<tr>
+<th>文件以“_”开头</th>
+<th>文件类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>“d”</td>
+<td>目录</td>
+</tr>
+<tr>
+<td>“-”</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>“l”</td>
+<td>链接文件（类似win中快捷方式）</td>
+</tr>
+<tr>
+<td>“b”</td>
+<td>设备文件，提供存储接口的设备</td>
+</tr>
+<tr>
+<td>“c”</td>
+<td>设备文件，提供串行结合口的设备—键盘</td>
+</tr>
+</tbody></table>
+<h2 id="文件处理："><a href="#文件处理：" class="headerlink" title="文件处理："></a><strong>文件处理：</strong></h2><p><img src="/2019/08/25/【Linux】Linux基础/2.png" alt="img"></p>
+<p>cp            cp abc a：复制abc并命名为a/多文件复制：cp a abc goulandis/：复制a、abc到goulandis下</p>
+<p>mv            mv 文件1 文件2：将文件1更名为文件2/mv 文件1（文件2 ….） 目录：将文件移动到目录下                 </p>
+<p>rm             rm -f 文件1 （文件2…）：强制删除</p>
+<p>mkdir       mkdir -p （要创建的）目录1/（要创建的）目录2：创建目录1并在目录1下创建目录2</p>
+<h2 id="查看文件："><a href="#查看文件：" class="headerlink" title="查看文件："></a><strong>查看文件：</strong></h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>cat/**</strong>路径**</td>
+<td>查看文件</td>
+</tr>
+<tr>
+<td>nl</td>
+<td>显示的时候，顺便出现行号</td>
+</tr>
+<tr>
+<td>tac</td>
+<td>从最后一行开始显示</td>
+</tr>
+<tr>
+<td>head</td>
+<td>显示文件前10行 -n：设置行数</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>显示文件尾10行 -n：设置行数</td>
+</tr>
+<tr>
+<td>wc</td>
+<td>显示文件行数，数字，字节</td>
+</tr>
+<tr>
+<td>more</td>
+<td>一页一页翻动</td>
+</tr>
+<tr>
+<td><strong>less</strong></td>
+<td>一页一页翻动</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>cat**</strong>和tac<strong>**选项</strong></th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-A</td>
+<td>整合命令-vET（整合-v、-E、-T）</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>列出行号，但是空白行不标志行号</td>
+</tr>
+<tr>
+<td>-E</td>
+<td>将结尾的断行字符（$）显示出来</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>列出行号，空白行也会标志出来</td>
+</tr>
+<tr>
+<td>-T</td>
+<td>将tab键以^I显示</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>列出一些看不出来的字符</td>
+</tr>
+<tr>
+<td>&lt;区分大小写&gt;</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>nl**</strong>的选项**</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>总选项</td>
+<td>分选项</td>
+<td>作用</td>
+</tr>
+<tr>
+<td>b</td>
+<td>ba</td>
+<td>无论是否有空，都列出行号</td>
+</tr>
+<tr>
+<td>bt</td>
+<td>如果有空行，则不列出行号（默认）</td>
+<td></td>
+</tr>
+<tr>
+<td>n</td>
+<td>nln</td>
+<td>行号在屏幕最左方</td>
+</tr>
+<tr>
+<td>nrn</td>
+<td>行号在屏幕最右方，前面不加0</td>
+<td></td>
+</tr>
+<tr>
+<td>nrz</td>
+<td>行号在屏幕最右方，前面加0</td>
+<td></td>
+</tr>
+<tr>
+<td>w</td>
+<td></td>
+<td>缩进多少位</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>more**</strong>的选项**</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空格</td>
+<td>向下翻一页</td>
+</tr>
+<tr>
+<td>回车</td>
+<td>向下翻一行</td>
+</tr>
+<tr>
+<td>/字符串</td>
+<td>搜索</td>
+</tr>
+<tr>
+<td>:f</td>
+<td>立刻显示文件名和行数</td>
+</tr>
+<tr>
+<td>b</td>
+<td>翻到第一页</td>
+</tr>
+<tr>
+<td>q</td>
+<td>离开</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>less**</strong>的选项**</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>空格</strong></td>
+<td>向下翻动一行</td>
+</tr>
+<tr>
+<td><strong>回车</strong></td>
+<td>向下翻动一页</td>
+</tr>
+<tr>
+<td><strong>pagedown</strong></td>
+<td>向下翻动一页</td>
+</tr>
+<tr>
+<td><strong>pageup</strong></td>
+<td>向上翻动一页</td>
+</tr>
+<tr>
+<td><strong>n</strong></td>
+<td>重复前一个搜索（操作：n）</td>
+</tr>
+<tr>
+<td><strong>N</strong></td>
+<td>反向重复前一个搜索（操作：shift+n）</td>
+</tr>
+<tr>
+<td><strong>q</strong></td>
+<td>退出</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>head和tail的选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>指定显示几行，默认10行</td>
+</tr>
+<tr>
+<td>日志文件路径（/var/log/messages）</td>
+<td>查看日志</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>wc的选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>只显示字节</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>只显示字数，一个字被定义为空白、跳格、换行字符、分隔字符串</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>只显示行</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>Vim编辑器操作命令</strong></th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>i</strong></td>
+<td>插入</td>
+</tr>
+<tr>
+<td><strong>esc</strong></td>
+<td>退出</td>
+</tr>
+<tr>
+<td><strong>u</strong></td>
+<td>撤销</td>
+</tr>
+<tr>
+<td><strong>x</strong></td>
+<td>删除</td>
+</tr>
+<tr>
+<td><strong>v</strong></td>
+<td>选择文本</td>
+</tr>
+<tr>
+<td><strong>y</strong></td>
+<td>复制</td>
+</tr>
+<tr>
+<td><strong>yy</strong></td>
+<td>复制当前行</td>
+</tr>
+<tr>
+<td><strong>dd</strong></td>
+<td>删除光标所在行</td>
+</tr>
+<tr>
+<td><strong>p</strong></td>
+<td>粘贴</td>
+</tr>
+<tr>
+<td><strong>:w</strong></td>
+<td>保存</td>
+</tr>
+<tr>
+<td><strong>:wq</strong></td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td><strong>:q**</strong>！**</td>
+<td>强制退出</td>
+</tr>
+</tbody></table>
+<h2 id="软链接："><a href="#软链接：" class="headerlink" title="软链接："></a><strong>软链接：</strong></h2><p><img src="/2019/08/25/【Linux】Linux基础/3.png" alt="img"></p>
+<p><img src="/2019/08/25/【Linux】Linux基础/4.png" alt="img"></p>
+<h2 id="硬链接："><a href="#硬链接：" class="headerlink" title="硬链接："></a><strong>硬链接：</strong></h2><p><img src="/2019/08/25/【Linux】Linux基础/5.png" alt></p>
+<p>ls -I ：查看Inode编号</p>
+<h1 id="l-关机操作"><a href="#l-关机操作" class="headerlink" title="l  关机操作"></a>l  <strong>关机操作</strong></h1><table>
+<thead>
+<tr>
+<th>sync</th>
+<th>数据同步写入磁盘</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>shutdown</strong></td>
+<td>常用关机指令</td>
+</tr>
+<tr>
+<td>reboot、halt、poweroff</td>
+<td>重启，关机</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>shutdown的指令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-t</td>
+<td>添加秒数。几秒后关机</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>不是真关机，二十发出警告信息</td>
+</tr>
+<tr>
+<td><strong>-r</strong></td>
+<td>在系统服务都停止后，重启</td>
+</tr>
+<tr>
+<td><strong>-h</strong></td>
+<td>在系统服务都停止后，关机</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>关闭，并且开机一个后强行略过磁盘检查</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>重启后强制进行磁盘检查</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>取消已经在进行的shutdown指令内容</td>
+</tr>
+<tr>
+<td></td>
+<td>shutdown -h now    现在马上停止服务并关机   shutdown -h 12：00       在12：00时刻停止服务并关机   shutdown -h +10     十分钟以后停止服务并关机   shutdown -r now     现在马上停止服务并重启   shutdown -r +30 ‘the system will reboot’       先发一个警告信息“the system will reboot”，系统将要在30分钟后重启   shutdown -k now ‘the system will reboot’     现在马上发出一个警告信息“the system will reboot”</td>
+</tr>
+</tbody></table>
+<h1 id="l-Linux文件权限"><a href="#l-Linux文件权限" class="headerlink" title="l  Linux文件权限"></a>l  <strong>Linux文件权限</strong></h1><p><img src="/2019/08/25/【Linux】Linux基础/6.png" alt="img"></p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>连接</th>
+<th>所有者</th>
+<th>所属组</th>
+<th>容量（默认单位B）</th>
+<th>修改日期</th>
+<th>文件名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>文件的权限</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r、w、x ： 读、写、执行，没有权限就是-</td>
+<td></td>
+</tr>
+<tr>
+<td>第一组rwx</td>
+<td>文件所有者的权限</td>
+</tr>
+<tr>
+<td>第二组rwx</td>
+<td>文件所属组的权限</td>
+</tr>
+<tr>
+<td>第三组rwx</td>
+<td>文件其他人的权限</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>目录的权限</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>具有读取目录的结构列表的权限，可以查看目录下有哪些文件</td>
+</tr>
+<tr>
+<td>w</td>
+<td>该权限对于目录来说是很大的</td>
+</tr>
+<tr>
+<td>1</td>
+<td>可以在该目录下新建新的文件和目录</td>
+</tr>
+<tr>
+<td>2</td>
+<td>可以删除已存在的文件和目录</td>
+</tr>
+<tr>
+<td>3</td>
+<td>将已存在的文件和目录重命名</td>
+</tr>
+<tr>
+<td>4</td>
+<td>移动该目录内的文件和目录的位置</td>
+</tr>
+<tr>
+<td>X</td>
+<td>是否可以进入该目录</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>文件权限的修改</strong></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>命令</td>
+<td>命令作用</td>
+<td>格式</td>
+<td>选项</td>
+<td>选项作用</td>
+<td></td>
+</tr>
+<tr>
+<td>chown</td>
+<td>修改文件的拥有者，前提是要有该拥有者</td>
+<td>chown 拥有者   文件/目录</td>
+<td>-R</td>
+<td>递归修改</td>
+<td></td>
+</tr>
+<tr>
+<td>chgrp</td>
+<td>修改文件所属组，前提是要有该组</td>
+<td></td>
+<td>-R</td>
+<td>递归修改</td>
+<td></td>
+</tr>
+<tr>
+<td>chmod</td>
+<td>修改拥有者和所属组的权限</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>加减法</td>
+<td>chmod    u/g/o+/-/=r/w/x 123：   将文件1213给用户/组/其他人加/减/赋予一个读/写/执行权限</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数字法</td>
+<td>r=4    w=2  x=1 ： chmod  632 123 ：   将文件123给用户赋予r和w权限，给组赋予wx权限，给其他人赋予w权限</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chown -R goulandis 123 ： 将123目录下的所有文件包括目录本身的拥有者修改为goulandis</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>默认权限：</strong></p>
+<p>umask      查看当前用户的umask权限       </p>
+<p>umask –(选项) ：临时修改默认权限</p>
+<p>/etc/bashrc ： 永久修改默认权限（通过修改脚本文件实现）</p>
+<p>umask的选项说明</p>
+<p>0022         拿走的权限</p>
+<p>​         第一个数字表示特殊权限</p>
+<p>​         022=rwxr-xr-x ：不拿走用户的权限、拿走用户组的w权限、拿走其他用户的w权限</p>
+<p>目录无法拿走x权限</p>
+<p>普通用户umask值 0002</p>
+<p>root用户umask值 0022</p>
+<h2 id="文件的特殊权限"><a href="#文件的特殊权限" class="headerlink" title="文件的特殊权限:"></a><strong>文件的特殊权限:</strong></h2><p><img src="/2019/08/25/【Linux】Linux基础/7.png" alt="img"></p>
+<p>当s出现在拥有者的x权限的位置时，表示拥有者有SUID的权限（Set UID）</p>
+<p>当s出现在用户组的x权限的位置时，表示用户组有SGID的权限（Set GID）</p>
+<p>当s出现在其他人的x权限的位置时，表示其他人有SBIT的权限（Sticky Bit）</p>
+<table>
+<thead>
+<tr>
+<th>SUID</th>
+<th>临时获取文件拥有者的权限—–只能针对文件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SGID</td>
+<td>可以作用于目录，也可以作用于文件</td>
+</tr>
+<tr>
+<td>作用于文件 ： 和SUID作用一样</td>
+<td></td>
+</tr>
+<tr>
+<td>作用与目录 ： 继承父级目—–目录会不停的继承，下级目录会一直继承父级目录的权限值</td>
+<td></td>
+</tr>
+<tr>
+<td>SBIT</td>
+<td>只有文件的拥有者才能删除修改该目录下的文件—–只能针对目录</td>
+</tr>
+<tr>
+<td>S和T有大小写之分   大写 ： 没有x权限   小写 ： 有x权限</td>
+<td></td>
+</tr>
+<tr>
+<td>数字法 ：SUID=4、SGID=2、SBIT=1</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="/2019/08/25/【Linux】Linux基础/8.png" alt="img"></p>
+<h1 id="l-Linux进程"><a href="#l-Linux进程" class="headerlink" title="l  Linux进程"></a>l  <strong>Linux进程</strong></h1><p>进程 ：已经启动的可执行程序的运行实例</p>
+<p>PID : 进程的ID（每一个进程都有唯一的PID）</p>
+<p>PPID ： 父进程的ID</p>
+<p>任何一个进程都可以创建紫进程</p>
+<table>
+<thead>
+<tr>
+<th>ｐｓ　：　查看当前的进程情况</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>选项</td>
+<td>作用</td>
+</tr>
+<tr>
+<td>－ａｕｘ／ａｕｘ</td>
+<td>列出所有进程</td>
+</tr>
+<tr>
+<td>－ｅｆ</td>
+<td>列出所有进程</td>
+</tr>
+<tr>
+<td>－ｌ</td>
+<td>列出和当前用户有关的进程</td>
+</tr>
+<tr>
+<td>－ｕ</td>
+<td>查看某一用户的进程</td>
+</tr>
+<tr>
+<td>－ｔｏｐ</td>
+<td>实时查看进程状况</td>
+</tr>
+</tbody></table>
+<p><img src="/2019/08/25/【Linux】Linux基础/9.png" alt="img"></p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">学习笔记</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/Linux">Linux</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">学！永不止步</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+            <br><br>
+            
+            
+    <script src="https://utteranc.es/client.js"
+            repo="Goulandis/Comments"
+            issue-term="pathname"
+            
+            label="utterances"
+            
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+	    
+        
+    </div>
+</div>
+
+    
+</main>
+
+
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="None" data-success="success" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "Linux基础&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      var el = "h1,h2,h3,h4,h5,h6".split(",")
+      var res = []
+      for (item of el) {
+        res.push(".markdown-body > " + item)
+      }
+      anchors.add(res.join(", "))
+    </script>
+  
+
+  
+    <script src="/js/local-search.js"></script>
+    <script>
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function(){ getSearchFile(path); this.onclick = null }
+    </script>
+  
+</body>
+</html>

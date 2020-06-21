@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>【C++】C++函数模板的实现机制剖析 ~ Goulandis</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">主页</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">归档</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">分类</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">标签</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">关于</a>
+            </li>
+            
+            
+                <li class="nav-item" id="search-btn">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/2.png')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Thursday, October 3rd 2019, 8:14 pm</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="函数模板的实现机制剖析"><a href="#函数模板的实现机制剖析" class="headerlink" title="函数模板的实现机制剖析"></a>函数模板的实现机制剖析</h1><p>要剖析函数模板的实现机制，我们要先了解程序的编译过程，这里以gcc为例</p>
+<p><img src="/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_16-51-51.png" alt></p>
+<p>这里对下面代码进行剖析</p>
+<pre><code class="c++">#include &quot;stdafx.h&quot;//这是VS的固有头文件
+#include &lt;iostream&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+void Fun(T a,T b)
+{
+    a = a + b;
+    cout &lt;&lt; &quot;我是函数模板&quot; &lt;&lt; endl;
+}
+int main()
+{
+    Fun(1, 2);
+    Fun(0.1, 0.2);
+    system(&quot;pause&quot;);
+    return 0;
+}</code></pre>
+<p>打开控制台，使用命令生成汇编文件(当然环境变量里需要有g++编译器的路径才能这样使用，具体操作放在文末)</p>
+<pre><code class="shell">g++ -S 1.cpp -o 1.s</code></pre>
+<p>我们来查看汇编文件</p>
+<pre><code class="pascal">    .file    &quot;C++.cpp&quot;
+.lcomm __ZStL8__ioinit,1,1
+    .def    ___main;    .scl    2;    .type    32;    .endef
+    .section .rdata,&quot;dr&quot;
+LC2:
+    .ascii &quot;pause\0&quot;
+    .text
+    .globl    _main
+    .def    _main;    .scl    2;    .type    32;    .endef
+_main:
+LFB1062:
+    .cfi_startproc
+    pushl    %ebp
+    .cfi_def_cfa_offset 8
+    .cfi_offset 5, -8
+    movl    %esp, %ebp
+    .cfi_def_cfa_register 5
+    andl    $-16, %esp
+    subl    $16, %esp
+    call    ___main//--------------进入main函数
+    movl    $2, 4(%esp)
+    movl    $1, (%esp)
+    call    __Z3FunIiEvT_S0_//-----第一次调用函数模板
+    fldl    LC0
+    fstpl    8(%esp)
+    fldl    LC1
+    fstpl    (%esp)
+    call    __Z3FunIdEvT_S0_//-----第二次调用函数模板
+    movl    $LC2, (%esp)
+    call    _system
+    movl    $0, %eax
+    leave
+    .cfi_restore 5
+    .cfi_def_cfa 4, 4
+    ret
+    .cfi_endproc
+LFE1062:
+    .section .rdata,&quot;dr&quot;
+LC4:
+    .ascii &quot;\316\322\312\307\272\257\312\375\304\243\260\345\0&quot;
+    .section    .text$_Z3FunIiEvT_S0_,&quot;x&quot;
+    .linkonce discard
+    .globl    __Z3FunIiEvT_S0_
+    .def    __Z3FunIiEvT_S0_;    .scl    2;    .type    32;    .endef
+__Z3FunIiEvT_S0_://------------第一次调用时函数模板的具体实现
+LFB1063:
+    .cfi_startproc
+    pushl    %ebp
+    .cfi_def_cfa_offset 8
+    .cfi_offset 5, -8
+    movl    %esp, %ebp
+    .cfi_def_cfa_register 5
+    subl    $24, %esp
+    movl    12(%ebp), %eax
+    addl    %eax, 8(%ebp)
+    movl    $LC4, 4(%esp)
+    movl    $__ZSt4cout, (%esp)
+    call    __ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
+    movl    $__ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_, (%esp)
+    movl    %eax, %ecx
+    call    __ZNSolsEPFRSoS_E
+    subl    $4, %esp
+    nop
+    leave
+    .cfi_restore 5
+    .cfi_def_cfa 4, 4
+    ret
+    .cfi_endproc
+LFE1063:
+    .section    .text$_Z3FunIdEvT_S0_,&quot;x&quot;
+    .linkonce discard
+    .globl    __Z3FunIdEvT_S0_//-第二次调用时函数模板的具体实现
+    .def    __Z3FunIdEvT_S0_;    .scl    2;    .type    32;    .endef
+__Z3FunIdEvT_S0_:
+LFB1064:
+    .cfi_startproc
+    pushl    %ebp
+    .cfi_def_cfa_offset 8
+    .cfi_offset 5, -8
+    movl    %esp, %ebp
+    .cfi_def_cfa_register 5
+    subl    $40, %esp
+    movl    8(%ebp), %eax
+    movl    %eax, -16(%ebp)
+    movl    12(%ebp), %eax
+    movl    %eax, -12(%ebp)
+    movl    16(%ebp), %eax
+    movl    %eax, -24(%ebp)
+    movl    20(%ebp), %eax
+    movl    %eax, -20(%ebp)
+    fldl    -16(%ebp)
+    faddl    -24(%ebp)
+    fstpl    -16(%ebp)
+    movl    $LC4, 4(%esp)
+    movl    $__ZSt4cout, (%esp)
+    call    __ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
+    movl    $__ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_, (%esp)
+    movl    %eax, %ecx
+    call    __ZNSolsEPFRSoS_E
+    subl    $4, %esp
+    nop
+    leave
+    .cfi_restore 5
+    .cfi_def_cfa 4, 4
+    ret
+    .cfi_endproc
+LFE1064:
+    .text
+    .def    ___tcf_0;    .scl    3;    .type    32;    .endef
+___tcf_0:
+LFB1074:
+    .cfi_startproc
+    pushl    %ebp
+    .cfi_def_cfa_offset 8
+    .cfi_offset 5, -8
+    movl    %esp, %ebp
+    .cfi_def_cfa_register 5
+    subl    $8, %esp
+    movl    $__ZStL8__ioinit, %ecx
+    call    __ZNSt8ios_base4InitD1Ev
+    leave
+    .cfi_restore 5
+    .cfi_def_cfa 4, 4
+    ret
+    .cfi_endproc
+LFE1074:
+    .def    __Z41__static_initialization_and_destruction_0ii;    .scl    3;    .type    32;    .endef
+__Z41__static_initialization_and_destruction_0ii:
+LFB1073:
+    .cfi_startproc
+    pushl    %ebp
+    .cfi_def_cfa_offset 8
+    .cfi_offset 5, -8
+    movl    %esp, %ebp
+    .cfi_def_cfa_register 5
+    subl    $24, %esp
+    cmpl    $1, 8(%ebp)
+    jne    L8
+    cmpl    $65535, 12(%ebp)
+    jne    L8
+    movl    $__ZStL8__ioinit, %ecx
+    call    __ZNSt8ios_base4InitC1Ev
+    movl    $___tcf_0, (%esp)
+    call    _atexit
+L8:
+    nop
+    leave
+    .cfi_restore 5
+    .cfi_def_cfa 4, 4
+    ret
+    .cfi_endproc
+LFE1073:
+    .def    __GLOBAL__sub_I_main;    .scl    3;    .type    32;    .endef
+__GLOBAL__sub_I_main:
+LFB1075:
+    .cfi_startproc
+    pushl    %ebp
+    .cfi_def_cfa_offset 8
+    .cfi_offset 5, -8
+    movl    %esp, %ebp
+    .cfi_def_cfa_register 5
+    subl    $24, %esp
+    movl    $65535, 4(%esp)
+    movl    $1, (%esp)
+    call    __Z41__static_initialization_and_destruction_0ii
+    leave
+    .cfi_restore 5
+    .cfi_def_cfa 4, 4
+    ret
+    .cfi_endproc
+LFE1075:
+    .section    .ctors,&quot;w&quot;
+    .align 4
+    .long    __GLOBAL__sub_I_main
+    .section .rdata,&quot;dr&quot;
+    .align 8
+LC0:
+    .long    -1717986918
+    .long    1070176665
+    .align 8
+LC1:
+    .long    -1717986918
+    .long    1069128089
+    .ident    &quot;GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 5.3.0&quot;
+    .def    _system;    .scl    2;    .type    32;    .endef
+    .def    __ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc;    .scl    2;    .type    32;    .endef
+    .def    __ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_;    .scl    2;    .type    32;    .endef
+    .def    __ZNSolsEPFRSoS_E;    .scl    2;    .type    32;    .endef
+    .def    __ZNSt8ios_base4InitD1Ev;    .scl    2;    .type    32;    .endef
+    .def    __ZNSt8ios_base4InitC1Ev;    .scl    2;    .type    32;    .endef
+    .def    _atexit;    .scl    2;    .type    32;    .endef</code></pre>
+<p>可以看到，在汇编码中编译器将模板<code>void Fun(T a,T b)</code>分别针对类型<code>int</code>和类型<code>float</code>进行了两次具体实现，这不是和没有使用模板，直接写两个函数一样么？没错就是一样的，只是C++将这个工作交从程序员手里移交给了编译器来做。</p>
+<p>事实上C++对函数模板进行了<font color="red">两次编译</font>，第一次编译仅仅生成一个函数头，第二次编译则是在函数调用时根据模板的类型参数列表具体的实现这个模板对应的类型的函数实例，注意这里是根据类型参数列表来实现，而不是根据调用次数，如：</p>
+<pre><code class="c++">Fun(1, 2);
+Fun(0.1, 0.2);</code></pre>
+<p>编译器实现两个模板实例<code>int</code>和<code>float</code></p>
+<pre><code class="c++">Fun(1, 2);
+Fun(3 ,4);
+Fun(0.1, 0.2);</code></pre>
+<p>编译器还是实现两个模板实例<code>int</code>和<code>float</code></p>
+<p>由此可以看出</p>
+<p><font color="red"> 编译器并不是把函数模板处理成能够处理任意类的函数</font></p>
+<p><font color="red">编译器将函数模板根据具体类型产生不同的函数</font></p>
+<p><font color="red">编译器会对函数模板进行两次编译，在申明的地方对模板代码本身进行编译，在调用的地方对参数替换后的代码进行编译。</font></p>
+<p>g++命令的使用</p>
+<p>首先电脑里要有g++这个软件，我这里使用的是Qt里集成的g++软件</p>
+<p><img src="/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_19-57-21.png" alt></p>
+<p>然后右键我的电脑–&gt;属性–&gt;高级环境设置–&gt;环境变量–&gt;系统变量/Path–&gt;编辑</p>
+<p><img src="/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_20-07-41.png" alt></p>
+<p>再然后新建–&gt;将g++.exe所在的路径拷贝到新建的环境变量中</p>
+<p><img src="/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_20-08-21.png" alt></p>
+<p>测试一下，win+r–&gt;cmd–&gt;任意目录键入g++</p>
+<p><img src="/2019/10/03/【C++】C++函数模板的实现机制剖析/Snipaste_2019-10-03_20-12-24.png" alt></p>
+<p>可以看到系统没有提示无此命令，说明配置成功</p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/C++">C++</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">学！永不止步</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+            <br><br>
+            
+            
+    <script src="https://utteranc.es/client.js"
+            repo="Goulandis/Comments"
+            issue-term="pathname"
+            
+            label="utterances"
+            
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+	    
+        
+    </div>
+</div>
+
+    
+</main>
+
+
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="None" data-success="success" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "【C++】C++函数模板的实现机制剖析&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      var el = "h1,h2,h3,h4,h5,h6".split(",")
+      var res = []
+      for (item of el) {
+        res.push(".markdown-body > " + item)
+      }
+      anchors.add(res.join(", "))
+    </script>
+  
+
+  
+    <script src="/js/local-search.js"></script>
+    <script>
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function(){ getSearchFile(path); this.onclick = null }
+    </script>
+  
+</body>
+</html>

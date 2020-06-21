@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>【C++】C++中的四种类型转换 ~ Goulandis</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">主页</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">归档</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">分类</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">标签</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">关于</a>
+            </li>
+            
+            
+                <li class="nav-item" id="search-btn">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/2.png')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Thursday, September 12th 2019, 9:43 am</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <p>C++提供四种类型转换：const_cast、static_cast、dynamic_cast、reinterpret_cast</p>
+<h1 id="1-const-cast"><a href="#1-const-cast" class="headerlink" title="1.const_cast"></a>1.const_cast</h1><p>​    const_cast的存在主要就是针对const字段，C++提供const_cast的目的就是为了消除const字段的const属性，让const字段也可以修改。</p>
+<p>​    const_cast的用法：</p>
+<p>​        const_cast只能将常指针转换为非常指针，不能直接将常字段转换为非常字段，只能通过指针类间接的修改常字段所在的内存的内容。</p>
+<p>​        例：</p>
+<pre><code class="C++">const int a = 1;
+const int* n = &amp;a;
+int* m = const_cast&lt;int*&gt;(n) ;
+*m = 2;</code></pre>
+<p>​    最终的输出结果：</p>
+<pre><code>a = 1,*n = 2,*m = 2
+&amp;a=n=m</code></pre><p>​        奇怪，指针n，m的确指向了地址&amp;a，之中的内容的确也修改成了2，可为什么字段a的值依旧是1？</p>
+<p>​        经过多方查阅资料和自己的试验，原来对于常字段在预编译的过程中编译器就会给常字段预定义为初始化的值，类似宏定义一般，尽管内存的内容被改变了，但是常字段的值依旧被预定义为初始化的值。</p>
+<p>​        但是，我就疑问了，既然const_cast就是用来修改const字段的，可是只是改变了其内存的值，字段的值依旧没变，那么程序里使用该字段的地方的值依旧没有改变，如此const_cast似乎没有达到想要的结果。</p>
+<p>​        $\color{red}{不过const_cast似乎可以修改const标识的结构体对象中没有再用const标识的字段，也可以修改用const标识的类对象中没有用const标识的公有字段，但是在结构体或类中用const标识的字段就不能再修改了。}$</p>
+<p><img src="/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_10-44-16.png" alt></p>
+<h1 id="2-static-cast"><a href="#2-static-cast" class="headerlink" title="2.static_cast"></a>2.static_cast</h1><p>​    static_cast类型转换的用法几乎和C中的基本类型转换的用法一致，而C++的static_cast类型转换增加l类型检查，在安全性上较C要强。</p>
+<p>​    static_cast支持所有类型之间的转换包括类，对于类在继承过程中的类型转换有两点是需要注意的，一、static_cast类型转换在上行转换是安全的，在下行转换是不安全，（上行转换：从子类转换到父类，下行转换：从父类转换到子类），二、static_cast类型转换在类的转换中因该使用指针转换，即通过指针间接的实现转换，直接对类的对象进行转换类型会被裁剪，并且在下行转换中不使用指针会报错。</p>
+<p><img src="/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_11-51-30.png" alt></p>
+<h1 id="3-dynamic-cast"><a href="#3-dynamic-cast" class="headerlink" title="3.dynamic_cast"></a>3.dynamic_cast</h1><p>​    dynamic_cast类型转换用于类之间的上下行转换，与static_cast不同的是，dynamic_cast类型转换无论上下行都具有类型检查，都可以进行安全的类型转换。上行转换dynamic_cast与static_cast完全一致，下行转换dynamic_cast比static_cast更安全</p>
+<h1 id="4-reinterpret-cast"><a href="#4-reinterpret-cast" class="headerlink" title="4.reinterpret_cast"></a>4.reinterpret_cast</h1><p>​    reinterpret_cast类型转换只能对指针进行操作，reinterpret_cast类型转换提供的是一种更底层的转换模式–比特位上的重新解释，即对某一类型的内存地址的比特位以另一种类型来解释，这可能不好理解，在这放一张图来辅助理解。</p>
+<p><img src="/2019/09/12/【C++】C++中的四种转换类型/Snipaste_2019-09-12_16-32-44.png" alt></p>
+<p>​    p是指向字符串的char类型指针，i是指向整型的指针，i = reinterpret_cast&lt;int*&gt;(p)则将p所指向的内存里的比特位以int类型来重新解释并复制到i所指向的内存地址上，于是在输出 *i 时，输出的是一个整型的数值。</p>
+<p>reinterret_cast可以说是一个安全的强制类型转换了。 </p>
+<p>​    至于为什么cout&lt;&lt;p时不是输出的p所指向的地址而是地址里的内容，我始终没有弄明白，不过不影响对reinterpret_cast类型转换的理解。</p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95">知识记录</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/C++">C++</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">学！永不止步</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+            <br><br>
+            
+            
+    <script src="https://utteranc.es/client.js"
+            repo="Goulandis/Comments"
+            issue-term="pathname"
+            
+            label="utterances"
+            
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+	    
+        
+    </div>
+</div>
+
+    
+</main>
+
+
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="None" data-success="success" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "【C++】C++中的四种类型转换&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      var el = "h1,h2,h3,h4,h5,h6".split(",")
+      var res = []
+      for (item of el) {
+        res.push(".markdown-body > " + item)
+      }
+      anchors.add(res.join(", "))
+    </script>
+  
+
+  
+    <script src="/js/local-search.js"></script>
+    <script>
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function(){ getSearchFile(path); this.onclick = null }
+    </script>
+  
+</body>
+</html>
