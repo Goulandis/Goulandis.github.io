@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>【UE4】基于Spline的测距功能 ~ Goulandis</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">主页</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">归档</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">分类</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">标签</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">关于</a>
+            </li>
+            
+            
+                <li class="nav-item" id="search-btn">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/2.png')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Sunday, July 19th 2020, 6:16 pm</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="基于Spline的测距功能插件"><a href="#基于Spline的测距功能插件" class="headerlink" title="基于Spline的测距功能插件"></a>基于Spline的测距功能插件</h1><h1 id="一、功能分析"><a href="#一、功能分析" class="headerlink" title="一、功能分析"></a>一、功能分析</h1><p>这里首先分析一下整个插件的功能部件</p>
+<ul>
+<li><p>SplineActor—基于Spline的线条显示模块</p>
+</li>
+<li><p>Ranging—对整个插件功能的整体控制</p>
+</li>
+<li><p>DistancePanel—距离显示UI</p>
+</li>
+<li><p>Point—线上的点，集成DistancePanel</p>
+</li>
+<li><p>FunLib—高复用函数集合</p>
+<p>资产状况：</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/UEProject/APRRanging/%E3%80%90UE4%E3%80%91%E5%9F%BA%E4%BA%8ESpline%E7%9A%84%E6%B5%8B%E8%B7%9D%E5%8A%9F%E8%83%BD/QQ%E6%88%AA%E5%9B%BE20200608111928.png" alt></p>
+</li>
+</ul>
+<p>由于使用屏幕坐标转世界坐标的方式实现测距功能可能及其复杂，所以这里使用比较直观简便的三维Spline来实现测距功能。</p>
+<h1 id="二、制作线上的点Point"><a href="#二、制作线上的点Point" class="headerlink" title="二、制作线上的点Point"></a>二、制作线上的点Point</h1><h2 id="1-Point的结构分析"><a href="#1-Point的结构分析" class="headerlink" title="1.Point的结构分析"></a>1.Point的结构分析</h2><p>Point是一个拥有StaticMesh和WedgitComponent组件的Actor，StaticMesh我这里使用Shape，Materials是自己做的一个发光材质。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200608111928.png" alt></p>
+<h2 id="2-MeshMeterial材质"><a href="#2-MeshMeterial材质" class="headerlink" title="2.MeshMeterial材质"></a>2.MeshMeterial材质</h2><p>Materials蓝图：</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200608114141.png" alt></p>
+<h2 id="3-Point核心函数实现"><a href="#3-Point核心函数实现" class="headerlink" title="3.Point核心函数实现"></a>3.Point核心函数实现</h2><p>Point主要实现一个函数两个事件</p>
+<ul>
+<li>函数ShowDistance—负责距离显示</li>
+<li>事件InitFontInfo—负责获取初始字体信息</li>
+<li>事件ShowText—控制距离是否显示</li>
+</ul>
+<p>在构造函数需要记录DistancePanel的初始位置信息和初始字体信息。</p>
+<p>ConstructScript：记录DistancePanel的初始位置信息和初始字体信息</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200608152440.png" alt></p>
+<p>InitFontInfo：记录字体的初始信息</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200608152554.png" alt></p>
+<p>ShowText：设置显示字体的大小。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200608153449.png" alt></p>
+<p>Tick函数：SetActorRotation设置点上的文字跟随摄像机旋转使之始终面向摄像机，GetMouseLocation-&gt;SetActorLocation-&gt;ShowText当SureLocation为false时即未确定点的位置时设置点跟随鼠标移动，当点跟随鼠标移动时不显示距离。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200608153823.png" alt></p>
+<ul>
+<li>FontInfo：是一个SlateFontInfoStructure结构体用于设置距离显示的字体样式。</li>
+<li>SureLocation：bool变量，确认点是否已经确定了位置坐标，当点没有确定位置坐标时，点将跟随鼠标移动。</li>
+<li>InitScale3D：Vector变量，保存DistancePanel的初始大小。</li>
+<li>SureAdsorb：bool变量，控制闭环吸附，当为true时，起点具有吸附功能，可以将终点吸附到起点位置实现闭环。</li>
+</ul>
+<p>ShowDistance：将输入的距离信息显示出来。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200608172703.png" alt></p>
+<p>至此点的设计完毕。</p>
+<h1 id="三、用于显示的Widget"><a href="#三、用于显示的Widget" class="headerlink" title="三、用于显示的Widget"></a>三、用于显示的Widget</h1><p>创建一个UserWidget命名为DistancePanel，DistancePanel比较简单，CanvasPanel下就一个Text即可，只有一个函数UpdateTextScale，然后在EventConstruct中记录Text的初始大小。</p>
+<p>EventConstruct：</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200608181300.png" alt></p>
+<p>UpdateTextScale：更新Text的大小，使Text跟随摄像机距离地板的远近变大变小，以保证Text的大小在视野中保持不变。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200608181518.png" alt></p>
+<h1 id="三、使用Spline制作线段"><a href="#三、使用Spline制作线段" class="headerlink" title="三、使用Spline制作线段"></a>三、使用Spline制作线段</h1><h2 id="1-SplineActor结构分析"><a href="#1-SplineActor结构分析" class="headerlink" title="1.SplineActor结构分析"></a>1.SplineActor结构分析</h2><p>Spline是UE4的样条线组件，Spline是一组点和线的集合，但是Spline的点和线只有在编辑模式下可见，在运行模式下不可见，Spline可以通过选中其中的点按下Alt键并拖动鼠标来添加新的点。</p>
+<p>我们需要一个Actor作为Spline的载体，创建一个Actor命名为Spline。Spline的组件结构为：</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200608173947.png" alt></p>
+<ul>
+<li>StaticMesh：使用Shape和自定义的材质，这个Mesh作为起点使用。</li>
+<li>Spline：样条线组件，此Actor的核心组件。</li>
+<li>Sphere：球型触发器，用于起点吸附。</li>
+</ul>
+<h2 id="2-在编辑模式下实现Spline编辑"><a href="#2-在编辑模式下实现Spline编辑" class="headerlink" title="2.在编辑模式下实现Spline编辑"></a>2.在编辑模式下实现Spline编辑</h2><p>在编辑模式下实现样条线的编辑需要在构造函数中实现下面的逻辑：</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609102524.png" alt></p>
+<p>核心函数分析：</p>
+<ul>
+<li><p>AddSplineMeshComponent：这是一个自定义的封装函数，作用就是提高复用率，</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609103047.png" alt></p>
+<p>StaticMesh决定线的样式，Meterial决定线的颜色；</p>
+</li>
+<li><p>AttachToMeshComponent：将添加的SplineMeshComponent组件设置StaticMesh为父节点；</p>
+</li>
+<li><p>Set Start and End：函数根据Get LocationandTangentatSplinePoint函数获取的起点和终点的位置和切角，将生成的SplineMeshComponent组件附着在上面。</p>
+</li>
+</ul>
+<p>这样我们的Spline样条线就被设置成了我们设定的模样，并且在运行时可见。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609103945.png" alt></p>
+<h2 id="3-运行时动态添加Spline的点"><a href="#3-运行时动态添加Spline的点" class="headerlink" title="3.运行时动态添加Spline的点"></a>3.运行时动态添加Spline的点</h2><p>由于在运行模式下无法像在编辑模式下通过Alt键拖动点来添加Spline的点，所以我们需要通过蓝图来实现。这项功能封装在AddPoint函数中。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609105232.png" alt></p>
+<p>AddPoint函数通过输入的坐标位置动态生成Spline的点</p>
+<ul>
+<li>AddSplinePoint：向Spline中添加新的点；</li>
+<li>SpawnActorPoint：目的是在Spline的生成的新点的位置处生成一个具象化的Point；</li>
+<li>Sequence的的Then0分支作用是当生成一个新的Point时，确定上一个Point的位置坐标；</li>
+<li>PointArray是一个Point类型的数组，用于存储生成的Point的引用，SplineMeshComponentArray是一个SplineMeshComponent类型的数组，用于存储生成的SplineMeshComponent组件的引用，两个数组的作用是方便之后对Point和SplineMeshComponent的操作。</li>
+<li>AddSplineMeshComponent、AttachToComponent和SetSartandEnd函数作用和构造函数中一样；</li>
+<li>UpddateTotaldistance函数用于更新距离显示，具体实现在后面介绍。</li>
+</ul>
+<p>AddPoint函数在AddPointEvent事件中调用。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609171025.png" alt></p>
+<ul>
+<li><p>GetMouseLocation是FunLib库中的一个函数负责获取鼠标坐在的屏幕坐标转换成空间坐标。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609171318.png" alt></p>
+</li>
+</ul>
+<h2 id="4-实时更新样条线"><a href="#4-实时更新样条线" class="headerlink" title="4.实时更新样条线"></a>4.实时更新样条线</h2><p>实时更新样条线的功能封装在UpdateCurrentSplinePoint函数中。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609112522.png" alt></p>
+<p>UpdateCurrentSplinePoint函数在SplineActor的Tick函数中调用，每帧删除前一个Spline的点，在新的坐标位置下添加一个新的Spline的点，由于Point是跟随鼠标移动的，所以通过这个操作在宏观上的表现就是Spline的点在跟随鼠标一点，之所以使用这种方式，是因为Spline中的点似乎没办法直接修改位置。</p>
+<p>每帧设置好位置之后再重新渲染一遍Mesh组件，就达到如下效果了：</p>
+<p>![](【UE4】基于Spline的测距功能/录制_2020_06_09_11_32_46_632 00_00_00-00_00_30.gif)</p>
+<p>这样在运行状态下编辑Spline样条线就制作完成了。</p>
+<h1 id="四、实时更新距离"><a href="#四、实时更新距离" class="headerlink" title="四、实时更新距离"></a>四、实时更新距离</h1><p>实时更新距离的功能封装在UpdateTotalDistance函数下。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609165750.png" alt></p>
+<ul>
+<li>Ranging变量就是Ranging类型，存储Ranging的引用，在重新计算总距离前先将存储中距离的变量TotalDistance清零；</li>
+<li>然后一次取PointArray中的Point来计算Point与Point之间的距离，0号索引的Point较为特殊需要与其他索引的Point分开计算，因为0号索引的Point需要与SplineActor的位置计算距离；</li>
+<li>ShowDistance函数封装在Point类中，负责将输入的距离显示出来。</li>
+</ul>
+<p>显示总距离专门创建了一个DistancePanel来显示。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609170754.png" alt></p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609170817.png" alt></p>
+<ul>
+<li>HiddenTotalDistance控制总距离是否显示。</li>
+</ul>
+<p>到这里基本的功能就基本实现了，下面实现一些必要的附加功能。</p>
+<h1 id="五、封装Ranging类"><a href="#五、封装Ranging类" class="headerlink" title="五、封装Ranging类"></a>五、封装Ranging类</h1><p>由于SplineActor类是插件的核心类，不宜对外开放调用接口，且SplineActor类自身拥有Mesh，直接拖入场景中会显示Mesh，效果不佳，所以在SplineActor之外再封装一成没有Mesh的Ranging是十分必要的，有Ranging类提供对外调用的接口。</p>
+<p>Ranging类的封装函数和变量：</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609175002.png" alt></p>
+<ul>
+<li><p>SetupRanging：启动测距，在鼠标所在位置生成SplineActor；</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609175653.png" alt></p>
+</li>
+<li><p>AddPoint：封装SplineActor中的AddPointEvent事件；</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609175919.png" alt></p>
+</li>
+<li><p>EndRanging：结束测距，封装ActorSpline的DeleteLastPoint函数，函数的具体实现在之后介绍；</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609180302.png" alt></p>
+</li>
+<li><p>Remove：删除所有的点线，封装SplineActor的RemoveAllPoint函数，函数的具体实现在之后介绍；</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609180543.png" alt></p>
+</li>
+<li><p>SplineActor：存储SplineActor的引用；</p>
+</li>
+<li><p>TotalDistance：存储总距离的值；</p>
+</li>
+<li><p>DistanceUint：显示总距离时的单位；</p>
+</li>
+<li><p>K：存储SplineActor中DistancePanel随相机距离变化大小的变化倍率；我这里设定的值为0.0002。</p>
+</li>
+</ul>
+<p>文字随相机距离变化的函数实现封装在Ranging的UpdeteDistancePanelScale事件中，事件在Ranging的Tick函数中调用。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609182540.png" alt></p>
+<h1 id="六、保持Point的DistancePanel组件的大小不变"><a href="#六、保持Point的DistancePanel组件的大小不变" class="headerlink" title="六、保持Point的DistancePanel组件的大小不变"></a>六、保持Point的DistancePanel组件的大小不变</h1><p>为了保证观感效果，Point的显示距离的DistancePanel组件的大小应该跟随相机的远近保持保持一定的大小，以保证相机贴近地面时，文字不会过大，相机原理地面时文字不过过小而看不见。</p>
+<p>实现原理就在Ranging的UpdateDistancePanelScale事件中。</p>
+<h1 id="七、返回上一步功能"><a href="#七、返回上一步功能" class="headerlink" title="七、返回上一步功能"></a>七、返回上一步功能</h1><p>当我们确定点的位置时会出现位置确定错误的情况，所以返回上一步的功能也是十分必要的，具体实现在SplineActor的DeleteLastPoint函数中。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609183150.png" alt></p>
+<p>原理是移除上一个Spline的点和其匹配的Point、SplineMeshComponent并删除数组中对应的元素，然后更新一次距离，如果剩下最后一个点时，再撤回就直接将SplineActor删除并把显示总距离的DistancePanel移除，防止再创建SplineActor时再生成一个DiatancePanel而出现两个DistancePanel。</p>
+<h1 id="八、移除所有的点"><a href="#八、移除所有的点" class="headerlink" title="八、移除所有的点"></a>八、移除所有的点</h1><p>当测距完成后需要清除所有的点，所以此功能也是必要的，具体实现在SplineActor的RemoveAllPoint中。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609183833.png" alt></p>
+<h1 id="九、起点吸附功能"><a href="#九、起点吸附功能" class="headerlink" title="九、起点吸附功能"></a>九、起点吸附功能</h1><p>起点吸附是为了实现闭环。具体实现在SplineActor的EventActorBeginOverlap事件中。</p>
+<p><img src="/2020/07/19/【UE4】基于Spline的测距功能/QQ%E6%88%AA%E5%9B%BE20200609184204.png" alt></p>
+<p>原理就是当SplineActor的Sphere触发器检测到Point时将此Point的坐标设置到起点的坐标处。</p>
+<h1 id="九、整体效果预览"><a href="#九、整体效果预览" class="headerlink" title="九、整体效果预览"></a>九、整体效果预览</h1><p>![](【UE4】基于Spline的测距功能/录制_2020_06_09_18_39_33_815 00_00_00-00_00_30.gif)</p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/UE4">UE4</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">学！永不止步</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+            <br><br>
+            
+            
+    <script src="https://utteranc.es/client.js"
+            repo="Goulandis/Comments"
+            issue-term="pathname"
+            
+            label="utterances"
+            
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+	    
+        
+    </div>
+</div>
+
+    
+</main>
+
+
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="None" data-success="success" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "【UE4】基于Spline的测距功能&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      var el = "h1,h2,h3,h4,h5,h6".split(",")
+      var res = []
+      for (item of el) {
+        res.push(".markdown-body > " + item)
+      }
+      anchors.add(res.join(", "))
+    </script>
+  
+
+  
+    <script src="/js/local-search.js"></script>
+    <script>
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function(){ getSearchFile(path); this.onclick = null }
+    </script>
+  
+</body>
+</html>
