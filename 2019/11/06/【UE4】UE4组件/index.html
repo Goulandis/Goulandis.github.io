@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Goulandis">
+  <meta name="keywords" content="snoopy">
+  <title>【UE4】UE4组件 - Goulandis</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/vs2015.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Goulandis" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="【UE4】UE4组件">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-11-06 21:10" pubdate>
+        November 6, 2019 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【UE4】UE4组件</h1>
+            
+            <div class="markdown-body">
+              <p>不同的蓝图脚本拥有不同的组件集，蓝图脚本的组件集过于庞大，这里只对自己使用过的组件进行列举。</p>
+<p><font color=red>说明：红色字体表示一级目录组件，绿色字体表示二级目录，黄色字体为三级目录(三级目录较为少见所以使用和二级目录相同的三级标题)，白色字体为具体组件说明</font>。</p>
+<h1 id="一、材质蓝图组件"><a href="#一、材质蓝图组件" class="headerlink" title="一、材质蓝图组件"></a>一、材质蓝图组件</h1><h2 id="Constans-常量"><a href="#Constans-常量" class="headerlink" title="Constans(常量)"></a><font color=red>Constans(常量)</font></h2><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-46-47.png" srcset="/img/loading.gif"></p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Constans</td>
+<td>一维量，可以表示任何一维数据，如：小数、整数等</td>
+</tr>
+<tr>
+<td>Constans2Vector</td>
+<td>二维量，可以表示任何二维数据，如：二维坐标</td>
+</tr>
+<tr>
+<td>Constans3Vector</td>
+<td>三维量，可以表示任何三维数据，如：三维坐标、RBG等</td>
+</tr>
+<tr>
+<td>Constans4Vector</td>
+<td>四维量，可以表示任何四维数据，如：四元数</td>
+</tr>
+</tbody></table>
+<h2 id="Math-数学函数"><a href="#Math-数学函数" class="headerlink" title="Math(数学函数)"></a><font color=red>Math(数学函数)</font></h2><h4 id="Multiply-乘积"><a href="#Multiply-乘积" class="headerlink" title="Multiply(乘积)"></a><strong>Multiply(乘积)</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-50-37.png" srcset="/img/loading.gif"></p>
+<h3 id="Lerp-插值"><a href="#Lerp-插值" class="headerlink" title="Lerp(插值)"></a><font color=green>Lerp(插值)</font></h3><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_13-12-40.png" srcset="/img/loading.gif"></p>
+<p>Lerp组件在Math的多个二级目录中存在，有各种类型的插值变化。</p>
+<p><strong>输入：</strong></p>
+<ul>
+<li>A：插值变化的起始值；</li>
+<li>B：插值变化的目标值；</li>
+<li>Alpha：插值的变化规则，连接Float的TimeLine插值将按照TimeLine的规则变化。</li>
+</ul>
+<p><strong>输出：</strong></p>
+<ul>
+<li>Return Value：返回变化后的插值，将Lerp放入帧函数中可以获得每帧变化的插值。</li>
+</ul>
+<h1 id="二、普通蓝图组件"><a href="#二、普通蓝图组件" class="headerlink" title="二、普通蓝图组件"></a>二、普通蓝图组件</h1><hr>
+<h2 id="Add-Event-添加事件"><a href="#Add-Event-添加事件" class="headerlink" title="Add Event(添加事件)"></a><font color=red>Add Event(添加事件)</font></h2><h3 id="Collision-碰撞体组件"><a href="#Collision-碰撞体组件" class="headerlink" title="Collision(碰撞体组件)"></a><font color=green>Collision(碰撞体组件)</font></h3><h4 id="Event-ActorBeginOverlap-自动触发触发器"><a href="#Event-ActorBeginOverlap-自动触发触发器" class="headerlink" title="Event ActorBeginOverlap(自动触发触发器)"></a><strong>Event ActorBeginOverlap(自动触发触发器)</strong></h4><p>每当有物体进入触发器时自动触发</p>
+<p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_10-53-07.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>Other Actor：返回进入触发器的游戏物体的信息。</li>
+</ul>
+<h3 id="Game"><a href="#Game" class="headerlink" title="Game"></a><font color=green>Game</font></h3><h3 id="Damage"><a href="#Damage" class="headerlink" title="Damage"></a><font color=orange>Damage</font></h3><h4 id="Event-AnyDamage"><a href="#Event-AnyDamage" class="headerlink" title="Event AnyDamage"></a><strong>Event AnyDamage</strong></h4><p>Event AnyDamage事件是配合Apply Damage组件一起使用的，当Apply Damage组件执行时，会自动触发Event AnyDamage事件。</p>
+<p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-28_17-28-37.png" srcset="/img/loading.gif"></p>
+<p><strong>输出：</strong></p>
+<p>Damage：从Apply Damage组件的Damage中传递过来的值；</p>
+<p>Damage Type：从Apply Damage组件传递过来的Damage Type Class；</p>
+<p>Instigated By：从Apply Damage组件传递过来的Event Instigateor；</p>
+<p>Damage Causer：从Apply Damage组件传递过来的Damage Causer；</p>
+<h2 id="Event-BeginPlay"><a href="#Event-BeginPlay" class="headerlink" title="Event BeginPlay"></a><font color=red>Event BeginPlay</font></h2><p>游戏开始时自动触发</p>
+<p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_10-57-11.png" srcset="/img/loading.gif"></p>
+<h2 id="Add-TimeLine-添加时间线"><a href="#Add-TimeLine-添加时间线" class="headerlink" title="Add TimeLine(添加时间线)"></a><font color=red>Add TimeLine(添加时间线)</font></h2><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_10-33-38.png" srcset="/img/loading.gif"></p>
+<p><strong>输入：</strong></p>
+<ul>
+<li>Play：播放，播放完毕下一次触发时不会从头开始，而是会从上一次时间点继续开始；</li>
+<li>Play from Start：从头开始播放，每次触发都从时间线起点开始执行；</li>
+<li>Stop：暂停，触发后直接从当前时刻暂停；</li>
+<li>Reverse：倒序播放，从当前时刻开始倒叙播放；</li>
+<li>Reverse from End：从末尾开始倒序播放；</li>
+<li>Set New Time：设置新的时间起点，即时间线从新设置的时间点开始执行；</li>
+<li>New Time：新的时间起点由外部输入。</li>
+</ul>
+<p><strong>输出：</strong></p>
+<ul>
+<li>Update：在时间线内每帧执行；</li>
+<li>Finished：时间线结束时触发；</li>
+<li>Direction：返回时间线的执行方向，只有两个值“Forward”和“Backward”；</li>
+<li>New Track 0：自己创建的时间线，创建了才会有，显示的名字也是自己命名的时间线的名字。</li>
+</ul>
+<h2 id="Camera-Fades-相机渐变"><a href="#Camera-Fades-相机渐变" class="headerlink" title="Camera Fades(相机渐变)"></a><font color=red>Camera Fades(相机渐变)</font></h2><p>Camera Fades组件是只有在Get Player Camera Menager组件的外拉中才能搜索到的专门服务于Get Player Camera Menager组件的相机组件集。</p>
+<h4 id="Start-Camera-Fade-开始渐变"><a href="#Start-Camera-Fade-开始渐变" class="headerlink" title="Start Camera Fade(开始渐变)"></a><strong>Start Camera Fade(开始渐变)</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-02-10.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>Target：渐变目标相机，默认为当前相机；</li>
+<li>From Alpha：渐变起始Alpha；</li>
+<li>To Alpha：渐变目标Alpha；</li>
+<li>Duration：渐变持续时间；</li>
+<li>Color：渐变颜色；</li>
+<li>Should Fade Audio：启用声音渐变；</li>
+<li>Hold when Finished：渐变结束后保持当前Alpha值。</li>
+</ul>
+<h4 id="Stop-Camera-Fade-结束渐变"><a href="#Stop-Camera-Fade-结束渐变" class="headerlink" title="Stop Camera Fade(结束渐变)"></a><strong>Stop Camera Fade(结束渐变)</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-10-28.png" srcset="/img/loading.gif"></p>
+<p>触发时立刻停止当前渐变。</p>
+<h2 id="Input-输入流"><a href="#Input-输入流" class="headerlink" title="Input(输入流)"></a><font color=red>Input(输入流)</font></h2><h3 id="Keyboard-Events-按键触发事件"><a href="#Keyboard-Events-按键触发事件" class="headerlink" title="Keyboard Events(按键触发事件)"></a><font color=green>Keyboard Events(按键触发事件)</font></h3><p>包含所有键盘按键出发事件</p>
+<h2 id="Game-1"><a href="#Game-1" class="headerlink" title="Game"></a><font color=red>Game</font></h2><h4 id="Get-Player-Pawn-获取角色对象"><a href="#Get-Player-Pawn-获取角色对象" class="headerlink" title="Get Player Pawn(获取角色对象)"></a><strong>Get Player Pawn(获取角色对象)</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-17-59.png" srcset="/img/loading.gif"></p>
+<ul>
+<li><p>Play Index：输入角色索引，可以直接设置也可以外部输入；</p>
+</li>
+<li><p>Return Value：返回获取的角色对象(Object)。</p>
+</li>
+</ul>
+<h4 id="Get-Current-Level-Name-获取关卡名字"><a href="#Get-Current-Level-Name-获取关卡名字" class="headerlink" title="Get Current Level Name(获取关卡名字)"></a><strong>Get Current Level Name(获取关卡名字)</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-21-18.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>Remove Prefix String：移除前缀字符串；</li>
+<li>Return Value：返回获取到的关卡名称(String)。</li>
+</ul>
+<h4 id="Get-Player-Camera-Manager-获取角色相机管理器"><a href="#Get-Player-Camera-Manager-获取角色相机管理器" class="headerlink" title="Get Player Camera Manager(获取角色相机管理器)"></a><strong>Get Player Camera Manager(获取角色相机管理器)</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-26-07.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>Player Index：输入角色索引；</li>
+<li>Return Value：返回输入角色身上的相机对象。</li>
+</ul>
+<h3 id="Damage-1"><a href="#Damage-1" class="headerlink" title="Damage"></a><font color=green>Damage</font></h3><h4 id="Apply-Damage"><a href="#Apply-Damage" class="headerlink" title="Apply Damage"></a><strong>Apply Damage</strong></h4><p>Apply Damage组件一般和Event AnyDamage组件配合使用，当Apply Damage组件触发时，UE4会自动调用Event AnyDamage事件。需要注意的是，只有在Base Daamge不为0时才能触发Event Damage事件。</p>
+<p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-28_17-26-35.png" srcset="/img/loading.gif"></p>
+<p><strong>输入：</strong></p>
+<p>Ddamaged Actor：受到伤害的对象；</p>
+<p>Base Damage：输入的伤害值；</p>
+<p>Event Instigator：引发伤害的对象，如：持枪的敌人；</p>
+<p>Damage Causer：实际造成伤害的对象，如：子弹；</p>
+<p>Damage Type Class：伤害的类型；</p>
+<p><strong>输出：</strong></p>
+<p>Return Value：最终造成的实际伤害。</p>
+<h2 id="Rendering-渲染"><a href="#Rendering-渲染" class="headerlink" title="Rendering(渲染)"></a><font color=red>Rendering(渲染)</font></h2><h3 id="Components"><a href="#Components" class="headerlink" title="Components"></a><font color=green>Components</font></h3><h3 id="Light"><a href="#Light" class="headerlink" title=" Light"></a><font color= orange> Light</font></h3><h4 id="Set-Intensity-设置光源强度"><a href="#Set-Intensity-设置光源强度" class="headerlink" title="Set Intensity(设置光源强度)"></a><strong>Set Intensity(设置光源强度)</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_13-32-38.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>Target：目标光源；</li>
+<li>New Intensity：目标光源强度。</li>
+</ul>
+<h4 id="Get-Intensity-获取光源强度"><a href="#Get-Intensity-获取光源强度" class="headerlink" title="Get Intensity(获取光源强度)"></a><strong>Get Intensity(获取光源强度)</strong></h4><p>使用和Set Intensity一样。</p>
+<h2 id="String-字符串组件"><a href="#String-字符串组件" class="headerlink" title="String(字符串组件)"></a><font color=red>String(字符串组件)</font></h2><h3 id="Append-字符串连接"><a href="#Append-字符串连接" class="headerlink" title="Append(字符串连接)"></a><font color=green>Append(字符串连接)</font></h3><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-28_17-04-19.png" srcset="/img/loading.gif"></p>
+<h2 id="Utilities-通用组件"><a href="#Utilities-通用组件" class="headerlink" title="Utilities(通用组件)"></a><font color=red>Utilities(通用组件)</font></h2><h3 id="Flow-Control"><a href="#Flow-Control" class="headerlink" title="Flow Control"></a><font color=green>Flow Control</font></h3><h4 id="Branch-if语句"><a href="#Branch-if语句" class="headerlink" title="Branch(if语句)"></a><strong>Branch</strong>(if语句)</h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-30-52.png" srcset="/img/loading.gif"></p>
+<p>蓝图的if语句</p>
+<ul>
+<li>Condition：输入的判断条件，一般和各种判断组件的输出连接。</li>
+</ul>
+<h4 id="Delay-延迟函数"><a href="#Delay-延迟函数" class="headerlink" title="Delay(延迟函数)"></a><strong>Delay(延迟函数)</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-39-53.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>Duration：延迟时间。</li>
+</ul>
+<h3 id="Keyboard-Events-按键触发事件-1"><a href="#Keyboard-Events-按键触发事件-1" class="headerlink" title="Keyboard Events(按键触发事件)"></a><font color=green>Keyboard Events(按键触发事件)</font></h3><p>包含一些字符串操作函数。</p>
+<h3 id="Text"><a href="#Text" class="headerlink" title="Text"></a><font color=green>Text</font></h3><h4 id="Equal"><a href="#Equal" class="headerlink" title="Equal"></a><strong>Equal</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-42-14.png" srcset="/img/loading.gif"></p>
+<p>输入两个比较对象，输出判断结果(Bool)。</p>
+<p>各种其他的判断组件用法一致。</p>
+<h3 id="Transformation"><a href="#Transformation" class="headerlink" title=" Transformation"></a><font color=green> Transformation</font></h3><h4 id="Set-Actor-Scale-3D"><a href="#Set-Actor-Scale-3D" class="headerlink" title="Set Actor Scale 3D"></a><strong>Set Actor Scale 3D</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_13-19-47.png" srcset="/img/loading.gif"></p>
+<p>设置Actor的Scale值</p>
+<ul>
+<li>Target：要设置的目标Actor；</li>
+<li>New Scale 3D：要设置的目标Scale值。</li>
+</ul>
+<h4 id="Get-Actor-Scale-3D"><a href="#Get-Actor-Scale-3D" class="headerlink" title="Get Actor Scale 3D"></a><strong>Get Actor Scale 3D</strong></h4><p>获取Actor的Scale值。</p>
+<h1 id="二、物理组件"><a href="#二、物理组件" class="headerlink" title="二、物理组件"></a>二、物理组件</h1><p>UE4除了提供大量蓝图脚本函数组件来对蓝图类进行精细控制外还提供了一系列物理组件对蓝图类进行一些常规的复杂控制。</p>
+<h2 id="Camera"><a href="#Camera" class="headerlink" title="Camera"></a><font color=red>Camera</font></h2><h4 id="Camera-1"><a href="#Camera-1" class="headerlink" title="Camera"></a><strong>Camera</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-53-42.png" srcset="/img/loading.gif"></p>
+<p>相机，用于渲染视野，一般配合Spring Arm一起使用。</p>
+<h4 id="Spring-Arm"><a href="#Spring-Arm" class="headerlink" title="Spring Arm"></a><strong>Spring Arm</strong></h4><p><img src="%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/Snipaste_2019-10-25_11-56-15.png" srcset="/img/loading.gif"></p>
+<p>弹簧悬臂，将相机附于其上可以实现相机跟随</p>
+<h2 id="Movement"><a href="#Movement" class="headerlink" title="Movement"></a><font color=red>Movement</font></h2><h4 id="Rotating-Movement"><a href="#Rotating-Movement" class="headerlink" title="Rotating Movement"></a><strong>Rotating Movement</strong></h4><p>旋转控制，提供一系列参数对对蓝图类的旋转运动进行控制</p>
+<h2 id="Rendering"><a href="#Rendering" class="headerlink" title="Rendering"></a><font color=red>Rendering</font></h2><h4 id="Static-Mesh"><a href="#Static-Mesh" class="headerlink" title="Static Mesh"></a><strong>Static Mesh</strong></h4><p>静态网格，网格控制蓝图的贴图材质、模型外观、阴影渲染等。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/UE4/">UE4</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/11/17/%E3%80%90UE4%E3%80%91UE4%E8%81%94%E7%BA%A7%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【UE4】UE4联级粒子系统</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%BF%9E%E6%8E%A5MySQL/">
+                        <span class="hidden-mobile">【UE4】UE4连接MySQL</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
