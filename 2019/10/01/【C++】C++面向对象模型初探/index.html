@@ -254,10 +254,10 @@
 </tr>
 </tbody></table>
 <h1 id="2-C-类的内存分布"><a href="#2-C-类的内存分布" class="headerlink" title="2.C++类的内存分布"></a>2.C++类的内存分布</h1><p>要想更好的了解这些，我们还需了解C++类的内存分布</p>
-<p><img src="%E3%80%90C++%E3%80%91C++%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E5%88%9D%E6%8E%A2/Snipaste_2019-10-02_09-07-09.png" srcset="/img/loading.gif"></p>
+<p><img src="/.com//Snipaste_2019-10-02_09-07-09.png" srcset="/img/loading.gif"></p>
 <h2 id="Stack："><a href="#Stack：" class="headerlink" title="Stack："></a><strong>Stack：</strong></h2><p>栈，存放Automatic Variables，按内存地址由高到低方向生长，其最大大小由编译时确定，速度快，但自由性差，最大空间不大。保存程序中的局部变量。</p>
 <h2 id="Heap："><a href="#Heap：" class="headerlink" title="Heap："></a><strong>Heap：</strong></h2><p>堆，自由申请的空间，按内存地址由低到高方向生长，其大小由系统内存/虚拟内存上限决定，速度较慢，但自由性大，可用空间大。 动态分配的内存在调用malloc（）或者相关函数产生，在调用free()时释放，由程序员决定而不是一系列规则规定内存持续时间，因此内存块可在一个函数中创建，在另一个函数中释放。由于这点，动态内存分配容易导致堆区内存碎片化。</p>
-<h2 id="Data："><a href="#Data：" class="headerlink" title=".Data："></a><strong>.Data：</strong></h2><p> 存放程序中<font color=red> 已经初始化的非零全局变量。静态分配。</font></p>
+<h2 id="Data："><a href="#Data：" class="headerlink" title=".Data："></a><strong>.Data：</strong></h2><p> 存放程序中<font color="red"> 已经初始化的非零全局变量。静态分配。</font></p>
 <p>data又可分为读写（RW）区域和只读（RO）区域。 </p>
 <ul>
 <li>RO段保存常量所以也被称为<code>.constdata</code> eg const数据</li>
@@ -270,8 +270,8 @@
 <p>静态成员变量存储在全局数据区，是的每一个类的对象都共享一份静态</p>
 <p>成员变量。</p>
 <h1 id="3-this指针"><a href="#3-this指针" class="headerlink" title="3.this指针"></a>3.this指针</h1><p>那么，存放在代码段的成员函数是怎么区分调用对象的呢？</p>
-<p>事实上，<font color=red> C++为每一个函数都隐式定义了一个函数所属类类型的指针形参–this，而this指针永远指向调用函数的对象</font>，如此函数便可以识别调用自身的是类的哪个对象了。</p>
-<p>这里有一点要注意，<font color=red> C++并没有为静态成员函数定义this指针，如此，静态成员函数被所有的对象共享</font>。</p>
+<p>事实上，<font color="red"> C++为每一个函数都隐式定义了一个函数所属类类型的指针形参–this，而this指针永远指向调用函数的对象</font>，如此函数便可以识别调用自身的是类的哪个对象了。</p>
+<p>这里有一点要注意，<font color="red"> C++并没有为静态成员函数定义this指针，如此，静态成员函数被所有的对象共享</font>。</p>
 <h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h1><p>通过成员的分开存储和普通成员函数的<code>this指针</code>C++便可以识别各个不同的对象，如此便实现了面向对象。</p>
 
             </div>
