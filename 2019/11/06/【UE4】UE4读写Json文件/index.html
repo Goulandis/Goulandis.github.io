@@ -158,7 +158,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/Post.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -228,7 +228,9 @@
             <h1 style="display: none">【UE4】UE4读写Json文件</h1>
             
             <div class="markdown-body">
-              <h1 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h1><p>如果我们想要在UE4中读写Json文件，那么我们必须使UE4包含<font color="red">Json和JsonUtilities</font>这两个模块，那么UE4如何添加模块呢？</p>
+              <meta name="referrer" content="no-referrer">
+
+<h1 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h1><p>如果我们想要在UE4中读写Json文件，那么我们必须使UE4包含<font color="red">Json和JsonUtilities</font>这两个模块，那么UE4如何添加模块呢？</p>
 <p>UE4添加预定义模块的方法很简单，我只需打开工程的.Biuld.cs文件，在其中的<code>PublicDependencyModuleNames.AddRange()</code>函数中追加两个模块即可，如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">using</span> UnrealBuildTool;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DATA_sys</span> :</span> ModuleRules<br>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DATA_sys</span><span class="hljs-params">(ReadOnlyTargetRules Target)</span> : <span class="hljs-title">base</span><span class="hljs-params">(Target)</span></span><br><span class="hljs-function">	</span>&#123;<br>		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;<br>	<br>		PublicDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] &#123; <span class="hljs-string">&quot;Core&quot;</span>, <span class="hljs-string">&quot;CoreUObject&quot;</span>, <span class="hljs-string">&quot;Engine&quot;</span>, <span class="hljs-string">&quot;InputCore&quot;</span> ,<span class="hljs-string">&quot;Json&quot;</span>,<span class="hljs-string">&quot;JsonUtilities&quot;</span>&#125;);<br><br>		PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] &#123;  &#125;);<br><br>		<span class="hljs-comment">// Uncomment if you are using Slate UI</span><br>		<span class="hljs-comment">// PrivateDependencyModuleNames.AddRange(new string[] &#123; &quot;Slate&quot;, &quot;SlateCore&quot; &#125;);</span><br>		<br>		<span class="hljs-comment">// Uncomment if you are using online features</span><br>		<span class="hljs-comment">// PrivateDependencyModuleNames.Add(&quot;OnlineSubsystem&quot;);</span><br><br>		<span class="hljs-comment">// To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true</span><br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>如果我们要添加自定义模块就有点麻烦了，当然这里就不赘述了。</p>
@@ -411,7 +413,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+     <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>Github</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
   </div>
   
 

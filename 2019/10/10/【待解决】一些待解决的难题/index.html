@@ -158,7 +158,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/Post.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -228,7 +228,9 @@
             <h1 style="display: none">【待解决】一些待解决的难题</h1>
             
             <div class="markdown-body">
-              <p>这里记录一些待解决的程序难题</p>
+              <meta name="referrer" content="no-referrer">
+
+<p>这里记录一些待解决的程序难题</p>
 <h1 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h1><p>1.这两种内存分配的方式，有什么不一样，<br>2.初始化的s最后结果有什么不一样</p>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">a</span> &#123;</span><br>		<span class="hljs-keyword">int</span> id;<br>		<span class="hljs-built_in">string</span> s;<br>	&#125;;<br>	a *ptr1 = <span class="hljs-keyword">new</span> a();<br>	ptr1-&gt;s = <span class="hljs-string">&quot;hello&quot;</span>;<br>	a *ptr2 = (a*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(a));<br>	ptr2-&gt;s = <span class="hljs-string">&quot;hello&quot;</span>;<span class="hljs-comment">//这一句却会报异常，为什么？</span><br>	system(<span class="hljs-string">&quot;pause&quot;</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
@@ -346,7 +348,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+     <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>Github</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
   </div>
   
 

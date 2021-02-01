@@ -158,7 +158,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/Post.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -228,8 +228,10 @@
             <h1 style="display: none">【C++】C++函数模板的实现机制剖析</h1>
             
             <div class="markdown-body">
-              <h1 id="函数模板的实现机制剖析"><a href="#函数模板的实现机制剖析" class="headerlink" title="函数模板的实现机制剖析"></a>函数模板的实现机制剖析</h1><p>要剖析函数模板的实现机制，我们要先了解程序的编译过程，这里以gcc为例</p>
-<p><img src="/.com//Snipaste_2019-10-03_16-51-51.png" srcset="/img/loading.gif"></p>
+              <meta name="referrer" content="no-referrer">
+
+<h1 id="函数模板的实现机制剖析"><a href="#函数模板的实现机制剖析" class="headerlink" title="函数模板的实现机制剖析"></a>函数模板的实现机制剖析</h1><p>要剖析函数模板的实现机制，我们要先了解程序的编译过程，这里以gcc为例</p>
+<p><img src="/2019/10/03/%E3%80%90C++%E3%80%91C++%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E5%89%96%E6%9E%90/Snipaste_2019-10-03_16-51-51.png" srcset="/img/loading.gif"></p>
 <p>这里对下面代码进行剖析</p>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;stdafx.h&quot;</span><span class="hljs-comment">//这是VS的固有头文件</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Fun</span><span class="hljs-params">(T a,T b)</span></span><br><span class="hljs-function"></span>&#123;<br>	a = a + b;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;我是函数模板&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	Fun(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);<br>	Fun(<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>);<br>	system(<span class="hljs-string">&quot;pause&quot;</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>打开控制台，使用命令生成汇编文件(当然环境变量里需要有g++编译器的路径才能这样使用，具体操作放在文末)</p>
@@ -248,13 +250,13 @@
 <p><font color="red">编译器会对函数模板进行两次编译，在申明的地方对模板代码本身进行编译，在调用的地方对参数替换后的代码进行编译。</font></p>
 <p>g++命令的使用</p>
 <p>首先电脑里要有g++这个软件，我这里使用的是Qt里集成的g++软件</p>
-<p><img src="/.com//Snipaste_2019-10-03_19-57-21.png" srcset="/img/loading.gif"></p>
+<p><img src="/2019/10/03/%E3%80%90C++%E3%80%91C++%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E5%89%96%E6%9E%90/Snipaste_2019-10-03_19-57-21.png" srcset="/img/loading.gif"></p>
 <p>然后右键我的电脑–&gt;属性–&gt;高级环境设置–&gt;环境变量–&gt;系统变量/Path–&gt;编辑</p>
-<p><img src="/.com//Snipaste_2019-10-03_20-07-41.png" srcset="/img/loading.gif"></p>
+<p><img src="/2019/10/03/%E3%80%90C++%E3%80%91C++%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E5%89%96%E6%9E%90/Snipaste_2019-10-03_20-07-41.png" srcset="/img/loading.gif"></p>
 <p>再然后新建–&gt;将g++.exe所在的路径拷贝到新建的环境变量中</p>
-<p><img src="/.com//Snipaste_2019-10-03_20-08-21.png" srcset="/img/loading.gif"></p>
+<p><img src="/2019/10/03/%E3%80%90C++%E3%80%91C++%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E5%89%96%E6%9E%90/Snipaste_2019-10-03_20-08-21.png" srcset="/img/loading.gif"></p>
 <p>测试一下，win+r–&gt;cmd–&gt;任意目录键入g++</p>
-<p><img src="/.com//Snipaste_2019-10-03_20-12-24.png" srcset="/img/loading.gif"></p>
+<p><img src="/2019/10/03/%E3%80%90C++%E3%80%91C++%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E5%89%96%E6%9E%90/Snipaste_2019-10-03_20-12-24.png" srcset="/img/loading.gif"></p>
 <p>可以看到系统没有提示无此命令，说明配置成功</p>
 
             </div>
@@ -364,7 +366,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+     <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>Github</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
   </div>
   
 

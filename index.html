@@ -142,7 +142,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/Home.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -191,11 +191,13 @@
           
             
           
-          一、粒子系统的一些基本概念1.Particle System(粒子系统)粒子系统如同贴图、模型一样属于UE4的驻留资产，不能单独存在于场景中，必须使用载体依托才能在场景中渲染出来，粒子系统包含粒子特效的所有配置。粒子系统在UE4中表现为如下样子：
+          
+
+一、粒子系统的一些基本概念1.Particle System(粒子系统)粒子系统如同贴图、模型一样属于UE4的驻留资产，不能单独存在于场景中，必须使用载体依托才能在场景中渲染出来，粒子系统包含粒子特效的所有配置。粒子系统在UE4中表现为如下样子：
 
 创建粒子系统在内容浏览器中右键选择Particle System可以直接创建粒子系统。
 
-2.Emitter Actor(粒子发射器)粒子发射器就是粒
+2.Emitter Actor(粒子发射器)粒子发射器就
         </a>
       </p>
 
@@ -243,7 +245,9 @@
           
             
           
-          不同的蓝图脚本拥有不同的组件集，蓝图脚本的组件集过于庞大，这里只对自己使用过的组件进行列举。
+          
+
+不同的蓝图脚本拥有不同的组件集，蓝图脚本的组件集过于庞大，这里只对自己使用过的组件进行列举。
 说明：红色字体表示一级目录组件，绿色字体表示二级目录，黄色字体为三级目录(三级目录较为少见所以使用和二级目录相同的三级标题)，白色字体为具体组件说明。
 一、材质蓝图组件Constans(常量)
 
@@ -258,7 +262,7 @@ Constans
 一维量，可以表示任何一维数据，如：小数、整数等
 
 
-Constans2
+Constan
         </a>
       </p>
 
@@ -306,14 +310,16 @@ Constans2
           
             
           
-          一、使用MySQLIntegration插件连接Mysql
+          
+
+一、使用MySQLIntegration插件连接Mysql
 Update Data from Query Async组件后面必须再跟一个其他的节点，节点才能正常执行
 UE4 C++编程中不能出现私有私有变量？
 UE4 C++静态变量？
 MySQL Integration插件只支持sql语句，不支持存储过程
 在蓝图中实现的C++函数在蓝图中没法使用？
 暴露给蓝图的变量和函数必须是公有且非静态的
-UE
+
         </a>
       </p>
 
@@ -361,9 +367,11 @@ UE
           
             
           
-          一、准备工作如果我们想要在UE4中读写Json文件，那么我们必须使UE4包含Json和JsonUtilities这两个模块，那么UE4如何添加模块呢？
+          
+
+一、准备工作如果我们想要在UE4中读写Json文件，那么我们必须使UE4包含Json和JsonUtilities这两个模块，那么UE4如何添加模块呢？
 UE4添加预定义模块的方法很简单，我只需打开工程的.Biuld.cs文件，在其中的PublicDependencyModuleNames.AddRange()函数中追加两个模块即可，如：
-123456789101112131415161718192
+1234567891011121314151617181
         </a>
       </p>
 
@@ -411,13 +419,15 @@ UE4添加预定义模块的方法很简单，我只需打开工程的.Biuld.cs�
           
             
           
-          一、蓝图可视化脚本与蓝图系统1.蓝图脚本蓝图可视化脚本简称“蓝图”或“蓝图脚本”，是一种需要编译的面向对象的可视化编程语言，蓝图完全集成在UE4中，蓝图通过节点与连线工作。
+          
+
+一、蓝图可视化脚本与蓝图系统1.蓝图脚本蓝图可视化脚本简称“蓝图”或“蓝图脚本”，是一种需要编译的面向对象的可视化编程语言，蓝图完全集成在UE4中，蓝图通过节点与连线工作。
 蓝图脚本的节点
 触发事件，在蓝图脚本中以红色的节点出现
 函数，在看图脚本中以蓝色的节点出现
 变量，在蓝图脚本中中以黄色节点出现
 
-2.蓝图系统蓝图系统又称“蓝图”或“蓝图类”，蓝图类可以看成是一个包含游戏内容的容器，其中可以包
+2.蓝图系统蓝图系统又称“蓝图”或“蓝图类”，蓝图类可以看成是一个包含游戏内容的容器，其中可
         </a>
       </p>
 
@@ -465,8 +475,10 @@ UE4添加预定义模块的方法很简单，我只需打开工程的.Biuld.cs�
           
             
           
-          1.什么是存储过程数据库中的存储过程有点类似编程中的函数，可以供外部环境在需要时调用，并且存储过程只需要编译一次，之后再用则无需进行在此编译。
-2.存储过程的创建代码1234567delimiter &#x2F;&#x2F;create procedure Test(in parameter01 int,out parameter02 varchar(45));begin	-- 存储逻辑end&#
+          
+
+1.什么是存储过程数据库中的存储过程有点类似编程中的函数，可以供外部环境在需要时调用，并且存储过程只需要编译一次，之后再用则无需进行在此编译。
+2.存储过程的创建代码1234567delimiter &#x2F;&#x2F;create procedure Test(in parameter01 int,out parameter02 varchar(45));begin	-- 存储逻辑end
         </a>
       </p>
 
@@ -548,9 +560,11 @@ UE4添加预定义模块的方法很简单，我只需打开工程的.Biuld.cs�
           
             
           
-          ​    今天是十月十二号，阴，天灰蒙蒙的，仿佛和我此时的心境一般，此时我心身具备，虽然在国庆结束的前一天我拿到了第一个offer，可能也是唯一的一个offer了，尽管这份工作是那么的不尽人意。
+          
 
-​    我呢，现在是三峡大学计算机与信息学院在校2020应届生，为了秋招我从今年5月份开始准备，当时打算的就业方向是Unity3d客户端开发，哎！现在想想当时自己是不是太幼稚了，完全没有考虑过就业形势
+​    今天是十月十二号，阴，天灰蒙蒙的，仿佛和我此时的心境一般，此时我心身具备，虽然在国庆结束的前一天我拿到了第一个offer，可能也是唯一的一个offer了，尽管这份工作是那么的不尽人意。
+
+​    我呢，现在是三峡大学计算机与信息学院在校2020应届生，为了秋招我从今年5月份开始准备，当时打算的就业方向是Unity3d客户端开发，哎！现在想想当时自己是不是太幼稚了，完全没有考虑过就业
         </a>
       </p>
 
@@ -598,9 +612,11 @@ UE4添加预定义模块的方法很简单，我只需打开工程的.Biuld.cs�
           
             
           
-          这里记录一些待解决的程序难题
+          
+
+这里记录一些待解决的程序难题
 1.1.这两种内存分配的方式，有什么不一样，2.初始化的s最后结果有什么不一样
-12345678910111213int main()&#123;	struct a &#123;		int id;		string s;	&#125;;	a *ptr1 = new a();	ptr1-&gt;s = &quot;hello&quot;;	a *ptr2 = (a*)ma
+12345678910111213int main()&#123;	struct a &#123;		int id;		string s;	&#125;;	a *ptr1 = new a();	ptr1-&gt;s = &quot;hello&quot;;	a *ptr2 = (a*)
         </a>
       </p>
 
@@ -648,10 +664,12 @@ UE4添加预定义模块的方法很简单，我只需打开工程的.Biuld.cs�
           
             
           
-          智能指针的出现的目的就是为了解决c++中出现异常安全资源管理问题，智能指针的实现原理是依据RAII机制(Resource Acquisition Is Initialization)，这是的智能指针本质上是一个对象，行为表现上是一个指针。
+          
+
+智能指针的出现的目的就是为了解决c++中出现异常安全资源管理问题，智能指针的实现原理是依据RAII机制(Resource Acquisition Is Initialization)，这是的智能指针本质上是一个对象，行为表现上是一个指针。
 智能指针都是类模板使用时是必须指定类型参数的，如：auto_ptr&lt;int&gt; ptr
 1.auto_ptr
-auto_ptr采用所有权的模式，指针内
+auto_ptr采用所有权的模式，指
         </a>
       </p>
 
@@ -742,7 +760,7 @@ auto_ptr采用所有权的模式，指针内
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+     <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>Github</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
   </div>
   
 
