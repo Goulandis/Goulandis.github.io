@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2021/02/02/%E3%80%90%E6%97%A5%E8%AE%B0%E3%80%91%E5%9C%A8%E8%A1%A1%E5%8F%98%E7%9A%84%E6%97%A5%E5%AD%90/</loc>
+    
+    <lastmod>2021-02-02</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/10/12/%E3%80%90%E6%97%A5%E8%AE%B0%E3%80%91%E5%9C%A8%E6%AD%A6%E6%B1%89%E8%B7%91%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%97%A5%E5%AD%90/</loc>
     
     <lastmod>2021-02-01</lastmod>
@@ -256,7 +263,7 @@
 
   <url>
     <loc>http://yoursite.com/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -264,119 +271,119 @@
   
   <url>
     <loc>http://yoursite.com/tags/C/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/C/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/C/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Linux/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/MySQL/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Lua/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Qt/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/UE4/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Unity3d/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/shell/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E7%A8%8B%E5%BA%8F%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%A4%A7%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E7%A8%8B%E5%BA%8F%E7%BC%96%E7%A8%8B%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E6%B8%B8%E6%88%8F%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -385,28 +392,28 @@
   
   <url>
     <loc>http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E5%BE%85%E8%A7%A3%E5%86%B3/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E6%97%A5%E8%AE%B0/</loc>
-    <lastmod>2021-02-01</lastmod>
+    <lastmod>2021-02-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
