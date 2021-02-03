@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shun.png">
+  <link rel="icon" type="image/png" href="/img/shun.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Goulandis">
+  <meta name="keywords" content="snoopy">
+  <title>【UE4】UE4读写Json文件 - Goulandis</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/vs2015.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Goulandis" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/Post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="【UE4】UE4读写Json文件">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-11-06 21:10" pubdate>
+        November 6, 2019 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【UE4】UE4读写Json文件</h1>
+            
+            <div class="markdown-body">
+              <meta name="referrer" content="no-referrer">
+
+<h1 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h1><p>如果我们想要在UE4中读写Json文件，那么我们必须使UE4包含<font color="red">Json和JsonUtilities</font>这两个模块，那么UE4如何添加模块呢？</p>
+<p>UE4添加预定义模块的方法很简单，我只需打开工程的.Biuld.cs文件，在其中的<code>PublicDependencyModuleNames.AddRange()</code>函数中追加两个模块即可，如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">using</span> UnrealBuildTool;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DATA_sys</span> :</span> ModuleRules<br>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DATA_sys</span><span class="hljs-params">(ReadOnlyTargetRules Target)</span> : <span class="hljs-title">base</span><span class="hljs-params">(Target)</span></span><br><span class="hljs-function">	</span>&#123;<br>		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;<br>	<br>		PublicDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] &#123; <span class="hljs-string">&quot;Core&quot;</span>, <span class="hljs-string">&quot;CoreUObject&quot;</span>, <span class="hljs-string">&quot;Engine&quot;</span>, <span class="hljs-string">&quot;InputCore&quot;</span> ,<span class="hljs-string">&quot;Json&quot;</span>,<span class="hljs-string">&quot;JsonUtilities&quot;</span>&#125;);<br><br>		PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] &#123;  &#125;);<br><br>		<span class="hljs-comment">// Uncomment if you are using Slate UI</span><br>		<span class="hljs-comment">// PrivateDependencyModuleNames.AddRange(new string[] &#123; &quot;Slate&quot;, &quot;SlateCore&quot; &#125;);</span><br>		<br>		<span class="hljs-comment">// Uncomment if you are using online features</span><br>		<span class="hljs-comment">// PrivateDependencyModuleNames.Add(&quot;OnlineSubsystem&quot;);</span><br><br>		<span class="hljs-comment">// To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true</span><br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>如果我们要添加自定义模块就有点麻烦了，当然这里就不赘述了。</p>
+<p>包含这两个模块之后，我们还需要用到<font color="red"> Json.h、JsonObject.h、JsonSerializer.h</font>三个头文件，其中JsonSerializer.h是用于Json序列化与反序列化用的。</p>
+<p>至此我们就可以使用UE4自带的工具进行Json文件的读写工作了。</p>
+<h1 id="二、Json文件写"><a href="#二、Json文件写" class="headerlink" title="二、Json文件写"></a>二、Json文件写</h1><h2 id="1-非序列化写入"><a href="#1-非序列化写入" class="headerlink" title="1.非序列化写入"></a>1.非序列化写入</h2><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">AMysqlJsonCpp::CreatJson</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	FString filePath = FPaths::GameContentDir() + TEXT(<span class="hljs-string">&quot;MysqlConfig/Connect.json&quot;</span>);<br>	FString jsonStr;<br>	TSharedRef&lt;TJsonWriter&lt;&gt;&gt; jsonWriter = TJsonWriterFactory&lt;&gt;::Create(&amp;jsonStr);<br>	jsonWriter-&gt;WriteObjectStart();<br>	jsonWriter-&gt;WriteValue(TEXT(<span class="hljs-string">&quot;server&quot;</span>), TEXT(<span class="hljs-string">&quot;127.0.0.1&quot;</span>));<br>	jsonWriter-&gt;WriteObjectEnd();<br>	jsonWriter-&gt;Close();<br>	FFileHelper::SaveStringToFile(jsonStr, *filePath);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><p><code>FPaths::GameContentDir()</code>返回当前工程目录的Content文件夹的路径，FPaths为UE4的路径读写工具；</p>
+</li>
+<li><p><code>FString jsonStr</code>的作用是用于关联UE4的Json写工具TJsonWriter&lt;&gt;，作为输入流载体，且JsonStr必须是FString类型；</p>
+</li>
+<li><p><code>TShareRef&lt;T&gt;</code>是UE4自身的共享指针类型；</p>
+</li>
+<li><p><code>TJsonWriter&lt;&gt;</code>是UE4专门用于写Json的模板类，其中类型参数通常为TCHAR，其中有多个方法供开发者使用：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Close()</td>
+<td>关闭写工具</td>
+</tr>
+<tr>
+<td>WriterArrayStart()</td>
+<td>开始一个Json数组</td>
+</tr>
+<tr>
+<td>WriterArrayEnd()</td>
+<td>结束一个Json数组</td>
+</tr>
+<tr>
+<td>WriterNull(FString)</td>
+<td>为一个键写一个空值</td>
+</tr>
+<tr>
+<td>WriterObjectStart()</td>
+<td>开始一个Json对象</td>
+</tr>
+<tr>
+<td>WriterObjectEnd()</td>
+<td>结束一个Json对象</td>
+</tr>
+<tr>
+<td>WriterValue(FString,FString/int32/float/bool)</td>
+<td>向Json文件写入键值对</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ul>
+<li><p><code>TJsonWriterFactory&lt;&gt;::Create(FString)</code>是UE4用来生成Json写工具TJsonWriter&lt;&gt;的类，TJsonFactory&lt;&gt;只有一个方法就是Create；</p>
+</li>
+<li><p><code>FFileHelper</code>UE4的文件读写工具，方法<code>SaveStringToFile(TJsonWriter*,FString*)</code>函数的作用就是将Json写工具中的Json数据写到FString字符串中的路径文件中。</p>
+</li>
+</ul>
+<p>使用非序列化方式写入Json时，写入方式需要严格按照Json的语法格式来做，如最开始需要使用WriterObjectStart()创建一个根前括号，即Json语法中最外面一层的<code>&#123;</code>，所有写入结束后需要使用WriterObjectEnd()声明根对象结束，即Json语法中的最外面一层的<code>&#125;</code>，同理数组也需要按对象一样的方法进行处理。如此才能写入一个结构完整的Json文本。</p>
+<h2 id="2-序列化写入"><a href="#2-序列化写入" class="headerlink" title="2.序列化写入"></a>2.序列化写入</h2><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">AMyActor::Test</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	TSharedPtr&lt;FJsonObject&gt; rootObj = MakeShareable(<span class="hljs-keyword">new</span> FJsonObject());<br>	rootObj-&gt;SetStringField(<span class="hljs-string">&quot;root&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>);<br>	TArray&lt;TSharedPtr&lt;FJsonValue&gt;&gt; arrValue;<br>	TSharedPtr&lt;FJsonValueString&gt; tmp = MakeShareable(<span class="hljs-keyword">new</span> FJsonValueString(<span class="hljs-string">&quot;array&quot;</span>));<br>	arrValue.Add(tmp);<br>	rootObj-&gt;SetArrayField(<span class="hljs-string">&quot;array&quot;</span>, arrValue);<br>	FString filePath = FPaths::GameContentDir() + TEXT(<span class="hljs-string">&quot;MysqlConfig/text.json&quot;</span>);<br>	FString jsonStr;<br>	TSharedRef&lt;TJsonWriter&lt;TCHAR&gt;&gt; jsonWriter = TJsonWriterFactory&lt;TCHAR&gt;::Create(&amp;jsonStr);<br>	FJsonSerializer::Serialize(rootObj.ToSharedRef(), jsonWriter);<br>	FFileHelper::SaveStringToFile(jsonStr, *filePath);<br>	UE_LOG(LogTemp, Error, TEXT(<span class="hljs-string">&quot;%s&quot;</span>),*filePath);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>序列化的写入方式则无需考虑按Json的语法结构进行写入，序列化的写入方式是通过一个FJsonObject对象进行Json文本的写入。</p>
+<ul>
+<li>首先使用MakeSahreable()函数创建一个FJsonObject对象并使用共享指针引用。</li>
+<li>然后我们便可以使用FJsonObject对象中的<code>SetArrayField(FString,TArray&lt;FSharePtr&lt;FJsonValue&gt;&gt;)</code>、<code>SetBoolFiled(FString,bool)</code>、<code>SetNumberField(FString,Number)</code>、<code>SetStringField(FString,FString)</code>、<code>SetObjectField(FString,TSharePtr&lt;FJsonObject&gt;)</code>、<code>SetField(FString,TSharePtr&lt;FJsonValue&gt;)</code>等函数向FJsonObject对象中写分别入数组、bool值、数字、字符串、对象和Json键值对。其中数组的写入较为麻烦，我们需要先向创建Json键值对类型共享指针的TArray数组<code>TArray&lt;TSharePtr&lt;FJsonValue&gt;&gt;</code>。并向数组中添加指向FJsonValue对象的共享指针后然后才可以使用SetArrayField进行数组的Json文本写入。</li>
+<li>我们序列化写好的FJsonObject对象需要转化为FString字符串才能向文本中写入数据，FJsonObject转化为FString输入流的方式就是<code>FJsonSerializer::Serialize(TSharePtr&lt;FJsonObject&gt;.ToShareRef(),TSharePtr&lt;FJsonWriter&gt;)</code>;其中<code>TSharePtr&lt;FJsonWriter&gt;</code>和非序列化写入一样需要绑定一个FString作为输入流载体。</li>
+<li>最后就可以通过FFileHelper::SaveStringToFile(FString,*FString)，前一个FString是输入流载体，后一个*FString是Json文件的存储路径。</li>
+</ul>
+<h1 id="三、Json文件读"><a href="#三、Json文件读" class="headerlink" title="三、Json文件读"></a>三、Json文件读</h1><h2 id="1-反序列化读取"><a href="#1-反序列化读取" class="headerlink" title="1.反序列化读取"></a>1.反序列化读取</h2><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function">TArray&lt;FName&gt; <span class="hljs-title">AMysqlJsonCpp::ReadMysqlConnectConfig</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	FString filePath = FPaths::GameContentDir() + TEXT(<span class="hljs-string">&quot;MysqlConfig/Connect.json&quot;</span>);<br>	<span class="hljs-keyword">if</span> (FPaths::FileExists(filePath))<br>	&#123;<br>		FString server;<br>		FString dbName;<br>		FString userId;<br>		FString passwd;<br>		TArray&lt;FName&gt; connectConfig;<br>		FString fileStr;<br>		FFileHelper::LoadFileToString(fileStr, *filePath);<br>		TSharedPtr&lt;FJsonObject&gt; rootObject = MakeShareable(<span class="hljs-keyword">new</span> FJsonObject());<br>		TSharedRef&lt;TJsonReader&lt;&gt;&gt; jsonReader = TJsonReaderFactory&lt;&gt;::Create(fileStr);<br>		<span class="hljs-keyword">if</span> (FJsonSerializer::Deserialize(jsonReader, rootObject))<br>		&#123;<br>			server = rootObject-&gt;GetStringField(<span class="hljs-string">&quot;server&quot;</span>);<br>			dbName = rootObject-&gt;GetStringField(<span class="hljs-string">&quot;dbName&quot;</span>);<br>			userId = rootObject-&gt;GetStringField(<span class="hljs-string">&quot;userId&quot;</span>);<br>			passwd = rootObject-&gt;GetStringField(<span class="hljs-string">&quot;passwd&quot;</span>);<br>		&#125;<br>		connectConfig.Add(FName(*server));<br>		connectConfig.Add(FName(*dbName));<br>		connectConfig.Add(FName(*userId));<br>		connectConfig.Add(FName(*passwd));<br>	&#125;<br><br>	<span class="hljs-keyword">return</span> TArray&lt;FName&gt;();<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>首先Json文本的读取需要将Json文本以字符串的形式读入到一个FString的输入流载体中；</li>
+<li>然后我们需要将这个输入流载体绑定到TJsonReader&lt;&gt;读出工具上；</li>
+<li>然后使用<code>FJsonSerializer::Deserialize(TSharePtr&lt;TJsonReader&lt;&gt;&gt;,TSahrePtr&lt;FJsonObject&gt;)</code>将输入流载体的Json数据反序列化到FJsonObject对象中；</li>
+<li>最后我们就可以使用FJsonObject对象中的<code>GetArrayField(FString)</code>、<code>GetBoolFiled(FString)</code>、<code>GetNumberField(FString)</code>、<code>GetStringField(FString)</code>、<code>GetObjectField(FString)</code>、<code>GetField(FString)</code>等方法从Json对象中读取指定键的值了。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/">知识记录</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/UE4/">UE4</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%BF%9E%E6%8E%A5MySQL/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【UE4】UE4连接MySQL</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/10/28/%E3%80%90UE4%E3%80%91UE4%E8%93%9D%E5%9B%BE%E5%9F%BA%E7%A1%80/">
+                        <span class="hidden-mobile">【UE4】UE4蓝图基础</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>Github</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

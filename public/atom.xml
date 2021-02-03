@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Goulandis</title>
+  <icon>http://yoursite.com/icon.png&#39;</icon>
+  <subtitle>个人博客</subtitle>
+  <link href="http://yoursite.com/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2021-02-03T02:56:09.709Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Goulandis</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【C++】C++ PremierReadNote</title>
+    <link href="http://yoursite.com/2021/02/03/%E3%80%90C++%E3%80%91C++%20PremierReadNote/"/>
+    <id>http://yoursite.com/2021/02/03/%E3%80%90C++%E3%80%91C++%20PremierReadNote/</id>
+    <published>2021-02-03T02:52:44.000Z</published>
+    <updated>2021-02-03T02:56:09.709Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;C-Primer-阅读笔记&quot;&gt;&lt;a href=&quot;#C-Primer-阅读笔记&quot; class=&quot;headerlink&quot; title=&quot;C++ Primer 阅读笔记&quot;&gt;&lt;/a&gt;C++ Primer 阅读笔记&lt;/h1&gt;&lt;hr&gt;</summary>
+    
+    
+    
+    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【Dev】DevExpress应用</title>
+    <link href="http://yoursite.com/2021/02/03/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8/"/>
+    <id>http://yoursite.com/2021/02/03/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8/</id>
+    <published>2021-02-03T02:33:53.000Z</published>
+    <updated>2021-02-03T03:08:03.476Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h2 id=&quot;一、大纲&quot;&gt;&lt;a href=&quot;#一、大纲&quot; class=&quot;headerlink&quot; title=&quot;一、大纲&quot;&gt;&lt;/a&gt;一、大纲&lt;/h2&gt;&lt;p&gt;最近使用DevExpress做C/S开发碰到了一些问题，在解决问题的同时在这里做一下记录，下面列出涉及到技术点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Dev框架下GridControl与GridView&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用模板列动态替换GridView的指定列&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GridView分组并去掉列名的前缀&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FPT服务器文件预览与下载&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;单元格添加按钮并添加自定义点击事件&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GridView数据导出到Excel&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;向Word模板中写数据&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="Dev" scheme="http://yoursite.com/tags/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【日记】在衡变的日子</title>
+    <link href="http://yoursite.com/2021/02/02/%E3%80%90%E6%97%A5%E8%AE%B0%E3%80%91%E5%9C%A8%E8%A1%A1%E5%8F%98%E7%9A%84%E6%97%A5%E5%AD%90/"/>
+    <id>http://yoursite.com/2021/02/02/%E3%80%90%E6%97%A5%E8%AE%B0%E3%80%91%E5%9C%A8%E8%A1%A1%E5%8F%98%E7%9A%84%E6%97%A5%E5%AD%90/</id>
+    <published>2021-02-02T12:32:12.000Z</published>
+    <updated>2021-02-02T13:51:19.028Z</updated>
+    
+    
+    <summary type="html">绕路吧！</summary>
+    
+    
+    
+    <category term="日记" scheme="http://yoursite.com/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+    <category term="大事件" scheme="http://yoursite.com/tags/%E5%A4%A7%E4%BA%8B%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【UE4】UE4联级粒子系统</title>
+    <link href="http://yoursite.com/2019/11/17/%E3%80%90UE4%E3%80%91UE4%E8%81%94%E7%BA%A7%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://yoursite.com/2019/11/17/%E3%80%90UE4%E3%80%91UE4%E8%81%94%E7%BA%A7%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/</id>
+    <published>2019-11-17T12:36:30.000Z</published>
+    <updated>2021-02-01T13:33:45.196Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;一、粒子系统的一些基本概念&quot;&gt;&lt;a href=&quot;#一、粒子系统的一些基本概念&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【UE4】UE4组件</title>
+    <link href="http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/"/>
+    <id>http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/</id>
+    <published>2019-11-06T13:10:52.000Z</published>
+    <updated>2021-02-01T13:33:53.153Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;不同的蓝图脚本拥有不同的组件集，蓝图脚本的组件集过于庞大，这里只对自己使用过的组件进行列举。&lt;/p&gt;
+&lt;p&gt;&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【UE4】UE4连接MySQL</title>
+    <link href="http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%BF%9E%E6%8E%A5MySQL/"/>
+    <id>http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%BF%9E%E6%8E%A5MySQL/</id>
+    <published>2019-11-06T13:10:30.000Z</published>
+    <updated>2021-02-01T13:33:37.109Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;一、使用MySQLIntegration插件连接Mysql&quot;&gt;&lt;a href=&quot;#一、使用MySQLIntegration插件连接Mysql&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【UE4】UE4读写Json文件</title>
+    <link href="http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%AF%BB%E5%86%99Json%E6%96%87%E4%BB%B6/"/>
+    <id>http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%AF%BB%E5%86%99Json%E6%96%87%E4%BB%B6/</id>
+    <published>2019-11-06T13:10:15.000Z</published>
+    <updated>2021-02-01T13:32:55.185Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;一、准备工作&quot;&gt;&lt;a href=&quot;#一、准备工作&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【UE4】UE4蓝图基础</title>
+    <link href="http://yoursite.com/2019/10/28/%E3%80%90UE4%E3%80%91UE4%E8%93%9D%E5%9B%BE%E5%9F%BA%E7%A1%80/"/>
+    <id>http://yoursite.com/2019/10/28/%E3%80%90UE4%E3%80%91UE4%E8%93%9D%E5%9B%BE%E5%9F%BA%E7%A1%80/</id>
+    <published>2019-10-28T13:17:08.000Z</published>
+    <updated>2021-02-01T13:22:23.104Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;一、蓝图可视化脚本与蓝图系统&quot;&gt;&lt;a href=&quot;#一、蓝图可视化脚本与蓝图系统&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【MyQSL】MyQSL存储过程</title>
+    <link href="http://yoursite.com/2019/10/21/%E3%80%90MyQSL%E3%80%91MyQSL%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/"/>
+    <id>http://yoursite.com/2019/10/21/%E3%80%90MyQSL%E3%80%91MyQSL%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/</id>
+    <published>2019-10-21T13:12:42.000Z</published>
+    <updated>2021-02-01T13:32:24.275Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;1-什么是存储过程&quot;&gt;&lt;a href=&quot;#1-什么是存储过程&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【UE4】基础</title>
+    <link href="http://yoursite.com/2019/10/14/%E3%80%90UE4%E3%80%91UE4%E5%9F%BA%E7%A1%80/"/>
+    <id>http://yoursite.com/2019/10/14/%E3%80%90UE4%E3%80%91UE4%E5%9F%BA%E7%A1%80/</id>
+    <published>2019-10-14T03:39:39.000Z</published>
+    <updated>2019-11-18T07:25:19.000Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>【日记】在武汉跑秋招的日子</title>
+    <link href="http://yoursite.com/2019/10/12/%E3%80%90%E6%97%A5%E8%AE%B0%E3%80%91%E5%9C%A8%E6%AD%A6%E6%B1%89%E8%B7%91%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%97%A5%E5%AD%90/"/>
+    <id>http://yoursite.com/2019/10/12/%E3%80%90%E6%97%A5%E8%AE%B0%E3%80%91%E5%9C%A8%E6%AD%A6%E6%B1%89%E8%B7%91%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%97%A5%E5%AD%90/</id>
+    <published>2019-10-12T09:06:06.000Z</published>
+    <updated>2021-02-01T15:28:31.122Z</updated>
+    
+    
+    <summary type="html">这里不可以看哦！</summary>
+    
+    
+    
+    <category term="日记" scheme="http://yoursite.com/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+    <category term="大事件" scheme="http://yoursite.com/tags/%E5%A4%A7%E4%BA%8B%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【待解决】一些待解决的难题</title>
+    <link href="http://yoursite.com/2019/10/10/%E3%80%90%E5%BE%85%E8%A7%A3%E5%86%B3%E3%80%91%E4%B8%80%E4%BA%9B%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%9A%BE%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/10/10/%E3%80%90%E5%BE%85%E8%A7%A3%E5%86%B3%E3%80%91%E4%B8%80%E4%BA%9B%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%9A%BE%E9%A2%98/</id>
+    <published>2019-10-10T14:15:48.000Z</published>
+    <updated>2021-02-01T13:35:05.375Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;这里记录一些待解决的程序难题&lt;/p&gt;
+&lt;h1 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="待解决" scheme="http://yoursite.com/categories/%E5%BE%85%E8%A7%A3%E5%86%B3/"/>
+    
+    
+    <category term="程序问题" scheme="http://yoursite.com/tags/%E7%A8%8B%E5%BA%8F%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【C++】C++中的四种个智能指针.md</title>
+    <link href="http://yoursite.com/2019/10/08/%E3%80%90C++%E3%80%91C++%E4%B8%AD%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%B8%AA%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"/>
+    <id>http://yoursite.com/2019/10/08/%E3%80%90C++%E3%80%91C++%E4%B8%AD%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%B8%AA%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</id>
+    <published>2019-10-08T14:24:31.000Z</published>
+    <updated>2021-02-01T13:30:48.504Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;智能指针的出现的目的就是为了解决c++中出现异常安全资源管理问题，智能指针的实现原理是依据RAII机制(Resource Acquisition Is</summary>
+        
+      
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【算法】一些牛逼轰轰的算法记录</title>
+    <link href="http://yoursite.com/2019/10/08/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E4%B8%80%E4%BA%9B%E7%89%9B%E9%80%BC%E8%BD%B0%E8%BD%B0%E7%9A%84%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2019/10/08/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E4%B8%80%E4%BA%9B%E7%89%9B%E9%80%BC%E8%BD%B0%E8%BD%B0%E7%9A%84%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95/</id>
+    <published>2019-10-08T14:07:36.000Z</published>
+    <updated>2021-02-01T13:35:50.233Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;1-判断点是否在三角形内&quot;&gt;&lt;a href=&quot;#1-判断点是否在三角形内&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【C++】C++STL标准模板库</title>
+    <link href="http://yoursite.com/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/"/>
+    <id>http://yoursite.com/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/</id>
+    <published>2019-10-06T02:20:37.000Z</published>
+    <updated>2021-02-01T13:26:28.526Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;一、STL的基本概念&quot;&gt;&lt;a href=&quot;#一、STL的基本概念&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【C++】C++函数模板的实现机制剖析</title>
+    <link href="http://yoursite.com/2019/10/03/%E3%80%90C++%E3%80%91C++%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E5%89%96%E6%9E%90/"/>
+    <id>http://yoursite.com/2019/10/03/%E3%80%90C++%E3%80%91C++%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E5%89%96%E6%9E%90/</id>
+    <published>2019-10-03T12:14:23.000Z</published>
+    <updated>2021-02-01T13:27:39.525Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;函数模板的实现机制剖析&quot;&gt;&lt;a href=&quot;#函数模板的实现机制剖析&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【C】C的typedef的妙用</title>
+    <link href="http://yoursite.com/2019/10/03/%E3%80%90C%E3%80%91C%E7%9A%84typedef%E7%9A%84%E5%A6%99%E7%94%A8/"/>
+    <id>http://yoursite.com/2019/10/03/%E3%80%90C%E3%80%91C%E7%9A%84typedef%E7%9A%84%E5%A6%99%E7%94%A8/</id>
+    <published>2019-10-03T01:53:37.000Z</published>
+    <updated>2021-02-01T13:26:19.697Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;1-自定义数组类型&quot;&gt;&lt;a href=&quot;#1-自定义数组类型&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="C" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【C++】C++面向对象模型初探</title>
+    <link href="http://yoursite.com/2019/10/01/%E3%80%90C++%E3%80%91C++%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E5%88%9D%E6%8E%A2/"/>
+    <id>http://yoursite.com/2019/10/01/%E3%80%90C++%E3%80%91C++%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E5%88%9D%E6%8E%A2/</id>
+    <published>2019-10-01T13:58:43.000Z</published>
+    <updated>2021-02-01T13:30:31.798Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;1-成员的分开存储&quot;&gt;&lt;a href=&quot;#1-成员的分开存储&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【shell】shell基础</title>
+    <link href="http://yoursite.com/2019/09/30/%E3%80%90shell%E3%80%91shell%E5%9F%BA%E7%A1%80/"/>
+    <id>http://yoursite.com/2019/09/30/%E3%80%90shell%E3%80%91shell%E5%9F%BA%E7%A1%80/</id>
+    <published>2019-09-30T01:02:57.000Z</published>
+    <updated>2021-02-01T13:32:49.325Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;由于本文内有大量的markdwon转义未处理，导致远程同步不通过，所以本文引入外部ULR预览&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【C++】高级</title>
+    <link href="http://yoursite.com/2019/09/14/%E3%80%90C++%E3%80%91C++%E9%AB%98%E7%BA%A7/"/>
+    <id>http://yoursite.com/2019/09/14/%E3%80%90C++%E3%80%91C++%E9%AB%98%E7%BA%A7/</id>
+    <published>2019-09-14T01:01:06.000Z</published>
+    <updated>2021-02-01T13:27:20.343Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;一、类&quot;&gt;&lt;a href=&quot;#一、类&quot; class=&quot;headerlink&quot; title=&quot;一、类&quot;&gt;&lt;/a&gt;一、类&lt;/h1&gt;&lt;h2 id=&quot;1-浅拷贝与深拷贝&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+</feed>
