@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-02-02T13:51:19.028Z</updated>
+  <updated>2021-02-03T02:54:29.907Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【C++】C++ PremierReadNote</title>
+    <link href="http://yoursite.com/2021/02/03/%E3%80%90C++%E3%80%91C++%20PremierReadNote/"/>
+    <id>http://yoursite.com/2021/02/03/%E3%80%90C++%E3%80%91C++%20PremierReadNote/</id>
+    <published>2021-02-03T02:52:44.000Z</published>
+    <updated>2021-02-03T02:54:29.907Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h1 id=&quot;C-Primer-阅读笔记&quot;&gt;&lt;a href=&quot;#C-Primer-阅读笔记&quot; class=&quot;headerlink&quot; title=&quot;C++ Primer 阅读笔记&quot;&gt;&lt;/a&gt;C++ Primer 阅读笔记&lt;/h1&gt;&lt;hr&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>【Dev】DevExpress应用</title>
+    <link href="http://yoursite.com/2021/02/03/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8/"/>
+    <id>http://yoursite.com/2021/02/03/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8/</id>
+    <published>2021-02-03T02:33:53.000Z</published>
+    <updated>2021-02-03T02:54:52.985Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;h2 id=&quot;一、大纲&quot;&gt;&lt;a href=&quot;#一、大纲&quot; class=&quot;headerlink&quot; title=&quot;一、大纲&quot;&gt;&lt;/a&gt;一、大纲&lt;/h2&gt;&lt;p&gt;最近使用DevExpress做C/S开发碰到了一些问题，在解决问题的同时在这里做一下记录，下面列出涉及到技术点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Dev框架下GridControl与GridView&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用模板列动态替换GridView的指定列&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GridView分组并去掉列名的前缀&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FPT服务器文件预览与下载&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;单元格添加按钮并添加自定义点击事件&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GridView数据导出到Excel&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;向Word模板中写数据&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="Dev" scheme="http://yoursite.com/tags/Dev/"/>
+    
+  </entry>
   
   <entry>
     <title>【日记】在衡变的日子</title>
@@ -469,61 +516,6 @@
     
     
     <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="C++" scheme="http://yoursite.com/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【C++】C++中的四种类型转换</title>
-    <link href="http://yoursite.com/2019/09/12/%E3%80%90C++%E3%80%91C++%E4%B8%AD%E7%9A%84%E5%9B%9B%E7%A7%8D%E8%BD%AC%E6%8D%A2%E7%B1%BB%E5%9E%8B/"/>
-    <id>http://yoursite.com/2019/09/12/%E3%80%90C++%E3%80%91C++%E4%B8%AD%E7%9A%84%E5%9B%9B%E7%A7%8D%E8%BD%AC%E6%8D%A2%E7%B1%BB%E5%9E%8B/</id>
-    <published>2019-09-12T01:43:34.000Z</published>
-    <updated>2021-02-01T13:31:01.805Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;p&gt;C++提供四种类型转换：const_cast、static_cast、dynamic_cast、reinterpret_cast&lt;/p&gt;
-&lt;h1</summary>
-        
-      
-    
-    
-    
-    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="C++" scheme="http://yoursite.com/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【C++】普通全局变量、静态全局变量、普通局部变量与静态局部变量</title>
-    <link href="http://yoursite.com/2019/09/11/%E3%80%90C++%E3%80%91%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E3%80%81%E9%9D%99%E6%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E3%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E4%B8%8E%E9%9D%99%E6%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/"/>
-    <id>http://yoursite.com/2019/09/11/%E3%80%90C++%E3%80%91%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E3%80%81%E9%9D%99%E6%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E3%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E4%B8%8E%E9%9D%99%E6%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/</id>
-    <published>2019-09-11T12:58:55.000Z</published>
-    <updated>2021-02-01T13:31:12.925Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h1 id=&quot;1-普通全局变量&quot;&gt;&lt;a href=&quot;#1-普通全局变量&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
     
     
     <category term="C++" scheme="http://yoursite.com/tags/C/"/>
