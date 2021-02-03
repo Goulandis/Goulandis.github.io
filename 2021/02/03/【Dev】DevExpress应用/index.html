@@ -246,7 +246,7 @@
 <h3 id="2-GridControl输入数据到GridView的原理"><a href="#2-GridControl输入数据到GridView的原理" class="headerlink" title="2.GridControl输入数据到GridView的原理"></a>2.GridControl输入数据到GridView的原理</h3><p>GridControl的数据刷入GridView的操作由Dev框架执行，我们需要做的只是把数据绑定到GridControl.DataSource中即可。</p>
 <p>只有当GridView中存在与GridControl数据源对应列时，GridControl才能将对应列的数据刷入GridView的对应列中，这里的对应列指的是GridView中列的<code>FiledName</code>的值与GridControl数据源的列名相同，且大小写敏感。</p>
 <p>在GridView的列属性中有三个极为重要的属性：</p>
-<p><img src="/2021/02/03/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8/Downloads/Dev应用/img/Snipaste_2020-12-17_19-20-19.png" srcset="/img/loading.gif"></p>
+<p><img src="/2021/02/03/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8%5CSnipaste_2020-12-17_19-20-19.png" srcset="/img/loading.gif"></p>
 <ul>
 <li><p>Name：列在程序中操作的标识符，类似变量名，对列的操作都由它来引用，如：修改colfilename列的列宽</p>
 <figure class="highlight c#"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c#">colfilename.Width = <span class="hljs-number">300</span>;<br></code></pre></div></td></tr></table></figure></li>
