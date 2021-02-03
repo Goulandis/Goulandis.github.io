@@ -242,11 +242,13 @@
 </ul>
 <a id="more"></a>
 
-<h2 id="二、Dev框架下的GridControl和GridView"><a href="#二、Dev框架下的GridControl和GridView" class="headerlink" title="二、Dev框架下的GridControl和GridView"></a>二、Dev框架下的GridControl和GridView</h2><h3 id="1-GridControl和GridView的关系"><a href="#1-GridControl和GridView的关系" class="headerlink" title="1.GridControl和GridView的关系"></a>1.GridControl和GridView的关系</h3><p>Dev框架下GridControl负责操作数据，GridView负责展示数据，GridControl是GridView的容器，一个GridControl可以容纳多个GridView，在GridView中的任何数据操作都不会影响到GridControl中的源数据，即当我们将GridControl中数据重新刷入GridView时，GridView中数据操作会被清除，所以如果我们有要在本地展示的数据则需要在GridControl刷数据进入GridView的时候重新再刷入一次本地数据。</p>
+<h2 id="二、Dev框架下的GridControl和GridView"><a href="#二、Dev框架下的GridControl和GridView" class="headerlink" title="二、Dev框架下的GridControl和GridView"></a>二、Dev框架下的GridControl和GridView</h2><p><img src="https://goulandis.picgo.com/img/Image_20201222193848.png" srcset="/img/loading.gif"></p>
+<h3 id="1-GridControl和GridView的关系"><a href="#1-GridControl和GridView的关系" class="headerlink" title="1.GridControl和GridView的关系"></a>1.GridControl和GridView的关系</h3><p>Dev框架下GridControl负责操作数据，GridView负责展示数据，GridControl是GridView的容器，一个GridControl可以容纳多个GridView，在GridView中的任何数据操作都不会影响到GridControl中的源数据，即当我们将GridControl中数据重新刷入GridView时，GridView中数据操作会被清除，所以如果我们有要在本地展示的数据则需要在GridControl刷数据进入GridView的时候重新再刷入一次本地数据。</p>
 <h3 id="2-GridControl输入数据到GridView的原理"><a href="#2-GridControl输入数据到GridView的原理" class="headerlink" title="2.GridControl输入数据到GridView的原理"></a>2.GridControl输入数据到GridView的原理</h3><p>GridControl的数据刷入GridView的操作由Dev框架执行，我们需要做的只是把数据绑定到GridControl.DataSource中即可。</p>
 <p>只有当GridView中存在与GridControl数据源对应列时，GridControl才能将对应列的数据刷入GridView的对应列中，这里的对应列指的是GridView中列的<code>FiledName</code>的值与GridControl数据源的列名相同，且大小写敏感。</p>
 <p>在GridView的列属性中有三个极为重要的属性：</p>
-<p><img src="/2021/02/03/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8%5CSnipaste_2020-12-17_19-20-19.png" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/Snipaste_2020-12-17_19-20-19.png" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/image-20210203152634176.png" srcset="/img/loading.gif" alt="image-20210203152634176"></p>
 <ul>
 <li><p>Name：列在程序中操作的标识符，类似变量名，对列的操作都由它来引用，如：修改colfilename列的列宽</p>
 <figure class="highlight c#"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c#">colfilename.Width = <span class="hljs-number">300</span>;<br></code></pre></div></td></tr></table></figure></li>
