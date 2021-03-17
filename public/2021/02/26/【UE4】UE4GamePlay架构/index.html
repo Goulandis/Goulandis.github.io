@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shun.png">
+  <link rel="icon" type="image/png" href="/img/shun.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Goulandis">
+  <meta name="keywords" content="snoopy">
+  <title>【UE4】GamePlay架构 - Goulandis</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/vs2015.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Goulandis" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/Post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="【UE4】GamePlay架构">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-26 09:37" pubdate>
+        February 26, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      43
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【UE4】GamePlay架构</h1>
+            
+            <div class="markdown-body">
+              <meta name="referrer" content="no-referrer">
+
+<h1 id="一、整体框架"><a href="#一、整体框架" class="headerlink" title="一、整体框架"></a>一、整体框架</h1><p>首先来看一下整体框架：<br>)</p>
+<a id="more"></a>
+
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210226143303.png" srcset="/img/loading.gif"></p>
+<p><font color="red"> 红色部分为主体，从右往左为组合关系，至上而下为派生关系。</font></p>
+<p>在整个UE宇宙的构成中，UEngine就类似化学元素，UObject就类似物质，物质通过演化便衍生出了物体—AActor和UActorComponent，AActor继续演化就出现了生物APawn，人—ACharacter，于是世界便有了信息—AInfo，规则—AGameMode，大量的物体、生物组合在一起便形成了大陆—ULevel，不同的大陆组合在一起便形成了世界—UWorld，世界有着自己的信息—FWorldContext和客观规律—UGameInstance。</p>
+<p>而在UE这个宇宙有很多个Word，如编辑时的World，编辑时运行的World，运行时的World等等，查看源码就可知道UE宇宙有五大世界。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">namespace</span> EWorldType<br>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Type</span></span><br><span class="hljs-class">	&#123;</span><br>		None,		<span class="hljs-comment">// An untyped world, in most cases this will be the vestigial worlds of streamed in sub-levels</span><br>		Game,		<span class="hljs-comment">// The game world</span><br>		Editor,		<span class="hljs-comment">// A world being edited in the editor</span><br>		PIE,		<span class="hljs-comment">// A Play In Editor world</span><br>		Preview,	<span class="hljs-comment">// A preview world for an editor tool</span><br>		Inactive	<span class="hljs-comment">// An editor world that was loaded but not currently being edited in the level editor</span><br>	&#125;;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>首先我们先了解一下这些类的具体作用，然后再细致的了解各个类。</p>
+<h2 id="1-UEngine"><a href="#1-UEngine" class="headerlink" title="1.UEngine"></a>1.UEngine</h2><p>UEngine类是UE的基础，UEngine提供一些最底层的交互—与操作系统的交互，而根据不同的运行模式UE与操作系统的交互模式又有少许不同，所以UEngine又派生出了UGameEngine和UEditerEngine来负责不同运行模式下的交互模式。</p>
+<p>其中有一个很重要的全局指针GEngine，通过GEngine可以访问各种UE的全局资源，同时GEngine还提供多线程访问能力。</p>
+<p>关于UEngine的资料实在是太少了，官方文档中对UEngine的描述也就一句话，对UEngine的理解也就止步于此了。</p>
+<h2 id="2-UObject"><a href="#2-UObject" class="headerlink" title="2.UObject"></a>2.UObject</h2><p>UObject是构成UE世界最基础的物质，所以UObject提供供UE世界运行的最基本的功能：</p>
+<ul>
+<li>Garbage collection：垃圾收集</li>
+<li>Reference updating：引用自动更新</li>
+<li>Reflection：反射</li>
+<li>Serialization：序列化</li>
+<li>Automatic updating of default property changes：自动检测默认变量的更改</li>
+<li>Automatic property initialization：自动变量初始化</li>
+<li>Automatic editor integration：和虚幻引擎编辑器的自动交互</li>
+<li>Type information available at runtime：运行时类型识别</li>
+<li>Network replication：网络复制</li>
+</ul>
+<p>在之后再深入浅出的讲解各个功能。</p>
+<h2 id="3-AActor"><a href="#3-AActor" class="headerlink" title="3.AActor"></a>3.AActor</h2><p>AActor是派生自UObject的一个及其重要的类，AActor在UObject的基础上再进一步提供了：</p>
+<ul>
+<li>Replication：网络复制</li>
+<li>Spawn：动态创建</li>
+<li>Tick：每帧运行</li>
+</ul>
+<p>Replicatoin使AActor有了分裂复制的生育能力，Spawn使AActor在UE世界中出生，在UE4世界中死去，Tick使AActor有了心跳，AActor便组成了丰富多彩的UE世界。</p>
+<p>AActor拥有一个庞大的子孙族群，ALevelScriptActor、ANavigationObjectBase、APawn、AController、AInfo这些都是AActor的直系后代，而这些后代也都各自拥有自己的庞大分支族群，构成了UE世界中最强大的种族AActor。</p>
+<h3 id="ALevelScriptActor"><a href="#ALevelScriptActor" class="headerlink" title="ALevelScriptActor"></a>ALevelScriptActor</h3><p>ALevelScriptActor在官方文档中的表述就是ULevelScriptBlueprint生成的类的基类，通过名称我们就很容易联想到关卡蓝图，没错ULevelScriptBlueprint就是我们最常用的关卡蓝图，ULevelScriptBlueprint继承自UObject，所以ULevelScriptBlueprint的子类是一个多继承的虚继承类，而ALevelScriptActor就为其提供AActor的能力。</p>
+<p>在官方文档中有提及默认关卡蓝图是可以通过DefualtGame.ini配置文件替换成自定义关卡蓝图的，具体使用方法在后面在探讨。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210309211442.png" srcset="/img/loading.gif"></p>
+<h3 id="ANavigationObjectBase"><a href="#ANavigationObjectBase" class="headerlink" title="ANavigationObjectBase"></a>ANavigationObjectBase</h3><p>ANavigationObjectBase的资料实在是少的可怜，就连官方文档也是没有一个字的描述，源码也是相当简单，总共就70行，由ANavigationObjectBase是APlayerState的基类，和它继承的接口INavAgentInterface可以猜测ANavigationObjectBase应该和网络复制有关，具体细节留到以后更熟悉UE4了再深入探讨吧。</p>
+<h3 id="APlayerStart"><a href="#APlayerStart" class="headerlink" title="APlayerStart"></a>APlayerStart</h3><p>APlayerStart的作用就是记录APawn在游戏开始时生成的Position与Rotation信息，UE设计APlayerStart的初忠就是想让游戏的关卡设十师和场景设计师的工作分离开来，也就解耦合。那么，如果Level中不存在APlayerStart ，APawn 会出生在哪是呢？答案是世界原点(0，0，0)</p>
+<h3 id="APawn"><a href="#APawn" class="headerlink" title="APawn"></a>APawn</h3><p>APawn在AActor的基础上再度添加了：</p>
+<ul>
+<li>被Controller控制</li>
+<li>PhysicsCollision：物理碰撞</li>
+<li>MovementInput：移动响应接口</li>
+</ul>
+<p>等能力，有了MovementInput接口APawn就拥有了可运动的能力，这里UE的逻辑划分十分精妙，UE将一个可运动的物体巧妙地划分成了APwan和AController，APawn重点表现在物体，而这个物体具备运动能力，但是自身不具备运动技巧；而AController这是控制APawn运动地大脑，用来控制APawn如何运动，如果把APawn比作是提线木偶，那么AController就是控制木偶运动地线。</p>
+<p>到了APawn这一代，AActor的衍化之旅开始衍化出现于玩家间交互的能力，而这之中的佼佼者便是ACharacter。</p>
+<h3 id="ACharacter"><a href="#ACharacter" class="headerlink" title="ACharacter"></a>ACharacter</h3><p>ACharacter是APwan的特化加强版，在UE世界中可以称之为“人”，ACharacter是一个专门为人形角色定制的APawn，自带CharacterMovement组件，可以使人形角色像人一样行走。</p>
+<h3 id="ADefaultPawn"><a href="#ADefaultPawn" class="headerlink" title="ADefaultPawn"></a>ADefaultPawn</h3><p>最初始的APawn使最基本的APawn类，只提供APawn的一些基本能力，而没有提供支持这些能力的组件，而在具体实际使用情况中我们使用的APawn应该还需要组合一些其他的能力，以适应不同的场景，如：我们知道APawn可以运动，但在实际场景中我们是要确定这个APawn是因该直立行走还是爬行，是用轮子行驶还是用翅膀飞行，APawn在玩家眼里应该长什么样子，是人还是蛇，是因该左球形碰撞还是应该做方形碰撞，这些都是APawn不具备的能力，这时ADefaultPawn便出现了，ADefaultPawn自带DefualtPawnMovement、CollisionComponent、StaticMeshCompnent三件套，为ADefaultPawn提供了默认的场景表现。</p>
+<h3 id="ASpectatorPawn"><a href="#ASpectatorPawn" class="headerlink" title="ASpectatorPawn"></a>ASpectatorPawn</h3><p>在游戏中存在一种特殊的玩家—观战玩家，这类玩家不需要具体表现形式，只需要一些相机的漫游能力，于是ASpectatorPawn出现了，ASpectatorPawn继承自ADefaultPawn，ASpectatorPawn提供了一个基本的USpectatorPawnMovement（不带重力漫游），并关闭了StaticMesh的显示，碰撞也设置到了“Spectator”通道。</p>
+<h3 id="AController"><a href="#AController" class="headerlink" title="AController"></a>AController</h3><p>AController就是控制APawn运动的大脑了，ACtroller负责处理一些直接与玩家交互的控制逻辑，AController是从AActor派生的与APawn同级的子类，在UE的设计中，在同一时刻一个AController和一个APawn之间是1:1的关系，AController可以在多个APawn之间通过Possess/UnPossess切换。AController有两种控制APawn的方式，一种是AController直接附在APawn的身上控制APawn的移动，如驾驶汽车，一种是以上帝的视角控制APawn的移动，如控制第三人称的角色。</p>
+<h3 id="APlayerController"><a href="#APlayerController" class="headerlink" title="APlayerController"></a>APlayerController</h3><p>APlayerController是由AController派生出来专门用于负责玩家交互逻辑的AController，APlayerController提供了：</p>
+<ul>
+<li>Camera管理</li>
+<li>Input输入响应</li>
+<li>UPlayer关联</li>
+<li>HUD显示</li>
+<li>Level切换</li>
+<li>Voice音源监听</li>
+</ul>
+<p>这些能力。</p>
+<h3 id="AAIController"><a href="#AAIController" class="headerlink" title="AAIController"></a>AAIController</h3><p>在一个游戏中有玩家控制的角色也可以有NPC，那么NPC的行动逻辑有谁来控制呢？答案就是AAIController，AAIController与APlayerController完全不同，因为一个NPC不要管理Camera，不需要响应玩家的输入，不需要关联UPlayer，不需要显示HUD，不需要监听音源，只有Level切换可能会在少数情况下需要，那么AAIController因该做什么呢？UE为它设计的是这些事：</p>
+<ul>
+<li>Navigation：自动寻路</li>
+<li>AI Component：用于启动运行行为树，使用黑板数据</li>
+<li>Task系统：让AI去完成一些任务</li>
+</ul>
+<p>当然一个游戏中是至少需要一个APlayerController的，但是可以没有AAIController。</p>
+<h3 id="AInfo"><a href="#AInfo" class="headerlink" title="AInfo"></a>AInfo</h3><p>AInfo是一些数据保存类的基类，AInfo不需要运动和碰撞，也不需要物理表现，仅仅只是保存数据，所以UE在AInfo中将这些功能都隐藏了，之所以不直接继承自UObject，而继承自AActor是因为游戏数据是需要具备网络复制的能力的，而UObject不具备这个能力</p>
+<h3 id="AWordSetting"><a href="#AWordSetting" class="headerlink" title="AWordSetting"></a>AWordSetting</h3><p>AWordSetting继承自AInfo用来配置和保存一些Level配置，主要用于配置Level的GameMode信息，光照信息，导航系统，声音系统，LOD系统，物理加速度等关卡信息。由此可以知道一个Level对应一个AWordSetting，但是一个AWordSetting可以应用在多个Level上。</p>
+<h3 id="AGameMode"><a href="#AGameMode" class="headerlink" title="AGameMode"></a>AGameMode</h3><p>AGameMode就是用于配置AWorldSetting中的GameMode属性的。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210310162744.png" srcset="/img/loading.gif"></p>
+<p>在UE的设计中AGameMode就是游戏世界的逻辑，及整个游戏的玩法规则，而在实际情况中一个游戏既可以只有一个玩法也可以有多种玩法规则，所以AWordSetting与AGameMode的对应关系也是一个AWorldSetting只能对应一个AGameMode，而一个AGameMode可以对应多个AWorldSetting。那么AGameMode应该负责哪些逻辑呢？UE是这么规定的：</p>
+<ul>
+<li>Class登记：记录GameMode中各种类的信息</li>
+<li>Spawn：创建Pawn和PlayerController等</li>
+<li>游戏进度：游戏暂停重启的逻辑</li>
+<li>过场动画逻辑</li>
+<li>多人游戏的步调同步</li>
+</ul>
+<h3 id="AGameState"><a href="#AGameState" class="headerlink" title="AGameState"></a>AGameState</h3><p>AGameState用于保存游戏数据，如任务进度，游戏活动等。</p>
+<h3 id="APlayerState"><a href="#APlayerState" class="headerlink" title="APlayerState"></a>APlayerState</h3><p>APlayerState是一个用于存储玩家状态的类，在一个游戏客户端，尤其是网络游戏客户端中是可以存在多个APlayerState对象的，不同的APlayerState保存不同玩家的状态，同时APlayerState也可以存在于服务器中。APlayerState的生命周期为一整个Level的生命周期。</p>
+<p>到这是AActor家族下的几个重要成员的基本功能我们便有了一个大概的了解了，这里我们来捋一下这些成员之间的关系和在UE世界中的地位。<br><img src="https://i.loli.net/2021/03/10/3Ccrl7uNo4QRbUK.jpg" srcset="/img/loading.gif" alt="Alt"></p>
+<h2 id="4-UActorComponent"><a href="#4-UActorComponent" class="headerlink" title="4.UActorComponent"></a>4.UActorComponent</h2><p>UActorComponent是UE向U3D看齐的一个产物，虽然UE世界有了Actor就有了形形色色的物体生物，但是不同的生物拥有不同的技能，而同一个Actor可以会某个技能也可以不会，这种概念使用组合的方式组合到Actor下是最理想的，于是Component便出现了，UActorComponent直接继承自UObject，与AActor同级，Component既可以嵌套在Actor下，也可以嵌套在其他的Component下，但是需要注意的是，UActorComponent这一级是不提供互相嵌套的能力的，只有到其子类USceneComponent一级才提供互相嵌套能力。</p>
+<h3 id="USceneComponent"><a href="#USceneComponent" class="headerlink" title="USceneComponent"></a>USceneComponent</h3><p>USceneComponent主要提供两大能力，一是Transform，二是SceneComponent的互相嵌套。一般我们直接在Level里创建的Actor都会默认带有一个SceneComponent组件。</p>
+<h3 id="UPrimitiveComponent"><a href="#UPrimitiveComponent" class="headerlink" title="UPrimitiveComponent"></a>UPrimitiveComponent</h3><p>UPrimitiveComponent主要提供Actor用于物体渲染和碰撞相关的基础能力。</p>
+<h3 id="UMeshComponent"><a href="#UMeshComponent" class="headerlink" title="UMeshComponent"></a>UMeshComponent</h3><p>UMeshComponent由UPrimitiveComponent派生而来，主要提供具体的渲染显示方面的能力。</p>
+<h3 id="UChildActorComponent"><a href="#UChildActorComponent" class="headerlink" title="UChildActorComponent"></a>UChildActorComponent</h3><p>从名字就可以窥探其功能一二了，UChildComponent在Actor中主要用于链接Actor与Component，提供Component和Actor的嵌套能力。</p>
+<h2 id="5-ULevel"><a href="#5-ULevel" class="headerlink" title="5.ULevel"></a>5.ULevel</h2><p>ULevel可以看作是UE世界的大陆，是AActor的容器，前面提到的ALevelScriptActor便是ULevel默认带有的关卡蓝图，在这个关卡蓝图中编写便是这块大陆的逻辑，同事ULevel也默认带有一个AWorldSetting。</p>
+<h2 id="6-UWorld"><a href="#6-UWorld" class="headerlink" title="6.UWorld"></a>6.UWorld</h2><p>在UE中所有的ULevel互相联系就构成了一个UWorld，ULevel构建UWorld的方式有两种，一种是以SubLevel的形式，像关卡流一样，一个关卡链接下一个关卡，来组成UWorld，一种是每一个ULevel就是这个大地图的UWorld中的一块地图，ULevel之间以相对位置衔接在一起，构成一个大地图来组成这个UWorld。无论是那种构成形式，在一个UWorld中都有一个PersistentLevel，PersistenetLevel就是主Level，是玩家最初始的出生地，这里用的是最初始而不是游戏开始，是因为，现在很多在游戏开始时玩家的出点可能不是PersistentLevel而是上一次玩家离线时的位置。</p>
+<h2 id="7-FWorldContext"><a href="#7-FWorldContext" class="headerlink" title="7.FWorldContext"></a>7.FWorldContext</h2><p>FWorldContext不对开发者公开，是UE内部用来处理引擎UWorld上下文的类，比如当我们从编辑状态的EditorWorld点击播放切换到PIEWorld即运行状态时，这个过程中EditorWorld到PIEWorld之间的信息交换就是通过FWorldContext实现的。可以说FWorldContext处理的是UWorld级的通信。</p>
+<h2 id="8-UGameInstance"><a href="#8-UGameInstance" class="headerlink" title="8.UGameInstance"></a>8.UGameInstance</h2><p>UGameInstance可以说是凌驾于所有AActor、UActorComponent、ULevel、UWorld之上的类，通常情况下一个Game中应该只有一个，这里的Gam是UEngine中提到的所有World的总和，当然这不是绝对的，对于更高层次的开发者，UE也是提供了多个UGameInstance协同的扩展的。</p>
+<p>所以UGameInstance主要处理：</p>
+<ul>
+<li>UWorld、ULevel之间的切换</li>
+<li>UPlayer的创建，这里的UPlayer又和前面的APlayerController有所不同，这一点在后面再介绍。</li>
+<li>全局配置</li>
+<li>GameMode的切换</li>
+</ul>
+<h2 id="9-UNetDriver"><a href="#9-UNetDriver" class="headerlink" title="9.UNetDriver"></a>9.UNetDriver</h2><p>从名字就可以略知一二，UNetDriver是UE处理网络同步相关的类，UNetDriver中有两个主要的成员：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UNetConnection</span>* <span class="hljs-title">ServerConnection</span>;</span><br>TArray&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UNetConnection</span>*&gt;</span> ClientConnections;<br></code></pre></div></td></tr></table></figure>
+<p>ServerConnection是客户端到服务器的连接，ClientConnections数组是服务器到客户端群的连接的数组。而在UNetConnnection中又有一个很重要的成员：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">TMap&lt;TWeakObjectPtr&lt;AActor&gt;,<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UActorChannel</span>*&gt;</span> ActorChannels<br></code></pre></div></td></tr></table></figure>
+<p>ActorChannels是在服务器与客户端完成连接后用于实现Actor同步的对象。</p>
+<h2 id="10-UPlayer"><a href="#10-UPlayer" class="headerlink" title="10.UPlayer"></a>10.UPlayer</h2><p>UPlayer即玩家，ULevel可以切换，UWorld可以交替，但是尽管ULevel、UWorld如何变换，玩家还是那个玩家，所以UPlayer是和UGameInstance同一级别的存在，那么，UPlayer、AController、APawn之间到底是什么关系呢?</p>
+<p>UE源码对UPlayer是这么解释：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sqf"><span class="hljs-built_in">Player</span>: Corresponds <span class="hljs-keyword">to</span> a real <span class="hljs-built_in">player</span> (a <span class="hljs-built_in">local</span> camera <span class="hljs-built_in">or</span> remote net <span class="hljs-built_in">player</span>).<br></code></pre></div></td></tr></table></figure>
+<p>很显然，UE对UPlayer的定位就是与玩家交互的类，即UPlayer是直接与底层硬件输入相关的类，如处理鼠标键盘的输入或游戏手柄的输入，当然游戏与人之间的交互也不仅限于这两种，还有VR设备的交互，语音交互，重力感应等等，谁也不知道未来还会有什么样的游戏交互出现，所以UE并没有把UPlayer隐藏起来，开发者依然可以创建自己的UPlayer。而然在大多数情况下，我们是不需要直接操作UPlayer的，因为一些常规的底层交互UE已经封装好了。</p>
+<p>所以UPlayer是处理底层输入的，而AController则是直接对接UPlayer，通过接收UPlayer的输入来处理对APawn的控制逻辑，最后APawn更具AController的控制逻辑做出响应的行为，于是玩家到角色的交互过程便实现了。</p>
+<h3 id="ULocalPlayer"><a href="#ULocalPlayer" class="headerlink" title="ULocalPlayer"></a>ULocalPlayer</h3><p>在一个单机游戏中UPlayer是唯一的存在，但是在一个网络联级游戏中，表示同一实体的UPlayer即存在于玩家本地的客户端中，同时也存在于其他玩家的多个客户端中，那么玩家的输入就既要作用于本地的APawn上，同时在其他玩家的客户端中的表示这个实体的APawn也要做出响应的反应，于是UE便将UPlayer又派生出了两个子类，ULocalPlayer和UNetConnection。其中ULocalPlayer就是处理本地客户端的输入逻辑的类。</p>
+<h3 id="UNetConnection"><a href="#UNetConnection" class="headerlink" title="UNetConnection"></a>UNetConnection</h3><p>UNetConnection就是处理其他玩家在本地客户端中的APawn的类，所以UNetConnection也是一个玩家。</p>
+<h2 id="11-USaveGame"><a href="#11-USaveGame" class="headerlink" title="11.USaveGame"></a>11.USaveGame</h2><p>前面提到了AGameState是一个保存游戏数据的类，这个保存是一个临时保存，所以当游戏程序关闭之后AGameState中数据也就不存在了，而USaveGame就是用来保存存档的类，USaveGame提供游戏数据永久性保存，我们只需要往USaveGame中添加我们要保存的属性字段，就可以直接调用USaveGame的接口直接将游戏数据序列化保存到本地文件中，相当的方便。</p>
+<p>花了这么长的篇幅也就简要的介绍了一下GamePlay的整体框架，总共由这11个类组成，说起来不多，但是里面的门道却是相当深奥，这需要在以后的使用中慢慢学习消化。</p>
+<p>那么接下来就开始各个类的详细使用学习了。</p>
+<h1 id="二、UObject"><a href="#二、UObject" class="headerlink" title="二、UObject"></a>二、UObject</h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/UE4/">UE4</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/04/%E3%80%90Python%E3%80%91Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">【Python】Python学习笔记</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>Github</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
