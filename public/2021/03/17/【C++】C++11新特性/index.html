@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      1.6k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      20
        分钟
     </span>
   
@@ -233,10 +233,68 @@
 
 
 <a id="more"></a>
+
+<h1 id="一、auto类型推导"><a href="#一、auto类型推导" class="headerlink" title="一、auto类型推导"></a>一、auto类型推导</h1><p>auto这个关键字其实在C++11之前就已经存在了，在C++98中的auto关键字的作用是指明变量的存储类型，与static相对，在比较老C++书籍中可以找得到相关内容，只是在我们的实际编程中基本上被忽略，这是因为我们在创建变量时默认的存储类型就是auto—自动存储类型的，不需要显示表示，只有在需要声明静态变量时才会显示表示static，以指明变量的存储类型为静态存储类型。如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">auto</span> <span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">int</span> b = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> c = <span class="hljs-number">0</span>;<br></code></pre></div></td></tr></table></figure>
+<p>这里a和b的存储类型都是auto类型。</p>
+<p>在C++11之后，C++标准摒弃了C++98的auto关键字的用法，将auto关键字的功能换成了自动类型推导，就和现在大多数脚本语言中的var一样。</p>
+<p><font color="red"> 需要注意的是，在自动类型推导中，小数会被默认推导成double类型而不是float。</font></p>
+<p>auto的出现并不意味着C++变成了弱类型语言，auto在程序中仅仅只起到占位符的作用，在编译期间它才会被替换成具体的类型，所以在运行时类型依然是明确的。</p>
+<p><font color="red">auto关键字支持多变量声明，但是同时声明的变量必须是同一类型的，否则会出现编译不通过的错误。</font>如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">auto</span> a = <span class="hljs-number">1</span>,b = <span class="hljs-number">1.1</span>;<br></code></pre></div></td></tr></table></figure>
+<p>这种情况会报错。</p>
+<p><font color="red"> 在声明auto变量时，必须对变量进行初始化。</font>这种情况是语法错误：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">auto</span> a,b;<br></code></pre></div></td></tr></table></figure>
+<h2 id="auto、指针与引用"><a href="#auto、指针与引用" class="headerlink" title="auto、指针与引用"></a>auto、指针与引用</h2><p>先来看一个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">auto</span> *p1 = &amp;a;<br><span class="hljs-keyword">auto</span> p2 = &amp;a;<br><span class="hljs-keyword">auto</span> p3 = p1;<br><span class="hljs-keyword">auto</span> &amp;r1 = a;<br><span class="hljs-keyword">auto</span> r2 = r1;<br><br><br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(p1).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(p2).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(p3).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(r1).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(r2).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br></code></pre></div></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> *<br><span class="hljs-keyword">int</span> *<br><span class="hljs-keyword">int</span> *<br><span class="hljs-keyword">int</span><br><span class="hljs-keyword">int</span><br></code></pre></div></td></tr></table></figure>
+<p>可以看到<font color="red">auto推导出了指针类型，却忽略了&amp;类型</font>，这一点是需要注意的。</p>
+<h2 id="auto与const"><a href="#auto与const" class="headerlink" title="auto与const"></a>auto与const</h2><p>还是先来看一个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">auto</span> c1 = a;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span> c2 = a;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span> *p = &amp;a;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span> &amp;r1 = a;<br><span class="hljs-keyword">auto</span> &amp;r2 = r1;<br>	<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(c1).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(c2).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(p).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(r1).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(r2).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br></code></pre></div></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">int</span><br><span class="hljs-keyword">int</span><br><span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span> *<br><span class="hljs-keyword">int</span><br><span class="hljs-keyword">int</span><br></code></pre></div></td></tr></table></figure>
+<p>可以看到除了指针类型，其他的都被推导成了int类型，我们再在上面的代码中加一些代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">auto</span> c1 = a;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span> c2 = a;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span> *p = &amp;a;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span> &amp;r1 = a;<br><span class="hljs-keyword">auto</span> &amp;r2 = r1;<br>	<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(c1).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(c2).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(p).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(r1).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">typeid</span>(r2).name() &lt;&lt; <span class="hljs-built_in">endl</span>;<br>	<br><span class="hljs-keyword">int</span> b = <span class="hljs-number">0</span>;<br>c1 = <span class="hljs-number">2</span>;<br>c2 = <span class="hljs-number">2</span>;<br>p = b;<br>r1 = <span class="hljs-number">2</span>;<br>r2 = <span class="hljs-number">2</span>;<br></code></pre></div></td></tr></table></figure>
+<p>当我们添加了这段代码之后，除了<code>c1=2</code>，其他的行都会报语法错误，所以尽c2，r1，r2被推导为int类型，但是const的约束依旧存在，但是c1没有报语法错误，也就是说c1实际上是非const类型，即<code>auto c1 = a</code>，在默认情况下auto将c1推导为非常量，如果需要设置为常量则需要显示标识const。</p>
+<p>关于<code>typeid().name()</code> 有一点很迷，就是在C++的语法中，只有常量指针类型在类型名上带有const，如上面的int const *，而其他的无论是指针常量、常量引用在类型上都是忽略const的，但是在我们把一个变量常量的地址赋予一个非常量指针时，则会报：</p>
+<p><img src="/2021/03/17/%E3%80%90C++%E3%80%91C++11%E6%96%B0%E7%89%B9%E6%80%A7/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%9E%B6%E6%9E%84%5CSnipaste_2021-03-18_14-34-58.png" srcset="/img/loading.gif"></p>
+<p>在网上没有找到相关的解析，推测在C++语法上是只有常量指针类型带有const，没有其他的带有const的类型的，而出现上面的提示十有八九是编辑器做的，而非C++本身的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>auto的作用是类型推导，本质是占位符，在编译阶段，编译器会将正确的类型替换到auto位置上；</li>
+<li>auto可以和任何类型搭配，包括指针与引用；</li>
+<li>在声明auto变量时必须对uto变量初始化；</li>
+<li>auto关键字可以用作函数返回值类型。</li>
+</ul>
+<h1 id="二、decltype类型推导"><a href="#二、decltype类型推导" class="headerlink" title="二、decltype类型推导"></a>二、decltype类型推导</h1><p>由于auto的使用在有些方面上收到限制，比如，声明auto变量时必须对变量进行初始化，而在实际使用时，可能没法进行初始化，于是decltype就出现了，decltype也是C++的一个关键字。</p>
+<p>decltype通过表达式来推导类型，表达式可以是一个变量、常量、或者函数，使用形式为<code>decltype(exp),exp为表达式</code>如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* a)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> *a * <span class="hljs-number">0.2f</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> b = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">decltype</span>(fun(&amp;b)) a;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>和auto一样decltype也可以用作函数返回值类型。</p>
+<h2 id="decltype与auto的区别"><a href="#decltype与auto的区别" class="headerlink" title="decltype与auto的区别"></a>decltype与auto的区别</h2><ul>
+<li>auto关键字声明的变量必须初始化，decltype不需要；</li>
+<li>auto在类中只能用于定义静态成员，decltype可以用于任何成员；</li>
+<li>decltype的使用上比auto更灵活；</li>
+<li>auto更具初始值来推导类型，decltype根据表达式来推导类型。</li>
+</ul>
+<h1 id="三、返回类型后置语法"><a href="#三、返回类型后置语法" class="headerlink" title="三、返回类型后置语法"></a>三、返回类型后置语法</h1><p>有时候我们写函数需要用到函数参数来推导，由于C++的返回值是前置语法，所以返回值是无法使用函数参数的，于是便有了返回值类型后置语法，先看一个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T,<span class="hljs-keyword">typename</span> U&gt;<br>auto fun(T a,U b)-&gt;decltype(a+b)<br>&#123;<br>	<span class="hljs-keyword">return</span> a+b;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>返回值类型后置语法可以将decltype使用参数推导出的类型赋予auto中，所以在这个语法中auto，decltype是必不可少的。</p>
+<p>我们仔细思考后会发现好像直接这样使用也是可以达到最终效果的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T,<span class="hljs-keyword">typename</span> U&gt;<br><span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">fun</span><span class="hljs-params">(T a,U b)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> a+b;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>那么返回值后置类型语法的作用又是什么呢？事实上我们在多想一下就会明白，<code>auto fun(T a,U b)-&gt;decltype(a+b)</code>语法把auto的类型限制在decltype(a+b)的推导类型的范围内了，而auto fun(T a,U b)中auto是可以为任何类型的。但是在大多数使用场景下似乎还是没什么区别。</p>
+<p>到这里只有一句感叹，C++在类型推导上相较于主流脚本语言的类型推导还是薄弱了很多很多。</p>
+<h1 id="四、左值与右值"><a href="#四、左值与右值" class="headerlink" title="四、左值与右值"></a>四、左值与右值</h1>
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/">知识记录</a>
+                    
+                  </div>
                 
                 
                   <div class="post-meta">

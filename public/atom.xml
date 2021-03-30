@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-17T07:17:53.496Z</updated>
+  <updated>2021-03-18T09:23:18.369Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,12 +21,14 @@
     <link href="http://yoursite.com/2021/03/17/%E3%80%90C++%E3%80%91C++11%E6%96%B0%E7%89%B9%E6%80%A7/"/>
     <id>http://yoursite.com/2021/03/17/%E3%80%90C++%E3%80%91C++11%E6%96%B0%E7%89%B9%E6%80%A7/</id>
     <published>2021-03-17T07:12:33.000Z</published>
-    <updated>2021-03-17T07:17:53.496Z</updated>
+    <updated>2021-03-18T09:23:18.369Z</updated>
     
     
     <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;</summary>
     
     
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
     
     
     <category term="CPlus" scheme="http://yoursite.com/tags/CPlus/"/>
@@ -38,7 +40,7 @@
     <link href="http://yoursite.com/2021/02/26/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%9E%B6%E6%9E%84/"/>
     <id>http://yoursite.com/2021/02/26/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%9E%B6%E6%9E%84/</id>
     <published>2021-02-26T01:37:18.000Z</published>
-    <updated>2021-03-15T14:08:46.992Z</updated>
+    <updated>2021-03-22T14:38:44.877Z</updated>
     
     
     <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
@@ -427,7 +429,7 @@
     <link href="http://yoursite.com/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/"/>
     <id>http://yoursite.com/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/</id>
     <published>2019-10-06T02:20:37.000Z</published>
-    <updated>2021-03-17T07:18:00.799Z</updated>
+    <updated>2021-03-22T09:29:14.504Z</updated>
     
     
       
