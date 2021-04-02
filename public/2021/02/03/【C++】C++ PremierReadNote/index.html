@@ -316,7 +316,8 @@
 
 <p><font color="red">数组的下标运算只要不超过数组长度就可以执行下标运算，如：含有10个元素数组下标从0-9，但是 下标运算可以取到10，即a[10]，a[10]是数组的尾元素的下一个位置，但是对a[10]只能进行去地址运算(&amp;a[10])，不能对a[10]解引用或读取。</font></p>
 <h2 id="17-ptrdiff-t类型"><a href="#17-ptrdiff-t类型" class="headerlink" title="17.ptrdiff_t类型"></a>17.ptrdiff_t类型</h2><p>和<code>size_type</code>一样，<code>ptrdiff_t</code>是c++11专门定制给begin()与end()的运算结果的类型，用于适应不同机器的字长。<br><font color="red">需要注意的是，内置数组下标值不是<code>ptrdiff_t</code>类型，如：a[1]，1就不是<code>ptrdiff_t</code>类型。</font></p>
-<h2 id="18-void-指针"><a href="#18-void-指针" class="headerlink" title="18.void *指针"></a>18.void *指针</h2><h2 id="任何非常量值都可以存入void-指针中。"><a href="#任何非常量值都可以存入void-指针中。" class="headerlink" title="任何非常量值都可以存入void *指针中。"></a>任何非常量值都可以存入<code>void *</code>指针中。</h2><h1 id="四、表达式"><a href="#四、表达式" class="headerlink" title="四、表达式"></a>四、表达式</h1><hr>
+<h2 id="18-void-指针"><a href="#18-void-指针" class="headerlink" title="18.void *指针"></a>18.void *指针</h2><p>任何非常量值都可以存入<code>void *</code>指针中。</p>
+<h1 id="四、表达式"><a href="#四、表达式" class="headerlink" title="四、表达式"></a>四、表达式</h1><hr>
 <h2 id="1-为定义行为"><a href="#1-为定义行为" class="headerlink" title="1.为定义行为"></a>1.为定义行为</h2><p>c++中存在一些为定义行为，如&lt;&lt;运算符在c++中并没有定义其后表达式的运算顺序，此时运行下面代码就会出现为定义行为。</p>
 <figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;<br><span class="hljs-built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="hljs-string">&quot;,&quot;</span>&lt;&lt;++i&lt;&lt;<span class="hljs-built_in">endl</span>;<br></code></pre></div></td></tr></table></figure>
 <p>此时会出现0，1或1，1两种结果，这是因为&lt;&lt;没有明确指定何时及如何对运算对象求值，但是在实际使用过程中并没有出现上述情况，这可能是编译器为&lt;&lt;规定了运算顺序。</p>
