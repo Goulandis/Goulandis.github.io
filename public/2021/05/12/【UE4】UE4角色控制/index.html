@@ -1,0 +1,501 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shun.png">
+  <link rel="icon" type="image/png" href="/img/shun.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Goulandis">
+  <meta name="keywords" content="snoopy">
+  <title>Goulandis</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/vs2015.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Goulandis" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/Post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-12 11:18" pubdate>
+        May 12, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      33
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h1 id="一、UE4的角色控制框架"><a href="#一、UE4的角色控制框架" class="headerlink" title="一、UE4的角色控制框架"></a>一、UE4的角色控制框架</h1><p>做角色控制之前，我们首先要了解UE4的角色控制框架，了解引擎是如何控制角色移动和做出各种骚姿势的。</p>
+<h2 id="1-Pawn"><a href="#1-Pawn" class="headerlink" title="1.Pawn"></a>1.Pawn</h2><p>Pawn类就是UE4里可用于操控的游戏物体，Pawn类继承自Actor拥有Actor的所有特性，并且Pawn还带有</p>
+<ul>
+<li>Controller：可以被操控；</li>
+<li>PhysicsCollision：物理碰撞；</li>
+<li>MovementInput：事件响应，大多数情况下用于键盘输入事件响应。</li>
+</ul>
+<h2 id="2-Character"><a href="#2-Character" class="headerlink" title="2.Character"></a>2.Character</h2><p>Character就是我们即将要使用的类，Character继承自Pawn，也拥有可操控性，物理碰撞和事件响应，除此之外，Character还拥有CapsuleComponent(椭圆碰撞体)，ArrowComponent(角色正面方向)，Mesh。我们向Mesh上添加模型，Character便拥有了可显示的网格。</p>
+<p>当然Pawn派生的还有defaultPawn,SpectatorPawn，这里就不探讨了。</p>
+<h2 id="3-Controller"><a href="#3-Controller" class="headerlink" title="3.Controller"></a>3.Controller</h2><p>Controller也派生自Actor，是与Pawn平级的类，Controller负责控制Pawn及Pawn的派生类，但Controller一般负责高层面的控制，如角色切换，多角色控制等，而Pawn和Character负责处理角色自身的简单控制逻辑，如角色的移动，跑，蹲，跳等运动逻辑。</p>
+<p>由于Controller是独立Pawn存在的，所以Controller可以独立存在与World中，如：上帝视角。</p>
+<p>一个Controller可以控制多个Pawn，一个Pawn也可以被多个Controller控制。</p>
+<p>但是一个Pawn要想被控制就必须关联至少一个Controller，否则尽管在Pawn中编写了控制逻辑，我们依然无法操控Pawn。</p>
+<h1 id="二、角色控制"><a href="#二、角色控制" class="headerlink" title="二、角色控制"></a>二、角色控制</h1><p>与U3D的角色控制一样，在UE4中进行角色控制前也需要进行按键的映射注册。</p>
+<h2 id="1-注册按键映射"><a href="#1-注册按键映射" class="headerlink" title="1.注册按键映射"></a>1.注册按键映射</h2><p>在<code>Project Settings/Input/Bindings</code>下，有一个Action Mappings(行为映射)和一个Axis Mappings(轴映射)，Action Mappings是与角色三维坐标轴无关的映射，一般用于触发角色的行为，如：跳，蹲，拾取等行为，并且UE4还为Action Mappings封装好了组合键，在U3D中，组合键的逻辑是需要我们自己写的。Axis Mappings是与角色三维坐标轴有关的映射，一般用于触发角色的移动与视角控制。</p>
+<p><font color="red"> 我们将映射注册好之后，UE4会自动按照我们的命名创建触发事件蓝图，这个在后面详细讲解</font>。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171219.png" srcset="/img/loading.gif"></p>
+<p>这里详细说一下视角控制，视角控制一般使用鼠标来控制(当然也可以使用键盘，只是大多数情况下使用鼠标)，所有我们使用的映射是Mouse Y和Mouse X，我们用一张图来理解Mouse Y和Mouse X的方向：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171226.png" srcset="/img/loading.gif"></p>
+<p>Mouse Y就是鼠标的Y轴，Mouse X就是鼠标的X轴。</p>
+<h2 id="2-使用角色蓝图编写控制逻辑"><a href="#2-使用角色蓝图编写控制逻辑" class="headerlink" title="2.使用角色蓝图编写控制逻辑"></a>2.使用角色蓝图编写控制逻辑</h2><p>首先我们创建一个继承自Character的蓝图类，然后为Character中添加SpringArm组件并在SpringArm组件下添加Camera组件，SpringArm组件是专门为Camera服务的组件，用于连接Mesh和Camera，可以对Camera进行一些操作，如相机偏移等。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171233.png" srcset="/img/loading.gif"></p>
+<p>然后向Mesh中添加我们需要的模型，一个Character基本组件就搭建好了</p>
+<p>然后我们就可以在Character蓝图类的Event Graph中编写控制逻辑了。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171240.png" srcset="/img/loading.gif"></p>
+<p>Input Axis MoveForword，Input Axis MoveRight，Input Axis LookUp，Input Axis Turn都是UE4按照我们注册按键映射时的名字为我们创建好的事件，当我们按下对应的键时事件就会被触发。</p>
+<p>UE4使用MovementComponent封装好了Pawn的移动实现，Character中也自带有一个CharacterMovement，我们只需要向组件中添加输入就可以使角色移动了，Add Movement Input函数就是用于MovementComponent组件输入的函数，我们只需要传给Add Movement Input函数移动方向和值就可以使角色按照我们规定的方向移动，移动方向的获取，UE4也封装好了Get Forward Vector(正前方)和Get Right Vector(正右方)来获取某一个轴上的正前与正右的方向矢量，Get Control Rotation函数可以获取角色当前的方向矢量，而角色的前后左右移动是在Z轴的垂直面，即XY平面上移动，所以我们需要获取Z轴的正前正右的方向矢量，我们可以使用Break将角色当前的方向矢量拆开成xyz三个标量，只拿Z轴的值再使用Make封装成矢量，这样Get Forward Vector和Get Right Vector所拿到就是Z轴的正前方与正右方了。</p>
+<p>而角色的视角转向，UE4使用的是 Controller Yaw，Controller Pitch，Controller Roll来控制的，Controller Yaw控制的是角色的上下方向的视角旋转，Controller Pitch控制的是角色的左右方向的视角旋转，Controller Roll控制的是角色的前后方向的视角旋转，和MoveComponent一样UE4也提供Add Controller Yaw Input，Add Controller Pitch Input，Add Controller Roll Input分别为三者传值。我们只需要将映射对应的值输入给三个函数即可实现角色视角的旋转控制了，然后勾选SpringArm的Details/Camera Settings/Use Pawn Controller Rotation，将视角旋转控制应用到相机上，这样角色就可以通过鼠标进行视角控制了。</p>
+<h2 id="3-关联角色控制器"><a href="#3-关联角色控制器" class="headerlink" title="3.关联角色控制器"></a>3.关联角色控制器</h2><p>UE4的角色控制框架规定了，我们必须为角色关联一个Controller才可以对角色进行控制。</p>
+<p>在角色的Details/Input/Auto Receive Input选项中可以切换控制器，UE4为我们封装好了一个Controller–Player 0，我们选择Player 0就可以对角色进行控制了。其他的Palyer 1，Player 2等是用于其他的用途的，我们这里不探讨。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171247.png" srcset="/img/loading.gif"></p>
+<h1 id="三、配置骨骼动画"><a href="#三、配置骨骼动画" class="headerlink" title="三、配置骨骼动画"></a>三、配置骨骼动画</h1><p>完成以上步骤，我们的角色就可以在场景中自由自动了，但是这个移动只是纯移动，并不带有移动动画，要想移动更真实，我们还需要为角色配置骨骼动画。</p>
+<p>需要注意的是不是什么动画都可以往角色身上套的，只有和角色骨骼相匹配的动画才可以被角色使用，如果我们想要使用某些动画，我们就需要设置模型的骨骼为这些动画配套的骨骼。</p>
+<h2 id="1-配置骨骼"><a href="#1-配置骨骼" class="headerlink" title="1.配置骨骼"></a>1.配置骨骼</h2><p>在导入模型的时候就可以为模型选定骨骼，选定好骨骼的模型导入工程后就不能在更换骨骼了，想要更换骨骼就需要重新导入。这里我们使用UE4自带的骨骼。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171254.png" srcset="/img/loading.gif"></p>
+<p>还有一步是为模型添加物理资产，在模型视图的Asset Details/Physics/Physics Asset选择与骨骼动画配套的物理资产，至于这个物理资产具体是干什么的这里不深究。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171300.png" srcset="/img/loading.gif"></p>
+<h2 id="2-混合空间"><a href="#2-混合空间" class="headerlink" title="2.混合空间"></a>2.混合空间</h2><p>如上图，我们可以看到一个Blend Space和一个Bland Space 1D，这是UE4专门用来处理某一类动画混合的模块。Blend Space是二维混合空间，可以混合两个方向上的动作，比如，向前前后是一个方向，向左向右是一个方向，Blend Space就可以混合这两个方向的所有动作；而Blend Space 1D则只能混合一个方向上的动作。</p>
+<p>这里我们需要为角色前后左右两个方向上的移动添加动作，所以选择Blend Space。打开混合空间</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171307.png" srcset="/img/loading.gif"></p>
+<p>在动作混合视图中UE4已经为我们预设好了很多骨骼动画，横轴与纵轴的名字要命名规范，因为这两个轴的名字会作为混合空间的参数，从外界传值进来的。横轴纵轴的最大值最小值和分割数都可以根据自己的实际需求设置。</p>
+<p>Preview Base Pose是用来设置关键帧姿势的，有的骨骼动画直接包含了姿势动作，Preview Base Pose会自动赋值，有的骨骼动画只包含了动作，这时就需要我们手动赋予姿势了，如我们后面需要用到的扭头的动画。</p>
+<p>然后添加上我们需要的动画即可，当Speed变化时，角色的动画会在Idle-Walk-Run之间切换，当Deriction变化时，角色的动画会在Left和Right之间切换。</p>
+<h2 id="3-动画蓝图"><a href="#3-动画蓝图" class="headerlink" title="3.动画蓝图"></a>3.动画蓝图</h2><p>Animation Blueprint是UE4封装的专门用于管理动画的类，Animation Blueprint可以管理骨骼动画的混合空间也可以直接管理骨骼动画。</p>
+<p>在Content Browser中右键选择Animation/Animation Blueprint，然后Parent Class选择父类为AnimInstance，Target Skeletion选择我们角色应用的骨骼，就可以创建一个管理我们选定的骨骼动画的管理蓝图了。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171314.png" srcset="/img/loading.gif"></p>
+<p>进入动画蓝图，在Anim  Graph视图，我们可以看见一个Final Animation Pose节点，这是UE4封装好的处理角色最终要显示的动画的模块，右键添加添加一个状态机。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171320.png" srcset="/img/loading.gif"></p>
+<p>双击状态机，进入状态机里，右键添加一个状态并命名为Idle_Walk_Run。一个状态机可以管理多个状态。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171328.png" srcset="/img/loading.gif"></p>
+<p>双击进入状态，在右侧Asset Browser中选择我们配置好的混合空间，并在左侧MyBlueprint/Variables中添加两个变量Speed和Deriction分别给混合空间的横轴Speed和纵轴Deriction赋值。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171335.png" srcset="/img/loading.gif"></p>
+<p>然后在动画蓝图的Event Graph中编写逻辑为Speed和Deriction变量赋值。</p>
+<img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171341.png" srcset="/img/loading.gif" style="zoom:200%;">
+
+<p>直接看到角色移动的控制逻辑，UE4为我们封装好了Caculate Deriction来计算角色的移动方向，我们只需要使用Get Velocity和GetActorRotation获取角色的速度矢量和旋转方向赋值给Calculate Deriction既可以了，速度矢量的模，UE4也封装好了VectorLength来计算。</p>
+<p>最后在角色蓝图的Mesh的Details/Animation中将Animation Mode设置成Use Animation Blueprint，将Anim Class设置成我们创建的动画蓝图，这样我们的动画就可以应用到我们的角色上了。</p>
+<h1 id="四、多动画管理"><a href="#四、多动画管理" class="headerlink" title="四、多动画管理"></a>四、多动画管理</h1><p>我们的游戏角色一般不可能只有移动的动画，一般还会有其他的动画，如拾取，下蹲等，这时我们就需要进行多动画混合空间的管理了。</p>
+<p>多动画管理有两类，一类是与角色移动动画同级的混合动画，在一个时刻是能播放一个动画，二者不兼容，如下蹲，一类是可以在角色移动动画播放的同时也可以播放的混合动画，在一个时刻两个动画都可以播放，二者兼容，如角色站立时扭头。</p>
+<h2 id="1-不兼容的同级动画管理"><a href="#1-不兼容的同级动画管理" class="headerlink" title="1.不兼容的同级动画管理"></a>1.不兼容的同级动画管理</h2><p>按照第三步，我们也可以创建一个Blend Space来混合下蹲动画。当然如果下蹲动画只有一个，就没必要使用Blend Space了，可以直接使用动画蓝图来管理动画。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171351.png" srcset="/img/loading.gif"></p>
+<p>同样，我们创建一个状态机Crouch，在状态机里配置下蹲动画。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171400.png" srcset="/img/loading.gif"></p>
+<p>需要注意的是，下蹲动画的横轴和纵轴也需要命名为Speed和Deriction，因为我们的下蹲移动使用的也是前后左右两个方向来控制动画。</p>
+<p>然后在动画蓝图的Anim Graph中添加一个Blend Poses by bool来管理移动与下蹲动画，并创建一个bool值来判断动画的执行</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171406.png" srcset="/img/loading.gif"></p>
+<p>Is Crouch为true时走True Pose,为False时走False Pose，并且可以设置两个分支的动画过度时间。</p>
+<p>然后就是在Event Graph中编写下蹲动画的控制逻辑。如步骤三中逻辑控制图的下蹲控制逻辑，UE4甚至封装好了下蹲判断，Is Crouching，可以直接判断角色当前是否处于下蹲状态，直接将这个状态赋值给IsCrouch变量，然后使用Get MoveMen Component给Is Crouching传值。</p>
+<p>当然如果我们有更多的不兼容动画需要管理，UE4也为我们提供了Blend Poses by int来管理</p>
+<h2 id="2-可兼容动画管理"><a href="#2-可兼容动画管理" class="headerlink" title="2.可兼容动画管理"></a>2.可兼容动画管理</h2><p>可兼容的动画的混合就不是使用Blend Space来混合了，而是使用Aim Offset来混合。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171413.png" srcset="/img/loading.gif"></p>
+<p>一般可兼容的动画使用的是关键帧，即只有动画没有姿势，我们需要将动画应用到某一姿势上去，如上图应用到Idle上的Idle的扭头动作。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171419.png" srcset="/img/loading.gif"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/12/%E3%80%90UE4%E3%80%91UE4%E5%86%85%E5%B5%8CWeb%E5%8F%8A%E4%B8%8EWeb%E9%80%9A%E4%BF%A1/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>Github</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      927 字
+      1k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      11
        分钟
     </span>
   
@@ -248,7 +248,8 @@
 <p>一、static_cast类型转换在上行转换是安全的，在下行转换是不安全，（上行转换：从子类转换到父类，下行转换：从父类转换到子类），</p>
 <p>二、static_cast类型转换在类的转换中因该使用指针转换，即通过指针间接的实现转换，直接对类的对象进行转换类型会被裁剪，并且在下行转换中不使用指针会报错。</p>
 <p><img src="/2019/09/12/%E3%80%90C++%E3%80%91C++%E4%B8%AD%E7%9A%84%E5%9B%9B%E7%A7%8D%E8%BD%AC%E6%8D%A2%E7%B1%BB%E5%9E%8B/Snipaste_2019-09-12_11-51-30.png" srcset="/img/loading.gif"></p>
-<h1 id="3-dynamic-cast"><a href="#3-dynamic-cast" class="headerlink" title="3.dynamic_cast"></a>3.dynamic_cast</h1><p>​    dynamic_cast类型转换用于类之间的上下行转换，与static_cast不同的是，dynamic_cast类型转换无论上下行都具有类型检查，都可以进行安全的类型转换。上行转换dynamic_cast与static_cast完全一致，下行转换dynamic_cast比static_cast更安全</p>
+<h1 id="3-dynamic-cast"><a href="#3-dynamic-cast" class="headerlink" title="3.dynamic_cast"></a>3.dynamic_cast</h1><p>​    dynamic_cast类型转换用于类之间的上下行转换，与static_cast不同的是，dynamic_cast类型转换无论上下行都具有类型检查，都可以进行安全的类型转换。上行转换dynamic_cast与static_cast完全一致，下行转换dynamic_cast比static_cast更安全。</p>
+<p>​    dynamic_cast的具体使用场景就是将父类指针转换成子类指针，但是使用条件就是只能用于含有虚函数的类，因为dynamic_cast的内部机制就是利用虚函数表里的类型信息来判断一个父类指针是否指向一个子类对象，转换失败会抛出bad_cast异常，并返回null。</p>
 <h1 id="4-reinterpret-cast"><a href="#4-reinterpret-cast" class="headerlink" title="4.reinterpret_cast"></a>4.reinterpret_cast</h1><p>​    reinterpret_cast类型转换只能对指针进行操作，reinterpret_cast类型转换提供的是一种更底层的转换模式–比特位上的重新解释，即对某一类型的内存地址的比特位以另一种类型来解释，这可能不好理解，在这放一张图来辅助理解。</p>
 <p><img src="/2019/09/12/%E3%80%90C++%E3%80%91C++%E4%B8%AD%E7%9A%84%E5%9B%9B%E7%A7%8D%E8%BD%AC%E6%8D%A2%E7%B1%BB%E5%9E%8B/Snipaste_2019-09-12_16-32-44.png" srcset="/img/loading.gif"></p>
 <p>​    p是指向字符串的char类型指针，i是指向整型的指针，i = reinterpret_cast&lt;int*&gt;(p)则将p所指向的内存里的比特位以int类型来重新解释并复制到i所指向的内存地址上，于是在输出 *i 时，输出的是一个整型的数值。</p>

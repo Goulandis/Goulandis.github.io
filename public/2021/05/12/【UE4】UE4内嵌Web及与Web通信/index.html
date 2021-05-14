@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shun.png">
+  <link rel="icon" type="image/png" href="/img/shun.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Goulandis">
+  <meta name="keywords" content="snoopy">
+  <title>Goulandis</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/vs2015.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Goulandis" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/Post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-12 11:18" pubdate>
+        May 12, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      41
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <p>UE4嵌入Web及UE4到Web的通信，我使用UE 4.22.3版本，以UE4嵌入ECharts并与ECharts通信为例。</p>
+<h1 id="一、自定义WebBrowser"><a href="#一、自定义WebBrowser" class="headerlink" title="一、自定义WebBrowser"></a>一、自定义WebBrowser</h1><p>UwebBrowser是UE4自带的用于浏览Web的插件类，为了后面进行UE4与Web的通信，所以这里我们需要自定义一个UWebBrowser类。</p>
+<h2 id="1-创建自定义WebBrowser类"><a href="#1-创建自定义WebBrowser类" class="headerlink" title="1.创建自定义WebBrowser类"></a>1.创建自定义WebBrowser类</h2><p>在C++ Classes中右键创建一个自己的继承自widget类的C++类–MyWebBrowser。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170722.png" srcset="/img/loading.gif"></p>
+<h2 id="2-编写自定义WebBrowser"><a href="#2-编写自定义WebBrowser" class="headerlink" title="2.编写自定义WebBrowser"></a>2.编写自定义WebBrowser</h2><p>然后在VS中搜索WebBrowser.cpp和WebBrowser.h这是UE4自带的WebBrowser类，虽说是写一个自定义的WebBrowser，但是我们的自定义的WebBrowser在功能上基本和UE4自带的webBrowser一致，所以我们只需将UE4自带的WebBrowser中的代码拷贝到我们自己的MyWebBrowser中稍作修改即可。</p>
+<p>当然拷贝时不是全盘拷贝，只需拷贝如下WebBrowser.h中虚线一下的部分拷贝到我们的MyWebBrowser.h中。有时可能出现FOnUrlChanged和FOnBeforePopup报错，等VS反应一下就好了，有时可以直接编译，报红也是可以编译通过的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">/*WebBrowser.h*/</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Components/Widget.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;WebBrowser.generated.h&quot;</span></span><br><br>UCLASS()<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WEBBROWSERWIDGET_API</span> <span class="hljs-title">UWebBrowser</span> :</span> <span class="hljs-keyword">public</span> UWidget<br>&#123;<br>    <span class="hljs-comment">/*--------------------------------------------------------------------------------------*/</span><br>	GENERATED_UCLASS_BODY()<br><br><span class="hljs-keyword">public</span>:<br>	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUrlChanged, <span class="hljs-keyword">const</span> FText&amp;, Text);<br>	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnBeforePopup, FString, URL, FString, Frame);<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * Load the specified URL</span><br><span class="hljs-comment">	 *</span><br><span class="hljs-comment">	 * @param NewURL New URL to load</span><br><span class="hljs-comment">	 */</span><br>	UFUNCTION(BlueprintCallable, Category=<span class="hljs-string">&quot;Web Browser&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LoadURL</span><span class="hljs-params">(FString NewURL)</span></span>;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * Load a string as data to create a web page</span><br><span class="hljs-comment">	 *</span><br><span class="hljs-comment">	 * @param Contents String to load</span><br><span class="hljs-comment">	 * @param DummyURL Dummy URL for the page</span><br><span class="hljs-comment">	 */</span><br>	UFUNCTION(BlueprintCallable, Category=<span class="hljs-string">&quot;Web Browser&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LoadString</span><span class="hljs-params">(FString Contents, FString DummyURL)</span></span>;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	* Executes a JavaScript string in the context of the web page</span><br><span class="hljs-comment">	*</span><br><span class="hljs-comment">	* @param ScriptText JavaScript string to execute</span><br><span class="hljs-comment">	*/</span><br>	UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">&quot;Web Browser&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ExecuteJavascript</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString&amp; ScriptText)</span></span>;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * Get the current title of the web page</span><br><span class="hljs-comment">	 */</span><br>	UFUNCTION(BlueprintCallable, Category=<span class="hljs-string">&quot;Web Browser&quot;</span>)<br>	<span class="hljs-function">FText <span class="hljs-title">GetTitleText</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	* Gets the currently loaded URL.</span><br><span class="hljs-comment">	*</span><br><span class="hljs-comment">	* @return The URL, or empty string if no document is loaded.</span><br><span class="hljs-comment">	*/</span><br>	UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">&quot;Web Browser&quot;</span>)<br>	<span class="hljs-function">FString <span class="hljs-title">GetUrl</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>;<br><br>	<span class="hljs-comment">/** Called when the Url changes. */</span><br>	UPROPERTY(BlueprintAssignable, Category = <span class="hljs-string">&quot;Web Browser|Event&quot;</span>)<br>	FOnUrlChanged OnUrlChanged;<br><br>	<span class="hljs-comment">/** Called when a popup is about to spawn. */</span><br>	UPROPERTY(BlueprintAssignable, Category = <span class="hljs-string">&quot;Web Browser|Event&quot;</span>)<br>	FOnBeforePopup OnBeforePopup;<br><br><span class="hljs-keyword">public</span>:<br><br>	<span class="hljs-comment">//~ Begin UWidget interface</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SynchronizeProperties</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br>	<span class="hljs-comment">// End UWidget interface</span><br><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ReleaseSlateResources</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> bReleaseChildren)</span> <span class="hljs-keyword">override</span></span>;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> WITH_EDITOR</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">const</span> FText <span class="hljs-title">GetPaletteCategory</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br><br><span class="hljs-keyword">protected</span>:<br>	<span class="hljs-comment">/** URL that the browser will initially navigate to. The URL should include the protocol, eg http:// */</span><br>	UPROPERTY(EditAnywhere, Category=Appearance)<br>	FString InitialURL;<br><br>	<span class="hljs-comment">/** Should the browser window support transparency. */</span><br>	UPROPERTY(EditAnywhere, Category=Appearance)<br>	<span class="hljs-keyword">bool</span> bSupportsTransparency;<br><br><span class="hljs-keyword">protected</span>:<br>	TSharedPtr&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SWebBrowser</span>&gt;</span> WebBrowserWidget;<br><br><span class="hljs-keyword">protected</span>:<br>	<span class="hljs-comment">// UWidget interface</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> TSharedRef&lt;SWidget&gt; <span class="hljs-title">RebuildWidget</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br>	<span class="hljs-comment">// End of UWidget interface</span><br><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">HandleOnUrlChanged</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FText&amp; Text)</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">HandleOnBeforePopup</span><span class="hljs-params">(FString URL, FString Frame)</span></span>;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<p>WebBrowser.cpp则是全盘拷贝到我们的MyWebBrowser.cpp中，然后将所有的UWebBrowser修改为UMyWebBrowser，将#include “WebBrowser.h”改为我们自己的#include “MyWebBrowser.h”即可。</p>
+<p>这里需要注意，有时会因为引擎位置不同导致#include “SWebBrowser.h”头文件打不开，此时我们需要给SWebBrowser.h一个路径即可，如：#include “Runtime/WebBrowser/Public/SWebBrowser.h”。</p>
+<p>然后如下的代码中的Experimental，可以改也可以不改，这段代码主要控制我们自定义的MyWebBrowser显示在UI的Palette中的分栏位置，这里我都改为My。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> WITH_EDITOR</span><br><br><span class="hljs-function"><span class="hljs-keyword">const</span> FText <span class="hljs-title">UWebBrowser::GetPaletteCategory</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> LOCTEXT(<span class="hljs-string">&quot;Experimental&quot;</span>, <span class="hljs-string">&quot;Experimental&quot;</span>);<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br></code></pre></div></td></tr></table></figure>
+<p>然后就可以编译了。</p>
+<h2 id="3-完整代码"><a href="#3-完整代码" class="headerlink" title="3.完整代码"></a>3.完整代码</h2><p>这里贴出完整代码，供参考。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">/*MyWebBrowser.h*/</span><br><br><span class="hljs-comment">// Fill out your copyright notice in the Description page of Project Settings.</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;CoreMinimal.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Components/Widget.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;MyWebBrowser.generated.h&quot;</span></span><br><br>UCLASS()<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WEBTEST_API</span> <span class="hljs-title">UMyWebBrowser</span> :</span> <span class="hljs-keyword">public</span> UWidget<br>&#123;<br>	GENERATED_UCLASS_BODY()<br><br><span class="hljs-keyword">public</span>:<br>	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUrlChanged, <span class="hljs-keyword">const</span> FText&amp;, Text);<br>	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnBeforePopup, FString, URL, FString, Frame);<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * Load the specified URL</span><br><span class="hljs-comment">	 *</span><br><span class="hljs-comment">	 * @param NewURL New URL to load</span><br><span class="hljs-comment">	 */</span><br>	UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">&quot;Web Browser&quot;</span>)<br>		<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LoadURL</span><span class="hljs-params">(FString NewURL)</span></span>;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * Load a string as data to create a web page</span><br><span class="hljs-comment">	 *</span><br><span class="hljs-comment">	 * @param Contents String to load</span><br><span class="hljs-comment">	 * @param DummyURL Dummy URL for the page</span><br><span class="hljs-comment">	 */</span><br>	UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">&quot;Web Browser&quot;</span>)<br>		<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LoadString</span><span class="hljs-params">(FString Contents, FString DummyURL)</span></span>;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	* Executes a JavaScript string in the context of the web page</span><br><span class="hljs-comment">	*</span><br><span class="hljs-comment">	* @param ScriptText JavaScript string to execute</span><br><span class="hljs-comment">	*/</span><br>	UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">&quot;Web Browser&quot;</span>)<br>		<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ExecuteJavascript</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString&amp; ScriptText)</span></span>;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * Get the current title of the web page</span><br><span class="hljs-comment">	 */</span><br>	UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">&quot;Web Browser&quot;</span>)<br>		<span class="hljs-function">FText <span class="hljs-title">GetTitleText</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	* Gets the currently loaded URL.</span><br><span class="hljs-comment">	*</span><br><span class="hljs-comment">	* @return The URL, or empty string if no document is loaded.</span><br><span class="hljs-comment">	*/</span><br>	UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">&quot;Web Browser&quot;</span>)<br>		<span class="hljs-function">FString <span class="hljs-title">GetUrl</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>;<br><br>	<span class="hljs-comment">/** Called when the Url changes. */</span><br>	UPROPERTY(BlueprintAssignable, Category = <span class="hljs-string">&quot;Web Browser|Event&quot;</span>)<br>	FOnUrlChanged OnUrlChanged;<br><br>	<span class="hljs-comment">/** Called when a popup is about to spawn. */</span><br>	UPROPERTY(BlueprintAssignable, Category = <span class="hljs-string">&quot;Web Browser|Event&quot;</span>)<br>	FOnBeforePopup OnBeforePopup;<br><br><span class="hljs-keyword">public</span>:<br><br>	<span class="hljs-comment">//~ Begin UWidget interface</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SynchronizeProperties</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br>	<span class="hljs-comment">// End UWidget interface</span><br><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ReleaseSlateResources</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> bReleaseChildren)</span> <span class="hljs-keyword">override</span></span>;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> WITH_EDITOR</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">const</span> FText <span class="hljs-title">GetPaletteCategory</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br><br><span class="hljs-keyword">protected</span>:<br>	<span class="hljs-comment">/** URL that the browser will initially navigate to. The URL should include the protocol, eg http:// */</span><br>	UPROPERTY(EditAnywhere, Category = Appearance)<br>		FString InitialURL;<br><br>	<span class="hljs-comment">/** Should the browser window support transparency. */</span><br>	UPROPERTY(EditAnywhere, Category = Appearance)<br>		<span class="hljs-keyword">bool</span> bSupportsTransparency;<br><br><span class="hljs-keyword">protected</span>:<br>	TSharedPtr&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SWebBrowser</span>&gt;</span> WebBrowserWidget;<br><br><span class="hljs-keyword">protected</span>:<br>	<span class="hljs-comment">// UWidget interface</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> TSharedRef&lt;SWidget&gt; <span class="hljs-title">RebuildWidget</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br>	<span class="hljs-comment">// End of UWidget interface</span><br><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">HandleOnUrlChanged</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FText&amp; Text)</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">HandleOnBeforePopup</span><span class="hljs-params">(FString URL, FString Frame)</span></span>;<br>&#125;;<br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">/*MyWebBrowser.cpp*/</span><br><br><span class="hljs-comment">// Fill out your copyright notice in the Description page of Project Settings.</span><br><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;MyWebBrowser.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Runtime/WebBrowser/Public/SWebBrowser.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Widgets/Layout/SBox.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Widgets/Text/STextBlock.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Async/TaskGraphInterfaces.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;UObject/ConstructorHelpers.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> WITH_EDITOR</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Materials/MaterialInterface.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Materials/MaterialExpressionMaterialFunctionCall.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Materials/MaterialExpressionTextureSample.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Materials/MaterialExpressionTextureSampleParameter2D.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Materials/MaterialFunction.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Factories/MaterialFactoryNew.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;AssetRegistryModule.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;PackageHelperFunctions.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> LOCTEXT_NAMESPACE <span class="hljs-meta-string">&quot;WebBrowser&quot;</span></span><br><br><span class="hljs-comment">/////////////////////////////////////////////////////</span><br><span class="hljs-comment">// UWebBrowser</span><br><br>UMyWebBrowser::UMyWebBrowser(<span class="hljs-keyword">const</span> FObjectInitializer&amp; ObjectInitializer)<br>	: Super(ObjectInitializer)<br>&#123;<br>	bIsVariable = <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UMyWebBrowser::LoadURL</span><span class="hljs-params">(FString NewURL)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (WebBrowserWidget.IsValid())<br>	&#123;<br>		<span class="hljs-keyword">return</span> WebBrowserWidget-&gt;LoadURL(NewURL);<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UMyWebBrowser::LoadString</span><span class="hljs-params">(FString Contents, FString DummyURL)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (WebBrowserWidget.IsValid())<br>	&#123;<br>		<span class="hljs-keyword">return</span> WebBrowserWidget-&gt;LoadString(Contents, DummyURL);<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UMyWebBrowser::ExecuteJavascript</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString&amp; ScriptText)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (WebBrowserWidget.IsValid())<br>	&#123;<br>		<span class="hljs-keyword">return</span> WebBrowserWidget-&gt;ExecuteJavascript(ScriptText);<br>	&#125;<br>&#125;<br><br><span class="hljs-function">FText <span class="hljs-title">UMyWebBrowser::GetTitleText</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (WebBrowserWidget.IsValid())<br>	&#123;<br>		<span class="hljs-keyword">return</span> WebBrowserWidget-&gt;GetTitleText();<br>	&#125;<br><br>	<span class="hljs-keyword">return</span> FText::GetEmpty();<br>&#125;<br><br><span class="hljs-function">FString <span class="hljs-title">UMyWebBrowser::GetUrl</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (WebBrowserWidget.IsValid())<br>	&#123;<br>		<span class="hljs-keyword">return</span> WebBrowserWidget-&gt;GetUrl();<br>	&#125;<br><br>	<span class="hljs-keyword">return</span> FString();<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UMyWebBrowser::ReleaseSlateResources</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> bReleaseChildren)</span></span><br><span class="hljs-function"></span>&#123;<br>	Super::ReleaseSlateResources(bReleaseChildren);<br><br>	WebBrowserWidget.Reset();<br>&#125;<br><br><span class="hljs-function">TSharedRef&lt;SWidget&gt; <span class="hljs-title">UMyWebBrowser::RebuildWidget</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (IsDesignTime())<br>	&#123;<br>		<span class="hljs-keyword">return</span> SNew(SBox)<br>			.HAlign(HAlign_Center)<br>			.VAlign(VAlign_Center)<br>			[<br>				SNew(STextBlock)<br>				.Text(LOCTEXT(<span class="hljs-string">&quot;Web Browser&quot;</span>, <span class="hljs-string">&quot;Web Browser&quot;</span>))<br>			];<br>	&#125;<br>	<span class="hljs-keyword">else</span><br>	&#123;<br>		WebBrowserWidget = SNew(SWebBrowser)<br>			.InitialURL(InitialURL)<br>			.ShowControls(<span class="hljs-literal">false</span>)<br>			.SupportsTransparency(bSupportsTransparency)<br>			.OnUrlChanged(BIND_UOBJECT_DELEGATE(FOnTextChanged, HandleOnUrlChanged))<br>			.OnBeforePopup(BIND_UOBJECT_DELEGATE(FOnBeforePopupDelegate, HandleOnBeforePopup));<br><br>		<span class="hljs-keyword">return</span> WebBrowserWidget.ToSharedRef();<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UMyWebBrowser::SynchronizeProperties</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	Super::SynchronizeProperties();<br><br>	<span class="hljs-keyword">if</span> (WebBrowserWidget.IsValid())<br>	&#123;<br><br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UMyWebBrowser::HandleOnUrlChanged</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FText&amp; InText)</span></span><br><span class="hljs-function"></span>&#123;<br>	OnUrlChanged.Broadcast(InText);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">UMyWebBrowser::HandleOnBeforePopup</span><span class="hljs-params">(FString URL, FString Frame)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (OnBeforePopup.IsBound())<br>	&#123;<br>		<span class="hljs-keyword">if</span> (IsInGameThread())<br>		&#123;<br>			OnBeforePopup.Broadcast(URL, Frame);<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			<span class="hljs-comment">// Retry on the GameThread.</span><br>			TWeakObjectPtr&lt;UMyWebBrowser&gt; WeakThis = <span class="hljs-keyword">this</span>;<br>			FFunctionGraphTask::CreateAndDispatchWhenReady([WeakThis, URL, Frame]()<br>			&#123;<br>				<span class="hljs-keyword">if</span> (WeakThis.IsValid())<br>				&#123;<br>					WeakThis-&gt;HandleOnBeforePopup(URL, Frame);<br>				&#125;<br>			&#125;, TStatId(), <span class="hljs-literal">nullptr</span>, ENamedThreads::GameThread);<br>		&#125;<br><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>	&#125;<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> WITH_EDITOR</span><br><br><span class="hljs-function"><span class="hljs-keyword">const</span> FText <span class="hljs-title">UMyWebBrowser::GetPaletteCategory</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> LOCTEXT(<span class="hljs-string">&quot;My&quot;</span>, <span class="hljs-string">&quot;My&quot;</span>);<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br><br><span class="hljs-comment">/////////////////////////////////////////////////////</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">undef</span> LOCTEXT_NAMESPACE</span><br><br></code></pre></div></td></tr></table></figure>
+
+
+<h1 id="二、嵌入Web页面"><a href="#二、嵌入Web页面" class="headerlink" title="二、嵌入Web页面"></a>二、嵌入Web页面</h1><p>我们创建的MyWebBrowser继承自Widget属于UI范畴，所以Web显示操作属于UI操作。</p>
+<h2 id="1-创建Web嵌入所用UI"><a href="#1-创建Web嵌入所用UI" class="headerlink" title="1.创建Web嵌入所用UI"></a>1.创建Web嵌入所用UI</h2><p>在Content Browser中右键/User Interface/Widget Buleprint，创建UI蓝图，这里我命名为WebBrowser。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170745.png" srcset="/img/loading.gif"></p>
+<p>打开WebBrowser，如果上面代码都编译通过了，那么在UI的Palette中应该会有一My栏，栏中有一个My Web Browser控件，这就是我们创建的自定义WebBrowser。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170752.png" srcset="/img/loading.gif"></p>
+<p>将My Web Browser拖入Hierachy中的Canvas Panel中并调整好大小。</p>
+<h2 id="2-显示UI"><a href="#2-显示UI" class="headerlink" title="2.显示UI"></a>2.显示UI</h2><p>打开关卡蓝图，写入如下蓝图脚本：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170758.png" srcset="/img/loading.gif"></p>
+<p>注意，Class中填入的是我们刚创建的UI蓝图webBrowser。</p>
+<h2 id="3-嵌入Web"><a href="#3-嵌入Web" class="headerlink" title="3.嵌入Web"></a>3.嵌入Web</h2><p>在UI蓝图webBrowser的Graph中写入如下蓝图脚本，在New URL中下入<a target="_blank" rel="noopener" href="http://www.baidu.com用以测试./">www.baidu.com用以测试。</a></p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170806.png" srcset="/img/loading.gif"></p>
+<p>运行测试</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170812.png" srcset="/img/loading.gif"></p>
+<p>测试通过。</p>
+<h1 id="三、UE4到Web通信"><a href="#三、UE4到Web通信" class="headerlink" title="三、UE4到Web通信"></a>三、UE4到Web通信</h1><p>UE4到Web的通信，这里以UE4到ECharts的通信为例，首先到ECharts官网下载一个自己喜欢的图表源码到本地。</p>
+<p>ECharts官网： <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/index.html">https://www.echartsjs.com/zh/index.html</a> </p>
+<p>我以折线图为例</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170819.png" srcset="/img/loading.gif"></p>
+<p>ECharts上手较为简单，官方有5分钟快速上手教程，有详尽的API解释，这里不多累赘。</p>
+<p>这里以使用UE4设置折线图Y轴的最大值和最小值为例。</p>
+<h2 id="1-通信前的准备"><a href="#1-通信前的准备" class="headerlink" title="1.通信前的准备"></a>1.通信前的准备</h2><p>UE4到Web的通信需要通过SWebBrowser类的一个函数来绑定通信对象，然后通过这个对象进行数据通信。</p>
+<p>首先我们需要定义一个函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++">UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">&quot;Web Browser&quot;</span>)<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UMyWebBrowser::BindUObject</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString &amp; Name, UObject * Object, <span class="hljs-keyword">bool</span> bIsPermanent)</span></span>;<br></code></pre></div></td></tr></table></figure>
+<p>函数调用SWebBrowser类里的<code>void SWebBrowser::BindUObject(const FString &amp; Name, UObject * Object, bool bIsPermanent);</code>函数实现通信中介的创建。</p>
+<p>这里要注意BindUObject函数需要暴露给蓝图调用。</p>
+<p>函数实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UMyWebBrowser::BindUObject</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString &amp; Name, UObject * Object, <span class="hljs-keyword">bool</span> bIsPermanent)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (WebBrowserWidget.IsValid())<br>	&#123;<br>		WebBrowserWidget-&gt;BindUObject(Name, Object, bIsPermanent);<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="2-创建通信对象与数据传递方法"><a href="#2-创建通信对象与数据传递方法" class="headerlink" title="2.创建通信对象与数据传递方法"></a>2.创建通信对象与数据传递方法</h2><p>然后再在WebBrowser的Graph的蓝图脚本中添加BindUObject的调用创建通信中介对象。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170828.png" srcset="/img/loading.gif"></p>
+<p>其中Name中填写的就是通信中介对象的名字，名字可以自定义，这里命的名字在Web中调用时用的对象名，中介对象就是Self，即当前Widget对象。</p>
+<p>UE4到Web的通信是Web主动调用UE4的方法，通信的数据则是这个方法的返回值，Web可以获取到这个返回值，通过这个对象中的这个方法的返回值即可达到数据通信的目的。</p>
+<p>在WebBrowser的My Blueprint/Functions中添加两个用于数据传递的方法，GetMin和GetMax。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170833.png" srcset="/img/loading.gif"></p>
+<p><font color="red">这里要注意，用于数据传递的方法的返回值的名字必须是<code>ReturnValue</code>否则数据无法传递。</font></p>
+<p>之后就可以在Web中操作通过obj这个对象操作这些函数来获取UE4里的Min和Max变量了。</p>
+<p>这里贴出Web源码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;meta charset=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;<br>    &lt;!-- 引入 echarts.js --&gt;<br>	&lt;script src=<span class="hljs-string">&quot;C:/Users/Administrator/Desktop/ECharts/echarts.min.js&quot;</span>&gt;&lt;/script&gt;<br>    &lt;script src=<span class="hljs-string">&quot;C:/Users/Administrator/Desktop/ECharts/jquery.min.js&quot;</span>&gt;&lt;/script&gt;<br>&lt;/head&gt;<br>&lt;body style = <span class="hljs-string">&quot;background-color:#d8d8d8&quot;</span>&gt;<br>    &lt;!-- 为ECharts准备一个具备大小（宽高）的Dom --&gt;<br>	&lt;div id=<span class="hljs-string">&quot;main&quot;</span> style=<span class="hljs-string">&quot;width: 1000px;height:450px;position:1px; top:1px;&quot;</span>&gt;CHART&lt;/div&gt;<br>	&lt;script type=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;<br>         <br>		<span class="hljs-keyword">var</span> myChart = echarts.init(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;main&quot;</span>));<br>		<span class="hljs-keyword">var</span> x = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>,<span class="hljs-number">14</span>,<span class="hljs-number">15</span>,<span class="hljs-number">16</span>,<span class="hljs-number">17</span>,<span class="hljs-number">18</span>,<span class="hljs-number">19</span>,<span class="hljs-number">20</span>,<span class="hljs-number">20</span>,<span class="hljs-number">22</span>,<span class="hljs-number">23</span>,<span class="hljs-number">24</span>,<span class="hljs-number">25</span>,<span class="hljs-number">26</span>,<span class="hljs-number">27</span>,<span class="hljs-number">28</span>,<span class="hljs-number">29</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>,<span class="hljs-number">32</span>,<span class="hljs-number">33</span>,<span class="hljs-number">34</span>,<span class="hljs-number">35</span>,<span class="hljs-number">36</span>,<span class="hljs-number">37</span>,<span class="hljs-number">38</span>,<span class="hljs-number">39</span>,<span class="hljs-number">40</span>];<br>		<span class="hljs-keyword">var</span> y = [];<br>		<br>		<span class="hljs-keyword">var</span> y_min = <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">var</span> y_max = <span class="hljs-number">1</span>;<br>		<br>		<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Set</span>(<span class="hljs-params"></span>)</span>&#123;<br>			option = &#123;<br>				tooltip :<br>				&#123;<br>					trigger : <span class="hljs-string">&#x27;axis&#x27;</span>,<br>					<span class="hljs-comment">//十字锚点</span><br>					axisPointer:<br>					&#123;<br>						type: <span class="hljs-string">&#x27;cross&#x27;</span>,<br>						animation: <span class="hljs-literal">false</span>,<br>						label: &#123;<span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&#x27;#505765&#x27;</span>&#125;,<br>						lineStyle : &#123;<span class="hljs-attr">type</span> : <span class="hljs-string">&#x27;dashed&#x27;</span>&#125;<br>					&#125;<br>				&#125;,<br>				xAxis: &#123;<span class="hljs-attr">data</span>: x&#125;,<br>				yAxis: <br>				&#123;<br>					splitLine: &#123;<span class="hljs-attr">show</span>: <span class="hljs-literal">false</span> &#125;,<br>					min : y_min,<br>					max : y_max<br>				&#125;,<br>				dataZoom: [<br>					&#123;<span class="hljs-attr">startValue</span>: <span class="hljs-string">&#x27;2014-06-01&#x27;</span>&#125;, <br>					&#123;<span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;inside&#x27;</span>&#125;<br>				],	<br>				series: &#123;<br>					type: <span class="hljs-string">&#x27;line&#x27;</span>,<br>					data: y<br>				&#125;<br>			&#125;<br>		&#125;<br>		<br>		<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">SetYMinAndMax</span>(<span class="hljs-params"></span>)</span>&#123;<br>			ue.obj.getmin().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ReturnValue</span>)</span>&#123;<br>				y_min = ReturnValue;<br>			&#125;);<br>			ue.obj.getmax().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ReturnValue</span>)</span>&#123;<br>				y_max = ReturnValue;<br>			&#125;);<br>		&#125;<br>		<br>		<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">AddData</span>(<span class="hljs-params"></span>)</span>&#123;<br>			y.push(<span class="hljs-built_in">Math</span>.random());<br>		&#125;<br>		<br>		SetYMinAndMax();<br>		<span class="hljs-built_in">setInterval</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>			AddData();<br>			<span class="hljs-built_in">Set</span>();<br>			myChart.setOption(option);<br>		&#125;,<span class="hljs-number">1000</span>);<br>    &lt;/script&gt;		<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></div></td></tr></table></figure>
+<p>其中SetYMinAndMax函数便是UE4与Web的数据通信。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">SetYMinAndMax</span>(<span class="hljs-params"></span>)</span>&#123;<br>			ue.obj.getmin().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ReturnValue</span>)</span>&#123;<br>				y_min = ReturnValue;<br>			&#125;);<br>			ue.obj.getmax().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ReturnValue</span>)</span>&#123;<br>				y_max = ReturnValue;<br>			&#125;);<br>		&#125;<br></code></pre></div></td></tr></table></figure>
+<p><font color="red">这里还需要注意，ue.obj.getmin()和ue.obj.getmax()必须使用小写，否则也无法通信，其次匿名函数function(ReturnValue)的参数名也必须为ReturnValue不可更改，否则数据依然无法传递。</font></p>
+<p>然后测试一下数据传递是否正确。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170845.png" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514170850.png" srcset="/img/loading.gif"></p>
+<p>可以看到Y轴的最大值由1改为了Max变量的值2。数据传递成功。</p>
+<p>上面的Web程序要运行还需要两个文件<code>echarts.min.js</code>和<code>jquery.min.js</code>，文件放在：</p>
+<p>这是B站上的视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av47212309">https://www.bilibili.com/video/av47212309</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/12/%E3%80%90UE4%E3%80%91UE4%E8%A7%92%E8%89%B2%E6%8E%A7%E5%88%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/12/%E3%80%90UE4%E3%80%91UE4%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9%E7%B2%92%E5%AD%90%E5%8F%82%E6%95%B0/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>Github</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
