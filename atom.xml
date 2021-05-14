@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-18T09:23:18.369Z</updated>
+  <updated>2021-05-14T09:14:26.241Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,116 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2021/05/12/%E3%80%90UE4%E3%80%91UE4%E8%A7%92%E8%89%B2%E6%8E%A7%E5%88%B6/"/>
+    <id>http://yoursite.com/2021/05/12/%E3%80%90UE4%E3%80%91UE4%E8%A7%92%E8%89%B2%E6%8E%A7%E5%88%B6/</id>
+    <published>2021-05-12T03:18:55.241Z</published>
+    <updated>2021-05-14T09:14:26.241Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一、UE4的角色控制框架&quot;&gt;&lt;a href=&quot;#一、UE4的角色控制框架&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2021/05/12/%E3%80%90UE4%E3%80%91UE4%E5%86%85%E5%B5%8CWeb%E5%8F%8A%E4%B8%8EWeb%E9%80%9A%E4%BF%A1/"/>
+    <id>http://yoursite.com/2021/05/12/%E3%80%90UE4%E3%80%91UE4%E5%86%85%E5%B5%8CWeb%E5%8F%8A%E4%B8%8EWeb%E9%80%9A%E4%BF%A1/</id>
+    <published>2021-05-12T03:18:55.194Z</published>
+    <updated>2021-05-14T09:09:00.907Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;UE4嵌入Web及UE4到Web的通信，我使用UE 4.22.3版本，以UE4嵌入ECharts并与ECharts通信为例。&lt;/p&gt;
+&lt;h1 id=&quot;一、自定义WebBrowser&quot;&gt;&lt;a href=&quot;#一、自定义WebBrowser&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2021/05/12/%E3%80%90UE4%E3%80%91UE4%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9%E7%B2%92%E5%AD%90%E5%8F%82%E6%95%B0/"/>
+    <id>http://yoursite.com/2021/05/12/%E3%80%90UE4%E3%80%91UE4%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9%E7%B2%92%E5%AD%90%E5%8F%82%E6%95%B0/</id>
+    <published>2021-05-12T03:18:55.181Z</published>
+    <updated>2021-05-14T09:11:09.448Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;如果对UE4联级粒子P_Water系统比较熟悉的可能对动态修改粒子参数不陌生。&lt;/p&gt;
+&lt;p&gt;UE4的联级粒子系统大部分的模块都拥有一个&lt;font color=&quot;red&quot;&gt; Distribution&lt;/font&gt;子栏，其中可以选择如下模式&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2021/05/12/%E3%80%90UE4%E3%80%91UE4Socket%E7%BC%96%E7%A8%8B/"/>
+    <id>http://yoursite.com/2021/05/12/%E3%80%90UE4%E3%80%91UE4Socket%E7%BC%96%E7%A8%8B/</id>
+    <published>2021-05-12T03:18:55.179Z</published>
+    <updated>2021-05-14T09:16:45.061Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一、基于C-的服务器&quot;&gt;&lt;a href=&quot;#一、基于C-的服务器&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2021/05/12/%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/"/>
+    <id>http://yoursite.com/2021/05/12/%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</id>
+    <published>2021-05-12T03:18:55.172Z</published>
+    <updated>2021-05-14T09:17:17.795Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Windows自动脚本，我已自动同步GitHub仓库为例。&lt;/p&gt;
+&lt;p&gt;先上源码，可以直接用TXT写，然后将文件后缀改为.bat。&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>【C++】C++11新特性</title>
@@ -40,13 +150,13 @@
     <link href="http://yoursite.com/2021/02/26/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%9E%B6%E6%9E%84/"/>
     <id>http://yoursite.com/2021/02/26/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%9E%B6%E6%9E%84/</id>
     <published>2021-02-26T01:37:18.000Z</published>
-    <updated>2021-04-02T09:18:29.529Z</updated>
+    <updated>2021-05-13T11:01:22.596Z</updated>
     
     
     <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
 
 &lt;p&gt;参考博客：&lt;a href=&quot;https://docs.unrealengine.com/en-US/index.html&quot;&gt;UE4官方文档&lt;/a&gt;、&lt;a href=&quot;https://zhuanlan.zhihu.com/p/22813908&quot;&gt;大钊&lt;/a&gt;、&lt;a href=&quot;https://zhuanlan.zhihu.com/p/67055774&quot;&gt;南京周润发&lt;/a&gt;、&lt;a href=&quot;https://blog.csdn.net/qq_29523119/article/details/84981218&quot;&gt;带带大师兄&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;一、整体框架&quot;&gt;&lt;a href=&quot;#一、整体框架&quot; class=&quot;headerlink&quot; title=&quot;一、整体框架&quot;&gt;&lt;/a&gt;一、整体框架&lt;/h1&gt;&lt;p&gt;首先来看一下整体框架：&lt;br&gt;)&lt;/p&gt;</summary>
+&lt;h1 id=&quot;一、整体框架&quot;&gt;&lt;a href=&quot;#一、整体框架&quot; class=&quot;headerlink&quot; title=&quot;一、整体框架&quot;&gt;&lt;/a&gt;一、整体框架&lt;/h1&gt;&lt;p&gt;首先来看一下整体框架：&lt;/p&gt;</summary>
     
     
     
@@ -180,7 +290,7 @@
     <link href="http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/"/>
     <id>http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/</id>
     <published>2019-11-06T13:10:52.000Z</published>
-    <updated>2021-02-01T13:33:53.153Z</updated>
+    <updated>2021-05-11T12:12:02.613Z</updated>
     
     
       
@@ -312,19 +422,6 @@
   </entry>
   
   <entry>
-    <title>【UE4】基础</title>
-    <link href="http://yoursite.com/2019/10/14/%E3%80%90UE4%E3%80%91UE4%E5%9F%BA%E7%A1%80/"/>
-    <id>http://yoursite.com/2019/10/14/%E3%80%90UE4%E3%80%91UE4%E5%9F%BA%E7%A1%80/</id>
-    <published>2019-10-14T03:39:39.000Z</published>
-    <updated>2019-11-18T07:25:19.000Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>【日记】在武汉跑秋招的日子</title>
     <link href="http://yoursite.com/2019/10/12/%E3%80%90%E6%97%A5%E8%AE%B0%E3%80%91%E5%9C%A8%E6%AD%A6%E6%B1%89%E8%B7%91%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%97%A5%E5%AD%90/"/>
     <id>http://yoursite.com/2019/10/12/%E3%80%90%E6%97%A5%E8%AE%B0%E3%80%91%E5%9C%A8%E6%AD%A6%E6%B1%89%E8%B7%91%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%97%A5%E5%AD%90/</id>
@@ -348,7 +445,7 @@
     <link href="http://yoursite.com/2019/10/10/%E3%80%90%E5%BE%85%E8%A7%A3%E5%86%B3%E3%80%91%E4%B8%80%E4%BA%9B%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%9A%BE%E9%A2%98/"/>
     <id>http://yoursite.com/2019/10/10/%E3%80%90%E5%BE%85%E8%A7%A3%E5%86%B3%E3%80%91%E4%B8%80%E4%BA%9B%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%9A%BE%E9%A2%98/</id>
     <published>2019-10-10T14:15:48.000Z</published>
-    <updated>2021-02-01T13:35:05.375Z</updated>
+    <updated>2021-05-13T06:01:29.095Z</updated>
     
     
       
@@ -395,114 +492,6 @@
     
     
     <category term="CPlus" scheme="http://yoursite.com/tags/CPlus/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【算法】一些牛逼轰轰的算法记录</title>
-    <link href="http://yoursite.com/2019/10/08/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E4%B8%80%E4%BA%9B%E7%89%9B%E9%80%BC%E8%BD%B0%E8%BD%B0%E7%9A%84%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
-    <id>http://yoursite.com/2019/10/08/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E4%B8%80%E4%BA%9B%E7%89%9B%E9%80%BC%E8%BD%B0%E8%BD%B0%E7%9A%84%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95/</id>
-    <published>2019-10-08T14:07:36.000Z</published>
-    <updated>2021-03-26T03:42:12.593Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h1 id=&quot;1-判断点是否在三角形内&quot;&gt;&lt;a href=&quot;#1-判断点是否在三角形内&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【C++】C++STL标准模板库</title>
-    <link href="http://yoursite.com/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/"/>
-    <id>http://yoursite.com/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/</id>
-    <published>2019-10-06T02:20:37.000Z</published>
-    <updated>2021-03-30T03:19:55.514Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h1 id=&quot;一、STL的基本概念&quot;&gt;&lt;a href=&quot;#一、STL的基本概念&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="CPlus" scheme="http://yoursite.com/tags/CPlus/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【C++】C++函数模板的实现机制剖析</title>
-    <link href="http://yoursite.com/2019/10/03/%E3%80%90C++%E3%80%91C++%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E5%89%96%E6%9E%90/"/>
-    <id>http://yoursite.com/2019/10/03/%E3%80%90C++%E3%80%91C++%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E5%89%96%E6%9E%90/</id>
-    <published>2019-10-03T12:14:23.000Z</published>
-    <updated>2021-03-17T07:18:17.619Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h1 id=&quot;函数模板的实现机制剖析&quot;&gt;&lt;a href=&quot;#函数模板的实现机制剖析&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="CPlus" scheme="http://yoursite.com/tags/CPlus/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【C】C的typedef的妙用</title>
-    <link href="http://yoursite.com/2019/10/03/%E3%80%90C%E3%80%91C%E7%9A%84typedef%E7%9A%84%E5%A6%99%E7%94%A8/"/>
-    <id>http://yoursite.com/2019/10/03/%E3%80%90C%E3%80%91C%E7%9A%84typedef%E7%9A%84%E5%A6%99%E7%94%A8/</id>
-    <published>2019-10-03T01:53:37.000Z</published>
-    <updated>2021-02-01T13:26:19.697Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h1 id=&quot;1-自定义数组类型&quot;&gt;&lt;a href=&quot;#1-自定义数组类型&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="C" scheme="http://yoursite.com/tags/C/"/>
     
   </entry>
   

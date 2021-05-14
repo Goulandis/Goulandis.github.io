@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shun.png">
+  <link rel="icon" type="image/png" href="/img/shun.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Goulandis">
+  <meta name="keywords" content="snoopy">
+  <title>Goulandis</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/vs2015.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Goulandis" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/Post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-12 11:18" pubdate>
+        May 12, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h1 id="一、基于C-的服务器"><a href="#一、基于C-的服务器" class="headerlink" title="一、基于C++的服务器"></a>一、基于C++的服务器</h1><p>当然服务器也是可以使用UE4写的，不过对于一般的不需要UI的服务器来说，直接使用C++控制台程序编写要方便得多。</p>
+<h2 id="1-所需头文件和静态库"><a href="#1-所需头文件和静态库" class="headerlink" title="1.所需头文件和静态库"></a>1.所需头文件和静态库</h2><p><code>#include &lt;winsock.h&gt;</code></p>
+<p><code>#pragma comment(lib &quot;ws2_32.lib&quot;)</code></p>
+<p><font color="red"> 需要注意的是，winsock.h是Windows环境使用的头文件，对于其他的环境需要使用其他的头文件，如在Linux下使用的是socket.h。</font></p>
+<p>有的时候也是用winsock2.h，winsockt2.h是winsockt.h的升级版，一个文件中不可同时存在winsockt.h和winsockt2.h，因为winsockt2.h中有重定义winsockt.h中的内容。</p>
+<h2 id="2-创建套接字"><a href="#2-创建套接字" class="headerlink" title="2.创建套接字"></a>2.创建套接字</h2><p><strong>Server.h</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">&quot;ws2_32.lib&quot;</span>)</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Server</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>	WSADATA wsd;<span class="hljs-comment">//存放套接字的属性，如：版本信息等</span><br>	SOCKET serverSocket;<br>	SOCKET clientSocket;<br>	SOCKADDR_IN serverAddr;<span class="hljs-comment">//用于设置套接字使用的地址类型，端口和</span><br><br>	Server(<span class="hljs-keyword">int</span> port);<br>	~Server();<br><br>	<span class="hljs-function">SOCKET <span class="hljs-title">ClientListen</span><span class="hljs-params">()</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Receive</span><span class="hljs-params">(SOCKET clientSocket)</span></span>;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<p><strong>创建套接字</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++">Server::Server(<span class="hljs-keyword">int</span> port)<br>&#123;<br>	<span class="hljs-comment">//打开2.2版本的套接字，注册套接字</span><br>	<span class="hljs-keyword">if</span> (WSAStartup(MAKEWORD(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>), &amp;wsd) != <span class="hljs-number">0</span>)<br>	&#123;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;初始化套接字动态库错误&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>	<span class="hljs-comment">//创建套接字，AF_INET--使用Inter使用，SOCK_STREAM--使用流式传输，IPPROTO_TCP--使用TCP连接</span><br>	serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);<br>	<span class="hljs-keyword">if</span> (serverSocket == INVALID_SOCKET)<br>	&#123;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;套接字创建失败&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		WSACleanup();<span class="hljs-comment">//注销套接字</span><br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br><br>	serverAddr.sin_family = AF_INET;<span class="hljs-comment">//配置地址类型为InterIP</span><br>	serverAddr.sin_port = htons(port);<span class="hljs-comment">//配置占用端口</span><br>	serverAddr.sin_addr.S_un.S_addr = INADDR_ANY;<span class="hljs-comment">//接受任何IP类型</span><br>	<span class="hljs-comment">//将IP和端口与套接字绑定</span><br>	<span class="hljs-keyword">int</span> ret = bind(serverSocket, (LPSOCKADDR)&amp;serverAddr, <span class="hljs-keyword">sizeof</span>(SOCKADDR_IN));<br>	<span class="hljs-keyword">if</span> (ret == SOCKET_ERROR)<br>	&#123;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;套接字绑定失败&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		closesocket(serverSocket);<span class="hljs-comment">//关闭套接字</span><br>		WSACleanup();<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>其间也可以加一个版本判断，判断注册的套接字是否是2.2版本的</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">if</span> (LOBYTE(wsd.wVersion != <span class="hljs-number">2</span> || HIBYTE(wsd.wVersion) != <span class="hljs-number">2</span>))<br>&#123;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;套接字版本错误，需要打开2.2版本的套接字&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>	WSACleanup();<br>	<span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="3-套接字监听"><a href="#3-套接字监听" class="headerlink" title="3.套接字监听"></a>3.套接字监听</h2><p>C++没有提供专门的异步套接字监听方法，如果不想使用阻塞的方式，即同步方式监听套接字的话，就需要通过线程来实现异步监听了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function">SOCKET <span class="hljs-title">Server::ClientListen</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> ret = listen(serverSocket, SOMAXCONN);<span class="hljs-comment">//开启套接字监听，SOMAXCONN--监听队列设为最大</span><br>	<span class="hljs-keyword">if</span> (ret == SOCKET_ERROR)<br>	&#123;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;监听时发生错误&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		closesocket(serverSocket);<br>		WSACleanup();<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	&#125;<br>	sockaddr_in clientAddr;<span class="hljs-comment">//用于存储接收到的客户端的地址信息</span><br>	<span class="hljs-keyword">int</span> clientAddrLen = <span class="hljs-keyword">sizeof</span>(clientAddr);<br>    <span class="hljs-comment">//接受serverSocket缓冲区里clientAddrlen长度的内容，即一个套接字</span><br>	SOCKET clientSocket = accept(serverSocket, (sockaddr FAR*)&amp;clientAddr, &amp;clientAddrLen);<br>	<span class="hljs-keyword">if</span> (clientSocket == INVALID_SOCKET)<br>	&#123;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;接受客户端时发生错误&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		closesocket(serverSocket);<br>		WSACleanup();<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	&#125;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;接受到客户端&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>	<span class="hljs-keyword">return</span> clientSocket;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="4-接受消息"><a href="#4-接受消息" class="headerlink" title="4.接受消息"></a>4.接受消息</h2><p>获取到客户端的套接字后，就可以就收客户端发送过来的消息了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Server::Receive</span><span class="hljs-params">(SOCKET clientSocket)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">char</span> receiveBuff[<span class="hljs-number">50</span>];<span class="hljs-comment">//接受消息内容缓冲数组</span><br>    <span class="hljs-comment">//接受消息</span><br>	recv(clientSocket, receiveBuff, <span class="hljs-built_in">strlen</span>(receiveBuff), <span class="hljs-number">0</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, receiveBuff);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="5-发送消息"><a href="#5-发送消息" class="headerlink" title="5.发送消息"></a>5.发送消息</h2><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Server::Send</span><span class="hljs-params">(SOCKET clientSocket, <span class="hljs-keyword">char</span> * sendBuff)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//发送sendBuff发送消息数组钟的内容到clientSocket套接字</span><br>	send(clientSocket, sendBuff, <span class="hljs-built_in">strlen</span>(sendBuff) + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="二、GameMode与GameInstance"><a href="#二、GameMode与GameInstance" class="headerlink" title="二、GameMode与GameInstance"></a>二、GameMode与GameInstance</h1><p>由于UE4在换关卡的时候会删除世界大纲中的上一关卡中的所有的内容，所以对于需要在整个游戏运行期间都必须工作的套接字来说，需要在一个从游戏开始运行到游戏程序关闭都存在的场所中工作，这个场所就是GameInstance，而使用自定义GameInstance需要用到GameMode，所以在写UE4客户端套接字之前，我们有必要先了解GameInstance和GameMode。</p>
+<h2 id="1-GameInstance"><a href="#1-GameInstance" class="headerlink" title="1.GameInstance"></a>1.GameInstance</h2><p>要了解GameInstance，首先我们要对UE的引擎结构有一点点的了解。</p>
+<p>UE的宇宙是由UEngine这个创世神管理的各个World组成的，每个World就是一个个平行世界，编辑模式是一个World，运行模式是一个World，而每个World又由各个Level组成，每个Level又由各个Actor组成，而每个Actor拥有各种不同Component从而形成了各式各样的Actor，于是多姿多彩的UE世界便展开了，而GameInstance就是凌驾于World之上的存在。</p>
+<p><font color="red"> GameInstance的生命周期就是整个游戏进程的生命周期，从游戏开始到游戏程序关闭，并且GameInstance在整个游戏进程中只存在一个对象，即单例，就如名字一般</font>。所以任何凌驾于Level和World之上的逻辑都应该在GameInstance中保存和实现，比如游戏网络连接，因为Level在切换时UE4会清空上一个Level在世界大纲中所有内容，然后加载下一个Level的内容，此时如果把游戏网络连接的逻辑放在Level或World中，这些逻辑就会被清空，在上一个Level内容被清空到下一个Level中重新加载网络连接逻辑的期间游戏会处于网络孤立状态。在游戏运行期间World在任意时刻其实都是是唯一的，为什么网络连接的逻辑不能放在World中，而要放在GameInstance中呢?这是因为UE在加载新的Level时，其实是在销毁前一个World，创建了一个新的World。但是World依然只有一个。</p>
+<p><strong>使用GameInstance</strong></p>
+<p>使用GameInstance的方法很简单，就是创建一个类继承自UGameInstance的子类，这个子类就继承到了GameInstance的所有属性了。</p>
+<p>但是GameInstance不存在于世界大纲中该如何执行在其中实现的逻辑代码呢？这就是我们接下来要来了解的GameMode的事了。</p>
+<h2 id="2-GameMode"><a href="#2-GameMode" class="headerlink" title="2.GameMode"></a>2.GameMode</h2><p>首先我们需要知道什么是GameMode，在UE4里GameMode是对应World层存在的，UE4给予GameMode的职责就是处理与实现游戏逻辑，即游戏的玩法，这里我们要区分GameMode与LevelBlueptint，LevelBlueprint是对应Level存在在，每一个Level有且只有一个LevelBlueprint，而GameMode是对应World存在的，每一个World有且只有一个GameMode，但是一个UE4游戏中是可以有多个GameMode，就像一个游戏可以有多种规则玩法一样。</p>
+<p>在UE4里GameInstance里的内容可以被全局调用，那么我们为什么要使用GameMode来实现网络连接而不是用更易理解的LevelBlueprint呢？这是因为GameMode提供了内容在拥有不同GameMode的World中迁移的能力，加以大多数游戏一般只有一中游戏规则，即一个GameMode，所以在GameMode中做网络连接的逻辑是较为恰当的。</p>
+<p><strong>使用GameMode</strong></p>
+<p>GameMode实质上是一个继承自GameModeBase的蓝图类，我们只需创建一个继承自GameModeBase的GameMode，就可以在GameMode中编写蓝图脚本调用C++函数来实现游戏逻辑了，为什么在GameMode中只进行函数调用呢？因为如果所有的代码逻辑都在GameMode中实现就会显得GameMode过于臃肿，所以GameMode一般进行函数调用，而函数的实现则在C++类中处理。</p>
+<p>至此，客户端的网络部分的代码逻辑在什么地方编写就基本确定了。</p>
+<h1 id="三、UE4客户端"><a href="#三、UE4客户端" class="headerlink" title="三、UE4客户端"></a>三、UE4客户端</h1><h2 id="1-前提准备"><a href="#1-前提准备" class="headerlink" title="1.前提准备"></a>1.前提准备</h2><ul>
+<li><p>UE4编写网络模块的逻辑需要在.Build.cs文件里添加两个模块<font color="red"> “Sockets”, “Networking”</font>；</p>
+</li>
+<li><p>创建一个继承自UGameInstance的类作为网络部分的代码实现模块；</p>
+</li>
+<li><p>创建一个继承自GameModeBase的GameMode，并在Settings/Project Settings/Maps&amp;Mode下设置项目默认的GameMode和GameInstance。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171635.png" srcset="/img/loading.gif"></p>
+</li>
+</ul>
+<h2 id="2-连接服务器"><a href="#2-连接服务器" class="headerlink" title="2.连接服务器"></a>2.连接服务器</h2><p><strong>.h</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;FReceiveThread.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Runtime/NEtworking/Public/Networking.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;CoreMinimal.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Engine/GameInstance.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;ServerConnector.generated.h&quot;</span></span><br><br>UCLASS()<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MYGAME_API</span> <span class="hljs-title">UServerConnector</span> :</span> <span class="hljs-keyword">public</span> UGameInstance<br>&#123;<br>	GENERATED_BODY()<br><span class="hljs-keyword">private</span>:<br><br>	FSocket *connectSocket;<br>	FIPv4Address ip;<br>	TSharedPtr&lt;FReceiveThread&gt; receiveThread;<br><br><span class="hljs-keyword">public</span>:<br><br>	FString msg;<br><br><span class="hljs-keyword">public</span>:<br>	UServerConnector() &#123;&#125;<br>	<span class="hljs-comment">//create socket and connect server</span><br>	UFUNCTION(BlueprintCallable,Category=<span class="hljs-string">&quot;ClientSocket&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ServerConnect</span><span class="hljs-params">(FString ip,int32 port)</span></span>;<br>	<span class="hljs-comment">//send message to server</span><br>	UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">&quot;ClientSocket&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Send</span><span class="hljs-params">(FString msg)</span></span>;<br>	<span class="hljs-comment">//receive message from server</span><br>	UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">&quot;ClientSocket&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Receive</span><span class="hljs-params">()</span></span>;<br>	<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<p><strong>连接Server</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">UServerConnector::ServerConnect</span><span class="hljs-params">(FString ip, int32 port)</span></span><br><span class="hljs-function"></span>&#123;<br>	FIPv4Address::Parse(ip,<span class="hljs-keyword">this</span>-&gt;ip);<span class="hljs-comment">//将字符串表示的ip转换成点分十进制的ip</span><br>    <span class="hljs-comment">//创建服务器套接字地址，PLATFROM_SOCKTSUBSYSTEM--选择当前系统的套接字</span><br>	TSharedPtr&lt;FInternetAddr&gt; addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)-&gt;CreateInternetAddr();<br>	addr-&gt;SetIp(<span class="hljs-keyword">this</span>-&gt;ip.Value);<span class="hljs-comment">//向套接字地址绑定服务器ip</span><br>	addr-&gt;SetPort(port);<span class="hljs-comment">//向套接字地址绑定服务器端口</span><br>    <span class="hljs-comment">//创建客户端套接字，NAME_Stream--使用流式传输，Default--套接字描述，false使用TCP，Ture使用UDP连接</span><br>	connectSocket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)-&gt;CreateSocket(NAME_Stream, TEXT(<span class="hljs-string">&quot;Default&quot;</span>), <span class="hljs-literal">false</span>);<br>	<span class="hljs-keyword">if</span> (!connectSocket-&gt;Connect(*addr))<span class="hljs-comment">//连接服务器</span><br>	&#123;<br>		UE_LOG(LogTemp, Error, TEXT(<span class="hljs-string">&quot;ServerConnector.cpp:Connect Failed&quot;</span>));<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>	UE_LOG(LogTemp, Error, TEXT(<span class="hljs-string">&quot;Connect Succeed&quot;</span>));<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="3-发送消息"><a href="#3-发送消息" class="headerlink" title="3.发送消息"></a>3.发送消息</h2><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">UServerConnector::Send</span><span class="hljs-params">(FString msg)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//将字符串形式的消息转换成TCHAR*类型，因为二进制流的转换只支持TCHAR类型</span><br>	TCHAR *seriallizedChar = msg.GetCharArray().GetData();<br>	int32 size = FCString::Strlen(seriallizedChar) + <span class="hljs-number">1</span>;<span class="hljs-comment">//计算消息的内存大小</span><br>	int32 sent = <span class="hljs-number">0</span>;<span class="hljs-comment">//这一行是Send函数的格式要求，提供给Send内部使用的参数</span><br>    <span class="hljs-comment">//将消息转化成二进制流并向服务器发送消息</span><br>	<span class="hljs-keyword">if</span> (!connectSocket-&gt;Send((uint8*)TCHAR_TO_UTF8(seriallizedChar), size, sent))<br>	&#123;<br>		UE_LOG(LogTemp, Error, TEXT(<span class="hljs-string">&quot;Message Send Failly&quot;</span>));<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>	UE_LOG(LogTemp, Error, TEXT(<span class="hljs-string">&quot;Message Send Successlly&quot;</span>));<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="4接受消息"><a href="#4接受消息" class="headerlink" title="4接受消息"></a>4接受消息</h2><p>接受消息就需要使用到UE4线程了，那么首先我们就需要了解UE4线程。</p>
+<p>在UE4中线程就是一个继承自FRunnable的类，我们创建这个类的对象的同时就开启了线程，<font color="red"> 要注意的是继承自FRunnable的类是一个自定义类，即以F开头的类，并且自定义类在UE4的内容浏览器中是不显示的</font>。</p>
+<p><strong>需要包含的头文件</strong></p>
+<ul>
+<li><p>#include “Runnable.h”</p>
+</li>
+<li><p>#include “RunnableThread.h”</p>
+<p>或者我们也可以直接只包含#include “ThreadingBase.h”头文件，ThreadingBase.h里面就已经包含了线程所需要的所有的头文件</p>
+</li>
+</ul>
+<h3 id="h"><a href="#h" class="headerlink" title=".h"></a><strong>.h</strong></h3><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;CoreMinimal.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Runnable.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;RunnableThread.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Networking.h&quot;</span></span><br><span class="hljs-comment">//#include &quot;ThreadingBase.h&quot;</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MYGAME_API</span> <span class="hljs-title">FReceiveThread</span> :</span> <span class="hljs-keyword">public</span> FRunnable<br>&#123;<br><span class="hljs-keyword">private</span>:<br><br>	FRunnableThread* thread = <span class="hljs-literal">nullptr</span>;	<br>	<span class="hljs-keyword">bool</span> threadRuning;<br>	FSocket* socket;<span class="hljs-comment">//需要读取消息的线程</span><br><br><span class="hljs-keyword">public</span>:<br><br>	FString msg;<br><br><span class="hljs-keyword">private</span>:	<br>	<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> uint32 <span class="hljs-title">Run</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Stop</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br><br><span class="hljs-keyword">public</span>:<br>	FReceiveThread(FSocket* socket);<br>	~FReceiveThread();;<br><br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<p><strong>.cpp</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;FReceiveThread.h&quot;</span></span><br><br>FReceiveThread::FReceiveThread(FSocket* socket)<br>&#123;<br>	<span class="hljs-keyword">this</span>-&gt;socket = socket;<br>	thread = FRunnableThread::Create(<span class="hljs-keyword">this</span>, TEXT(<span class="hljs-string">&quot;ReceiveThread&quot;</span>), <span class="hljs-number">0</span>);<br>	threadRuning = <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function">uint32 <span class="hljs-title">FReceiveThread::Run</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (!socket) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>	TArray&lt;uint8&gt; buff;<br>	int32 readType = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (threadRuning)<br>	&#123;<br>		buff.Init(<span class="hljs-number">0</span>, <span class="hljs-number">1024u</span>);<br>		socket-&gt;Recv(buff.GetData(), buff.Num(), readType);<br>		msg = FString(ANSI_TO_TCHAR(<span class="hljs-keyword">reinterpret_cast</span>&lt;<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>*&gt;(buff.GetData())));<br>		UE_LOG(LogTemp, Error, TEXT(<span class="hljs-string">&quot;%s&quot;</span>), *msg);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">FReceiveThread::Stop</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	threadRuning = <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">if</span> (thread) thread-&gt;WaitForCompletion();<br>&#125;<br><br>FReceiveThread::~FReceiveThread()<br>&#123;<br>	threadRuning = <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">delete</span> thread;<br>	thread = <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/12/%E3%80%90UE4%E3%80%91UE4%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9%E7%B2%92%E5%AD%90%E5%8F%82%E6%95%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/12/%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>Github</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
