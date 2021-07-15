@@ -2,28 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A1%86%E9%80%89/</loc>
-    
-    <lastmod>2021-05-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%9F%BA%E4%BA%8ESpline%E7%9A%84%E6%B5%8B%E8%B7%9D%E5%8A%9F%E8%83%BD/</loc>
-    
-    <lastmod>2021-05-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2021/05/14/%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHUb%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</loc>
-    
-    <lastmod>2021-05-14</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9%E7%B2%92%E5%AD%90%E5%8F%82%E6%95%B0/</loc>
+    
+    <lastmod>2021-05-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A1%86%E9%80%89/</loc>
     
     <lastmod>2021-05-14</lastmod>
     
@@ -44,7 +30,21 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%9F%BA%E4%BA%8ESpline%E7%9A%84%E6%B5%8B%E8%B7%9D%E5%8A%9F%E8%83%BD/</loc>
+    
+    <lastmod>2021-05-14</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4Socket%E7%BC%96%E7%A8%8B/</loc>
+    
+    <lastmod>2021-05-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2021/05/14/%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHUb%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</loc>
     
     <lastmod>2021-05-14</lastmod>
     
@@ -467,6 +467,13 @@
   
   <url>
     <loc>http://yoursite.com/tags/CPlus/</loc>
+    <lastmod>2021-05-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/BAT/</loc>
     <lastmod>2021-05-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
