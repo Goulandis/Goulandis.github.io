@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-07-15T02:03:59.982Z</updated>
+  <updated>2021-08-05T13:52:47.963Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,17 +17,23 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>【UE4】Pak包热更新</title>
-    <link href="http://yoursite.com/2021/07/15/%E3%80%90UE4%E3%80%91Pak%E5%8C%85%E7%83%AD%E6%9B%B4%E6%96%B0/"/>
-    <id>http://yoursite.com/2021/07/15/%E3%80%90UE4%E3%80%91Pak%E5%8C%85%E7%83%AD%E6%9B%B4%E6%96%B0/</id>
-    <published>2021-07-15T02:03:59.000Z</published>
-    <updated>2021-07-15T02:03:59.982Z</updated>
+    <title>【UE4】UE4在网页里展示虚拟形象</title>
+    <link href="http://yoursite.com/2021/08/05/%E3%80%90UE4%E3%80%91UE4%E5%9C%A8%E7%BD%91%E9%A1%B5%E9%87%8C%E5%B1%95%E7%A4%BA%E8%99%9A%E6%8B%9F%E5%BD%A2%E8%B1%A1/"/>
+    <id>http://yoursite.com/2021/08/05/%E3%80%90UE4%E3%80%91UE4%E5%9C%A8%E7%BD%91%E9%A1%B5%E9%87%8C%E5%B1%95%E7%A4%BA%E8%99%9A%E6%8B%9F%E5%BD%A2%E8%B1%A1/</id>
+    <published>2021-08-05T13:43:55.000Z</published>
+    <updated>2021-08-05T13:52:47.963Z</updated>
     
     
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;</summary>
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;参考博客：&lt;a href=&quot;https://zhuanlan.zhihu.com/p/235547851&quot;&gt;吾爱豆&lt;/a&gt;&lt;/p&gt;</summary>
     
     
     
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
     
   </entry>
   

@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Goulandis">
   <meta name="keywords" content="snoopy">
-  <title>【UE4】Pak包热更新 - Goulandis</title>
+  <title>【UE4】UE4在网页里展示虚拟形象 - Goulandis</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="【UE4】Pak包热更新">
+            <span class="h2" id="subtitle" title="【UE4】UE4在网页里展示虚拟形象">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-15 10:03" pubdate>
-        July 15, 2021 am
+      <time datetime="2021-08-05 21:43" pubdate>
+        August 5, 2021 pm
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      947 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      10
        分钟
     </span>
   
@@ -225,19 +225,66 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【UE4】Pak包热更新</h1>
+            <h1 style="display: none">【UE4】UE4在网页里展示虚拟形象</h1>
             
             <div class="markdown-body">
               <meta name="referrer" content="no-referrer">
 
-
-
+<p>参考博客：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/235547851">吾爱豆</a></p>
 <a id="more"></a>
+
+<h1 id="一、通过UMG来展示角色"><a href="#一、通过UMG来展示角色" class="headerlink" title="一、通过UMG来展示角色"></a>一、通过UMG来展示角色</h1><p>在UE4中使用UMG来展示角色的原理主要通过UE4提供的一个<code>SceneCapture2D</code>相机来捕捉场景中的画面，搭配<code>Render Target</code>将捕捉到的画面显示到贴图上，然后将贴图制作成材质，将材质运用到UMG中就可以了，当然也不一定非得要将贴图制作成材质再给UMG使用，贴图也是可以直接给UMG使用的，只是我们后面还需要在材质里对贴图做一些处理，所以这里就直接把贴图做成材质了。</p>
+<p>首先像场景中添加一个SceneCapture2D，并把它位置设置到角色前，设置到自己想要的效果就行了。</p>
+<p>然后再创建一个Render Target，在SceneCapture2D的Details/Scene Capture/Texture Target下把目标贴图设置成我们新建的Render Target，这样Render Target就可以接收到SceneCapture2D捕捉到的画面了。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215100.png" srcset="/img/loading.gif"></p>
+<p>然后创建一个Material，双击打开材质界面，把材质的Matrial Domain设置成User Interface，把Blend Mode设置成Translucent，Translucent是后面过滤背景用的，现在先设置好。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215107.png" srcset="/img/loading.gif"></p>
+<p>把RenderTarget直接拖进材质界面，会自动生成一个Texture Sample节点，然后把节点连接到材质。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215111.png" srcset="/img/loading.gif"></p>
+<p>然后我们需要创建一个UMG来展示角色，创建一个UserWidget，添加一个Image用于展示角色。把Image的Brush/Image设置成我们创建的材质，于是人物就出来了。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215115.png" srcset="/img/loading.gif"></p>
+<p>运行出来的效果就是这样的</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215119.gif" srcset="/img/loading.gif"></p>
+<p>这里我给人物加了一点动画。</p>
+<h1 id="二、过滤不需要的背景"><a href="#二、过滤不需要的背景" class="headerlink" title="二、过滤不需要的背景"></a>二、过滤不需要的背景</h1><p>从上面的运行结果可以看到，效果还是不错的，只是我想要角色，而不想要地板和天空球，怎么办呢？</p>
+<p>SceneCapture2D提供了一种渲染模式Use ShowOnly List，意思是只渲染我们添加到列表里的Actor，我们把SceneCapture2D的Scene Capture/Primitive Render Mode换成Use ShowOnly List模式，然后再Show Only Actors下添加我们要显示的角色，这里Capture Source要设置成SceneColor(HDR) in RGB，Inv Opacity in A，in A表示颜色模式是带透明度的，这个设置是过滤背景的关键，没有透明度信息的话，就没办法过滤背景了。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215123.png" srcset="/img/loading.gif"></p>
+<p>到这一步我们运行场景的话，效果就是这样的。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215127.png" srcset="/img/loading.gif"></p>
+<p>可以看到Image上已经没有显示Palne和天空了，但是不渲染的部分都是黑色的，怎么办呢？这就需要用的材质了，打开我们之前创建的Material，添加一个OneMinus节点，设置到透明度上。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215131.png" srcset="/img/loading.gif"></p>
+<p>然后我们再运行，效果是这样的。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215135.png" srcset="/img/loading.gif"></p>
+<p>可以看到Image中出人物的部分已经完全变透明了。</p>
+<h1 id="三、设置网页图层"><a href="#三、设置网页图层" class="headerlink" title="三、设置网页图层"></a>三、设置网页图层</h1><p>既然小已经达成了，我们就可以把人物嵌入到网页里了。</p>
+<p>这里我们需要自定义一个WebBrowser控件，具体的操作可以看我的<a target="_blank" rel="noopener" href="https://goulandis.github.io/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%86%85%E5%B5%8CWeb%E5%8F%8A%E4%B8%8EWeb%E9%80%9A%E4%BF%A1/">另一篇博文</a>。</p>
+<p>做好之后，就可以直接Palette里搜索到我们自定的WebBrowser了，拖两个到UMG中，然后在蓝图中分别给两个WebBrowser加载两个网页。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215139.png" srcset="/img/loading.gif"></p>
+<p>现在运行，网页会把我们的角色给遮挡住，我们要的效果是角色夹在两个网页之间，这就需要我们自己手动调整三个图层的前后位置了。</p>
+<p>只需要把显示角色Image的Slot/ZOrder的值设置在两个WebBrowser之间就可以了，这个值默认为0，值越大表示图层越高，高图层会覆盖低图层。</p>
+<p>然后我们看一下效果。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210805215142.gif" srcset="/img/loading.gif"></p>
+<p>然后具体角色想要在网页上达到什么效果就自己灵活调整了。如果觉得角色太暗，可以在场景中为角色打个灯光。</p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/">知识记录</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/UE4/">UE4</a>
+                    
+                  </div>
                 
               </div>
               
