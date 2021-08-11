@@ -385,7 +385,7 @@
 <p>这里需要注意的是<code>GEngine</code>在<code>Engine.h</code>头文件下。</p>
 <p>手动触发的使用场景一般是在卸载某些资源后，手动触发GC回收这些资源在使用过程中的无用对象。</p>
 <p>其二是蓝图节点：</p>
-<p><img src="/2021/02/26/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%9E%B6%E6%9E%84/Git\Hexo\source_posts\【UE4】UE4GamePlay架构\Snipaste_2021-03-19_21-54-55.png" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225101.png" srcset="/img/loading.gif"></p>
 <p>手动调用这两个函数，UE会跳过GC算法，在下一次Tick时直接进行GC。</p>
 <p><font color="red"> 这里有一点需要注意，在大多数情况下，手动GC一般只能回收NewObject函数创建的对象，而UWorld()-&gt;SpawnActor函数创建的对象无论如何调用都无法销毁，这是因为，当UE创建一个Actor之后在UWorld中就已经保存了这个Actor的引用，所以无论我们如何释放Actor的引用，这个Actor的引用计数都不会归零，所以要销毁一个Actor还是需要通过Actor-&gt;Destroy()函数。</font></p>
 <p>我们可以个一个例子：</p>

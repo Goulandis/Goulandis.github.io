@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-08-05T13:52:47.963Z</updated>
+  <updated>2021-08-11T14:58:30.387Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,43 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【Git】Git操作手册</title>
+    <link href="http://yoursite.com/2021/08/11/%E3%80%90Git%E3%80%91Git%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/"/>
+    <id>http://yoursite.com/2021/08/11/%E3%80%90Git%E3%80%91Git%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</id>
+    <published>2021-08-11T14:56:29.000Z</published>
+    <updated>2021-08-11T14:58:30.387Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;</summary>
+    
+    
+    
+    <category term="操作手册" scheme="http://yoursite.com/categories/%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/"/>
+    
+    
+    <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【UE5】UE5 Dedicated Server专用服务器与网络同步</title>
+    <link href="http://yoursite.com/2021/08/11/%E3%80%90UE5%E3%80%91UE5-Dedicated-Server%E4%B8%93%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5/"/>
+    <id>http://yoursite.com/2021/08/11/%E3%80%90UE5%E3%80%91UE5-Dedicated-Server%E4%B8%93%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5/</id>
+    <published>2021-08-11T14:55:36.000Z</published>
+    <updated>2021-08-11T14:59:39.302Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;这篇文章是个人在学习UE4的网络同步方面的内容的一些记录，因为UE5出来了，顺带也一起熟悉熟悉UE5，所以也就直接使用UE5来实践了。说句实在话，UE4网络同步这块确实挺难的，我自己在网上搜索的博客的内容要么停留在很浅层面只搭建一个ds服务器，要么就直接深入源码去剖析UE4的网络机制，处在中间层面的内容少之又少，不得不自己好一阵研究，强烈推荐这几位博主的博文，我在学习的过程中也从中受益匪浅。&lt;/p&gt;
+&lt;p&gt; &lt;a href=&quot;https://www.cnblogs.com/AnKen/p/7897076.html&quot;&gt;Ken_An&lt;/a&gt;、&lt;a href=&quot;https://blog.ch-wind.com/ue4-multiplayer-and-network-overview/&quot;&gt;风蚀之月&lt;/a&gt;、 &lt;a href=&quot;https://blog.csdn.net/weixin_37864449/article/details/89096536&quot;&gt;刘东无敌&lt;/a&gt;还有我师傅推荐给我的一本&lt;a href=&quot;https://cedric-neukirchen.net/Downloads/Compendium/UE4_Network_Compendium_by_Cedric_eXi_Neukirchen.pdf&quot;&gt;关于UE4网络的PDF&lt;/a&gt;。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>【UE4】UE4在网页里展示虚拟形象</title>
@@ -244,7 +281,7 @@
     <link href="http://yoursite.com/2021/02/26/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%9E%B6%E6%9E%84/"/>
     <id>http://yoursite.com/2021/02/26/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%9E%B6%E6%9E%84/</id>
     <published>2021-02-26T01:37:18.000Z</published>
-    <updated>2021-06-16T14:29:13.668Z</updated>
+    <updated>2021-08-11T14:52:21.819Z</updated>
     
     
     <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;</summary>
@@ -354,7 +391,7 @@
     <link href="http://yoursite.com/2019/11/17/%E3%80%90UE4%E3%80%91UE4%E8%81%94%E7%BA%A7%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/"/>
     <id>http://yoursite.com/2019/11/17/%E3%80%90UE4%E3%80%91UE4%E8%81%94%E7%BA%A7%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/</id>
     <published>2019-11-17T12:36:30.000Z</published>
-    <updated>2021-02-01T13:33:45.196Z</updated>
+    <updated>2021-08-11T14:47:52.111Z</updated>
     
     
       
@@ -381,7 +418,7 @@
     <link href="http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/"/>
     <id>http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/</id>
     <published>2019-11-06T13:10:52.000Z</published>
-    <updated>2021-05-11T12:12:02.613Z</updated>
+    <updated>2021-08-11T14:50:36.018Z</updated>
     
     
       
@@ -398,60 +435,6 @@
     
     
     <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【UE4】UE4连接MySQL</title>
-    <link href="http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%BF%9E%E6%8E%A5MySQL/"/>
-    <id>http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%BF%9E%E6%8E%A5MySQL/</id>
-    <published>2019-11-06T13:10:30.000Z</published>
-    <updated>2021-02-01T13:33:37.109Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h1 id=&quot;一、使用MySQLIntegration插件连接Mysql&quot;&gt;&lt;a href=&quot;#一、使用MySQLIntegration插件连接Mysql&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【UE4】UE4读写Json文件</title>
-    <link href="http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%AF%BB%E5%86%99Json%E6%96%87%E4%BB%B6/"/>
-    <id>http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%AF%BB%E5%86%99Json%E6%96%87%E4%BB%B6/</id>
-    <published>2019-11-06T13:10:15.000Z</published>
-    <updated>2021-02-01T13:32:55.185Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h1 id=&quot;一、准备工作&quot;&gt;&lt;a href=&quot;#一、准备工作&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
     
     
     <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
