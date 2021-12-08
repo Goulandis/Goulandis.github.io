@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      23.2k 字
+      23.3k 字
     </span>
   
 
@@ -562,7 +562,7 @@
 <p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20211208142131.png" srcset="/img/loading.gif"></p>
 <p><font color="red">这里有几点需要注意，FString::Printf中的字符串使用空格隔开，一个字符串为要调用的函数名，之后的字符串为参数，各个参数之间也是用空格隔开，FOutputDeviceDebug来自头文件OutputDeviceDebug.h</font></p>
 <p>当然CallFunctionByNameWithArguments接口也有通过子类重写来调用蓝图的方式一样需要通过子类来调用蓝图，所以一样需要这个子类蓝图要存在于场景中，否则调用一样无效，所以有一样的局限性，就是只支持Actor类型。</p>
-<h1 id="三、AActor"><a href="#三、AActor" class="headerlink" title="三、AActor"></a>三、AActor</h1><h2 id="1-Actor网络同步"><a href="#1-Actor网络同步" class="headerlink" title="1.Actor网络同步"></a>1.Actor网络同步</h2><p>Actor的网络同步可以参考<a target="_blank" rel="noopener" href="https://goulandis.github.io/2021/08/11/%E3%80%90UE5%E3%80%91UE5-Dedicated-Server%E4%B8%93%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5/">另一篇博文</a></p>
+<h1 id="三、AActor"><a href="#三、AActor" class="headerlink" title="三、AActor"></a>三、AActor</h1><h2 id="1-Actor网络同步"><a href="#1-Actor网络同步" class="headerlink" title="1.Actor网络同步"></a>1.Actor网络同步</h2><p>Actor的网络同步可以参考<a target="_blank" rel="noopener" href="https://goulandis.github.io/2021/08/11/%E3%80%90UE5%E3%80%91UE5%20Dedicated%20Server%E4%B8%93%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5/">另一篇博文</a>的第三节</p>
 <h2 id="2-GameMode"><a href="#2-GameMode" class="headerlink" title="2.GameMode"></a>2.GameMode</h2><h3 id="GameMode的执行过程"><a href="#GameMode的执行过程" class="headerlink" title="GameMode的执行过程"></a>GameMode的执行过程</h3><p>这里引用Ken_An大佬总结的一张精髓图片</p>
 <p><img src="/2021/12/08/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%A1%86%E6%9E%B6/Users/Goulandis/OneDrive/Pics/GamePlay/1128759-20171125230638328-328560702.png" srcset="/img/loading.gif"></p>
 <p>GameMode只运行在服务器当中，对于单机游戏来说，由于UE4的服务器代码和客户端代码是一体的所以单机游戏本身可以算是自己的服务器，对网络游戏来说，GameMode只存在于服务器当中，在客户端中只拥有GameMode的一些副本，GameMode存在于ULevel中，当游戏切换Level时，当前GameMode会随着Level的切换而被销毁，并在新的Level加载之后产生新的GameMode。</p>
@@ -899,6 +899,20 @@
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/UE4/">UE4</a>
+                    
+                  </div>
                 
               </div>
               
