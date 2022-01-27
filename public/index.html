@@ -207,6 +207,20 @@
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/UE4/">UE4</a>
+            
+          </div>
         
       </div>
     </article>
@@ -401,18 +415,24 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/16/%E3%80%90UE4%E3%80%91UE4Pak%E5%8C%85%E7%83%AD%E6%9B%B4%E6%96%B0/">【UE4】UE4 Pak包热更新</a>
+        <a href="/2021/06/16/%E3%80%90UE4%E3%80%91UE4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">UE4 文件系统</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/16/%E3%80%90UE4%E3%80%91UE4Pak%E5%8C%85%E7%83%AD%E6%9B%B4%E6%96%B0/">
+        <a href="/2021/06/16/%E3%80%90UE4%E3%80%91UE4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
           
           
             
           
           
 
-pak文件，又称pak包，是UE4用于更新资源(包括热更新)的一种文件格式，UE4将多个文件合并到一个pak文件中，通过pak文件来更新资源，pak文件不仅能够装载UE4的资源文件，如：uasset、umap等，也能够装载非资源文件，如：xml、json、txt等，除了文件pak文件还可以包含一些额外的信息，如：pak文件的加密情况，pak的版本等等。
+先来看一下UE4文件系统的类组成情况：
+
+我们一个个类来看。
+这里面类组成大致可以分为三大类：
+
+物理文件类：UE4封装的在各个平台下直接对文件进行操作的类，主要是IPhysicalPlatformFile及其子类；
+包装文件类：UE4封装的对特定情况的文件进行操作的类，如对pak包的处理，包装文件类不会直接对文件进行操作，而是通过其持有的底层对象来进行文件操作，包装文件类持有的底层对象也可以
         </a>
       </p>
 
