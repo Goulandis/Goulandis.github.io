@@ -1,0 +1,841 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shun.png">
+  <link rel="icon" type="image/png" href="/img/shun.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Goulandis">
+  <meta name="keywords" content="snoopy">
+  <title>UE4 文件系统 - Goulandis</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/vs2015.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Goulandis" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Goulandis</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/Post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="UE4 文件系统">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-27 15:38" pubdate>
+        January 27, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      13.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      176
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">UE4 文件系统</h1>
+            
+            <div class="markdown-body">
+              <meta name="referrer" content="no-referrer">
+
+<p>先来看一下UE4文件系统的类组成情况：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135722.png" srcset="/img/loading.gif"></p>
+<p>我们一个个类来看。</p>
+<p>这里面类组成大致可以分为三大类：</p>
+<ul>
+<li>物理文件类：UE4封装的在各个平台下直接对文件进行操作的类，主要是IPhysicalPlatformFile及其子类；</li>
+<li>包装文件类：UE4封装的对特定情况的文件进行操作的类，如对pak包的处理，包装文件类不会直接对文件进行操作，而是通过其持有的底层对象来进行文件操作，包装文件类持有的底层对象也可以是另一个包装文件类，这样一层层的持有对象，各个类就链接成了一条链，当链头接收到要处理的文件若自己能处理则直接处理，若自己无法处理则抛给自己持有的底层对象，底层对象重复这个操作直到有一个对象可以处理则停止，这条链的链尾就是一个物理文件对象，这就是UE4文件系统的责任链模式。包装文件类主要包括继承自IPlatformFile的除IPhysicalPlatformFile类及其子类以外的其他类；</li>
+<li>平台文件管理器：FPlatformFileManager用于管理注册的平台文件类及其组成的文件操作链。</li>
+</ul>
+<p>参考博客:</p>
+<p><a target="_blank" rel="noopener" href="https://bajiaobujie.github.io/2019/04/25/2019-04-25-UE4%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%EF%BC%88%E4%B8%89%EF%BC%89FPakPlatformFile%E7%9B%B8%E5%85%B3/#more">芭蕉不解的博客</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35925797">FlyingTree</a>、<a target="_blank" rel="noopener" href="https://www.cnblogs.com/shiroe/p/14803859.html">代码质疑人生</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/KKsuser/article/details/111659209">Khcys_</a>、<a target="_blank" rel="noopener" href="https://dhbloo.github.io/2020/09/07/UE4-FileSystem/#%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%88%9B%E5%BB%BA">dhb</a></p>
+<a id="more"></a>
+
+<h1 id="一、IPlatformFile"><a href="#一、IPlatformFile" class="headerlink" title="一、IPlatformFile"></a>一、IPlatformFile</h1><p>IPlatformfile是文件类的基类，是一个UE4预定义的C++接口，是一个顶层类不继承任何类，所以IPlatformFile类及其子类均不支持反射和垃圾回收，也就是说这些类的指针管理需要我们自己手动管理，析构时需要手动delete对象，以防内存泄漏。</p>
+<p>作为基类IPlatformFile的主要作用是用于文件操作链中的多态和提供一些通用方法与属性，如:初始化，判断文件是否存在，读取、写入、移动、删除、拷贝文件等等，其中需要注意的是<code>virtual bool Initialize(IPlatformFile* Inner, const TCHAR* CmdLine) = 0;</code>在IPlatformfile类中是一个纯虚函数，在子类使用其作初始化时，对于包装文件类来说，第一个参数是他所指向的下一个文件类对象。对于物理文件类，第一个参数只能是空的; 第二个参数是命令行，部分文件类会从这里去解析一些参数。</p>
+<h1 id="二、IPhysicalPlatformFile"><a href="#二、IPhysicalPlatformFile" class="headerlink" title="二、IPhysicalPlatformFile"></a>二、IPhysicalPlatformFile</h1><p>IPhysicalPlatformFile是物理文件类的基类，对SetLowerLevel函数进行了屏蔽，使其子类都无法访问SetLowerLevel函数，因为对于文件操作链来说，链尾一定是一个物理文件类，所以不需要再设置底层对象。</p>
+<p>源码相当简单：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* Common base for physical platform File I/O Interface</span><br><span class="hljs-comment">**/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CORE_API</span> <span class="hljs-title">IPhysicalPlatformFile</span> :</span> <span class="hljs-keyword">public</span> IPlatformFile<br>&#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-comment">//~ Begin IPlatformFile Interface</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">ShouldBeUsed</span><span class="hljs-params">(IPlatformFile* Inner, <span class="hljs-keyword">const</span> TCHAR* CmdLine)</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">override</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Initialize</span><span class="hljs-params">(IPlatformFile* Inner, <span class="hljs-keyword">const</span> TCHAR* CmdLine)</span> <span class="hljs-keyword">override</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> IPlatformFile* <span class="hljs-title">GetLowerLevel</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetLowerLevel</span><span class="hljs-params">(IPlatformFile* NewLowerLevel)</span> <span class="hljs-keyword">override</span></span><br><span class="hljs-function">	</span>&#123;<br>		check(<span class="hljs-literal">false</span>); <span class="hljs-comment">// can&#x27;t override wrapped platform file for physical platform file</span><br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">const</span> TCHAR* <span class="hljs-title">GetName</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">override</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">return</span> IPlatformFile::GetPhysicalTypeName();<br>	&#125;<br>	<span class="hljs-comment">//~ End IPlatformFile Interface</span><br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<p>在源码中IPhysicalPlatformFile::GetLowerLevel直接返回了一个nullptr。</p>
+<p>查看FWindowsPlatformFile在UE4.26中的源码发现FWindowsPlatformFile.h是一个空的头文件，而整个FWindowsPlatformFile类都被定义在FWindowsPlatformFile.cpp中，这就谢绝了我们以常规的方式使用FWindowsPlatformFile这些类了，FAndriodPlatformFile类更是找都找不到，UE4这么做的意图已经很明显了，UE4是不想让开发者直接使用这些底层类的，这也是为什么UE4要提供一个FPlatformFileManager类的原因。</p>
+<h1 id="三、FPlatformFileManager"><a href="#三、FPlatformFileManager" class="headerlink" title="三、FPlatformFileManager"></a>三、FPlatformFileManager</h1><p>PLatformFileManager类就是用UE4用于文件系统的跨平台用的，在引擎的主循环的FEngineLoop::PreInit函数中会调用FEngineLoop::PreInitPreStartupScreen，然后通过LaunchCheckForFileOverride函数检测是否需要设置当前文件系统，不需要设置则将引擎的文件系统设置成默认物理文件系统，如果需要设置则根据配置设置对应的文件系统，并将这个文件类的LowerLevel设置成对应的物理文件系统。</p>
+<p>FPlatformFileManager提供GetPlatformFile函数返回一个IPlatformFile指针，通过多态来调用接口的具体实现，可以忽略掉底层不同平台类的文件操作实现，从而达到跨平台的效果。</p>
+<p>IPlatformFile的文件操作依然是比较底层的操作，如IPlatformFile::OpenRead和IPlatformFile::OpenWrite函数返回的都是一个IFileHandle文件操作句柄，通过这个句柄才能对文件做跟底层的读写，如IFileHandle::Read和IFileHandle::Write函数都是直接读写的字节码。</p>
+<p>IPlatformFile主要是提供对文件的整体操作，如移动、删除、拷贝、读取与设置文件属性，寻找文件，判断文件是否存在，获取文件大小，同时也提供对文件夹层面的操作，如创建、删除、复制、遍历文件夹等等。</p>
+<p>而对于常规文件的读写UE4提供了一个更高层的类FileHelper来操作，对目录路径的操作UE4提供了FPaths，对配置文件的操作UE4提供了GConfig，读取Json文件UE4提供了内置的Json读写工具链。这些我们后面再看，先把IPlatformFile的子类过完。</p>
+<h1 id="四、FPakPlatformFile"><a href="#四、FPakPlatformFile" class="headerlink" title="四、FPakPlatformFile"></a>四、FPakPlatformFile</h1><p>在IPlatFormFile派生的所有的包装文件类当中FPakPlatformFile是最重要也是最常用的，FPakPlatformFile是UE4专门用于Pak文件读取的包装文件类。</p>
+<h2 id="1-什么是Pak文件"><a href="#1-什么是Pak文件" class="headerlink" title="1.什么是Pak文件"></a>1.什么是Pak文件</h2><p>pak文件，又称pak包，是UE4用于更新资源(包括热更新)的一种文件格式，UE4将多个文件合并到一个pak文件中，通过pak文件来更新资源，pak文件不仅能够装载UE4的资源文件，如：uasset、umap等，也能够装载非资源文件，如：xml、json、txt等，除了文件，pak文件还可以包含一些额外的信息，如：pak文件的加密情况，pak的版本等等。</p>
+<p>要想对pak文件进行操作，我们首先要先获取pak文件。</p>
+<p>pak文件的生成分为两步，烘培与打包。</p>
+<h2 id="2-Cook资源-烘焙资源"><a href="#2-Cook资源-烘焙资源" class="headerlink" title="2.Cook资源(烘焙资源)"></a>2.Cook资源(烘焙资源)</h2><h3 id="为什么要烘焙资源"><a href="#为什么要烘焙资源" class="headerlink" title="为什么要烘焙资源"></a>为什么要烘焙资源</h3><p>由于程序运行的平台多种多样，而不同平台有着各自的资源格式，所以在创建Pak文件之前必须先烘焙对应平台的资源才行，UE4提供UE4Editor-Cmd.exe工具来提供资源烘焙，UE4Editor-Cmd.exe可以直接在cmd命令。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">&lt;引擎路径&gt;\Engine\Binaries\Win64\UE4Editor-Cmd.exe &lt;项目路径&gt;\RobotEngine.uproject <span class="hljs-attribute">-run</span>=Cook  <span class="hljs-attribute">-TargetPlatform</span>=&lt;平台类型&gt; -fileopenlog -unversioned <span class="hljs-attribute">-abslog</span>=&lt;日志输出路径&gt; -stdout -CrashForUAT -unattended -NoLogTimes  -UTF8Output<br></code></pre></div></td></tr></table></figure>
+<p>烘培完的资源会存储在<code>&lt;项目文件夹&gt;/Saved/Cooked/&lt;对应的平台名称&gt;/&lt;项目名称&gt;/Content/&lt;对应的目录&gt;</code></p>
+<h3 id="烘焙所支持的平台类型"><a href="#烘焙所支持的平台类型" class="headerlink" title="烘焙所支持的平台类型"></a>烘焙所支持的平台类型</h3><p>UE4的资源烘焙自持目前大部分主流平台：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135749.png" srcset="/img/loading.gif"></p>
+<p>当然，如果我们只需要烘焙Windows平台的资源，UE4直接提供了烘焙按钮</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135758.png" srcset="/img/loading.gif"></p>
+<h2 id="2-Pak文件的打包"><a href="#2-Pak文件的打包" class="headerlink" title="2.Pak文件的打包"></a>2.Pak文件的打包</h2><p>UE4提供了一个创建Pak文件的工具—UnrealPak.exe供我们使用，我们可以直接从cmd命令行运行UnrealPak.exe来对指定文件创建Pak包。</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs taggerscript">&lt;引擎路径&gt;<span class="hljs-symbol">\E</span>ngine<span class="hljs-symbol">\B</span>inaries<span class="hljs-symbol">\W</span>in64<span class="hljs-symbol">\U</span>nrealPak.exe &lt;pak文件路径&gt; -Create=&lt;项目路径&gt;<span class="hljs-symbol">\R</span>obotEngine<span class="hljs-symbol">\S</span>aved<span class="hljs-symbol">\C</span>ooked<span class="hljs-symbol">\A</span>ndroid_ASTC<span class="hljs-symbol">\R</span>obotEngine<span class="hljs-symbol">\C</span>ontent<span class="hljs-symbol">\C</span>omps<span class="hljs-symbol">\&lt;</span>cook资源文件所在的文件夹&gt; -compress<br></code></pre></div></td></tr></table></figure>
+<p>这里有几点需要注意，pak文件路径是我们要存放创建出来的pak文件的路径，如：D:\PAK\mypak.pak，cook资源文件所在文件夹即cook后的uasset文件所在目录，切记不是文件路径，因为目录下可以包含多个资源文件，其中Andriod_ASTC是对应平台类型的文件夹，需要实际根据cook的平台选择对应的文件夹。</p>
+<p><code>-compress</code>表示文件打包pak时进行压缩。</p>
+<p>UnrealPak可以封装一个指定文件到Pak文件中，也可以封装一个指定文件夹下的所有文件到Pak文件中，还可以封装一个文件下中指定的多个文件夹和文件的组合到Pak文件中。</p>
+<p>比如：</p>
+<h3 id="指定单个目录打包Pak"><a href="#指定单个目录打包Pak" class="headerlink" title="指定单个目录打包Pak"></a>指定单个目录打包Pak</h3><figure class="highlight taggerscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs taggerscript">D:<span class="hljs-symbol">\U</span>E_4.26_SourceCode<span class="hljs-symbol">\U</span>nrealEngine-4.26<span class="hljs-symbol">\E</span>ngine<span class="hljs-symbol">\B</span>inaries<span class="hljs-symbol">\W</span>in64<span class="hljs-symbol">\U</span>nrealPak.exe D:<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\P</span>aks<span class="hljs-symbol">\P</span>akActor.pak -create=D:<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\C</span>onfig -compress<br></code></pre></div></td></tr></table></figure>
+<h3 id="指定多个目录和文件的组合打包Pak"><a href="#指定多个目录和文件的组合打包Pak" class="headerlink" title="指定多个目录和文件的组合打包Pak"></a>指定多个目录和文件的组合打包Pak</h3><figure class="highlight taggerscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs taggerscript">D:<span class="hljs-symbol">\U</span>E_4.26_SourceCode<span class="hljs-symbol">\U</span>nrealEngine-4.26<span class="hljs-symbol">\E</span>ngine<span class="hljs-symbol">\B</span>inaries<span class="hljs-symbol">\W</span>in64<span class="hljs-symbol">\U</span>nrealPak.exe D:<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\P</span>aks<span class="hljs-symbol">\P</span>akActor.pak -create=D:<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\C</span>onfig<span class="hljs-symbol">\A</span>.txt -compress<br></code></pre></div></td></tr></table></figure>
+<p>txt文件中目录和文件的组合格式如下：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs taggerscript">D:<span class="hljs-symbol">\G</span>oulandis<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\P</span>aks<span class="hljs-symbol">\P</span>aks_0104143216 <br>D:<span class="hljs-symbol">\G</span>oulandis<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\P</span>aks<span class="hljs-symbol">\P</span>aks_0104145559<br>D:<span class="hljs-symbol">\G</span>oulandis<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\P</span>aks<span class="hljs-symbol">\J</span>son.json<br></code></pre></div></td></tr></table></figure>
+<p>路径与路径之间必须用换行符隔开，如果存在不可用路径则文件打包失败。</p>
+<h3 id="指定单个文件打包Pak"><a href="#指定单个文件打包Pak" class="headerlink" title="指定单个文件打包Pak"></a>指定单个文件打包Pak</h3><p>由于-create=只能接文件和目录，若是目录，则打包目录下的所有文件进Pak包，如果接的是文件，则会读取文件内容，将文件中的内容当作要打包的路径，所以直接指定文件路径的指令形式是无法打包单个文件的，因此我们还是需要使用文本来指定单个文件的路径的形式来打包单个文件。</p>
+<p>-create可以读取常用的文本格式，如txt，ini，json等，只要里面内容符合格式要求即可读取。</p>
+<h3 id="小知识"><a href="#小知识" class="headerlink" title="小知识"></a><font color="green">小知识</font></h3><p>当我们在打包引用程序的时候勾选Edit\Project Setting\Packaging\Use Pak File</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135809.png" srcset="/img/loading.gif"></p>
+<p>则打包出来的资源将全部封装进一个独立的Pak包里面，pak包保存在<code>&lt;程序目录&gt;/&lt;项目名称&gt;/Content/Paks/</code>目录下，如果不勾选那么资源路径情况和编辑时一样，并且打包出来的资源也依旧是.uasset资源。由于pak文件可以加密而uasset不能加密，所以将资源封装进pak文件中有利于程序的安全性。</p>
+<h2 id="3-Pak文件的挂载"><a href="#3-Pak文件的挂载" class="headerlink" title="3.Pak文件的挂载"></a>3.Pak文件的挂载</h2><p>首先我们需要明白一个机制，就是UE挂载Pak文件，仅仅是引擎内部注册一个Pak挂载点对应的文件夹，这样当引擎去寻找资源的时候就知道有这么一个地址可以去搜索资源，而在实际的物理文件中这个文件夹是不存在的，由此可以知晓，Pak文件挂载之后并不能直接使用Pak文件中资源，因为资源仍然是一个虚拟文件夹下的物理文件，还未加载到内存中。</p>
+<p>然后创建一个类作为挂载代码的载体，这个载体可以AActor也可以是UObject，甚至可以是自定义的C++类。这里我使用一个UObject类来作为载体。</p>
+<p>先上源码，后面再做解析</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">//.h</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;IPlatformFilePak.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;GenericPlatform/GenericPlatformFile.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;CoreMinimal.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;UObject/NoExportTypes.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;PakExpand.generated.h&quot;</span></span><br><br>UCLASS(Blueprintable,BlueprintType)<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UNKOWN_API</span> <span class="hljs-title">UPakExpand</span> :</span> <span class="hljs-keyword">public</span> UObject<br>&#123;<br>	GENERATED_BODY()<br><span class="hljs-keyword">private</span>:<br>	FPakPlatformFile* HandlePakPlatform;<br>	IPlatformFile* HandleOriginPlatform;<br>	FPlatformFileManager* PlatformFileManager;<br><span class="hljs-keyword">private</span>:<br>	~UPakExpand();<br><span class="hljs-keyword">public</span>:<br>	UPakExpand();<br>	UFUNCTION(BlueprintCallable,Category=<span class="hljs-string">&quot;PakExpand&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Mount</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString PakFilePath)</span></span>;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-comment">//.cpp</span><br>UPakExpand::~UPakExpand()<br>&#123;<br>    PlatformFileManager = <span class="hljs-literal">nullptr</span>;<br>    HandleOriginPlatform = <span class="hljs-literal">nullptr</span>;<br>    HandlePakPlatform = <span class="hljs-literal">nullptr</span>;<br>&#125;<br>UPakExpand::UPakExpand()<br>&#123;<br>    <span class="hljs-comment">//获取平台文件链接管理器</span><br>    PlatformFileManager = &amp;FPlatformFileManager::Get();<br>    <span class="hljs-comment">//获取平台I/O接口，用于操作平台文件</span><br>    HandleOriginPlatform = &amp;PlatformFileManager-&gt;GetPlatformFile();<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">UPakExpand::Mount</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString PakFilePath)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//判断文件时候是pak文件</span><br>    <span class="hljs-keyword">if</span> (!PakFilePath.EndsWith(<span class="hljs-string">&quot;.pak&quot;</span>))<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;  <br>    <span class="hljs-keyword">if</span> (!HandlePakPlatform)<br>    &#123;<br>        <span class="hljs-comment">//创建Pak平台文件系统</span><br>        HandlePakPlatform = <span class="hljs-keyword">new</span> FPakPlatformFile();<br>    &#125;<br>    <span class="hljs-comment">//使用平台接口初始化Pak文件平台包装器</span><br>    HandlePakPlatform-&gt;Initialize(HandleOriginPlatform, TEXT(<span class="hljs-string">&quot;&quot;</span>));<br>    <span class="hljs-comment">//将PakPlatformFile设置到最顶层，查找文件时优先查找PakPlatformFile内的文件</span><br>    PlatformFileManager-&gt;SetPlatformFile(*HandlePakPlatform);<br>    <span class="hljs-comment">//判断文件是否存在</span><br>    <span class="hljs-keyword">if</span> (!HandleOriginPlatform-&gt;FileExists(*PakFilePath))<br>    &#123; <br>        PlatformFileManager-&gt;SetPlatformFile(*HandleOriginPlatform);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-comment">//创建pak对象</span><br>    TSharedPtr&lt;FPakFile&gt; PakFile = MakeShareable&lt;FPakFile&gt;(<span class="hljs-keyword">new</span> FPakFile(HandlePakPlatform, *PakFilePath, <span class="hljs-literal">false</span>));<br>    <span class="hljs-keyword">if</span> (!PakFile)<br>    &#123;<br>        PlatformFileManager-&gt;SetPlatformFile(*HandleOriginPlatform);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;   <br>    <span class="hljs-comment">//获取pak文件的无后缀文件名</span><br>    FString PakName = GetPakFileName(PakFilePath);<br>    TArray&lt;FString&gt; ExistPakFiles;<br>    <span class="hljs-comment">//查询已挂载的所有pak包名称</span><br>    HandlePakPlatform-&gt;GetMountedPakFilenames(ExistPakFiles);<br>    <span class="hljs-comment">//判断当前pak包是否已挂载</span><br>    <span class="hljs-keyword">if</span> (ExistPakFiles.Find(PakFilePath) &gt;= <span class="hljs-number">0</span>)<br>    &#123;<br>        PlatformFileManager-&gt;SetPlatformFile(*HandleOriginPlatform);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    int32 Pos = PakFile-&gt;GetMountPoint().Find(<span class="hljs-string">&quot;Content/&quot;</span>);<br>    FString MountPoint = PakFile-&gt;GetMountPoint().RightChop(Pos);<br>    MountPoint = FPaths::ProjectDir() + MountPoint;<br>    PakFile-&gt;SetMountPoint(*MountPoint);<br>    <span class="hljs-comment">//使用pak包记录的挂载点挂载pak包</span><br>    <span class="hljs-keyword">if</span> (!HandlePakPlatform-&gt;Mount(*PakFilePath, <span class="hljs-number">0</span>, *PakFile-&gt;GetMountPoint()))<br>    &#123;<br>        PlatformFileManager-&gt;SetPlatformFile(*HandleOriginPlatform);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    PlatformFileManager-&gt;SetPlatformFile(*HandleOriginPlatform);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>这里有一些类和函数需要说明一下：</p>
+<ul>
+<li>IPlatformFile：这是UE4对文件操作的最基础的类，定义了对文件进行操作的相关方法，UE4自己单独封装一个文件操作类而不是直接用C++的文件操作，是UE4为了提供平台的可移植性才建立这么一个更高层的I/O接口；</li>
+<li>FPakPlatformFile：这个类是UE4对pak文件操作的一个封装类，派生与IPlatformFile类；</li>
+<li>FPlatformFileManager：这个类是UE4用于获取不同平台的物理文件的封装，Get()方法是获取类自身的实例，GetPlatformFile()方法是获取文件操作链的链头，如果没有找到则返回nullptr；</li>
+<li>Initialize()：初始化接口，第一个参数为FPakPlatformFile类指向的下一个文件类对象，我们这里是需要指向当前平台，第二参数是一个命令行，部分文件类会从这里解析一些参数，我们这里没有命令，所以用空字符串；</li>
+<li>SetPlatformFile()：可以理解为想UE4文件系统设置Initialize()初始化的配置；</li>
+<li>GetMountedPakFilenames()：获取已经挂载过的pak文件，参数为一个FString数组；</li>
+<li>GetMountPoint()：获取pak文件的挂载点，这个挂载点是直接存储在pak文件中的，pak文件的结构具体将<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/333857439">弘竣的开发笔记</a>；</li>
+<li>RightChop()：返回字符串指定位置右侧的字符串；</li>
+<li>SetMountPoint()：设置挂载点，pak文件的挂载必须得有挂载点，否则UE4就无法找到pak文件，挂载点就是pak文件在UE4中上级目录；</li>
+<li>Mount()：挂载pak文件；</li>
+</ul>
+<p>这里有一点需要注意的是，PlatformFileManager-&gt;SetPlatformFile(*HandlePakPlatform);设置文件系统不可以在构造函数中执行否则打包会报错。</p>
+<p>到这里一个pak文件的挂载就完成了。</p>
+<h3 id="里面的一些坑"><a href="#里面的一些坑" class="headerlink" title="里面的一些坑"></a>里面的一些坑</h3><p>在网上搜了相当多的UE4pak挂载的文章，里面大多数使用共享指针来指向FPakPlatformFile，我在UE4.26中在未勾选Edit\Project Setting\Packaging\Use Pak File的情况下，不会有任何问题，但是在勾选了的情况下会在退出游戏时报：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135820.png" srcset="/img/loading.gif"></p>
+<p>具体原因暂不清楚，所以我上面的源码一律没有使用共享指针，而是选择了C++指针，自己去管理指针。</p>
+<h2 id="4-Pak文件的加载"><a href="#4-Pak文件的加载" class="headerlink" title="4.Pak文件的加载"></a>4.Pak文件的加载</h2><h3 id="资源加载"><a href="#资源加载" class="headerlink" title="资源加载"></a>资源加载</h3><p>想要加载Pak文件中的资源进入内存我们就只能使用C++的方式来加载，我以加载一个AActor为例，先上源码。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function">AActor* <span class="hljs-title">UPakExpand::SpawnActorFromPak</span><span class="hljs-params">(FString ClassRef, FTransform Transform, <span class="hljs-keyword">bool</span>&amp; Result)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (!HandlePakPlatform)<br>    &#123;<br>        Result = <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>    &#125;<br>    PlatformFileManager-&gt;SetPlatformFile(*HandlePakPlatform);<br>    UClass* uclass = StaticLoadClass(AActor::StaticClass(), <span class="hljs-literal">NULL</span>, *ClassRef);<br>    <span class="hljs-keyword">if</span> (!uclass)<br>    &#123;<br>        Result = <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>    &#125;<br>    AActor* Actor = GetWorld()-&gt;SpawnActor(uclass,&amp;Transform);<br>    <span class="hljs-keyword">if</span> (!Actor)<br>    &#123;<br>        Result = <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>    &#125;   <br>    <span class="hljs-keyword">if</span> (!HandleOriginPlatform)<br>    &#123;<br>        Result = <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>    &#125;<br>    PlatformFileManager-&gt;SetPlatformFile(*HandleOriginPlatform);<br>    Result = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">return</span> Actor;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>PlatformFileManager-&gt;SetPlatformFile(*HandlePakPlatform);将文件系统切换到Pak文件系统，这样才能读取到Pak包中的资源，因为引擎默认使用的是物理文件系统，而Pak包挂载的不是物理文件，所以使用物理文件系统是无法读取到Pak文件内的资源的。</li>
+<li>PlatformFileManager-&gt;SetPlatformFile(*HandleOriginPlatform);将文件系统切换回原来的文件系统，实际上切不切回去是没有影响的，因为SetPlatformFile是在当前的文件操作链的链头再加一个操作节点，然后以这个新的操作节点作为文件操作链的链头，当加载资源时会从操作链的链头开始搜索资源，当然，当我们不需要再加载Pak包中的资源时，切回去可以使操作链少一个节点，资源的寻找速度会更快一点，所以这里我还是切回去。</li>
+</ul>
+<h3 id="里面的一些坑-1"><a href="#里面的一些坑-1" class="headerlink" title="里面的一些坑"></a>里面的一些坑</h3><p>这里有一点是需要注意的，前面有说过挂载只是在引擎内部注册了一个虚拟文件夹，这个文件夹在实际的物理目录中是不存在的，所以如果我们在编辑状态下直接使用要打成Pak文件的这些资源，在挂载了Pak之后引擎依然是找不到这些资源的，原因我猜是编辑状态下使用资源保存的路径应该是封装整个程序资源的Pak文件的路径即这个Pak文件：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135826.png" srcset="/img/loading.gif"></p>
+<p>这里面有一个比较隐晦的状况，就是如果我们打包的时候不排除需要Pak的文件夹，也就是说打包的时候把需要Pak的文件一并打进Unkown-WindowsNoEditor.pak这个Pak文件中，在实际运行的效果是，资源是可以被加载的，这是因为引擎加载的资源是Unkown-WindowsNoEditor.pak中的资源，而非我们自己挂载的Pak包中的资源，我们可通过修改Pak包中的资源内容，重新运行来证明这个问题。而如果我们把需要打Pak的文件夹不打包进Unkown-WindowsNoEditor.pak中，那么资源就识别不出来了。如果资源只是在Pak包自己内部使用则没有这个问题。</p>
+<p>我们通过一个例子也许会更好理解一些。</p>
+<p><strong>第一步：</strong></p>
+<p>在Content文件夹下创建一个需要Pak的文件夹命名为DLCs，在里面创建两个资源，给Pak包外部使用的PakActor和给Pak包内部使用的PakWidget。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135830.png" srcset="/img/loading.gif"></p>
+<p>两个资源的内部情况如下：</p>
+<p><strong>PakActor：</strong></p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135835.png" srcset="/img/loading.gif"></p>
+<p>在PakActor中去创建PakWidget，注意这里是直接在编辑状态下去加载PakWidget，并且PakWidget和PakActor在同一个文件夹下，即将来打Pak包后，两个资源在同一个Pak包中。</p>
+<p>PrintDebugLog是自己封装的一个打印日志的函数。</p>
+<p><strong>PakWidget：</strong></p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135910.png" srcset="/img/loading.gif"></p>
+<p><strong>第二步：</strong></p>
+<p>在另一个文件夹下去创建一个GameInstance，使用GameInstance去挂载并加载资源，这里我创建一个名为UnkGameInstance的GameInstance，并放在Content/GamePlay文件夹下，蓝图内容如下：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135915.png" srcset="/img/loading.gif"></p>
+<p>这里我们先使用在编辑状态下直接使用UE4原生API<code>SpawnActorFromClass</code>来加载PakActor，</p>
+<p>好，现在我们不排除Content/DLCs文件夹，在Project Setting/Packaging/Packaging/Directories to never cook项不添加文件夹，勾选Use Pak File。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135920.png" srcset="/img/loading.gif"></p>
+<p>然后打一个Windows程序出来，然后把Content/DLCs文件夹打一个Pak包出来，我这里命名为PakActor.pak，并将Pak包放入程序目录/Content/DLCs/目录下。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135929.png" srcset="/img/loading.gif"></p>
+<p>可以看到在勾选了UsePakFile时引擎自动生成了一个Paks文件夹下的<code>&lt;项目名&gt;-&lt;平台类型&gt;.pak</code>的文件，我这里是Unkown-WindowsNoEditor.pak文件，而DLCs文件夹是没有的，所以我们要自己创建一个，并把打包出来的Pak文件放进去，需要注意的是Pak文件的命名需要和加载时的名称要一致。</p>
+<p>然后我们跑起来看一下。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135933.png" srcset="/img/loading.gif"></p>
+<p>PakActor和PakWidget资源是加载出来了的，此时我们无法分辨加载的到底是Unkown-WindowsNoEditor.pak中的资源还是PakActor.pak中的资源，因为在两个pak包中都存在一份/Game/DLCs/PakActor.uasset和/Game/DLCs/PakWidget.uasset资源。</p>
+<p>为了识别资源是哪个Pak包中的，有两种方式验证，先看第一种</p>
+<p>现在我们修改一下PakActor蓝图的打印的内容：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135937.png" srcset="/img/loading.gif"></p>
+<p>把this is PakActor修改成this is PakActor2，然后再打一个Pak包出来，同样命名为PakActor.pak并放到Content/DLCs/目录下替换掉之前的pak包，然后我们再跑一次看看，打印内容有没有变化。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135942.png" srcset="/img/loading.gif"></p>
+<p>可以看到，打印的内容依旧是this is PakActor，这说明加载到PakActor不是PakActor.pak中的资源而是Unkown-WindowsNoEditor.pak中的资源，因为我们没有重新打包程序，所以Unkown-WindowsNoEditor.pak中的PakActor.uasset打印依然是this is PakActor，而PakActor.pak中PakActor.uasset打印已经修改成了this is PakActor2。</p>
+<p>为了严谨起见，我们再用第二种方式验证一遍。</p>
+<p>现在我们在打包时不把Content/DLCs/文件夹打进Unkown-WindowsNoEditor.pak中，在Project Setting/Packaging/Packaging/Directories to never cook项中把Content/DLCs/添加进去。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135946.png" srcset="/img/loading.gif"></p>
+<p>然后我们再打包来跑一次看看。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135950.png" srcset="/img/loading.gif"></p>
+<p>可以看到没有任何打印出来，并且PakWidget也没有加载出来，我们再看一下日志，日志存储在<code>&lt;程序目录&gt;/&lt;项目名称&gt;/Saved/Logs/</code>目录下。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127135955.png" srcset="/img/loading.gif"></p>
+<p>日志打印了PakActor is not valid这说明PakActor未识别到，由于此时Unkown-WindowsNoEditor.pak中不包含PakActor.uasset资源，只有PacActor.pak中包含，所以可以验证在编辑状态下使用Pak中的资源引擎保存的路径和实际Pak挂载的路径是不一致的(尽管匹配到物理路径上两者是一样的，个人猜想编辑状态下使用的是物理路径，而挂载使用的是虚拟路径，纯个人猜想)。</p>
+<p>好，现在我们换一种方式来加载Pak包中的资源，使用前面我们封装好的UPakExpand::SpawnActorFromPak函数，通过C++的方式来加载，我们重新修改一下UnkGameInstance的蓝图内容。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127140009.png" srcset="/img/loading.gif"></p>
+<p>重新打一个包出来，这一次我们依旧不把Content/DLCs/文件夹打进Unkown-WindowsNoEditor.pak，重新打一份程序，再跑一次看看。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127140017.png" srcset="/img/loading.gif"></p>
+<p>可以看到，我们对PakActor的修改也生效了，嗯，这就是这个坑的解释。</p>
+<h2 id="5-Pak文件的加密"><a href="#5-Pak文件的加密" class="headerlink" title="5.Pak文件的加密"></a>5.Pak文件的加密</h2><p>UE提供了UnrealPak工具提供了对Pak文件的加密功能，通过Project Settings/Crypto/Encryption/Generate New Encryption Key可以自动生成用于加密Pak文件的密钥，并且这些配置信息会保存在<code>&lt;项目目录&gt;/Config/DefaultCrypto.ini</code>文件中。</p>
+<h3 id="使用预定义文件加密Pak文件"><a href="#使用预定义文件加密Pak文件" class="headerlink" title="使用预定义文件加密Pak文件"></a>使用预定义文件加密Pak文件</h3><p>在我们对项目进行了打包操作后，UE会根据Project Settings/Crypto/Encryption/中配置生成一个&lt;项目目录&gt;/Saved/Cooked/&lt;平台名称&gt;/&lt;项目名称&gt;/Metadata/Crypto.json文件，这个文件使用Json的格式保存了配置中的信息，以便UnrealPak使用。具体加密指令如下：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs taggerscript">D:<span class="hljs-symbol">\U</span>E_4.26_SourceCode<span class="hljs-symbol">\U</span>nrealEngine-4.26<span class="hljs-symbol">\E</span>ngine<span class="hljs-symbol">\B</span>inaries<span class="hljs-symbol">\W</span>in64<span class="hljs-symbol">\U</span>nrealPak.exe D:<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\P</span>aks<span class="hljs-symbol">\P</span>akActor.pak -create=D:<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\S</span>aved<span class="hljs-symbol">\C</span>ooked<span class="hljs-symbol">\W</span>indowsNoEditor<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\C</span>ontent<span class="hljs-symbol">\D</span>LCs -encrypt -encryptindex -compress -cryptokeys=D:<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\S</span>aved<span class="hljs-symbol">\C</span>ooked<span class="hljs-symbol">\W</span>indowsNoEditor<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\M</span>etadata<span class="hljs-symbol">\C</span>rypto.json<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>-encrypt : 加密Pak文件；</li>
+<li>-encryptindex : 加密索引，解包时不提供Key无法解包，如果不使用这个参数，解包时就不需要Key也可以解包；</li>
+<li>-compress : 对Pak文件数据进行压缩；</li>
+<li>-cryptokeys : 指向加密需要的带密钥的Json文件；</li>
+</ul>
+<p>更多指令可以参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/shiroe/p/14803859.html">代码质疑人生</a>的这篇博客。</p>
+<p>按理说在Project Settings/Crypto/Encryption/中应该可以对-encrypt和-encryptindex参数进行配置，且在Crypto.json中也都有字段存储，但是似乎在使用UnrealPak打包时依旧需要手动指定，否则加密无效。</p>
+<h3 id="使用自定义文件加密Pak"><a href="#使用自定义文件加密Pak" class="headerlink" title="使用自定义文件加密Pak"></a>使用自定义文件加密Pak</h3><p>-cryptokeys除了可以读取UE打包时自动生成的json文件中的密钥来加密Pak，也可以使用自定义的json文件来加密Pak，只需要json中有一个<code>EncryptionKey</code>对象，对象中有一个<code>Key</code>字段即可，如：</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>	<span class="hljs-attr">&quot;EncryptionKey&quot;</span>:<br>	&#123;<br>		<span class="hljs-attr">&quot;Key&quot;</span>:<span class="hljs-string">&quot;xlTq7RXTF5yhLRkoJd8m9tQMdjxsalROP6DycVf+UNc=&quot;</span><br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Json可以有其他的自定义字段。</p>
+<h2 id="6-Pak文件的解密"><a href="#6-Pak文件的解密" class="headerlink" title="6.Pak文件的解密"></a>6.Pak文件的解密</h2><h3 id="使用UnrealPak解密"><a href="#使用UnrealPak解密" class="headerlink" title="使用UnrealPak解密"></a>使用UnrealPak解密</h3><p>使用UnrealPak解密基本和加密是反着来的，当然加密和解密必须使用同一个Key，否者解密会失败。</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs taggerscript">D:<span class="hljs-symbol">\U</span>E_4.26_SourceCode<span class="hljs-symbol">\U</span>nrealEngine-4.26<span class="hljs-symbol">\E</span>ngine<span class="hljs-symbol">\B</span>inaries<span class="hljs-symbol">\W</span>in64<span class="hljs-symbol">\U</span>nrealPak.exe D:<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\P</span>aks<span class="hljs-symbol">\P</span>akActor.pak -Extract D:<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\P</span>aks<span class="hljs-symbol">\P</span>akContent -cryptokeys=D:<span class="hljs-symbol">\U</span>E4<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\S</span>aved<span class="hljs-symbol">\C</span>ooked<span class="hljs-symbol">\W</span>indowsNoEditor<span class="hljs-symbol">\U</span>nkown<span class="hljs-symbol">\M</span>etadata<span class="hljs-symbol">\C</span>rypto.json<br></code></pre></div></td></tr></table></figure>
+<p>这个指令会把Pak中的文件全部解包成源文件。</p>
+<h3 id="挂载时解密"><a href="#挂载时解密" class="headerlink" title="挂载时解密"></a>挂载时解密</h3><p>在代码中解密Pak包需要用到UE内置的FPakEncryptionKeyDelegate委托，且UE在FCoreDelegates类中已经预制了FPakEncryptionKeyDelegate的对象，可以通过FCoreDelegates::GetPakEncryptionKeyDelegate()函数获取。在UE通过Mount挂载Pak包是会判断Pak有没有加密，如果加密了则使用委托调用绑定的解密函数来获取密钥进而对Pak文件进行密钥验证。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-comment">//Mount重载，解密挂载</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">UPakExpand::Mount</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString PakFilePath, <span class="hljs-keyword">const</span> FString CryptoJsonPath)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (CryptoJsonPath.IsEmpty())<br>    &#123;<br>        <span class="hljs-keyword">return</span> Mount(PakFilePath);<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>        SetEncryptJsonPath(CryptoJsonPath);<br>        <span class="hljs-comment">//UE4预制委托，当挂载Pak包的时候自动调用</span><br>        FCoreDelegates::GetPakEncryptionKeyDelegate().BindUObject(<span class="hljs-keyword">this</span>, &amp;UPakExpand::UnEncrypt);<br>        <span class="hljs-keyword">return</span> Mount(PakFilePath);<br>    &#125;   <br>&#125;<br><span class="hljs-comment">//设置存储密钥的文件路径，之所以要专门设置密钥文件的路径，是因为GetPakEncryptionKeyDelegate()返回的委托是一个返回值为空，参数为uint8*的委托，无法直接往UnEncrypt函数传入文件路径</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UPakExpand::SetEncryptJsonPath</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString CryptoJsonPath)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (FPaths::FileExists(CryptoJsonPath))<br>    &#123;<br>        EncryptJsonPath = CryptoJsonPath;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//读取json文件</span><br><span class="hljs-function">FString <span class="hljs-title">UPakExpand::ReadEncryptKeyStrFromJson</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (!FPaths::FileExists(EncryptJsonPath))<br>    &#123;<br>        <span class="hljs-keyword">return</span> FString(TEXT(<span class="hljs-string">&quot;&quot;</span>));<br>    &#125;<br>    FString JsonStr;<br>    FFileHelper::LoadFileToString(JsonStr, *EncryptJsonPath);<br>    TSharedPtr&lt;FJsonObject&gt; JsonObject = MakeShareable(<span class="hljs-keyword">new</span> FJsonObject());<br>    TSharedRef&lt;TJsonReader&lt;&gt;&gt; JsonReader = TJsonReaderFactory&lt;&gt;::Create(JsonStr);<br>    FString KeyStr;<br>    <span class="hljs-keyword">if</span> (FJsonSerializer::Deserialize(JsonReader, JsonObject))<br>    &#123;<br>        TSharedPtr&lt;FJsonObject&gt; EncryptionKey = JsonObject-&gt;GetObjectField(TEXT(<span class="hljs-string">&quot;EncryptionKey&quot;</span>));<br>        KeyStr = EncryptionKey-&gt;GetStringField(TEXT(<span class="hljs-string">&quot;Key&quot;</span>));<br>        <span class="hljs-keyword">return</span> KeyStr;<br>    &#125;<br>    <span class="hljs-keyword">return</span> FString(TEXT(<span class="hljs-string">&quot;&quot;</span>));<br>&#125;<br><span class="hljs-comment">//密钥转码将ascii码下表现为字符串的密钥转换成二进制码</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UPakExpand::UnEncrypt</span><span class="hljs-params">(uint8* Key)</span></span><br><span class="hljs-function"></span>&#123;<br>    FString KeyStr = ReadEncryptKeyStrFromJson();  <br>    TArray&lt;uint8&gt; KeyBase64Ary;<br>    FBase64::Decode(KeyStr, KeyBase64Ary);<br>    FMemory::Memcpy(Key, KeyBase64Ary.GetData(), FAES::FAESKey::KeySize);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Pak文件的解密实际上也不难，我们对第三小节Pak挂载的Mount函数进行函数重载，再挂载Pak文件之前先对Pak文件进行解密，这里之所以使用文件的形式来加载密钥而不是直接将密钥定义再代码里是为了更灵活的使不同的Pak包可以使用不同的密钥来加密解密。</p>
+<h2 id="7-Pak加载的优先级"><a href="#7-Pak加载的优先级" class="headerlink" title="7.Pak加载的优先级"></a>7.Pak加载的优先级</h2><p>当同一份资源同时存在于两个pak文件中时，就涉及到资源加载的优先级问题了。</p>
+<h3 id="目录优先级"><a href="#目录优先级" class="headerlink" title="目录优先级"></a>目录优先级</h3><p>我们可以直接从源码入手</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function">int32 <span class="hljs-title">FPakPlatformFile::GetPakOrderFromPakFilePath</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString&amp; PakFilePath)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (PakFilePath.StartsWith(FString::Printf(TEXT(<span class="hljs-string">&quot;%sPaks/%s-&quot;</span>), *FPaths::ProjectContentDir(), FApp::GetProjectName())))<br>	&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (PakFilePath.StartsWith(FPaths::ProjectContentDir()))<br>	&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (PakFilePath.StartsWith(FPaths::EngineContentDir()))<br>	&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (PakFilePath.StartsWith(FPaths::ProjectSavedDir()))<br>	&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>	&#125;<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>源码的注释是这样的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-comment">/*</span><br><span class="hljs-comment">* Hardcode default load ordering of game main pak -&gt; game content -&gt; engine content -&gt; saved dir</span><br><span class="hljs-comment">* would be better to make this config but not even the config system is initialized here so we can&#x27;t do that</span><br><span class="hljs-comment">*/</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> int32 <span class="hljs-title">GetPakOrderFromPakFilePath</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString&amp; PakFilePath)</span></span>;<br></code></pre></div></td></tr></table></figure>
+<p>UE会在游戏启动时自动挂载某些目录下的Pak文件，分别是&lt;项目目录&gt;/Content/Paks，&lt;引擎目录&gt;/Content/Paks，&lt;项目目录&gt;/Saved/Paks</p>
+<p>这里的项目目录和引擎目录均是打包后游戏根目录下的项目目录和引擎目录。</p>
+<p>三者满足优先级：<code>&lt;项目目录&gt;/Content/Paks</code>  &gt;  <code>&lt;引擎目录&gt;/Content/Paks</code>  &gt;  <code>&lt;项目目录&gt;/Saved/Paks</code>，其中最高优先级为游戏主Pak包，即在&lt;项目目录&gt;/Content/Paks/目录下以项目名开头，由引擎打包出来的Pak文件。</p>
+<p>但是我在实际测试中发现实际加载顺序不是这样的，具体原因未知。</p>
+<p>我分别在三个目录下放入一个内容相同而名字不同的三个Pak文件，通过日志看看挂载顺序：</p>
+<p>Pak位置情况：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127140030.png" srcset="/img/loading.gif"></p>
+<p>Pak加载日志，exe运行后会在/游戏根目录/Saved/Logs/目录下生成运行日志，其中<code>项目名称.log</code>为最新的日志：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127140034.png" srcset="/img/loading.gif"></p>
+<p>可以看到，位于&lt;项目目录&gt;/Saved/Paks/PakActor_3.pak最先加载，而游戏主Pak包/&lt;项目目录&gt;/Content/Paks/Unkown-WindowsNoEditor.pak第二加载，/&lt;项目目录&gt;/Content/Paks/PakActor_1.pak第三加载，/&lt;引擎目录&gt;/Content/Paks/PakActor_2.pak最后加载。</p>
+<p>加载顺序似乎有出入，目前未找到原因，不过一般不影响正常游戏流程。</p>
+<h3 id="二级优先级"><a href="#二级优先级" class="headerlink" title="二级优先级"></a>二级优先级</h3><p>在满足目录优先级的情况下，UE还增加了Pak文件名以<code>_P.pak</code>结尾的二级优先级，如：Pak_P.pak的优先级就要高于Pak.pak，而Pak_1_P.pak的优先级又高于Pak_P.pak，Pak_2_P.pak高于Pak_1_P.pak，以此类推。来实践验证一下。</p>
+<p>前面有说过，在PakActor蓝图中创建了一个黑色的PakWidget界面，现在把PakWidget界面设置成白色，然后再打一个包，重命名为“PakActor_1_P.pak”，一并放入Content/DLCs目录下，这里还需要对挂载做一点改动，即把DLCs目录下的Pak文件都挂载起来，所以我们往UPakExpaned类中新增一个函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function">TArray&lt;FString&gt; <span class="hljs-title">UPakExpand::GetAllPakFromDir</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString Dir, <span class="hljs-keyword">bool</span>&amp; Result)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-function">FString <span class="hljs-title">PakDir</span><span class="hljs-params">(FPaths::ProjectContentDir() + Dir + TEXT(<span class="hljs-string">&quot;/&quot;</span>))</span></span>;<br>    IFileManager&amp; FileManager = IFileManager::Get();<br>    TArray&lt;FString&gt; ResultList;<br>    <span class="hljs-keyword">if</span> (FileManager.DirectoryExists(*PakDir))<br>    &#123;<br>        TArray&lt;FString&gt; PakList;      <br>        FileManager.FindFiles(PakList, *PakDir,TEXT(<span class="hljs-string">&quot;*.pak&quot;</span>));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; PakList.Num(); i++)<br>        &#123;<br>            <span class="hljs-function">FString <span class="hljs-title">PakFilePath</span><span class="hljs-params">(PakDir + PakList[i])</span></span>;<br>            ResultList.Add(PakFilePath);<br>        &#125;<br>        Result = <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (ResultList.Num() &lt;= <span class="hljs-number">0</span>)<br>    &#123;<br>        Result = <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ResultList;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>然后再UnkGameInstance中对挂载步骤进行改进：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127140041.png" srcset="/img/loading.gif"></p>
+<p>Mount节点的CryptoJsonPath参数可以忽略，这是用来解密加密Pak包的。</p>
+<p>Pak包位置：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127140047.png" srcset="/img/loading.gif"></p>
+<p>好，运行一下试试</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127140050.png" srcset="/img/loading.gif"></p>
+<p>可以看到加载的PakActor已经是PakActor_1_P.pak中的资源了。</p>
+<h2 id="8-以DLC的形式进行资源更新"><a href="#8-以DLC的形式进行资源更新" class="headerlink" title="8.以DLC的形式进行资源更新"></a>8.以DLC的形式进行资源更新</h2><p>DLC的形式与pak包的形式不同的只在于pak包的生成方式，pak包是直接使用命令行烘培和打包的，而DLC则是使用的ProjectLauncher，最终资源都是以pak包的形式下载到本地，只是pak的形式需要我们手动写C++代码挂载，而DLC的形式将pak文件放到指定文件夹内可自动挂载并加载。</p>
+<p>用DLC的形式需要配置两个ProjectLauncher，一个为打包本地的ProjectLauncher，一个为打包DLC的ProjectLauncher，具体配置方法见<a target="_blank" rel="noopener" href="http://mingchuan.wang/2016/09/20/UE4-DLC/">wmc的一篇博文</a>。</p>
+<h1 id="五、FCachedReadPlatformFile"><a href="#五、FCachedReadPlatformFile" class="headerlink" title="五、FCachedReadPlatformFile"></a>五、FCachedReadPlatformFile</h1><p>FCachedReadPlatformFile实现了文件的预读写逻辑，FCachedReadPlatformFile对IPlatformFile的修改主要是在OpenRead和OpenWrite的返回值中。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">virtual</span> IFileHandle*	<span class="hljs-title">OpenRead</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Filename, <span class="hljs-keyword">bool</span> bAllowWrite)</span> <span class="hljs-keyword">override</span></span><br><span class="hljs-function"></span>&#123;<br>	IFileHandle* InnerHandle=LowerLevel-&gt;OpenRead(Filename, bAllowWrite);<br>	<span class="hljs-keyword">if</span> (!InnerHandle)<br>	&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FCachedFileHandle(InnerHandle, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">virtual</span> IFileHandle*	<span class="hljs-title">OpenWrite</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Filename, <span class="hljs-keyword">bool</span> bAppend = <span class="hljs-literal">false</span>, <span class="hljs-keyword">bool</span> bAllowRead = <span class="hljs-literal">false</span>)</span> <span class="hljs-keyword">override</span></span><br><span class="hljs-function"></span>&#123;<br>	IFileHandle* InnerHandle=LowerLevel-&gt;OpenWrite(Filename, bAppend, bAllowRead);<br>	<span class="hljs-keyword">if</span> (!InnerHandle)<br>	&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FCachedFileHandle(InnerHandle, bAllowRead, <span class="hljs-literal">true</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>二者的返回值不再是IFileHanle而是其子类FCachedFileHandle，预读逻辑就在FCachedFileHandle中，每次预读64k的数据到一个缓存块，这个类应该是给一些为做预读取优化的平台使用的，而像Windows和PS4这些平台本身就对文件读取做了预读取的平台，UE是默认启用FCachedReadPlatformFile的，即在文件的责任链中是没有FCachedReadPlatformFile节点的，当然我们也可以通过可通过<code>NoCachedReadFile</code>参数和<code>CachedReadFile</code>参数强行关闭或启用。</p>
+<p>个人认为，FCachedReadPlatformFile的使用就是将FCachedReadPlatformFile设置进责任链中，在读取文件时上层抛到FCachedReadPlatformFile时就进行预读取处理。实践验证由于我是Windows平台还想到什么好的验证方法，也就没验证了。</p>
+<h1 id="六、FLoggedPlatformFile"><a href="#六、FLoggedPlatformFile" class="headerlink" title="六、FLoggedPlatformFile"></a>六、FLoggedPlatformFile</h1><p>FLoggedPlatformFile包装类会把每一次对文件的操作都通过UE_LOG使用LogPlatformFile打印到日志中去，使用方法也是将FLoggedPlatformFile对象设置进责任链中，如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UPakExpand::ReadFile</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString FilePath)</span></span><br><span class="hljs-function"></span>&#123;<br>    TSharedPtr&lt;FLoggedPlatformFile&gt; LoggedPlatformFile = MakeShareable(<span class="hljs-keyword">new</span> FLoggedPlatformFile());<br>    IPlatformFile&amp; PlatformFile = FPlatformFileManager::Get().GetPlatformFile();<br>    LoggedPlatformFile-&gt;Initialize(PlatformFile, TEXT(<span class="hljs-string">&quot;&quot;</span>));<br>    FPlatformFileManager::Get().SetPlatformFile(*LoggedPlatformFile);<br>    FString FileData;<br>    FFileHelper::LoadFileToString(FileData, *FilePath);<br>    FileData = TEXT(<span class="hljs-string">&quot;this is write data&quot;</span>);<br>    FFileHelper::SaveStringToFile(FileData, *FilePath);<br>    FPlatformFileManager::Get().SetPlatformFile(*PlatformFile);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>然后在UnkGameInstance中调用，运行，打开日志搜索LogPlatformFile：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127140100.png" srcset="/img/loading.gif"></p>
+<p>可以看到对文件的读写关闭等操作多被打印进了日志中。</p>
+<h1 id="七、FPlatformFileOpenLog"><a href="#七、FPlatformFileOpenLog" class="headerlink" title="七、FPlatformFileOpenLog"></a>七、FPlatformFileOpenLog</h1><p>FPlatformFileOpenLog包装类的功能、用法和FLoggedPlatformFile类似，FPlatformFileOpenLog类只会记录文件的打开历史，并且在编辑器模式下运行使用单独的EditorOpenOrder.log文件保存，在非Shipping版本的游戏包中使用GameOpenOrder.log文件保存，在Shipping版本的有游戏包中不能使用。在编辑模式下的EditorOpenOrder.log文件保存在&lt;项目目录&gt;\Build\Windows\FileOpenOrder，在Game模式下的GameOpenOrder.log文件保存在&lt;游戏目录&gt;\Build\WindowsNoEditor\FileOpenOrder下。</p>
+<p>现在我们把上面的ReadFile函数修改一下。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UPlatformFileExpand::ReadFile</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString FilePath)</span></span><br><span class="hljs-function"></span>&#123;<br>    TSharedPtr&lt;FPlatformFileOpenLog&gt; PlatformFileOpenLog = MakeShareable(<span class="hljs-keyword">new</span> FPlatformFileOpenLog());<br>    IPlatformFile&amp; PlatformFile = FPlatformFileManager::Get().GetPlatformFile();<br>    PlatformFileOpenLog-&gt;Initialize(PlatformFile, TEXT(<span class="hljs-string">&quot;&quot;</span>));<br>    FPlatformFileManager::Get().SetPlatformFile(*PlatformFileOpenLog);<br>    FString FileData;<br>    FFileHelper::LoadFileToString(FileData, *FilePath);<br>    DEBUGLOG(FEnumSet::DebugLogType::Log, (TEXT(<span class="hljs-string">&quot;Read file data:&quot;</span>) + FileData));<br>    FileData = TEXT(<span class="hljs-string">&quot;this is write data&quot;</span>);<br>    FFileHelper::SaveStringToFile(FileData, *FilePath);<br>    FPlatformFileManager::Get().SetPlatformFile(*PlatformFile);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>然后打开</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220127140105.png" srcset="/img/loading.gif"></p>
+<p>不过后面的数字代表什么意思，暂时还没弄明白，无论重启多少次exe，或在一次启动中打开多次同一文件，后面的数字始终是1。</p>
+<h1 id="八、FNetworkPlatformFile、FCookedIterativeNetworkFile和FStreamingNetworkPlatformFile"><a href="#八、FNetworkPlatformFile、FCookedIterativeNetworkFile和FStreamingNetworkPlatformFile" class="headerlink" title="八、FNetworkPlatformFile、FCookedIterativeNetworkFile和FStreamingNetworkPlatformFile"></a>八、FNetworkPlatformFile、FCookedIterativeNetworkFile和FStreamingNetworkPlatformFile</h1><h2 id="1-FNetworkPlatformFile"><a href="#1-FNetworkPlatformFile" class="headerlink" title="1.FNetworkPlatformFile"></a>1.FNetworkPlatformFile</h2><p>这三个包装文件类都是用于实现网络文件的读取功能，当UE要打开某个文件，而文件却不存在时，则先查看是否连接了文件服务器，连接了则从文件服务器下载文件到本地然后再打开。</p>
+<p>源码中的描述是：用于将低级文件系统重定向到服务器的包装器。</p>
+<p>FCookedIterativeNetworkFile和FStreamingNetworkPlatformFile的初始化函数和前面的包装文件类有所不同：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">InitializeInternal</span><span class="hljs-params">(IPlatformFile* Inner, <span class="hljs-keyword">const</span> TCHAR* HostIP)</span> <span class="hljs-keyword">override</span></span>;<br></code></pre></div></td></tr></table></figure>
+<p>不仅要指定下层文件类对象，还要指定服务器端口地址，HostIP可以使用<code>tcp://</code>开头指定tcp通信协议，使用<code>http://</code>指定http通信协议，不指定则默认使用tcp，同时可以使用<code>+</code>号分隔来指定多个Host地址，初始化后UE会将本地文件与服务器文件做出映射，以便在本地没有找到文件时能快速的找到服务器中对应的文件，同时在Tick函数中会通过PerformHeartbeat函数监测服务器文件的更新，使本地文件与服务器文件保持一致。</p>
+<p>三者具有优先级，优先级为：FStreamingNetworkPlatformFile<code>&gt;</code>FCookedIterativeNetworkFile<code>&gt;</code>FNetworkPlatformFile</p>
+<p>且在Shipping版本中被禁止使用。</p>
+<p>不是所有的目录下的文件都会在没读取到时去文件服务器下载，在源码中有一个LocalDirectories数组记录着只会进行本地读取的目录：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">// Save and Intermediate directories are always local</span><br>	LocalDirectories.Add(FPaths::EngineDir() / TEXT(<span class="hljs-string">&quot;Binaries&quot;</span>));<br>	LocalDirectories.Add(FPaths::EngineIntermediateDir());<br>	LocalDirectories.Add(FPaths::ProjectDir() / TEXT(<span class="hljs-string">&quot;Binaries&quot;</span>));<br>	LocalDirectories.Add(FPaths::ProjectIntermediateDir());<br>	LocalDirectories.Add(FPaths::ProjectSavedDir() / TEXT(<span class="hljs-string">&quot;Backup&quot;</span>));<br>	LocalDirectories.Add(FPaths::ProjectSavedDir() / TEXT(<span class="hljs-string">&quot;Config&quot;</span>));<br>	LocalDirectories.Add(FPaths::ProjectSavedDir() / TEXT(<span class="hljs-string">&quot;Logs&quot;</span>));<br>	LocalDirectories.Add(FPaths::ProjectSavedDir() / TEXT(<span class="hljs-string">&quot;Sandboxes&quot;</span>));<br></code></pre></div></td></tr></table></figure>
+<p>分别是引擎目录下的Binaries，Intermediate目录，项目目录下的Binaries，Intermediate，Saved/Backup，Saved/Config，Saved/Logs，Saved/SandBoxes目录。</p>
+<h2 id="2-FCookedIterativeNetworkFile"><a href="#2-FCookedIterativeNetworkFile" class="headerlink" title="2.FCookedIterativeNetworkFile"></a>2.FCookedIterativeNetworkFile</h2><p>FCookedIterativeNetworkFile在FNetworkPlatformFile的基础上增加了，本地Pak文件绕过网络访问的机制，如在某次更新中有些Pak文件未做修改，可以不更新，尽管服务器中这些Pak文件的版本号更高了，但是由于内容未做更改所以可以使用FCookedIterativeNetworkFile直接绕过更新。</p>
+<h2 id="3-FStreamingNetworkPlatformFile"><a href="#3-FStreamingNetworkPlatformFile" class="headerlink" title="3.FStreamingNetworkPlatformFile"></a>3.FStreamingNetworkPlatformFile</h2><p>FStreamingNetworkPlatformFile在FNetworkPlatformFile的基础上实现了对服务器的流式访问，和FNetworkPlatformFile不能对服务器文件进行修改不同，FStreamingNetworkPlatformFile可以直接修改服务器上的文件，FStreamingNetworkPlatformFile对文件的访问操作均是直接操作的服务器文件。</p>
+<p>这里引用<a target="_blank" rel="noopener" href="https://dhbloo.github.io/2020/09/07/UE4-FileSystem/#%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%88%9B%E5%BB%BA">dhb</a>大佬博客的一段原话：</p>
+<figure class="highlight isbl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs isbl">打开文件的<span class="hljs-function"><span class="hljs-title">OpenRead</span>()、<span class="hljs-title">OpenWrite</span>()函数使用<span class="hljs-title">SendOpenMessage</span>()通知服务器打开文件，服务器会返回一个文件的句柄<span class="hljs-variable">ID</span>，后续对该文件的操作以这个句柄<span class="hljs-variable">ID</span>作为标识。在接口配套定义的<span class="hljs-variable">FStreamingNetworkFileHandle</span>文件句柄中，<span class="hljs-title">Read</span>()、<span class="hljs-title">Write</span>()等操作都被转换到对服务器发送消息，分别在<span class="hljs-title">SendReadMessage</span>()与<span class="hljs-title">SendWriteMessage</span>()中。这样，对文件的读取实时从服务器获得（每次网络传输以<span class="hljs-number">64</span><span class="hljs-variable">KB</span>的块为单位进行，进行缓存），而对文件的写入则实时发送到服务器。</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="九、FSandboxPlatformFile"><a href="#九、FSandboxPlatformFile" class="headerlink" title="九、FSandboxPlatformFile"></a>九、FSandboxPlatformFile</h1><h2 id="1-什么是沙盒"><a href="#1-什么是沙盒" class="headerlink" title="1.什么是沙盒"></a>1.什么是沙盒</h2><p>FSandboxPlatformFile是UE实现的一个简单的沙盒机制，首先我们需要了解什么是沙盒：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs plain">沙盒机制是内存空间访问的一种安全机制，一个应用程序被分配到专属于自己的存储空间，程序只能在自己的空间中访问内存，不可以越过边界访问外部内存，这个区域就叫沙盒。<br></code></pre></div></td></tr></table></figure>
+<h2 id="2-FSandboxPlatformFile的使用"><a href="#2-FSandboxPlatformFile的使用" class="headerlink" title="2.FSandboxPlatformFile的使用"></a>2.FSandboxPlatformFile的使用</h2><p>FSandboxPLatformFile的使用需要在.Build.cs中添加<code>SandBoxFile</code>模块，且FSandboxPlatformFile的构造函数不是公有的，需要使用FSandboxPLatformFile::Create函数来创建TUniquePtr指针来使用。</p>
+<p>关于FSandboxPlatformFile的使用网上的资料几乎为零，在官方文档也只找到了类的描述，没办法还得自己上手撸源码。</p>
+<p>首先先上一段自己写的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UPlatformFileExpand::ReadFile</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString FilePath)</span></span><br><span class="hljs-function"></span>&#123;<br>    TUniquePtr&lt;FSandboxPlatformFile&gt; SandboxPlatformFile = FSandboxPlatformFile::Create(<span class="hljs-literal">true</span>);<br>    IPlatformFile&amp; PlatformFile = FPlatformFileManager::Get().GetPlatformFile();<br>    SandboxPlatformFile-&gt;Initialize(&amp;PlatformFileTmp, TEXT(<span class="hljs-string">&quot;-Sandbox=Unique&quot;</span>));<br>    SandboxPlatformFile-&gt;SetSandboxEnabled(<span class="hljs-literal">true</span>);<br>    FPlatformFileManager::Get().SetPlatformFile(*SandboxPlatformFile);<br>    FString FileData;<br>    FFileHelper::LoadFileToString(FileData, *FilePath);<br>    FPlatformFileManager::Get().SetPlatformFile(PlatformFile);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>Initialize：FSandboxPlatformFile的初始化需要添加命令行参数，<code>-sandbox=</code>，看源码可以看出UE提供多种沙盒类型：</li>
+</ul>
+  <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">FSandboxPlatformFile::Initialize</span><span class="hljs-params">(IPlatformFile* Inner, <span class="hljs-keyword">const</span> TCHAR* CmdLine)</span></span><br><span class="hljs-function"></span>&#123;<br>	FString CommandLineDirectory;<br>	FParse::Value( CmdLine, TEXT(<span class="hljs-string">&quot;-Sandbox=&quot;</span>), CommandLineDirectory);<br>	<span class="hljs-comment">//...</span><br>	<span class="hljs-keyword">if</span> (LowerLevel != <span class="hljs-literal">NULL</span> &amp;&amp; !CommandLineDirectory.IsEmpty())<br>	&#123;<br>		<span class="hljs-comment">//...</span><br>		<span class="hljs-keyword">if</span>( CommandLineDirectory == TEXT(<span class="hljs-string">&quot;User&quot;</span>) )<br>		&#123;<br>			<span class="hljs-comment">// Special case - platform defined user directory will be used</span><br>			SandboxDirectory = FPlatformProcess::UserDir();<br>			SandboxDirectory += TEXT(<span class="hljs-string">&quot;My Games/&quot;</span>);<br>			SandboxDirectory += TEXT( <span class="hljs-string">&quot;UE4/&quot;</span> );<br>			bSandboxIsAbsolute = <span class="hljs-literal">true</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( CommandLineDirectory == TEXT(<span class="hljs-string">&quot;Unique&quot;</span>) )<br>		&#123;<br>			<span class="hljs-keyword">const</span> FString Path = FPaths::GetRelativePathToRoot() / TEXT(<span class="hljs-string">&quot;&quot;</span>);<br>			SandboxDirectory = FPaths::ConvertToSandboxPath( Path, *FGuid::NewGuid().ToString() );<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (CommandLineDirectory.StartsWith(TEXT(<span class="hljs-string">&quot;..&quot;</span>)))<br>		&#123;<br>			<span class="hljs-comment">// for relative-specified directories, just use it directly, and don&#x27;t put into FPaths::ProjectSavedDir()</span><br>			SandboxDirectory = CommandLineDirectory;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( FPaths::IsDrive( CommandLineDirectory.Mid( <span class="hljs-number">0</span>, CommandLineDirectory.Find(TEXT(<span class="hljs-string">&quot;/&quot;</span>), ESearchCase::CaseSensitive) ) ) == <span class="hljs-literal">false</span> ) <br>		&#123;<br>			<span class="hljs-keyword">const</span> FString Path = FPaths::GetRelativePathToRoot() / TEXT(<span class="hljs-string">&quot;&quot;</span>);<br>			SandboxDirectory = FPaths::ConvertToSandboxPath( Path, *CommandLineDirectory );<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			SandboxDirectory = CommandLineDirectory;<br>			bSandboxIsAbsolute = <span class="hljs-literal">true</span>;<br>		&#125;<br>	<span class="hljs-comment">//...</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>  -Sandbox=可以指定<code>User</code>，<code>Unique</code>，<code>..</code>，<code>自定义目录</code>等参数。</p>
+<ul>
+<li><p><code>User</code>：在用户用户目录下创建沙盒目录，如：C:/Users/admin/Documents/My Games/UE4/Unkown/GitToken.txt</p>
+</li>
+<li><p><code>Unique</code>：在项目目录/Saved目录下使用唯一的编码创建沙盒目录，如：D:/UE4/Unkown/Unkown/Saved/Sandboxes/260659334D930AEACA179EB8977A20F8/Unkown/GitToken.txt</p>
+</li>
+<li><p><code>..</code>：在引擎目录/Binaries目录下创建沙盒目，如：D:/UnrealEngine-4.26/Engine/Binaries/Unkown/GitToken.txt</p>
+</li>
+<li><p><code>自定义参数</code>：使用在自定义目录下作为沙盒目录，如：D:/UESandbox/Unkown/GitToken.txt</p>
+<p><font color="red"> 需要注意的是，这里所说的沙盒目录在实际物理文件夹下是不存在的，这里的目录只是作为一个安全边界来使用。</font></p>
+</li>
+<li><p>FPlatformFileManager::Get().SetPlatformFile(PlatformFile)：这里之所以要把责任链的链头还原回去是因为如果我不设置回去会导致崩溃，<font color="red">这里就有一个疑问了，既然必须要用的时候把沙盒添加到链头，用完了有必须还原回去，那么在还原回去之后，文件依然可以使用非沙盒模式去读取，所以这里使用沙盒又有什么意义呢？</font></p>
+</li>
+</ul>
+<h2 id="3-FSandboxPlatformFile的原理"><a href="#3-FSandboxPlatformFile的原理" class="headerlink" title="3.FSandboxPlatformFile的原理"></a>3.FSandboxPlatformFile的原理</h2><p>FSandboxPlatformFile的核心就是ConvertToSandboxPath()<code>、</code>ConvertFromSandboxPath()，在访问文件时FSandboxPlatformFile会直接将访问文件的路径替换为沙盒路径来使用，使程序处于沙盒模式下无法通过非沙盒路径读写文件。</p>
+<h1 id="十、FPlatformFileReadStats和FProfiledPlatformFile"><a href="#十、FPlatformFileReadStats和FProfiledPlatformFile" class="headerlink" title="十、FPlatformFileReadStats和FProfiledPlatformFile"></a>十、FPlatformFileReadStats和FProfiledPlatformFile</h1><p>FPlatformFileReadStats用于记录文件读取的速度，FProfiledPlatformFile用于记录文件操作得速度，不过这两个类在4.26中似乎已经废弃了，在源码中搜索不到这个类，官方文档也是个404页面。</p>
+<h1 id="十一、FFileHelper"><a href="#十一、FFileHelper" class="headerlink" title="十一、FFileHelper"></a>十一、FFileHelper</h1><p>FFileHelper是UE最顶的文本文件处理类了，提供一系列接口用于处理文本文件，最神奇的是FFileHelper是一个结构体。</p>
+<ul>
+<li><p>BufferToString：从缓冲中读取内容到字符串，适用于比较大的文本，无法一次性把文本都读取到字符串时，使用缓冲分批读取；</p>
+</li>
+<li><p>LoadFileToArray：以二进制的形式一次性加载文本全部内容到一个unit8数组；</p>
+</li>
+<li><p>LoadFileToString：以字符串的形式一次性加载文本的全部内容到一个字符串中；</p>
+</li>
+<li><p>LoadFileToStringArray：以字符串的形式按行加载文本到FString数组中，数组中每一个元素存储文本中一行的文本；</p>
+</li>
+<li><p>LoadFileToStringArrayWithPredicate：以字符串的形式同时使用谓词对文本进行筛选后再加载到FString数组中，数组中每一个元素存储文本中一行的文本；</p>
+<p>按照C++的用法，函数指针既可以指向一个Lambda表达式也是可以指向一个实际的函数的，指向实际的函数时只能使用静态函数；</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">//使用Lambda表达式</span><br>FFileHelper::LoadFileToStringArrayWithPredicate(Result, *FilePath, [](<span class="hljs-keyword">const</span> FString&amp; Item) &#123;<span class="hljs-keyword">return</span> Item.Contains(TEXT(<span class="hljs-string">&quot;Sandbox&quot;</span>)); &#125;);<br><br><span class="hljs-comment">//使用实际函数</span><br>TFunction&lt;<span class="hljs-keyword">bool</span>(<span class="hljs-keyword">const</span> FString&amp;)&gt; Fun = UPlatformFileExpand::Filter;<br>FFileHelper::LoadFileToStringArrayWithPredicate(Result, *FilePath, Fun);<br><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Filter</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString&amp; Item)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> Item.Contains(TEXT(<span class="hljs-string">&quot;Sandbox&quot;</span>));<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li><p>SaveArrayToFile：有两个中类型的重载，一个传入<code>TArrayView&lt;const uint8&gt;</code>类型的参数，一个是传入<code>TArray64&lt;uint8&gt;</code>类型的参数，二者都是TArray的变种，使用方法和TArray基本一致，只是内部构造可能有些不同；</p>
+</li>
+<li><p>SaveStringToFile：把字符串保存到文本文件，可以在字符转中使用<code>\n</code>来对写入的内容进行换行；</p>
+</li>
+<li><p>SaveStringArrayToFile：将String数组元素按行写入到文本文件，一个元素对应一行；</p>
+</li>
+<li><p>CreateBitmap：创建一个bmp图片，其中FColor*参数需要使用一个C++数组；</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">FColor color[<span class="hljs-number">20</span>];<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">20</span>; i++)<br>&#123;<br>    color[i] = FColor::Red;<br>&#125;<br>FFileHelper::CreateBitmap(*FilePath, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, color);<br></code></pre></div></td></tr></table></figure></li>
+<li><p>GenerateNextBitmapFilename、GenerateDateTimeBasedBitmapFilename：这两个函数从源码来看就是创建一个指定后缀的唯一的文件来存储位图文件，但是并没有创建实际的文件，没搞懂使用来干嘛的；</p>
+</li>
+<li><p>LoadANSITextFileToStrings：专门用来加载ANSI编码的文件；</p>
+</li>
+<li><p>IsFilenameValidForSaving：判断文件是否可用。</p>
+</li>
+</ul>
+<h1 id="十二、FPaths"><a href="#十二、FPaths" class="headerlink" title="十二、FPaths"></a>十二、FPaths</h1><p>FPaths是UE专门用于处理文件路径的封装类，一般文件访问都绕不开FPaths，FPath记录着各种常用的项目、引擎等的目录。</p>
+<ul>
+<li><p>提供路径的接口：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;LaunchDir:&quot;</span>) + FPaths::LaunchDir()));<br><span class="hljs-comment">//&gt; LaunchDir:D:\Goulandis\UE4\Unkown\Unkown\Intermediate\ProjectFiles/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineDir:&quot;</span>) + FPaths::EngineDir()));<br><span class="hljs-comment">//&gt; EngineDir:../../../Engine/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineUserDir:&quot;</span>) + FPaths::EngineUserDir()));<br><span class="hljs-comment">//&gt; EngineUserDir:../../../Engine/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineVersionAgnosticUserDir:&quot;</span>) + FPaths::EngineVersionAgnosticUserDir()));<br><span class="hljs-comment">//&gt; EngineVersionAgnosticUserDir:../../../Engine/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineContentDir:&quot;</span>) + FPaths::EngineContentDir()));<br><span class="hljs-comment">//&gt; EngineContentDir:../../../Engine/Content/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineConfigDir:&quot;</span>) + FPaths::EngineConfigDir()));<br><span class="hljs-comment">//&gt; EngineConfigDir:../../../Engine/Config/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineEditorSettingsDir:&quot;</span>) + FPaths::EngineEditorSettingsDir()));<br><span class="hljs-comment">//&gt; EngineEditorSettingsDir:../../../Engine/Saved/Config/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineIntermediateDir:&quot;</span>) + FPaths::EngineIntermediateDir()));<br><span class="hljs-comment">//&gt; EngineIntermediateDir:../../../Engine/Intermediate/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineSavedDir:&quot;</span>) + FPaths::EngineSavedDir()));<br><span class="hljs-comment">//&gt; EngineSavedDir:../../../Engine/Saved/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EnginePluginsDir:&quot;</span>) + FPaths::EnginePluginsDir()));<br><span class="hljs-comment">//&gt; EnginePluginsDir:../../../Engine/Plugins/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineDefaultLayoutDir:&quot;</span>) + FPaths::EngineDefaultLayoutDir()));<br><span class="hljs-comment">//&gt; EngineDefaultLayoutDir:../../../Engine/Config/Layouts/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineProjectLayoutDir:&quot;</span>) + FPaths::EngineProjectLayoutDir()));<br><span class="hljs-comment">//&gt; EngineProjectLayoutDir:../../../../../Goulandis/UE4/Unkown/Unkown/Config/Layouts/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineUserLayoutDir:&quot;</span>) + FPaths::EngineUserLayoutDir()));<br><span class="hljs-comment">//&gt; EngineUserLayoutDir:../../../Engine/Saved/Config/Layouts/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EnterpriseDir:&quot;</span>) + FPaths::EnterpriseDir()));<br><span class="hljs-comment">//&gt; EnterpriseDir:D:/UE_4.26_SourceCode/UnrealEngine-4.26/Enterprise/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EnterprisePluginsDir:&quot;</span>) + FPaths::EnterprisePluginsDir()));<br><span class="hljs-comment">//&gt; EnterprisePluginsDir:D:/UE_4.26_SourceCode/UnrealEngine-4.26/Enterprise/Plugins/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EnterpriseFeaturePackDir:&quot;</span>) + FPaths::EnterpriseFeaturePackDir()));<br><span class="hljs-comment">//&gt; EnterpriseFeaturePackDir:D:/UE_4.26_SourceCode/UnrealEngine-4.26/Enterprise/FeaturePacks/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EnginePlatformExtensionsDir:&quot;</span>) + FPaths::EnginePlatformExtensionsDir()));<br><span class="hljs-comment">//&gt; EnginePlatformExtensionsDir:../../../Engine/Platforms/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectPlatformExtensionsDir:&quot;</span>) + FPaths::ProjectPlatformExtensionsDir()));<br><span class="hljs-comment">//&gt; ProjectPlatformExtensionsDir:../../../../../Goulandis/UE4/Unkown/Unkown/Platforms/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;RootDir:&quot;</span>) + FPaths::RootDir()));<br><span class="hljs-comment">//&gt; RootDir:D:/UE_4.26_SourceCode/UnrealEngine-4.26/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectDir:&quot;</span>) + FPaths::ProjectDir()));<br><span class="hljs-comment">//&gt; ProjectDir:../../../../../Goulandis/UE4/Unkown/Unkown/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectUserDir:&quot;</span>) + FPaths::ProjectUserDir()));<br><span class="hljs-comment">//&gt; ProjectUserDir:../../../../../Goulandis/UE4/Unkown/Unkown/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectContentDir:&quot;</span>) + FPaths::ProjectContentDir()));<br><span class="hljs-comment">//&gt; ProjectContentDir:../../../../../Goulandis/UE4/Unkown/Unkown/Content/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectConfigDir:&quot;</span>) + FPaths::ProjectConfigDir()));<br><span class="hljs-comment">//&gt; ProjectConfigDir:../../../../../Goulandis/UE4/Unkown/Unkown/Config/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectSavedDir:&quot;</span>) + FPaths::ProjectSavedDir()));<br><span class="hljs-comment">//&gt; ProjectSavedDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectIntermediateDir:&quot;</span>) + FPaths::ProjectIntermediateDir()));<br><span class="hljs-comment">//&gt; ProjectIntermediateDir:../../../../../Goulandis/UE4/Unkown/Unkown/Intermediate/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ShaderWorkingDir:&quot;</span>) + FPaths::ShaderWorkingDir()));<br><span class="hljs-comment">//&gt; ShaderWorkingDir:C:/Users/admin/AppData/Local/Temp/UnrealShaderWorkingDir/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectPluginsDir:&quot;</span>) + FPaths::ProjectPluginsDir()));<br><span class="hljs-comment">//&gt; ProjectPluginsDir:../../../../../Goulandis/UE4/Unkown/Unkown/Plugins/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectModsDir:&quot;</span>) + FPaths::ProjectModsDir()));<br><span class="hljs-comment">//&gt; ProjectModsDir:../../../../../Goulandis/UE4/Unkown/Unkown/Mods/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectPersistentDownloadDir:&quot;</span>) + FPaths::ProjectPersistentDownloadDir()));<br><span class="hljs-comment">//&gt; ProjectPersistentDownloadDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/PersistentDownloadDir</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;SourceConfigDir:&quot;</span>) + FPaths::SourceConfigDir()));<br><span class="hljs-comment">//&gt; SourceConfigDir:../../../../../Goulandis/UE4/Unkown/Unkown/Config/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;GeneratedConfigDir:&quot;</span>) + FPaths::GeneratedConfigDir()));<br><span class="hljs-comment">//&gt; GeneratedConfigDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Config/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;SandboxesDir:&quot;</span>) + FPaths::SandboxesDir()));<br><span class="hljs-comment">//&gt; SandboxesDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Sandboxes</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProfilingDir:&quot;</span>) + FPaths::ProfilingDir()));<br><span class="hljs-comment">//&gt; ProfilingDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Profiling/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ScreenShotDir:&quot;</span>) + FPaths::ScreenShotDir()));<br><span class="hljs-comment">//&gt; ScreenShotDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Screenshots/Windows/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;BugItDir:&quot;</span>) + FPaths::BugItDir()));<br><span class="hljs-comment">//&gt; BugItDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/BugIt/Windows/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;VideoCaptureDir:&quot;</span>) + FPaths::VideoCaptureDir()));<br><span class="hljs-comment">//&gt; VideoCaptureDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/VideoCaptures/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;ProjectLogDir:&quot;</span>) + FPaths::ProjectLogDir()));<br><span class="hljs-comment">//&gt; ProjectLogDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Logs/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;AutomationDir:&quot;</span>) + FPaths::AutomationDir()));<br><span class="hljs-comment">//&gt; AutomationDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Automation/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;AutomationTransientDir:&quot;</span>) + FPaths::AutomationTransientDir()));<br><span class="hljs-comment">//&gt; AutomationTransientDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Automation/Tmp/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;AutomationReportsDir:&quot;</span>) + FPaths::AutomationReportsDir()));<br><span class="hljs-comment">//&gt; AutomationReportsDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Automation/Reports/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;AutomationLogDir:&quot;</span>) + FPaths::AutomationLogDir()));<br><span class="hljs-comment">//&gt; AutomationLogDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Automation/Logs/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;CloudDir:&quot;</span>) + FPaths::CloudDir()));<br><span class="hljs-comment">//&gt; CloudDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Cloud/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;GameDevelopersDir:&quot;</span>) + FPaths::GameDevelopersDir()));<br><span class="hljs-comment">//&gt; GameDevelopersDir:../../../../../Goulandis/UE4/Unkown/Unkown/Content/Developers/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;GameUserDeveloperFolderName:&quot;</span>) + FPaths::GameUserDeveloperFolderName()));<br><span class="hljs-comment">//&gt; GameUserDeveloperFolderName:admin</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;GameUserDeveloperDir:&quot;</span>) + FPaths::GameUserDeveloperDir()));<br><span class="hljs-comment">//&gt; GameUserDeveloperDir:../../../../../Goulandis/UE4/Unkown/Unkown/Content/Developers/admin/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;DiffDir:&quot;</span>) + FPaths::DiffDir()));<br><span class="hljs-comment">//&gt; DiffDir:../../../../../Goulandis/UE4/Unkown/Unkown/Saved/Diff/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;GameAgnosticSavedDir:&quot;</span>) + FPaths::GameAgnosticSavedDir()));<br><span class="hljs-comment">//&gt; GameAgnosticSavedDir:../../../Engine/Saved/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;EngineSourceDir:&quot;</span>) + FPaths::EngineSourceDir()));<br><span class="hljs-comment">//&gt; EngineSourceDir:../../../Engine/Source/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;GameSourceDir:&quot;</span>) + FPaths::GameSourceDir()));<br><span class="hljs-comment">//&gt; GameSourceDir:../../../../../Goulandis/UE4/Unkown/Unkown/Source/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;FeaturePackDir:&quot;</span>) + FPaths::FeaturePackDir()));<br><span class="hljs-comment">//&gt; FeaturePackDir:D:/UE_4.26_SourceCode/UnrealEngine-4.26/FeaturePacks/</span><br>DEBUGLOG(FEnumSet::DebugLogType::Warning, (TEXT(<span class="hljs-string">&quot;GetProjectFilePath:&quot;</span>) + FPaths::GetProjectFilePath()));<br><span class="hljs-comment">//&gt; GetProjectFilePath:../../../../../Goulandis/UE4/Unkown/Unkown/Unkown.uproject</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>GetExtension：获取文件的后缀，不带<code>.</code>；</p>
+</li>
+<li><p>GetCleanFilename：获取带后缀的文件名，不包含路径；</p>
+</li>
+<li><p>GetBaseFilename：获取不带后缀的文件名，不包含路径；</p>
+</li>
+<li><p>GetPath：只获取路径；</p>
+</li>
+<li><p>GetPathLeaf：获取路径中的叶子节点，即路径中最后一个节点，如：D:\UE4\A.txt，则获取到A.txt，D:\UE4\，则获取到UE4；</p>
+</li>
+<li><p>ChangeExtension：当文件有后缀时，改变文件的后缀，否则直接退出；</p>
+</li>
+<li><p>SetExtension：无论文件有没有后缀都为为文件设置一个新的后缀；</p>
+</li>
+<li><p>FileExists：判断文件是否存在；</p>
+</li>
+<li><p>DirectoryExists：判断文件夹是否存在;</p>
+</li>
+<li><p>IsDrive：判断路径是否是根目录，路径中只有<code>C:</code>这种形式才被认定为根目录，<code>:</code>之后不能跟任何东西；</p>
+</li>
+<li><p>IsRelative：判断路径是否是相对路径，路径不能以<code>\</code>或<code>/</code>开头，否则会被认定为False；</p>
+</li>
+<li><p>NormalizeFilename：格式化路径，会将路径中的所有<code>\</code>替换为<code>/</code>；</p>
+</li>
+<li><p>IsSamePath：判断两个路径是否一样；</p>
+</li>
+<li><p>IsUnderDirectory：判断路径是否在某个指定目录下；</p>
+</li>
+<li><p>NormalizeDirectoryName：格式化目录，和NormalizeFilename类似；</p>
+</li>
+<li><p>RemoveDuplicateSlashes：删除路径中重复<code>/</code>；</p>
+</li>
+<li><p>CreateStandardFilename：把UE的相对路径转换成绝对路径，如上面的所示，由于FPaths获取的路径几乎都是<code>../../</code>这种形式，有的时候我们可能需要绝对路径，就可以使用这个函数来转换。如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++">DEBUGLOG(FEnumSet::DebugLogType::Warning, FPaths::CreateStandardFilename(FPaths::GetProjectFilePath()));<br><span class="hljs-comment">//&gt; GetProjectFilePath: D:/Goulandis/UE4/Unkown/Unkown/Unkown.uproject</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>MakeStandardFilename：效果和CreateStandardFilename一致，只是CreateStandardFilename使用返回值返回路径，MakeStandardFilename直接传入引用，从参数返回；</p>
+</li>
+<li><p>MakePlatformFilename：这个函数好像没什么卵用，从源码上看就是跟格式化路劲好像没啥区别；</p>
+</li>
+<li><p>MakePathRelativeTo：传入两个路径，其中参数一为FString&amp;，参数二为const TCHAR*，如果二者是同一路径下的，那么将参数一的路径转化为相对于参数二的相对路径，如：参数一为：D:/UE/Content/A.txt，参数二为：D:/UE/B.txt，那么经过转换，参数将变成：Content/A.txt；如果二者路径不一致，则不做转换；</p>
+</li>
+<li><p>ConvertRelativePathToFull：这个函数似乎也是和CreateStandardFilename和MakeStandardFilename的作用是一样的，估计是历史遗留原因吧，很多重复功能的函数；</p>
+</li>
+<li><p>ConvertToSandboxPath：将路径转换为沙盒路径；</p>
+</li>
+<li><p>ConvertFromSandboxPath：将沙盒路径转为平台路径；</p>
+</li>
+<li><p>CreateTempFilename：创建临时文件，需要指定路径，可选文件名前缀和文件名后缀，函数会根据设置的路径、前缀、后缀生成一个随机名称的临时文件，如果没有指定后缀，默认使用.tmp，如果没有指定前缀，默认使用无前缀的随机数作为文件名；</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">DEBUGLOG(FEnumSet::DebugLogType::Warning, FPaths::CreateTempFilename(TEXT(<span class="hljs-string">&quot;D:/Unkwon/Content/&quot;</span>,TEXT(<span class="hljs-string">&quot;Temp_&quot;</span>))));<br><span class="hljs-comment">//&gt; D:/Unkwon/Content/Temp_684BF44044F4C6356EFEC8BA14E6B32B.tmp</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>GetInvalidFileSystemChars：获取操作系统规定的所有在路径中使用后是无效字符的字符串；</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">DEBUGLOG(FEnumSet::DebugLogType::Warning, FPaths::GetInvalidFileSystemChars());<br><span class="hljs-comment">//&gt; /?:&amp;\*&quot;&lt;&gt;|%#@^</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>MakeValidFileName：去除路径中的无效字符后，返回一个可用的路径；</p>
+</li>
+<li><p>ValidatePath：判断路径的组成字符中是否包含了操作系统规定的无效字符；</p>
+</li>
+<li><p>Split：将一个文件路径拆分成路径、不带后缀的文件名和后缀三部分；</p>
+</li>
+<li><p>Combine：这是一个可变参数的函数，将传入的参数组合成一个路径格式；</p>
+<p><font color="green"><strong>小知识:</strong></font></p>
+<p>这里涉及到了UE的可变参数，实际上就是C++11中的可变参数模板，如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span>... STR&gt;<br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UPlatformFileExpand::FuncTest</span><span class="hljs-params">(STR... Strs)</span></span><br><span class="hljs-function"></span>&#123;<br>    TCHAR* Str[] = &#123; Strs... &#125;;<br>    <span class="hljs-keyword">for</span> (TCHAR* Item : Str)<br>    &#123;<br>        UE_LOG(LogTemp, Warning, TEXT(<span class="hljs-string">&quot;%s&quot;</span>), Item);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>STR是一个可变参数包，可以接收任意类型的任意数量的参数，只是传进来的参数需要自行进行处理，否则可能会因为参数类型不符而导致编译失败。</p>
+<p>其中参数可以通过数组初始化的形式来使用数组接收参数包中的参数，当前提是需要提前对参数类型做处理，否者初始化就会失败，这种方式应该是UE自己实现的，C++中读取参数使用的是va_arg，va_start,va_end,va_list等来获取可变参数。</p>
+</li>
+<li><p>TearDown：释放所有FPaths所暂用的内存，由于FPaths类在程序开始由引擎自动初始化，其中保存了大量的路径字符串，如果不需要再用到FPaths了也可以直接把这部分内存释放出来。</p>
+</li>
+</ul>
+<h1 id="十三、GConfig"><a href="#十三、GConfig" class="headerlink" title="十三、GConfig"></a>十三、GConfig</h1><p>GConfig是一个定义在CoreGlobals.cpp中一个全局FConfigCacheIni*变量，可以在UEC++中的任何地方使用，FConfigCacheIni是UE专门用来处理缓存在内存中的配置文件的类，其中涉及到FConfigFile、FConfigSection、FConfigValue类。</p>
+<p>UE使用FConfigValue来封装配置文件中<code>=</code>号后面的内容，FConfigValue是一个结构体；使用一个<code>TPair&lt;FName,FConfigValue&gt;</code>来封装一行内容，其中TPair的Key就是一行中的Key，Value就是一行中的Value；使用FConfigSection来封装一个块的内容，FConfigSection是一个<code>TMultiMap&lt;FName,FConfigValue&gt;</code>的Map；使用FConfigFile来封装一个配置文件，FConfigFile是一个<code>TMap&lt;FString,FConfigSection&gt;</code>的Map。</p>
+<h2 id="FConfigCacheIni"><a href="#FConfigCacheIni" class="headerlink" title="FConfigCacheIni"></a>FConfigCacheIni</h2><ul>
+<li><p>DisableFileOperations和EnableFileOperations：这两个是相对的函数，具体是干什么的至今没搞懂；</p>
+</li>
+<li><p>AreFileOperationsDisabled：判断是DisableFileOperations状态还是EnableFileOperations状态；</p>
+</li>
+<li><p>IsReadyForUse：判断ini文件是否已经加载好了，GConfig在加载ini文件时，会把ini文件内容加载到一个FConfigFile类对象中，FConfigFile类才是直接对ini文件进行操作的类；</p>
+</li>
+<li><p>Parse1ToNSectionOfStrings：用于读取读取ini文件的二级键值，并用一个<code>TMap&lt;FString,TArray&lt;FStting&gt;&gt;&amp;</code>作为参数返回；如：</p>
+<figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-section">[TEXT]</span><br><span class="hljs-attr">AA</span>=T1<br><span class="hljs-attr">BB</span>=Y1<br><span class="hljs-attr">BB</span>=Y2<br><span class="hljs-attr">AA</span>=T2<br><span class="hljs-attr">BB</span>=Y3<br><span class="hljs-attr">AA</span>=W1<br><span class="hljs-attr">BB</span>=Y4<br><span class="hljs-attr">BB</span>=Y5<br><span class="hljs-attr">BB</span>=Y6<br></code></pre></div></td></tr></table></figure>
+<p>其中AA=T1为一级键值，在T1下游两个二级键值BB=Y1，BB=Y2，以此类推，一级键值AA=T2下有一个二级键值BB=Y3，一级键值AA=W1下有三个二级键值BB=Y4，BB=Y5，BB=Y6。</p>
+<p>Parse1ToNSectionOfStrings参数，其中Section为要读取的块的名称，KeyOne为一级键值名称，KeyN为二级键值名称，只能支持到二级键值。</p>
+</li>
+<li><p>Parse1ToNSectionOfNames：和Parse1ToNSectionOfStrings的效果一样只是使用FName替换了FString；</p>
+</li>
+<li><p>FindConfigFile：在已加载的配置文件中通过文件路径寻找FConfigFile类型的配置文件对象，只有已加载到内存中的配置文件才能被找到；</p>
+</li>
+<li><p>Find：Find的功能和FindConfigFile一样，只是新增了一个bool参数，指定在没有找到对象时是否创建一个；</p>
+</li>
+<li><p>FindConfigFileWithBaseName：使用不包含路径的文件名寻找加载到内存中FConfigFile对象；</p>
+</li>
+<li><p>Flush：清除指定的已加载到内存中的FConfigFile对象；</p>
+</li>
+<li><p>LoadFile：加载一个配置文件到一个FConfigFile对象并存储在内存中；</p>
+</li>
+<li><p>SetFile：为一个指定的配置文件设定一个新的FConfigFile对象，UE加载所有的配置文件使用了一个Map来在内存中存储，Map使用配置文件的全路径来作为Key，使用对应FConfigFile对象来作为Value；</p>
+</li>
+<li><p>UnloadFile：从内存中移除指定的FConfigFile对象；</p>
+</li>
+<li><p>Detach：这个函数着实是没弄明白是干什么的；</p>
+</li>
+<li><p>DoesSectionExist：判断指定块是否存在；</p>
+</li>
+<li><p>GetConfigFilenames：获取所有已加载到内存中的配置文件的名称，使用一个<code>TArray&lt;FString&gt;</code>数组存储；</p>
+</li>
+<li><p>GetSectionNames：获取所有的已加载到内存中的指定的配置文件的块的键值，使用一个<code>TArray&lt;FString&gt;</code>数组存储；</p>
+</li>
+<li><p>Exit：退出FConfigCacheIni，清除所有加载到内存的FConfigFile对象；</p>
+</li>
+<li><p>GetMaxMemoryUsage：获取FConfigCachIni的做大内存使用量；</p>
+</li>
+<li><p>ForEachEntry：遍历指定块的所有行，通过传入的FKeyValueSink委托绑定操作函数；</p>
+</li>
+<li><p>Factory：创建一个FConfigChechIni实例；</p>
+</li>
+<li><p>InitializeConfigSystem：创建GConfig实例，加载标准的全局ini文件；</p>
+</li>
+<li><p>GetDestIniFilename：这个函数会根据平台的类型给定标准的ini文件在不同平台中的名称；</p>
+</li>
+<li><p>LoadGlobalIniFile：加载ini文件，并把生成的FConfigFile配置到GConfig以便使用；</p>
+</li>
+<li><p>LoadLocalIniFile：加载ini文件，但不把生成的FConfigFile配置到GConfig；</p>
+</li>
+<li><p>LoadExternalIniFile：从指定的配置文件文件夹中加载配置文件，可以使用直接使用不带后缀的文件名加载；</p>
+</li>
+<li><p>SaveCurrentStateForBootstrap：将当前的FConfigCacheIni中的所有配置项存储到指定的配置文件中；</p>
+</li>
+<li><p>ini文件操作：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetString</span><span class="hljs-params">( <span class="hljs-keyword">const</span> TCHAR* Section, <span class="hljs-keyword">const</span> TCHAR* Key, FString&amp; Value, <span class="hljs-keyword">const</span> FString&amp; Filename )</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetText</span><span class="hljs-params">( <span class="hljs-keyword">const</span> TCHAR* Section, <span class="hljs-keyword">const</span> TCHAR* Key, FText&amp; Value, <span class="hljs-keyword">const</span> FString&amp; Filename )</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetSection</span><span class="hljs-params">( <span class="hljs-keyword">const</span> TCHAR* Section, TArray&lt;FString&gt;&amp; Result, <span class="hljs-keyword">const</span> FString&amp; Filename )</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetString</span><span class="hljs-params">( <span class="hljs-keyword">const</span> TCHAR* Section, <span class="hljs-keyword">const</span> TCHAR* Key, <span class="hljs-keyword">const</span> TCHAR* Value, <span class="hljs-keyword">const</span> FString&amp; Filename )</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetText</span><span class="hljs-params">( <span class="hljs-keyword">const</span> TCHAR* Section, <span class="hljs-keyword">const</span> TCHAR* Key, <span class="hljs-keyword">const</span> FText&amp; Value, <span class="hljs-keyword">const</span> FString&amp; Filename )</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">RemoveKey</span><span class="hljs-params">( <span class="hljs-keyword">const</span> TCHAR* Section, <span class="hljs-keyword">const</span> TCHAR* Key, <span class="hljs-keyword">const</span> FString&amp; Filename )</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">EmptySection</span><span class="hljs-params">( <span class="hljs-keyword">const</span> TCHAR* Section, <span class="hljs-keyword">const</span> FString&amp; Filename )</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">EmptySectionsMatchingString</span><span class="hljs-params">( <span class="hljs-keyword">const</span> TCHAR* SectionString, <span class="hljs-keyword">const</span> FString&amp; Filename )</span></span>;<br><span class="hljs-function">FString <span class="hljs-title">GetStr</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section, <span class="hljs-keyword">const</span> TCHAR* Key, <span class="hljs-keyword">const</span> FString&amp; Filename )</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetInt</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,int32&amp; Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetFloat</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,<span class="hljs-keyword">float</span>&amp; Value,<span class="hljs-keyword">const</span> FString&amp;	Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetDouble</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR*	Section,<span class="hljs-keyword">const</span> TCHAR* Key,<span class="hljs-keyword">double</span>&amp; Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetBool</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,<span class="hljs-keyword">bool</span>&amp; Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function">int32 <span class="hljs-title">GetArray</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR*	Section,<span class="hljs-keyword">const</span> TCHAR* Key,TArray&lt;FString&gt;&amp; out_Arr,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function">int32 <span class="hljs-title">GetSingleLineArray</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,TArray&lt;FString&gt;&amp; out_Arr,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetColor</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,FColor&amp;	Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetVector2D</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,FVector2D&amp; Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetVector</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,FVector&amp; Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetVector4</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,FVector4&amp; Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetRotator</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,FRotator&amp;	Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetInt</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,int32	Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetFloat</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,<span class="hljs-keyword">float</span> Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetDouble</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR*	Section,<span class="hljs-keyword">const</span> TCHAR* Key,<span class="hljs-keyword">double</span>	Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetBool</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,<span class="hljs-keyword">bool</span>	Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetArray</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR*	Key,<span class="hljs-keyword">const</span> TArray&lt;FString&gt;&amp; Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetSingleLineArray</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,<span class="hljs-keyword">const</span> TArray&lt;FString&gt;&amp; In_Arr,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetColor</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,FColor Value,<span class="hljs-keyword">const</span> FString&amp;	Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetVector2D</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,FVector2D Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetVector</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,FVector Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetVector4</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,<span class="hljs-keyword">const</span> FVector4&amp; Value,<span class="hljs-keyword">const</span> FString&amp; Filename)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetRotator</span><span class="hljs-params">(<span class="hljs-keyword">const</span> TCHAR* Section,<span class="hljs-keyword">const</span> TCHAR* Key,FRotator Value,<span class="hljs-keyword">const</span> FString&amp;	Filename)</span></span>;<br></code></pre></div></td></tr></table></figure>
+<h1 id="十四、FJsonObject"><a href="#十四、FJsonObject" class="headerlink" title="十四、FJsonObject"></a>十四、FJsonObject</h1></li>
+</ul>
+<p>UE提供FJsonObject来对json文件进行操作，同时提供一整套的json操作工具链，如：FJsonValue，FJsonReader，FJsonSerializer，FJsonWriter，FJsonTypes等。</p>
+<p>详细使用请查看<a target="_blank" rel="noopener" href="https://goulandis.github.io/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%AF%BB%E5%86%99Json%E6%96%87%E4%BB%B6/">这里</a>。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/">知识记录</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/UE4/">UE4</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/08/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%A1%86%E6%9E%B6/">
+                        <span class="hidden-mobile">【UE4】UE4GamePlay框架</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>Github</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.csdn.net/console/article" target="_blank" rel="nofollow noopener"><span>CSDN</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
