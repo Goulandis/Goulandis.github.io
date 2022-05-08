@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-01-27T07:38:50.675Z</updated>
+  <updated>2022-05-08T15:30:26.670Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,53 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>UE4 文件系统</title>
+    <title>【UE4】全局Widget</title>
+    <link href="http://yoursite.com/2022/05/08/%E3%80%90UE4%E3%80%91UE4%E5%85%A8%E5%B1%80Widget/"/>
+    <id>http://yoursite.com/2022/05/08/%E3%80%90UE4%E3%80%91UE4%E5%85%A8%E5%B1%80Widget/</id>
+    <published>2022-05-08T15:26:17.000Z</published>
+    <updated>2022-05-08T15:30:26.670Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;由于UE4在默认情况下会OpenLevel会将当前Level创建的Widget从ViewportClient中移除，所以默认的UserWidget会随着切换关切而消失。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【UE4】获取13位时间戳</title>
+    <link href="http://yoursite.com/2022/05/08/%E3%80%90UE4%E3%80%91UE4%E8%8E%B7%E5%8F%9613%E4%BD%8D%E6%97%B6%E9%97%B4%E6%88%B3/"/>
+    <id>http://yoursite.com/2022/05/08/%E3%80%90UE4%E3%80%91UE4%E8%8E%B7%E5%8F%9613%E4%BD%8D%E6%97%B6%E9%97%B4%E6%88%B3/</id>
+    <published>2022-05-08T15:25:46.000Z</published>
+    <updated>2022-05-08T15:28:06.300Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;UE4自身提供了一个FDateTime::ToUnixTimestamp函数可以将系统时间转换位时间戳，但是FDateTime::ToUnixTimestamp只能提供10位的时间错，翻阅了FDateTime中并没有提供13位的时间戳，且查看FDateTime::ToUnixTimestamp的源码，确实只精确到秒。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【UE4】 文件系统</title>
     <link href="http://yoursite.com/2022/01/27/%E3%80%90UE4%E3%80%91UE4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
     <id>http://yoursite.com/2022/01/27/%E3%80%90UE4%E3%80%91UE4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</id>
     <published>2022-01-27T07:38:22.000Z</published>
-    <updated>2022-01-27T07:38:50.675Z</updated>
+    <updated>2022-02-22T10:05:48.643Z</updated>
     
     
     <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
@@ -173,11 +215,11 @@
   </entry>
   
   <entry>
-    <title>【UE4】UE4基于Spline的测距功能</title>
+    <title>【UE4】基于Spline的测距功能</title>
     <link href="http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%9F%BA%E4%BA%8ESpline%E7%9A%84%E6%B5%8B%E8%B7%9D%E5%8A%9F%E8%83%BD/"/>
     <id>http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%9F%BA%E4%BA%8ESpline%E7%9A%84%E6%B5%8B%E8%B7%9D%E5%8A%9F%E8%83%BD/</id>
     <published>2021-05-14T09:41:32.000Z</published>
-    <updated>2021-05-14T10:15:00.905Z</updated>
+    <updated>2022-05-08T15:30:51.463Z</updated>
     
     
     <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
@@ -236,7 +278,7 @@
     <link href="http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%86%85%E5%B5%8CWeb%E5%8F%8A%E4%B8%8EWeb%E9%80%9A%E4%BF%A1/"/>
     <id>http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%86%85%E5%B5%8CWeb%E5%8F%8A%E4%B8%8EWeb%E9%80%9A%E4%BF%A1/</id>
     <published>2021-05-14T09:28:03.000Z</published>
-    <updated>2021-05-14T10:15:40.522Z</updated>
+    <updated>2022-02-22T10:28:11.372Z</updated>
     
     
     <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;</summary>
@@ -395,61 +437,6 @@
     
     
     <category term="大事件" scheme="http://yoursite.com/tags/%E5%A4%A7%E4%BA%8B%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【UE4】UE4联级粒子系统</title>
-    <link href="http://yoursite.com/2019/11/17/%E3%80%90UE4%E3%80%91UE4%E8%81%94%E7%BA%A7%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://yoursite.com/2019/11/17/%E3%80%90UE4%E3%80%91UE4%E8%81%94%E7%BA%A7%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/</id>
-    <published>2019-11-17T12:36:30.000Z</published>
-    <updated>2021-08-11T14:47:52.111Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h1 id=&quot;一、粒子系统的一些基本概念&quot;&gt;&lt;a href=&quot;#一、粒子系统的一些基本概念&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【UE4】UE4组件</title>
-    <link href="http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/"/>
-    <id>http://yoursite.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/</id>
-    <published>2019-11-06T13:10:52.000Z</published>
-    <updated>2021-08-11T14:50:36.018Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;p&gt;不同的蓝图脚本拥有不同的组件集，蓝图脚本的组件集过于庞大，这里只对自己使用过的组件进行列举。&lt;/p&gt;
-&lt;p&gt;&lt;font</summary>
-        
-      
-    
-    
-    
-    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
     
   </entry>
   
