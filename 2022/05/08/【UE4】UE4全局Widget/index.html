@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Goulandis">
   <meta name="keywords" content="snoopy">
-  <title>【BAT】BATWindows自动脚本同步GitHUb远程仓库 - Goulandis</title>
+  <title>【UE4】全局Widget - Goulandis</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="【BAT】BATWindows自动脚本同步GitHUb远程仓库">
+            <span class="h2" id="subtitle" title="【UE4】全局Widget">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-05-14 17:29" pubdate>
-        May 14, 2021 pm
+      <time datetime="2022-05-08 23:26" pubdate>
+        May 8, 2022 pm
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      379 字
+      274 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      3
        分钟
     </span>
   
@@ -225,30 +225,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【BAT】BATWindows自动脚本同步GitHUb远程仓库</h1>
+            <h1 style="display: none">【UE4】全局Widget</h1>
             
             <div class="markdown-body">
               <meta name="referrer" content="no-referrer">
 
-
-
+<p>由于UE4在默认情况下会OpenLevel会将当前Level创建的Widget从ViewportClient中移除，所以默认的UserWidget会随着切换关切而消失。</p>
 <a id="more"></a>
 
-<p>Windows自动脚本，我已自动同步GitHub仓库为例。</p>
-<p>先上源码，可以直接用TXT写，然后将文件后缀改为.bat。</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">start &quot;C:\Windows\System32\cmd.exe&quot;<br>G:<br>cd Git\Temp<br>git add .<br>git commit -m &quot;From Auto Updata&quot;<br>git push<br>pause<br>taskkill /f /im cmd.exe<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220508232919.gif" srcset="/img/loading.gif"></p>
+<p>有的时候我们可能需要使用一个全局的按钮什么的，所以就需要Widget不随切换关切而从ViewprotClient中移除，而是在我们想要移除的时候才移除，做一个全局的Widget其实也很简单，我只需要稍稍的重写一下UserWidget就好了。</p>
+<p>首先创建一个自己的UserWidget子类，然后重写OnLevelRemovedFromWorld函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;CoreMinimal.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Blueprint/UserWidget.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;GlobalWidget.generated.h&quot;</span></span><br><br>UCLASS()<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MYPROJECT_API</span> <span class="hljs-title">UGlobalWidget</span> :</span> <span class="hljs-keyword">public</span> UUserWidget<br>&#123;<br>	GENERATED_BODY()<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnLevelRemovedFromWorld</span><span class="hljs-params">(ULevel* InLevel, UWorld* InWorld)</span> <span class="hljs-keyword">override</span></span>;<br>    UFUNCTION(BlueprintCallable,Category=<span class="hljs-string">&quot;GloablWidget&quot;</span>)<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">RemoveGlobalWidget</span><span class="hljs-params">()</span></span>;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;GlobalWidget/GlobalWidget.h&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UGlobalWidget::OnLevelRemovedFromWorld</span><span class="hljs-params">(ULevel* InLevel, UWorld* InWorld)</span></span><br><span class="hljs-function"></span>&#123;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UGlobalWidget::RemoveGlobalWidget</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    RemoveFromParent();<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <ul>
-<li>start “C:\Windows\System32\cmd.exe”：打开Windows CMD控制台</li>
-<li>G：切换到G盘，因为我的Git仓库放在G盘</li>
-<li>cd Git\Temp：进入远程仓库所在的文件夹Temp，我的远程仓库放在G:/Goulandis/Git/Temp文件夹下</li>
-<li><code>git add .</code>到<code>git push</code>是git同步远程仓库的命令</li>
-<li>pause：pause命令用于暂停命令继续执行，本例中可有可无，这里加上主要是为了方便查看执行过程</li>
-<li>taskkill /f /im cmd.exe：自动关闭CMD</li>
+<li>OnLevelRemovedFromWorld函数就是UserWidget往FWorldDelegates::LevelRemovedFromWorld代理中添加的函数，FWorldDelegates::LevelRemovedFromWorld代理会在Level从World中移除时调用；</li>
+<li>RemoveGlobalWidget是自定义的函数，用于触发从ViewportClient中移除Widget。</li>
 </ul>
-<p>将文件后缀改为.bat之后，再将文件放入G:Goulandis(这是我电脑的路径)，这是根据cd Git\Temp决定的，我的Git文件夹就在G:Goulandis文件夹下，所以我将脚本放在G:Goulandis文件夹下，当然若觉得麻烦，也可直接将脚本放在Temp文件下，也就是仓库的.git文件夹所在的文件夹下，这时就不需要进行盘符和文件夹切换了，即上面代码中第二第三行删除。</p>
-<p>双击运行，测试一下执行效果：</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171713.png" srcset="/img/loading.gif"></p>
-<p>如果自动脚本很多的话，有一种更便捷的方法，就是专门为自动脚本创建一个文件夹，然后将其路径添加进环境变量中</p>
+<p>然后创建一个GlobalWidget的蓝图类：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220508232931.png" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220508232942.png" srcset="/img/loading.gif"></p>
+<p>然后我们就可看一下效果了：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20220508232947.gif" srcset="/img/loading.gif"></p>
 
             </div>
             <hr>
@@ -266,7 +264,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/BAT/">BAT</a>
+                      <a class="hover-with-bg" href="/tags/UE4/">UE4</a>
                     
                   </div>
                 
@@ -279,18 +277,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%9F%BA%E4%BA%8ESpline%E7%9A%84%E6%B5%8B%E8%B7%9D%E5%8A%9F%E8%83%BD/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【UE4】基于Spline的测距功能</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9%E7%B2%92%E5%AD%90%E5%8F%82%E6%95%B0/">
-                        <span class="hidden-mobile">【UE4】UE4使用蓝图动态修改粒子参数</span>
+                      <a href="/2022/05/08/%E3%80%90UE4%E3%80%91UE4%E8%8E%B7%E5%8F%9613%E4%BD%8D%E6%97%B6%E9%97%B4%E6%88%B3/">
+                        <span class="hidden-mobile">【UE4】获取13位时间戳</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
