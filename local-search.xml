@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>【UE5】解决UE5无法播放mp4视频</title>
+    <link href="/2022/11/14/%E3%80%90UE5%E3%80%91%E8%A7%A3%E5%86%B3UE5%E6%97%A0%E6%B3%95%E6%92%AD%E6%94%BEmp4%E8%A7%86%E9%A2%91/"/>
+    <url>/2022/11/14/%E3%80%90UE5%E3%80%91%E8%A7%A3%E5%86%B3UE5%E6%97%A0%E6%B3%95%E6%92%AD%E6%94%BEmp4%E8%A7%86%E9%A2%91/</url>
+    
+    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"><p>最近接手的项目需要把项目从UE4中迁移至UE5，其中遇到了一个mp4视频无法播放的bug，这里做一下记录。</p><a id="more"></a><p>在官方论中有提到过这个bug，<a href="https://forums.unrealengine.com/t/media-textures-wont-display-video-in-ue5-preview-1-while-using-directx-12/503980/2">https://forums.unrealengine.com/t/media-textures-wont-display-video-in-ue5-preview-1-while-using-directx-12/503980/2</a></p><p>按照常规的方法播放视频在MediaPlay的Play节点会返回false，并在会会在日志中打印：</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">LogWmfMedia</span>:Error:Tracks <span class="hljs-number">000084</span>F<span class="hljs-number">14025</span>C<span class="hljs-number">90</span>:Format is not supported in D<span class="hljs-number">3</span>D<span class="hljs-number">12</span><br></code></pre></td></tr></table></figure><p>意思是在最新的DX12图形库下UE5默认使用的WMF解码器目前不支持mp4的视频解码。</p><p>解决方案有两个，其一更换图形库，其二更换解码器。</p><h2 id="更换图形库"><a href="#更换图形库" class="headerlink" title="更换图形库"></a>更换图形库</h2><p>WMF解码器只是在DX12下会有解码出错的bug，在DX11或者Vulkan下没有这个bug，所以我们可以把UE使用的图形库换成DX11或者Vulkan。</p><p>在Edit/ProjectSettings/Platforms/Windows/Targeted RHIs/Default RHI中切换图形库，UE5支持DX11，DX12和Vulkan。</p><p>但是由于我的项目中使用了Groom毛发系统，Groom在DX11和Vulkan中支持的不是很好，所以方案一只能pass掉了。</p><h2 id="更换解码器"><a href="#更换解码器" class="headerlink" title="更换解码器"></a>更换解码器</h2><p>WMF是UE默认使用的视频解码器，除此之外UE在插件里还集成了一个功能更强大的视频解码器—<a href="https://docs.unrealengine.com/4.27/zh-CN/WorkingWithMedia/IntegratingMedia/MediaFramework/ElectraPlayer/">Electra Play</a>。</p><p>启用插件，重启后我们就可以在MediaPlay试图中的PlaybackOptions下看到ElectraPlay解码器，只需要将MediaPlay切换到ElectraPlay解码器即可，当然每一个MediaPlay都要进行切换解码器操作。</p><p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202211142240667.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>知识记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>UE5</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【UE4】C++编程</title>
     <link href="/2022/10/16/%E3%80%90UE4%E3%80%91C++%E7%BC%96%E7%A8%8B/"/>
     <url>/2022/10/16/%E3%80%90UE4%E3%80%91C++%E7%BC%96%E7%A8%8B/</url>
