@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-10-15T16:27:10.322Z</updated>
+  <updated>2022-11-14T14:40:22.949Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【UE5】解决UE5无法播放mp4视频</title>
+    <link href="http://yoursite.com/2022/11/14/%E3%80%90UE5%E3%80%91%E8%A7%A3%E5%86%B3UE5%E6%97%A0%E6%B3%95%E6%92%AD%E6%94%BEmp4%E8%A7%86%E9%A2%91/"/>
+    <id>http://yoursite.com/2022/11/14/%E3%80%90UE5%E3%80%91%E8%A7%A3%E5%86%B3UE5%E6%97%A0%E6%B3%95%E6%92%AD%E6%94%BEmp4%E8%A7%86%E9%A2%91/</id>
+    <published>2022-11-14T13:58:00.000Z</published>
+    <updated>2022-11-14T14:40:22.949Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;最近接手的项目需要把项目从UE4中迁移至UE5，其中遇到了一个mp4视频无法播放的bug，这里做一下记录。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="UE5" scheme="http://yoursite.com/tags/UE5/"/>
+    
+  </entry>
   
   <entry>
     <title>【UE4】C++编程</title>
@@ -418,33 +439,6 @@
     
     
     <category term="Dev" scheme="http://yoursite.com/tags/Dev/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【UE4】UE4联级粒子系统</title>
-    <link href="http://yoursite.com/2019/11/17/%E3%80%90UE4%E3%80%91UE4%E8%81%94%E7%BA%A7%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://yoursite.com/2019/11/17/%E3%80%90UE4%E3%80%91UE4%E8%81%94%E7%BA%A7%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/</id>
-    <published>2019-11-17T12:36:30.000Z</published>
-    <updated>2021-08-11T14:47:52.111Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h1 id=&quot;一、粒子系统的一些基本概念&quot;&gt;&lt;a href=&quot;#一、粒子系统的一些基本概念&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
     
   </entry>
   
