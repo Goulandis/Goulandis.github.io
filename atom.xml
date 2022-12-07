@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-11-14T14:40:22.949Z</updated>
+  <updated>2022-12-07T14:45:25.596Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【UE5】使用快捷键切换编辑器语言</title>
+    <link href="http://yoursite.com/2022/12/07/%E3%80%90UE5%E3%80%91%E4%BD%BF%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%87%E6%8D%A2%E7%BC%96%E8%BE%91%E5%99%A8%E8%AF%AD%E8%A8%80/"/>
+    <id>http://yoursite.com/2022/12/07/%E3%80%90UE5%E3%80%91%E4%BD%BF%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%87%E6%8D%A2%E7%BC%96%E8%BE%91%E5%99%A8%E8%AF%AD%E8%A8%80/</id>
+    <published>2022-12-07T14:29:35.000Z</published>
+    <updated>2022-12-07T14:45:25.596Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;最近在项目上和美术配合，由于在编辑器上美术习惯使用中文而我习惯使用英文，配合的时候对中英文要切来切去很麻烦，于是就向弄一个快捷键来切换编辑器的中英文，然后在网上找到一个大佬—[opda](&lt;a href=&quot;https://zhuanlan.zhihu.com/p/481496858&quot;&gt;UE4自定义快捷键实现中英文切换 - 知乎 (zhihu.com)&lt;/a&gt;)的实现，并且大佬还直接将功能插件化了。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="UE5" scheme="http://yoursite.com/tags/UE5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【UE5】多用户协同编辑</title>
+    <link href="http://yoursite.com/2022/12/07/%E3%80%90UE5%E3%80%91%E5%A4%9A%E7%94%A8%E6%88%B7%E5%8D%8F%E5%90%8C%E7%BC%96%E8%BE%91/"/>
+    <id>http://yoursite.com/2022/12/07/%E3%80%90UE5%E3%80%91%E5%A4%9A%E7%94%A8%E6%88%B7%E5%8D%8F%E5%90%8C%E7%BC%96%E8%BE%91/</id>
+    <published>2022-12-07T14:29:03.000Z</published>
+    <updated>2022-12-07T14:38:58.489Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;UE5新出了一个多用户协同功能所以想搭一个来玩玩。&lt;/p&gt;
+&lt;p&gt;Epic已经将流程极度的简化了，在B站虚幻官方也放出了&lt;a href=&quot;%5B%5B%E7%BD%91%E7%BB%9C%E7%A0%94%E8%AE%A8%E4%BC%9A%5D%E5%9C%A8%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E%E4%B8%AD%E5%8D%8F%E5%90%8C%E5%B7%A5%E4%BD%9C%EF%BC%9A%E5%A4%9A%E7%94%A8%E6%88%B7%E7%BC%96%E8%BE%91%E5%99%A8%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B(%E5%AE%98%E6%96%B9%E6%B1%89%E5%8C%96)_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1fK411W7Hn/?vd_source=e979466844c4915a4200c496efb35cfb)&quot;&gt;教程视频&lt;/a&gt;，[官方文档](&lt;a href=&quot;https://docs.unrealengine.com/4.27/zh-CN/ProductionPipelines/MultiUserEditing/QuickStart/&quot;&gt;多用户编辑入门 | 虚幻引擎文档 (unrealengine.com)&lt;/a&gt;)也有教程。&lt;/p&gt;
+&lt;p&gt;这里做一下简要记录。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="UE5" scheme="http://yoursite.com/tags/UE5/"/>
+    
+  </entry>
   
   <entry>
     <title>【UE5】解决UE5无法播放mp4视频</title>
@@ -388,57 +432,6 @@
     
     
     <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【C++】C++ PremierReadNote</title>
-    <link href="http://yoursite.com/2021/02/03/%E3%80%90C++%E3%80%91C++%20PremierReadNote/"/>
-    <id>http://yoursite.com/2021/02/03/%E3%80%90C++%E3%80%91C++%20PremierReadNote/</id>
-    <published>2021-02-03T02:52:44.000Z</published>
-    <updated>2021-03-30T06:41:55.056Z</updated>
-    
-    
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h1 id=&quot;C-Primer-阅读笔记&quot;&gt;&lt;a href=&quot;#C-Primer-阅读笔记&quot; class=&quot;headerlink&quot; title=&quot;C++ Primer 阅读笔记&quot;&gt;&lt;/a&gt;C++ Primer 阅读笔记&lt;/h1&gt;&lt;hr&gt;</summary>
-    
-    
-    
-    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="CPlus" scheme="http://yoursite.com/tags/CPlus/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【Dev】DevExpress应用</title>
-    <link href="http://yoursite.com/2021/02/03/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8/"/>
-    <id>http://yoursite.com/2021/02/03/%E3%80%90Dev%E3%80%91DevExpress%E5%BA%94%E7%94%A8/</id>
-    <published>2021-02-03T02:33:53.000Z</published>
-    <updated>2021-03-26T01:10:16.852Z</updated>
-    
-    
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;h2 id=&quot;一、大纲&quot;&gt;&lt;a href=&quot;#一、大纲&quot; class=&quot;headerlink&quot; title=&quot;一、大纲&quot;&gt;&lt;/a&gt;一、大纲&lt;/h2&gt;&lt;p&gt;最近使用DevExpress做C/S开发碰到了一些问题，在解决问题的同时在这里做一下记录，下面列出涉及到技术点&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Dev框架下GridControl与GridView&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;使用模板列动态替换GridView的指定列&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GridView分组并去掉列名的前缀&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;FPT服务器文件预览与下载&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;单元格添加按钮并添加自定义点击事件&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GridView数据导出到Excel&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;向Word模板中写数据&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="Dev" scheme="http://yoursite.com/tags/Dev/"/>
     
   </entry>
   

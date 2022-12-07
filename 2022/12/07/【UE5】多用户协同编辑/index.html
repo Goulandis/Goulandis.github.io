@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Goulandis">
   <meta name="keywords" content="snoopy">
-  <title>【UE5】解决UE5无法播放mp4视频 - Goulandis</title>
+  <title>【UE5】多用户协同编辑 - Goulandis</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="【UE5】解决UE5无法播放mp4视频">
+            <span class="h2" id="subtitle" title="【UE5】多用户协同编辑">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-11-14 21:58" pubdate>
-        November 14, 2022 pm
+      <time datetime="2022-12-07 22:29" pubdate>
+        December 7, 2022 pm
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      366 字
+      665 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      7
        分钟
     </span>
   
@@ -225,25 +225,41 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【UE5】解决UE5无法播放mp4视频</h1>
+            <h1 style="display: none">【UE5】多用户协同编辑</h1>
             
             <div class="markdown-body">
               <meta name="referrer" content="no-referrer">
 
-<p>最近接手的项目需要把项目从UE4中迁移至UE5，其中遇到了一个mp4视频无法播放的bug，这里做一下记录。</p>
+<p>UE5新出了一个多用户协同功能所以想搭一个来玩玩。</p>
+<p>Epic已经将流程极度的简化了，在B站虚幻官方也放出了<a href="%5B%5B%E7%BD%91%E7%BB%9C%E7%A0%94%E8%AE%A8%E4%BC%9A%5D%E5%9C%A8%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E%E4%B8%AD%E5%8D%8F%E5%90%8C%E5%B7%A5%E4%BD%9C%EF%BC%9A%E5%A4%9A%E7%94%A8%E6%88%B7%E7%BC%96%E8%BE%91%E5%99%A8%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B(%E5%AE%98%E6%96%B9%E6%B1%89%E5%8C%96)_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1fK411W7Hn/?vd_source=e979466844c4915a4200c496efb35cfb)">教程视频</a>，[官方文档](<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/4.27/zh-CN/ProductionPipelines/MultiUserEditing/QuickStart/">多用户编辑入门 | 虚幻引擎文档 (unrealengine.com)</a>)也有教程。</p>
+<p>这里做一下简要记录。</p>
 <a id="more"></a>
 
-<p>在官方论中有提到过这个bug，<a target="_blank" rel="noopener" href="https://forums.unrealengine.com/t/media-textures-wont-display-video-in-ue5-preview-1-while-using-directx-12/503980/2">https://forums.unrealengine.com/t/media-textures-wont-display-video-in-ue5-preview-1-while-using-directx-12/503980/2</a></p>
-<p>按照常规的方法播放视频在MediaPlay的Play节点会返回false，并在会会在日志中打印：</p>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">LogWmfMedia</span>:Error:Tracks <span class="hljs-number">000084</span>F<span class="hljs-number">14025</span>C<span class="hljs-number">90</span>:Format is not supported in D<span class="hljs-number">3</span>D<span class="hljs-number">12</span><br></code></pre></div></td></tr></table></figure>
-<p>意思是在最新的DX12图形库下UE5默认使用的WMF解码器目前不支持mp4的视频解码。</p>
-<p>解决方案有两个，其一更换图形库，其二更换解码器。</p>
-<h2 id="更换图形库"><a href="#更换图形库" class="headerlink" title="更换图形库"></a>更换图形库</h2><p>WMF解码器只是在DX12下会有解码出错的bug，在DX11或者Vulkan下没有这个bug，所以我们可以把UE使用的图形库换成DX11或者Vulkan。</p>
-<p>在Edit/ProjectSettings/Platforms/Windows/Targeted RHIs/Default RHI中切换图形库，UE5支持DX11，DX12和Vulkan。</p>
-<p>但是由于我的项目中使用了Groom毛发系统，Groom在DX11和Vulkan中支持的不是很好，所以方案一只能pass掉了。</p>
-<h2 id="更换解码器"><a href="#更换解码器" class="headerlink" title="更换解码器"></a>更换解码器</h2><p>WMF是UE默认使用的视频解码器，除此之外UE在插件里还集成了一个功能更强大的视频解码器—<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/4.27/zh-CN/WorkingWithMedia/IntegratingMedia/MediaFramework/ElectraPlayer/">Electra Play</a>。</p>
-<p>启用插件，重启后我们就可以在MediaPlay试图中的PlaybackOptions下看到ElectraPlay解码器，只需要将MediaPlay切换到ElectraPlay解码器即可，当然每一个MediaPlay都要进行切换解码器操作。</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202211142240667.png" srcset="/img/loading.gif"></p>
+<h2 id="1-启用插件"><a href="#1-启用插件" class="headerlink" title="1.启用插件"></a>1.启用插件</h2><p>首先打开Multi-User Editing插件，插件会要求重启，重启之后，在Project Settings/Plugins下会多出一个Multi-User Editing选项。</p>
+<h2 id="2-多用户协同配置"><a href="#2-多用户协同配置" class="headerlink" title="2.多用户协同配置"></a>2.多用户协同配置</h2><p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238897.png" srcset="/img/loading.gif"></p>
+<ul>
+<li><p>Enable Multi-User Toolbar Button：勾选之后需要重启编辑器，在编辑器的菜单栏会多出一个多用户协同的按钮。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238240.png" srcset="/img/loading.gif"></p>
+<p>点击按钮会打开Multi-User Browser视图。</p>
+</li>
+<li><p>Auto Connect、Default Server URL和Default Session Name：这三个是配合使用的，勾选Auto Connect(实际使用勾不勾选好像都一样)，Default Server URL设置默认的服务器地址，Default Session Name设置连上服务器后默认加入的会话。</p>
+<p>设置好这些后，多用户协同的按钮会发生变化，单击之后不会在打开Multi-User Browser视图，而是直接去连接服务器并直接加入会话。</p>
+</li>
+<li><p>Display Name：在多人协同中显示的名字，不设置就会使用Windows登录用户的名称。</p>
+</li>
+<li><p>Avatar Color：用户连上服务器是显示的标识颜色，再会话和修改历时中都会显示。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238807.png" srcset="/img/loading.gif"></p>
+</li>
+</ul>
+<h2 id="3-配置UDP消息"><a href="#3-配置UDP消息" class="headerlink" title="3.配置UDP消息"></a>3.配置UDP消息</h2><p>在Project Settings/UDP Messaging下还需要设置Transport/Unicast Endpoint为本机IP地址，端口固定设置为0，在Static EndPoints下新增一个元素，填入服务器的IP地址，端口固定为6666，如：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238554.png" srcset="/img/loading.gif"></p>
+<h2 id="4-创建服务器"><a href="#4-创建服务器" class="headerlink" title="4.创建服务器"></a>4.创建服务器</h2><p>UE的多人协同服务器可以支持局域网和公网，公网需要使用公网IP启动服务器，我这里没有条件，就使用局域网了。</p>
+<p>打开Multi-User Browser视图，点击Launch a Server或左上角第一个图标可以启动多人协同服务器，UE会启动一个命令行窗口。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238533.png" srcset="/img/loading.gif"></p>
+<h2 id="5-创建会话"><a href="#5-创建会话" class="headerlink" title="5.创建会话"></a>5.创建会话</h2><p>点击Multi-User Browser视图左上角第二个按钮，可以创建一个会话，双击或者右键可以加入会话，加入同一个会话的多个用户就可以在同一个场景中进行协同编辑了。</p>
+<p>加入会话之后在History栏会显示操作历时。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238080.png" srcset="/img/loading.gif"></p>
+<h2 id="6-其他UE加入会话"><a href="#6-其他UE加入会话" class="headerlink" title="6.其他UE加入会话"></a>6.其他UE加入会话</h2><p>在其他的电脑上，配置也基本一样，只要两个电脑是互通的，配置好后打开Multi-User Browser视图UE会自动搜索可用的服务器，连上服务器之后就可以加入会话，开启实时协同编辑了。</p>
 
             </div>
             <hr>
@@ -274,9 +290,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/07/%E3%80%90UE5%E3%80%91%E5%A4%9A%E7%94%A8%E6%88%B7%E5%8D%8F%E5%90%8C%E7%BC%96%E8%BE%91/">
+                      <a href="/2022/12/07/%E3%80%90UE5%E3%80%91%E4%BD%BF%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%87%E6%8D%A2%E7%BC%96%E8%BE%91%E5%99%A8%E8%AF%AD%E8%A8%80/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【UE5】多用户协同编辑</span>
+                        <span class="hidden-mobile">【UE5】使用快捷键切换编辑器语言</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -284,8 +300,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/16/%E3%80%90UE4%E3%80%91C++%E7%BC%96%E7%A8%8B/">
-                        <span class="hidden-mobile">【UE4】C++编程</span>
+                      <a href="/2022/11/14/%E3%80%90UE5%E3%80%91%E8%A7%A3%E5%86%B3UE5%E6%97%A0%E6%B3%95%E6%92%AD%E6%94%BEmp4%E8%A7%86%E9%A2%91/">
+                        <span class="hidden-mobile">【UE5】解决UE5无法播放mp4视频</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
