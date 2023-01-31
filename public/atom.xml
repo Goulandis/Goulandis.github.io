@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-12-07T14:45:25.596Z</updated>
+  <updated>2023-01-31T12:20:15.571Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【UE5】动画系统</title>
+    <link href="http://yoursite.com/2023/01/31/%E3%80%90UE5%E3%80%91%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://yoursite.com/2023/01/31/%E3%80%90UE5%E3%80%91%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F/</id>
+    <published>2023-01-31T11:50:47.000Z</published>
+    <updated>2023-01-31T12:20:15.571Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;meta name=&quot;referrer&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="UE5" scheme="http://yoursite.com/tags/UE5/"/>
+    
+  </entry>
   
   <entry>
     <title>【UE5】使用快捷键切换编辑器语言</title>
@@ -411,27 +436,6 @@
     
     
     <category term="CPlus" scheme="http://yoursite.com/tags/CPlus/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【Python】Python学习笔记</title>
-    <link href="http://yoursite.com/2021/02/04/%E3%80%90Python%E3%80%91Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2021/02/04/%E3%80%90Python%E3%80%91Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
-    <published>2021-02-04T06:10:35.000Z</published>
-    <updated>2021-05-17T06:16:35.192Z</updated>
-    
-    
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-
-&lt;center&gt;&lt;font size=&quot;6&quot;&gt;&lt;strong&gt;Python基础&lt;/strong&gt;&lt;/font&gt;&lt;/center&gt;</summary>
-    
-    
-    
-    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
   </entry>
   
