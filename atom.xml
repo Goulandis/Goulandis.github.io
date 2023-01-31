@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2023-01-31T12:20:15.571Z</updated>
+  <updated>2023-01-31T12:26:09.211Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,20 +21,16 @@
     <link href="http://yoursite.com/2023/01/31/%E3%80%90UE5%E3%80%91%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F/"/>
     <id>http://yoursite.com/2023/01/31/%E3%80%90UE5%E3%80%91%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F/</id>
     <published>2023-01-31T11:50:47.000Z</published>
-    <updated>2023-01-31T12:20:15.571Z</updated>
+    <updated>2023-01-31T12:26:09.211Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;meta name=&quot;referrer&quot;</summary>
-        
-      
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;最近接触的项目涉及到动捕和动画，以前接触的范围主要是GamePlay以及C++和蓝图的交互，很少接触动画，借此机会学习一下UE5的动画系统。&lt;/p&gt;</summary>
     
     
     
-    <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
     <category term="UE5" scheme="http://yoursite.com/tags/UE5/"/>
