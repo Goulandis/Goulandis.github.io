@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      54 字
+      28.4k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      303
        分钟
     </span>
   
@@ -231,15 +231,11 @@
               <meta name="referrer" content="no-referrer">
 
 <p>最近接触的项目涉及到动捕和动画，以前接触的范围主要是GamePlay以及C++和蓝图的交互，很少接触动画，借此机会学习一下UE5的动画系统。</p>
-<!--more--
+<a id="more"></a>
 
-首先把整个动画系统的框架了解一下。
-
-参考博客：[奶帆](https://zhuanlan.zhihu.com/p/62401630)、[骨架资源](https://docs.unrealengine.com/4.26/zh-CN/AnimatingObjects/SkeletalMeshAnimation/Skeleton/)、[骨架树](https://docs.unrealengine.com/4.27/zh-CN/AnimatingObjects/SkeletalMeshAnimation/Persona/SkeletonTree/)、[papalqi](https://papalqi.cn/2020/ue4%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/)、[郭袁](https://zhuanlan.zhihu.com/p/462945444)、[Stefan Perales](https://stefanperales.com/blog/dynamic-ik-retargeting-in-ue5/)
-
-# 一、动画系统的框架
-
-<pre><code class=" mermaid">graph TD
+<p>首先把整个动画系统的框架了解一下。</p>
+<p>参考博客：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/62401630">奶帆</a>、<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/4.26/zh-CN/AnimatingObjects/SkeletalMeshAnimation/Skeleton/">骨架资源</a>、<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/4.27/zh-CN/AnimatingObjects/SkeletalMeshAnimation/Persona/SkeletonTree/">骨架树</a>、<a target="_blank" rel="noopener" href="https://papalqi.cn/2020/ue4%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">papalqi</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/462945444">郭袁</a>、<a target="_blank" rel="noopener" href="https://stefanperales.com/blog/dynamic-ik-retargeting-in-ue5/">Stefan Perales</a></p>
+<h1 id="一、动画系统的框架"><a href="#一、动画系统的框架" class="headerlink" title="一、动画系统的框架"></a>一、动画系统的框架</h1><pre><code class=" mermaid">graph TD
 D1(AimOffset)--&gt;C2(BlendSpace);
 D2(AnimationMontage)--&gt;C3(AnimationCompostie);
 C1(PhysicsAsset)--&gt;B1(SkeletalMesh);
@@ -1037,21 +1033,21 @@ C(Animation State Machie)
 <p>创建好状态机后就可以双击进入状态机节点，对状态机进行编辑了。</p>
 <h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><p>State是用来封装姿势混合过程的节点，一个State输出一个最终姿势，State节点可双击进入进行姿势混合编辑。</p>
 <p>每一个状态都可以在Details/AnimationState中定义三个回调事件，分别是进入状态事件(EnteredStateEvent)、离开状态事件(LeftSatateEvent)和完全混合状态事件(FullyBlendedStateEvent)，在CustomBlueprintEvent处填写自定义事件名称，就可以为这个状态创建三个动画通知回调事件，和普通的动画通知效果一样，直接在EventGraph中搜索即可使用。</p>
-<h3 id="Transition-Rule"><a href="#Transition-Rule" class="headerlink" title="Transition Rule"></a>Transition Rule</h3><p>我们从一个State1节点的边缘按住鼠标左键拖动到另一个State2节点的边缘即可创建State1转换到State2的TransitionRule，TransitionRule由一个箭头加一个转换节点组成，转换节点可双击进入，转换节点固定输出一个bool值，只有返回true时才可转换到所指向的State，转换节点中可以编写一些<font color=red>bool表达式逻辑</font>，由于转换规则没有输入引脚，所以在转换规则编辑视图中是不可以直接调用带输入输出流程引脚的函数的，不过可以使用纯函数，所以一些比较复杂的bool表达式可以使用纯函数封装。</p>
+<h3 id="Transition-Rule"><a href="#Transition-Rule" class="headerlink" title="Transition Rule"></a>Transition Rule</h3><p>我们从一个State1节点的边缘按住鼠标左键拖动到另一个State2节点的边缘即可创建State1转换到State2的TransitionRule，TransitionRule由一个箭头加一个转换节点组成，转换节点可双击进入，转换节点固定输出一个bool值，只有返回true时才可转换到所指向的State，转换节点中可以编写一些<font color="red">bool表达式逻辑</font>，由于转换规则没有输入引脚，所以在转换规则编辑视图中是不可以直接调用带输入输出流程引脚的函数的，不过可以使用纯函数，所以一些比较复杂的bool表达式可以使用纯函数封装。</p>
 <p>在转换规则中UE定制了几个转换专用的纯函数蓝图节点，不过个人感觉一般也不怎么用得上，所以就直接上官方文档链接了—[虚幻引擎中的转换规则](<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/5.0/zh-CN/transition-rules-in-unreal-engine/">虚幻引擎中的转换规则 | 虚幻引擎5.0文档 (unrealengine.com)</a>)。</p>
 <p>除了纯函数函数蓝图节点外，UE也为转换规则定制了几个动画通知函数。</p>
 <p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202301312017137.png" srcset="/img/loading.gif"></p>
 <p>这些动画通知函数除了<code>WasAnim Notify State Active in Any State</code>外，其他的都只能在转换规则中使用。这些通知主要分为三类：</p>
 <ul>
-<li>Was Anim Notify Name Triggered In Any State：在转换规则之前的<font color=red>任何状态</font>中如果指定名称的动画通知被触发则返回true；</li>
-<li>Was Anim Notify State Active In Any State：在转换规则之前<font color=red>任何状态</font>中如果指定类型的动画通知状态被激活了则返回true；</li>
-<li>Was Anim Notify Triggered In Any State：在转换规则之前<font color=red>任何状态</font>中如果指定类型的动画通知被触发了则返回true；</li>
-<li>Was Anim Notify Name Triggered In Source：在转换规则之前的<font color=red>活动状态</font>中如果指定名称的动画通知被触发则返回true；</li>
-<li>Was Anim Notify State Active  In Source：在转换规则之前<font color=red>活动状态</font>中如果指定类型的动画通知状态被激活了则返回true；</li>
-<li>Was Anim Notify Triggered  In Source：在转换规则之前<font color=red>活动状态</font>中如果指定类型的动画通知被触发了则返回true；</li>
-<li>Was Anim Notify Name Triggered In State Machine：在转换规则之前的<font color=red>指定状态</font>中如果指定名称的动画通知被触发则返回true；</li>
-<li>Was Anim Notify State Active  In State Machine：在转换规则之前<font color=red>指定状态</font>中如果指定类型的动画通知状态被激活了则返回true；</li>
-<li>Was Anim Notify Triggered  In State Machine：在转换规则之前<font color=red>指定状态</font>中如果指定类型的动画通知被触发了则返回true；</li>
+<li>Was Anim Notify Name Triggered In Any State：在转换规则之前的<font color="red">任何状态</font>中如果指定名称的动画通知被触发则返回true；</li>
+<li>Was Anim Notify State Active In Any State：在转换规则之前<font color="red">任何状态</font>中如果指定类型的动画通知状态被激活了则返回true；</li>
+<li>Was Anim Notify Triggered In Any State：在转换规则之前<font color="red">任何状态</font>中如果指定类型的动画通知被触发了则返回true；</li>
+<li>Was Anim Notify Name Triggered In Source：在转换规则之前的<font color="red">活动状态</font>中如果指定名称的动画通知被触发则返回true；</li>
+<li>Was Anim Notify State Active  In Source：在转换规则之前<font color="red">活动状态</font>中如果指定类型的动画通知状态被激活了则返回true；</li>
+<li>Was Anim Notify Triggered  In Source：在转换规则之前<font color="red">活动状态</font>中如果指定类型的动画通知被触发了则返回true；</li>
+<li>Was Anim Notify Name Triggered In State Machine：在转换规则之前的<font color="red">指定状态</font>中如果指定名称的动画通知被触发则返回true；</li>
+<li>Was Anim Notify State Active  In State Machine：在转换规则之前<font color="red">指定状态</font>中如果指定类型的动画通知状态被激活了则返回true；</li>
+<li>Was Anim Notify Triggered  In State Machine：在转换规则之前<font color="red">指定状态</font>中如果指定类型的动画通知被触发了则返回true；</li>
 </ul>
 <p>除了上面的几个通知外，转换规则也和状态也样Details/Notifications下提供了三个自定义动画通知，开始过渡事件(Start Transition Event)、终止过渡事件(End Transition Event)和中断过渡事件(Interrupt Transition Event)。</p>
 <p>而对于中断过渡事件UE提供了更高端的设置，在Details/Events/TransitionInterrupt下可以设置更详细的中断配置。</p>
@@ -1276,7 +1272,7 @@ C(Animation State Machie)
 <p>可以看看一个简单的效果：</p>
 <p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202301312019469.gif" srcset="/img/loading.gif"></p>
 <h2 id="11-ControlRig函数库"><a href="#11-ControlRig函数库" class="headerlink" title="11.ControlRig函数库"></a>11.ControlRig函数库</h2><p>ControlRig函数库和蓝图函数库的功能是一样的，用来共享ControlRig的公共逻辑，和蓝图函数库不同的是，ControlRig的每一个资产都可以是一个函数库，我们只需要将函数设为Public就可以使这个函数在所有的ControlRig资产里使用了，但是为了方便管理一般都单独使用一个不绑定骨骼网格体的ControlRig资产来专门管理公共函数。</p>
--->
+
             </div>
             <hr>
             <div>
@@ -1285,7 +1281,7 @@ C(Animation State Machie)
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
                     
                   </div>
                 
