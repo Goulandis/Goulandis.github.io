@@ -489,7 +489,118 @@
 <h2 id="8-扩展-Extensions"><a href="#8-扩展-Extensions" class="headerlink" title="8.扩展(Extensions)"></a>8.扩展(Extensions)</h2><p>用来管理第三方插件的界面，所有安装的扩展，包括WebUI内置的都会在Installed(已安装)栏中显示，并且可以直接管理插件的更新。更新插件的时候需要确保自己的网络能连接得上github库，其实也没什么卵用，就算梯子没毛病，也经常连不上git库。</p>
 <p>Available(可用)：这是直接连接<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/wiki/AUTOMATIC1111/stable-diffusion-webui/Extensions-index.md%E6%89%A9%E5%B1%95%E5%88%97%E8%A1%A8%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E7%82%B9%E5%87%BB(%E5%8A%A0%E8%BD%BD%E8%87%AA)%E6%9D%A5%E5%88%B7%E6%96%B0%E6%89%A9%E5%B1%95%E5%88%97%E8%A1%A8%EF%BC%8C%E7%84%B6%E5%90%8E%E4%BB%8E%E8%BF%99%E9%87%8C%E6%9D%A5%E4%B8%8B%E8%BD%BD%E5%88%97%E8%A1%A8%E9%87%8C%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E6%8F%92%E4%BB%B6%EF%BC%8C%E5%AE%9E%E9%99%85%E6%B5%8B%E8%AF%95%E5%9F%BA%E6%9C%AC%E4%B8%8A%E8%A3%85%E4%B8%8D%E4%BA%86%E3%80%82">https://raw.githubusercontent.com/wiki/AUTOMATIC1111/stable-diffusion-webui/Extensions-index.md扩展列表，我们可以点击(加载自)来刷新扩展列表，然后从这里来下载列表里的第三方插件，实际测试基本上装不了。</a></p>
 <p>Install from URL(从网址安装)：用来安装扩展列表里没有的第三方库，就是用来给不会用git的人使用的。实际上也基本连不上git库，评价是不如直接用git来得舒服。</p>
-<h1 id="五、AI绘图的用法拓展"><a href="#五、AI绘图的用法拓展" class="headerlink" title="五、AI绘图的用法拓展"></a>五、AI绘图的用法拓展</h1><h2 id="1-ControlNet"><a href="#1-ControlNet" class="headerlink" title="1.ControlNet"></a>1.ControlNet</h2><p>ControlNet可以提供AI一个参考图，ControlNet会对参考图先做一次预处理，如识别参考图中人物的骨骼特征点或者物体的边缘线，然后再将检测出来的结果图给AI参考，让AI按照参考的姿势或边缘线来绘制图像。这有点类似图生图，只是二者底层原理不一样，图生图主要是通过噪点采样来学习图片的像素分布，而ControlNet则是通过机器视觉来进行智能识别再给AI学习。</p>
+<h1 id="五、提示词原理"><a href="#五、提示词原理" class="headerlink" title="五、提示词原理"></a>五、提示词原理</h1><p>提示词不同的绘画程序会有所在区别，这里以webui为主。</p>
+<p>本节参考了这几篇博文：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DWFdSTHJtQWRzYk9k">元素同典：确实不完全科学的魔导书 </a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DSHBGRmRUUURjVmNM">Tags基本编写逻辑及三段术式入门与解析v3 </a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv19790550">完整tags书写思路，从人工智能理论来了解如何绘画</a></p>
+<h2 id="1-提示词的顺序"><a href="#1-提示词的顺序" class="headerlink" title="1.提示词的顺序"></a>1.提示词的顺序</h2><p>对于提示词对画面的影响，我们首先想到，也是最直观看到的自然就是提示词的顺序，**<font color="red">AI对越靠前的提示词就越重视</font>**，我们可以做个实验来看看效果：</p>
+<img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-05-31_17-43-55.png" srcset="/img/loading.gif">
+
+<p>图1作为参考图，</p>
+<p>图2：深林(Forest)被放置在首位，AI绘制的画面开始着重数目，草丛的特征被稀释，同时落叶增加了；</p>
+<p>图3：林间小道(Forest trail)被放置在首位，AI绘制的画面小路的细节被增加；</p>
+<p>图4：落叶(fallen leaves)被放置在首位，AI绘制的画面中落叶的数量被大量增加；</p>
+<p>图5：草丛(Grass)被放置在首位，AI绘制的画面草丛的特征被方法，树下均被绘制了茂密的草丛；</p>
+<p>图6：秋天(Autumn)被放置在首位，AI绘制的画面开始大片的出现秋天的特征，树叶变得更黄了，落叶变得更多了，连女孩也开始套上了围巾，换上了秋季得衣服。</p>
+<h2 id="2-提示词的权重"><a href="#2-提示词的权重" class="headerlink" title="2.提示词的权重"></a>2.提示词的权重</h2><p>在stable diffusion webui中提示词可以被增加权重，以提高AI对某些提示词的重视程度，sd webui支持两种为提示词加权重的方式，其一使用英文小括号<code>()</code>，括号可以无限叠加，如：<code>((Autumn))</code>其二使用英文小括号加权重，括号也可以叠加，如：<code>(Grass,(Autumn:1.3))</code>，一个括号代表为提示词增加1.1倍权重，叠加一个括号表示增加<code>1.1*1.1</code>倍的权重，依次类推，而指定了权重的方式则是直接为提示词增加指定的权重，如在<code>(Grass,(Autumn:1.3))</code>中，Grass被增加了1.1倍的权重，Autumn则被增加了<code>1.1*1.1*1.3</code>被的权重。使用指定式权重时必须使用一个括号括起来。</p>
+<p>我们测试一下提示词权重</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-05-31_18-24-51.png" srcset="/img/loading.gif"></p>
+<p>图2给秋天(Autumn)增加了<code>1.1*1.1=1.21</code>倍的权重，秋天的氛围变浓了；</p>
+<p>图3给秋天(Autumn)增加了<code>1.1*1.3=1.43</code>倍的权重，秋天的特征变得更明显，连草地都变黄了。</p>
+<p>需要注意的是在给提示词增加权重时也不是加高越好的，加得太高了反而会适得其反，而是要根据整个提示词组，相对权重来增加，比如图2的提示词组中秋天这个提示词加了两个括号后，相对权重已经是最高的了，就没必要再给秋天这个提示词加七八个括号上去了。</p>
+<p>权重过高反而会使绘制的图崩坏：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-05-31_18-32-11.png" srcset="/img/loading.gif"></p>
+<h2 id="3-提示词的形式"><a href="#3-提示词的形式" class="headerlink" title="3.提示词的形式"></a>3.提示词的形式</h2><p>我们在使用提示词描述一个画面的时候，有多种形式，可以用<strong>单个的词语组合</strong>、可以用<strong>一段完整的句子</strong>、也可以用<strong>单词与短句的结合</strong>，不同的提示词形式又有什么影响呢？我们还是通过实验来看看。</p>
+<p>我们来画一个“一个穿着白色运动衫和粉红色运动鞋的黄色短发的站在街上的女孩”，使用文生图的Prompts from file or textbox脚本分别生成三种类型的提示词的图。</p>
+<p>单词组：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm"><span class="hljs-number">1</span>girl,<span class="hljs-keyword">short </span>yellow hair,white <span class="hljs-keyword">sweatshirt,pink </span>sneakers,standing,in street,full <span class="hljs-keyword">body,looking </span><span class="hljs-built_in">at</span> viewer,<br></code></pre></div></td></tr></table></figure>
+<p>完整长句：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livecodeserver">A girl <span class="hljs-keyword">with</span> <span class="hljs-keyword">short</span> yellow hair <span class="hljs-keyword">in</span> <span class="hljs-keyword">a</span> white sweatshirt <span class="hljs-keyword">and</span> pink sneakers standing <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> street,full body,looking <span class="hljs-keyword">at</span> viewer,<br></code></pre></div></td></tr></table></figure>
+<p>短语与单词组合：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm"><span class="hljs-keyword">short </span>yellow hair,a  girl in a white <span class="hljs-keyword">sweatshirt </span><span class="hljs-keyword">and </span>pink sneakers,standing,in street,full <span class="hljs-keyword">body,looking </span><span class="hljs-built_in">at</span> viewer,<br></code></pre></div></td></tr></table></figure>
+<p>出图结果：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-01_17-21-29.png" srcset="/img/loading.gif"></p>
+<p>第一列：使用的是单词组提示词，画的四张测试图里面头发颜色都画对了，衣服颜色全部被子鞋子颜色污染没有一张是正确的，鞋子颜色也只有三张是正确的；</p>
+<p>第二列：使用的是完整的长句提示词，画的四张测试图里面头发、衣服、鞋子颜色都正确；</p>
+<p>第三列：使用的短句和单词组合的提示词，画的四张测试图里面头发颜色都正确，衣服杨色全部被鞋子颜色污染，鞋子颜色都正确。</p>
+<p>现在不同类型的提示词的效果就出来了，很明显使用完整长句的提示词能很好的绑定物体的特征，短句与单词组合次之，单词组提示词绑定的最差。</p>
+<p>不过大多数情况一个画面是很难使用一句完整的长句描述出来的，所以三种类型的提示词多数需要根据实际情况来选择使用。</p>
+<h2 id="4-分步描绘"><a href="#4-分步描绘" class="headerlink" title="4.分步描绘"></a>4.分步描绘</h2><p>stable diffusion支持多种分步绘制的语法，如：<code>[a | b]</code>、<code>a | b</code>、<code>[a : b : 0.4]</code>、<code>[a : 10]</code>、<code>[a :: 10]</code>，<code>a:0.5 AND b:0.6</code>。</p>
+<h3 id="对主体的分步描绘"><a href="#对主体的分步描绘" class="headerlink" title="对主体的分步描绘"></a>对主体的分步描绘</h3><p>语法<code>[a:b:0.4]</code>，假设采样步数为20，那么这个语法的意思就是前8步绘制特征a，后12步绘制特征b，分步描绘可以将多个提示词融合到一个主体上；</p>
+<p>语法<code>[a | b]</code>和<code>a | b</code>，表示第一步画特征a，第二步画特征b，第三步画特征a，第四步画特征b，依次类推；</p>
+<p>还是先来看一下实验：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-02_14-24-14.png" srcset="/img/loading.gif"></p>
+<p>不使用分步的<code>(panda:0.4),(goblin:0.6)</code>已经不知道在画什么了，使用可控分步的<code>[panda:goblin:0.4]</code>和均衡分步的<code>[panda | goblin]</code>的效果和我们先画大熊猫为整体画面定下结构然后往大熊猫身上添加哥布林的特征的预期比较接近，<code>panda:0.4 AND goblin:0.6</code>语法融合的感觉更加深入，有一种大熊猫和哥布林的杂交物种的感觉。</p>
+<h3 id="对修饰词的分布描绘"><a href="#对修饰词的分布描绘" class="headerlink" title="对修饰词的分布描绘"></a>对修饰词的分布描绘</h3><p>用于修饰某一主体的修饰词的混合和主体本身的混合又有一点细微的差别，我们渐变色头发为例，分步描绘渐变发色有两种方式，一种是分步描绘颜色，不分步头发，另一种是颜色和头发都分步描绘：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/%E9%A2%9C%E8%89%B2%E5%88%86%E6%AD%A5%E6%B7%B7%E5%90%88.png" srcset="/img/loading.gif"></p>
+<p>可以看到在不使用分步绘制<code>1girl,red and blue hair,</code>和<code>1girl,red hair, blue hair,</code>的情况下ai也能画出相应的颜色混合的头发，但是发色是直接硬拼接起来的，无论是只分步颜色还是颜色和头发都分步，效果是一样的；</p>
+<p> 在使用<code>1girl,[red | blue] hair,</code>和<code>1girl,[red hair | blue hair],</code>均衡分步绘制语法绘制的头发更接近正常的渐变色的染发 ；</p>
+<p>在使用没有中括号的<code>1girl,red | blue hair,</code>和<code>1girl,red hair | blue hair,</code>均衡分步绘制语法绘制的头发 也有那么一点硬接的感觉，但是混合效果还可以，比不使用分步绘制的情况要好；</p>
+<p>对于修饰词的分步描绘使用可控步数的语法<code>1girl,[red:blue:0.5] hair,</code>和<code>1girl,[red hair:blue hair:0.5],</code>则完全不起作用了；</p>
+<p> 使用AND语法的分步描绘<code>1girl,red AND blue hair,</code>和<code>1girl,red hair AND blue hair,</code>在只有分步颜色的情况下，AI直接做了红色和蓝色的混合，用混合后的颜色来作为头发的颜色了，在颜色和头发都分步描绘的情况下， 效果和使用中括号的均衡分步描绘的效果差不多了。</p>
+<p>在我自己的使用过程中，分步描绘的混合效果很大程度上取决于大模型，比如测试发色混合时同一套提示词使用abyssorangemixAOM3模型混合的效果就很差，使用revAnimated模型混合的效果就很好。</p>
+<h3 id="指定开始步数和结束步数的分布描绘"><a href="#指定开始步数和结束步数的分布描绘" class="headerlink" title="指定开始步数和结束步数的分布描绘"></a>指定开始步数和结束步数的分布描绘</h3><p>语法<code>[a : 10]</code>，表示从第10步开始画特征a；</p>
+<p>语法<code>[a :: 10]</code>，表示从第10步开始结束画特征a；</p>
+<p>二者还可以结合<code>[[a :: 16] : 4]</code>，表示从第4步开始，到第16步结束画特征a；</p>
+<p>三者在出图效果上差别不大：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-02_15-35-51.png" srcset="/img/loading.gif"></p>
+<h2 id="5-占位符"><a href="#5-占位符" class="headerlink" title="5.占位符"></a>5.占位符</h2><p>占位符指的是一些模型无法理解的符号或词语，这些符号或词语在模型中没有明确的特征与它们相关联，所以ai画不出这些符号或词语的特征，但是它们又会占用词元数量，这样的符号或词语对ai来说就是占位符，常见的占位符符号有：<code>\  *  + _</code>等，词语可以是任何模型不理解的自造词。</p>
+<p>占位词的一大作用就是拉开一个词元与另一个词元之间的距离，最常见的用法就是通过拉开词元距离来减少颜色污染，如：画一个<code>一个穿着白色运动衫和粉红色运动鞋的黄色短发的站在街上的女孩</code>，在使用的单词组的情况下颜色污染很严重，我们就可以使用占位词来拉开不用颜色词元之间的距离来避免颜色污染。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-01_18-14-23.png" srcset="/img/loading.gif"></p>
+<p>可以看到在使用占位符将white sweatshirt和pink sneakers的词元距离拉开之后，颜色污染被有效的避免了。</p>
+<h2 id="6-Emoji表情"><a href="#6-Emoji表情" class="headerlink" title="6.Emoji表情"></a>6.Emoji表情</h2><p>Emoji表情也在stable diffusion webui的支持当中，并且能很精准的识别，比如在想让ai画出一些不太好描述的表情的时候，就可以使用emoji表情来控制。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mathematica"><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span>😥<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-operator">,</span><span class="hljs-number">1</span><span class="hljs-variable">girl</span><span class="hljs-operator">,</span><span class="hljs-built_in">Head</span> <span class="hljs-built_in">Close</span><span class="hljs-operator">-</span><span class="hljs-variable">up</span><span class="hljs-operator">,</span><span class="hljs-variable">complete</span> <span class="hljs-variable">face</span><span class="hljs-operator">,</span><br><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span>😤<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-operator">,</span><span class="hljs-number">1</span><span class="hljs-variable">girl</span><span class="hljs-operator">,</span><span class="hljs-built_in">Head</span> <span class="hljs-built_in">Close</span><span class="hljs-operator">-</span><span class="hljs-variable">up</span><span class="hljs-operator">,</span><span class="hljs-variable">complete</span> <span class="hljs-variable">face</span><span class="hljs-operator">,</span><br><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span>🥺<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-operator">,</span><span class="hljs-number">1</span><span class="hljs-variable">girl</span><span class="hljs-operator">,</span><span class="hljs-built_in">Head</span> <span class="hljs-built_in">Close</span><span class="hljs-operator">-</span><span class="hljs-variable">up</span><span class="hljs-operator">,</span><span class="hljs-variable">complete</span> <span class="hljs-variable">face</span><span class="hljs-operator">,</span><br></code></pre></div></td></tr></table></figure>
+<p>😥：失望但又如释重负；</p>
+<p>😤：傲慢；</p>
+<p>🥺：恳求；</p>
+<p>出图的结果从左往右一次是😥、😤、🥺：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-01_22-42-39.png" srcset="/img/loading.gif"></p>
+<p>当然除了描述表情的emoji表情，一些描述节日的也很好用：</p>
+<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">((🎃)),<span class="hljs-number">1</span>girl,full <span class="hljs-keyword">body</span>,standing,<br>((🎄)),<span class="hljs-number">1</span>girl,full <span class="hljs-keyword">body</span>,standing,<br>((🎁)),<span class="hljs-number">1</span>girl,full <span class="hljs-keyword">body</span>,standing,<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-01_22-48-57.png" srcset="/img/loading.gif"></p>
+<h2 id="7-提示词分类"><a href="#7-提示词分类" class="headerlink" title="7.提示词分类"></a>7.提示词分类</h2><p>提示词也是分很多种类的，比如有专门描述画面质量的、有专门描述画面氛围的、有专门描述光照的、有专门描述渲染的、有专门描述镜头的、绘制画面主体的等等。</p>
+<p>描述词数量巨大，这里就不分类列出来了，提供几个我常用提示词收录网址：</p>
+<p><a target="_blank" rel="noopener" href="https://tags.novelai.dev/">Danbooru 标签超市 (novelai.dev)</a></p>
+<p><a target="_blank" rel="noopener" href="https://aitag.top/">魔咒百科词典 (aitag.top)</a></p>
+<p><a target="_blank" rel="noopener" href="https://aiguidebook.top/index.php/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E9%AD%94%E5%AF%BC%E4%B9%A6-%E5%85%83%E7%B4%A0%E6%B3%95%E5%85%B8/">从零开始的魔导书 元素法典 - AI绘图指南wiki (aiguidebook.top)</a></p>
+<p><a target="_blank" rel="noopener" href="https://wolfchen.top/tag/">NovelAI tag在线生成器 (wolfchen.top)</a></p>
+<p><a target="_blank" rel="noopener" href="https://safebooru.donmai.us/posts">Danbooru: Anime Image Board (donmai.us)</a></p>
+<h1 id="六、模型文件"><a href="#六、模型文件" class="headerlink" title="六、模型文件"></a>六、模型文件</h1><p>Stable-diffusion支持五种模型文件，Checkpoint、Embedding、Hypernetwork、Lora和VAE。</p>
+<h2 id="1-Checkpoint"><a href="#1-Checkpoint" class="headerlink" title="1.Checkpoint"></a>1.Checkpoint</h2><p>Checkpoint是深度学习领域模型训练中保存模型参数的一种术语，一个模型的训练是循序渐进的，训练到一定的阶段就可以使用Checkpoint来保存当前的训练结果，这个训练结果也就是我们常说的模型。</p>
+<p>Checkpoint模型就是我们在webui的Stable Diffusion checkpoint中选择的模型。Checkpoint模型我把它理解为AI的记忆，它控制着AI能画出什么，画出的东西长什么样。</p>
+<p>Checkpoint模型一般分为两种，一种是Stability.AI官方为Stable Diffusion训练的通用超大型模型，目前已经更新到v2.1版本，这种模型都非常大，基本是4-5G往上。</p>
+<p>官方提供的基础通用模型可以到HuggingFace下载：</p>
+<p>1.5版本：<a target="_blank" rel="noopener" href="https://huggingface.co/runwayml">runwayml (Runway) (huggingface.co)</a>；</p>
+<p>2.1版本：<a target="_blank" rel="noopener" href="https://huggingface.co/stabilityai?sort_spaces=likes#spaces">stabilityai (Stability AI) (huggingface.co)</a>。</p>
+<p>另一种则是在通用模型的基础上训练的针对某一方面的定制化模型，也是我们最常使用的、在各大模型网站下载的模型，都属于这个种类。Checkpoint在存储训练参数的同时也提供参数的载入，进行再训练，个人训练的Checkpoint模型都是基于官方提供的Checkpoint模型再训练得出的。</p>
+<p>定制化模型可以到C站下载：<a target="_blank" rel="noopener" href="https://civitai.com/">Civitai</a>。</p>
+<h3 id="大模型的使用"><a href="#大模型的使用" class="headerlink" title="大模型的使用"></a>大模型的使用</h3><p>大模型的使用就比较简单了，直接点击左上角的Stable Diffusion Model就可以切换大模型，也可以通过点击右上角的show/hide extra networks按钮通过点击预览图切换。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-02_15-39-27.png" srcset="/img/loading.gif"></p>
+<h2 id="2-Lora"><a href="#2-Lora" class="headerlink" title="2.Lora"></a>2.Lora</h2><p>Lora模型是一种生成对抗网络模型，主要用对Checkpoint模型进行定向的微调。个人理解是用来做Checkpoint模型提示词重映射的。比如，在一个Checkpoint模型中，提示词“猫”对应形象是“加菲猫”，那么Lora就可以将“猫”这个提示词重映射，使其对应的形象变成HelloKitty，那么在加持Lora模型的Checkpoint模型上输入“猫”这个提示词后AI将不再生成加菲猫，而全部生成HelloKitty。</p>
+<p>Lora的使用目前有两种方式，一种是使用直接通过webui的Lora管理界面点击对应的Lora来应用，点击后webui会在正向提示词中添加一个形如：<code>&lt;lora:[lora名称]:[lora权重]&gt;</code>的标签，权重最大为1，最小为0，多个lora可以混合使用。</p>
+<p>另一种是通过<a target="_blank" rel="noopener" href="https://github.com/kohya-ss/sd-webui-additional-networks">sd-webui-additional-networks</a>插件来使用，通过这个插件来使用lora就不会像正向提示词中添加标签了，并且插件支持xyz plot脚本，可以很好的对比不同lora文件对画面的影响，尤其是在自己训练lora时对比不同epoches下的lora效果时很好用，但是使用这个插件需要将lora从webui的默认位置移动到插件位置中。</p>
+<h3 id="Lora的使用"><a href="#Lora的使用" class="headerlink" title="Lora的使用"></a>Lora的使用</h3><p>Lora的使用可以通过点击右上角的show/hide extra networks按钮在Lora标签中点击相应的预览图来使用，添加成功后webui会向正向提示词中添加一个类似<code> &lt;lora:lihui-repro-32-1e-4-noflip-re2-nonoise:1&gt;</code>的提示词，这个就表示使用了对应的lora，默认权重为1，Lora的使用权重最小为0最大为1，一般不使用两个极值，权重为0则Lora完全不会生效，权重为1则严重影响到出图效果，甚至可能会直接图lora训练时的原图。在C站上lora作者一般都会给出lora的最佳使用权重，最好根据作者的推荐权重来使用。</p>
+<p>有的lora会有触发词，有的lora没有触发词，触发词一般时lora作者的自创词，使用触发词能够有效的触发lora效果，触发词的具体使用和lora的不同有所差异，有的lora有触发词，但不使用也能触发效果，有的lora则必须使用触发词才能触发效果。</p>
+<p>多个不同的lora可以混合使用，lora和Embedding、Hypernetworks之间也可以混合使用</p>
+<h3 id="Lora的分层控制"><a href="#Lora的分层控制" class="headerlink" title="Lora的分层控制"></a>Lora的分层控制</h3><p><font color="red">后续更新计划</font></p>
+<h2 id="3-Embedding"><a href="#3-Embedding" class="headerlink" title="3.Embedding"></a>3.Embedding</h2><p>Embedding(嵌入层)也是深度学习中的一种模型，主要用来做编码映射，更深入的可以看这篇博文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/164502624">一文读懂Embedding的概念，以及它和深度学习的关系</a>。</p>
+<p>在Stable diffuion中，Embedding模型提供了一种向已有模型嵌入新内容的方式，Embedding模型可以使用很少的图片数据，来生成一个具有新的风格或者人物形象的模型，并且可以使用特定的提示词来映射这些特征。如，某一天有一个新猫猫形象叫git cat被创造出来，而原来的旧模型可能只有加菲猫或者HelloKitty，没有git cat这只猫猫的数据，那么我们想通过原有的模型让AI画出git cat那是做不到的，于是我们可以git cat的数据训练一个Embedding模型，在使用的时候将Embedding模型嵌入到原模型上，这样我们使用原模型就可以让AI画出git cat这只猫了。</p>
+<p>Embedding模型有两种称呼，国内大多就叫Embedding模型，也有叫TextualInversion模型，webui也是用TextualInversion来称呼。</p>
+<p>Embedding技术官网：<a target="_blank" rel="noopener" href="https://textual-inversion.github.io/">图像胜过一个词：使用文本反转个性化文本到图像生成 </a>。</p>
+<p>现在embedding模型已经很少使用了，目前最常用embeding模型就是用于配合三视图lora使用的<a target="_blank" rel="noopener" href="https://civitai.com/models/3036">CharTurner V2 </a>、用于反向提示词集合的<a target="_blank" rel="noopener" href="https://civitai.com/models/7808">EasyNegative</a>和用于美化脸部的<a target="_blank" rel="noopener" href="https://civitai.com/models/4514">PureErosFace_v1</a>。</p>
+<h2 id="4-Hypernetworks"><a href="#4-Hypernetworks" class="headerlink" title="4.Hypernetworks"></a>4.Hypernetworks</h2><p>Hypernetworks又叫超网络，Hypernetworks模型是一种风格化文件，可以为AI生成的图像应用指定画风。如，同样是画一个HelloKitty，在没有应用Hypernetworks模型的情况，画出来的HelloKitty就是一只正常的HelloKitty，如果给AI应用一个金享泰画风的Hypernetworks模型，那么AI画出来的HelloKitty就变成一只油腻的HelloKitty。</p>
+<h2 id="5-VAE"><a href="#5-VAE" class="headerlink" title="5.VAE"></a>5.VAE</h2><p>VAE的作用就是在第一章中讲到的将图片从潜空间的压缩数据解码变成一张正常的图片，不同的VAE会影响AI出图的色调，如果当我们不使用VAE时，AI生成的图片均会有一层灰蒙蒙的感觉，使用VAE会使图片的饱和度有所区别。</p>
+<p>目前网络上公开的VAE熟练还是比较少的，主要的来源有三个：</p>
+<p>Stability.AI官方提供的：<a target="_blank" rel="noopener" href="https://huggingface.co/stabilityai/sd-vae-ft-mse-original">stabilityai/sd-vae-ft-mse-original </a>；</p>
+<p>NovelAI模型泄露的：这个就没有网址了，可以使用秋叶的启动器下载；</p>
+<p>Reimu Hakurei提供的：<a target="_blank" rel="noopener" href="https://gist.github.com/harubaru/8581e780a1cf61352a739f2ec2eef09b">wd1-4-anime-release</a>。</p>
+<h2 id="6-AestheticGradients"><a href="#6-AestheticGradients" class="headerlink" title="6.AestheticGradients"></a>6.AestheticGradients</h2><p>AestheticGradients(美学渐变)是以插件的形式存在一种模型修改技术，AestheticGradients模型需要依赖AestheticGradients插件才能使用，效果和Hypernetworks差不多，但是基于AestheticGradients插件提供了更多的可调节参数，而Hypernetworks的参数是已经定死了不可更改的。</p>
+<p>AestheticGradients模型以<code>.pt</code>最为后缀，一般只有几K的大小。</p>
+<p>stable-diffusion-webui-aesthetic-gradients插件库地址：<a target="_blank" rel="noopener" href="https://github.com/AUTOMATIC1111/stable-diffusion-webui-aesthetic-gradients">AUTOMATIC1111/stable-diffusion-webui-aesthetic-gradients: Aesthetic gradients extension for web ui </a>；</p>
+<p>AestheticGradients库：<a target="_blank" rel="noopener" href="https://github.com/vicgalle/stable-diffusion-aesthetic-gradients">stable-diffusion-aesthetic-gradients/aivazovsky.pt at main · vicgalle/stable-diffusion-aesthetic-gradients</a>。</p>
+<p>在AestheticGradients库的aesthetic_embeddings文件夹下，作者提供了一些作者预制的AestheticGradients模型。</p>
+<h1 id="七、AI绘图的用法拓展"><a href="#七、AI绘图的用法拓展" class="headerlink" title="七、AI绘图的用法拓展"></a>七、AI绘图的用法拓展</h1><h2 id="1-ControlNet"><a href="#1-ControlNet" class="headerlink" title="1.ControlNet"></a>1.ControlNet</h2><p>ControlNet可以提供AI一个参考图，ControlNet会对参考图先做一次预处理，如识别参考图中人物的骨骼特征点或者物体的边缘线，然后再将检测出来的结果图给AI参考，让AI按照参考的姿势或边缘线来绘制图像。这有点类似图生图，只是二者底层原理不一样，图生图主要是通过噪点采样来学习图片的像素分布，而ControlNet则是通过机器视觉来进行智能识别再给AI学习。</p>
 <p>ControlNet的原理主要是使用OpenCV的一些识别算法，如姿势识别、手势识别、边缘检测、深度检测等，先对参考图做一层机器视觉方面的预处理，生成身体骨骼特征点、手势骨骼特征点、描边图、深度图等中间图，然后再让AI参考这些中间图进行创作。</p>
 <p>想要更细致的了解ControlNet可以看这篇文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxMzMxNDIyOA==&mid=2655548765&idx=1&sn=aaa5601921b8d438b5f3d4b5c91db498&chksm=8018a486b76f2d9005ac88af45c810aaae4fb959b9613a91b739428d95762f5c7b26b4e6b57a&scene=21#wechat_redirect">精确控制 AI 图像生成的破冰方案，ControlNet 和 T2I-Adapter </a>。</p>
 <p>ControlNet的库地址：<a target="_blank" rel="noopener" href="https://github.com/Mikubill/sd-webui-controlnet">Mikubill/sd-webui-controlnet: WebUI extension for ControlNet</a>；</p>
@@ -956,7 +1067,7 @@
 <p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-05-31_16-17-52.png" srcset="/img/loading.gif"></p>
 <p>尽管对于元素比较多的画面部分特征会被AI忽略，但总体上各个特征绘制的位置还算控制到位。</p>
 <p>除此之外，插件还支持使用蒙版来进行区域分割控制，不过使用起来还挺复杂，并且还只支持HSV的颜色格式，另一个个人感觉功能比较强的是分割模式中的提示词，可以根据提示词来确定分割区域，不过我使用的2023.5.22 commit为673801c3ef9f50fa29406400a4d9c4b5464d73b2版本的插件在stable diffusion webui 1.3.0版本中使用这个模式完全不起作用，估计是插件还没有兼容1.3.0的webui吧，所以这两个功能也不过多累述了，具体可以看这个up的视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Bk4y1x76D/?spm_id_from=333.1007.top_right_bar_window_history.content.click&vd_source=e979466844c4915a4200c496efb35cfb">【AI绘画】Stable Diffusion画面分区控制：Regional Prompter，从入门到……_哔哩哔哩_bilibili</a></p>
-<h1 id="六、在PS中使用AI绘图"><a href="#六、在PS中使用AI绘图" class="headerlink" title="六、在PS中使用AI绘图"></a>六、在PS中使用AI绘图</h1><h2 id="1-环境配置"><a href="#1-环境配置" class="headerlink" title="1.环境配置"></a>1.环境配置</h2><p>想要在PS中使用Stable Diffusion，首先我们电脑本地必须安装了可用的SD-WebUI，然后我们需要安装Photoshop2023，因为stable.art插件只支持Photoshop2023 v23.3.0以上的版本。</p>
+<h1 id="八、在PS中使用AI绘图"><a href="#八、在PS中使用AI绘图" class="headerlink" title="八、在PS中使用AI绘图"></a>八、在PS中使用AI绘图</h1><h2 id="1-环境配置"><a href="#1-环境配置" class="headerlink" title="1.环境配置"></a>1.环境配置</h2><p>想要在PS中使用Stable Diffusion，首先我们电脑本地必须安装了可用的SD-WebUI，然后我们需要安装Photoshop2023，因为stable.art插件只支持Photoshop2023 v23.3.0以上的版本。</p>
 <h2 id="2-安装Photoshop2023"><a href="#2-安装Photoshop2023" class="headerlink" title="2.安装Photoshop2023"></a>2.安装Photoshop2023</h2><p>这里分享一个Photoshop2023 v24.1.0版本的下载地址：<a target="_blank" rel="noopener" href="https://www.yutu.cn/softhtml/showsoft_8311.html">Adobe PhotoShop 2023 v24.1.0</a>。</p>
 <p>下载完之后，双击解压文件夹中的setup.exe文件安装，安装完之后拷贝解压文件夹/Crack/Photoshop.exe覆盖Adobe/Adobe Photoshop 2023/Photoshop.exe文件。</p>
 <p>这样Photoshop就安装好了。</p>
@@ -970,117 +1081,6 @@
 <p>stable.art插件目前还处于0.0.1的beta版本，功能还很不完善，如果插件能兼容ControlNet，那么这个插件将变得无比强大。</p>
 <h2 id="5-Auto-Photoshop-SD插件"><a href="#5-Auto-Photoshop-SD插件" class="headerlink" title="5.Auto-Photoshop-SD插件"></a>5.Auto-Photoshop-SD插件</h2><p>这个插件是我在撰写Lora模型训练章节时新发现的一个PS插件，功能要比Stable.art插件强大，而且已经支持了ControlNet，Auto-Photoshop-SD的安装方法和Stable.art一样，并且也只支持2023以上的PS版本，连接Stable Diffusion服务也和Stable.art一样，在设置中设置好地址就可以，然后其他的用法基本就和使用webui一样了。</p>
 <p>插件git库地址：<a target="_blank" rel="noopener" href="https://github.com/AbdullahAlfaraj/Auto-Photoshop-StableDiffusion-Plugin#what-photoshop-version-do-i-need-to-run-the-plugin">AbdullahAlfaraj/Auto-Photoshop-StableDiffusion-Plugin：一个用户友好的插件，可以使用Automatic1111-sd-webui作为后端，在Photoshop中轻松生成稳定的扩散图像</a>。</p>
-<h1 id="七、提示词原理"><a href="#七、提示词原理" class="headerlink" title="七、提示词原理"></a>七、提示词原理</h1><p>提示词不同的绘画程序会有所在区别，这里以webui为主。</p>
-<p>本节参考了这几篇博文：</p>
-<p><a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DWFdSTHJtQWRzYk9k">元素同典：确实不完全科学的魔导书 </a></p>
-<p><a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DSHBGRmRUUURjVmNM">Tags基本编写逻辑及三段术式入门与解析v3 </a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv19790550">完整tags书写思路，从人工智能理论来了解如何绘画</a></p>
-<h2 id="1-提示词的顺序"><a href="#1-提示词的顺序" class="headerlink" title="1.提示词的顺序"></a>1.提示词的顺序</h2><p>对于提示词对画面的影响，我们首先想到，也是最直观看到的自然就是提示词的顺序，**<font color="red">AI对越靠前的提示词就越重视</font>**，我们可以做个实验来看看效果：</p>
-<img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-05-31_17-43-55.png" srcset="/img/loading.gif">
-
-<p>图1作为参考图，</p>
-<p>图2：深林(Forest)被放置在首位，AI绘制的画面开始着重数目，草丛的特征被稀释，同时落叶增加了；</p>
-<p>图3：林间小道(Forest trail)被放置在首位，AI绘制的画面小路的细节被增加；</p>
-<p>图4：落叶(fallen leaves)被放置在首位，AI绘制的画面中落叶的数量被大量增加；</p>
-<p>图5：草丛(Grass)被放置在首位，AI绘制的画面草丛的特征被方法，树下均被绘制了茂密的草丛；</p>
-<p>图6：秋天(Autumn)被放置在首位，AI绘制的画面开始大片的出现秋天的特征，树叶变得更黄了，落叶变得更多了，连女孩也开始套上了围巾，换上了秋季得衣服。</p>
-<h2 id="2-提示词的权重"><a href="#2-提示词的权重" class="headerlink" title="2.提示词的权重"></a>2.提示词的权重</h2><p>在stable diffusion webui中提示词可以被增加权重，以提高AI对某些提示词的重视程度，sd webui支持两种为提示词加权重的方式，其一使用英文小括号<code>()</code>，括号可以无限叠加，如：<code>((Autumn))</code>其二使用英文小括号加权重，括号也可以叠加，如：<code>(Grass,(Autumn:1.3))</code>，一个括号代表为提示词增加1.1倍权重，叠加一个括号表示增加<code>1.1*1.1</code>倍的权重，依次类推，而指定了权重的方式则是直接为提示词增加指定的权重，如在<code>(Grass,(Autumn:1.3))</code>中，Grass被增加了1.1倍的权重，Autumn则被增加了<code>1.1*1.1*1.3</code>被的权重。使用指定式权重时必须使用一个括号括起来。</p>
-<p>我们测试一下提示词权重</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-05-31_18-24-51.png" srcset="/img/loading.gif"></p>
-<p>图2给秋天(Autumn)增加了<code>1.1*1.1=1.21</code>倍的权重，秋天的氛围变浓了；</p>
-<p>图3给秋天(Autumn)增加了<code>1.1*1.3=1.43</code>倍的权重，秋天的特征变得更明显，连草地都变黄了。</p>
-<p>需要注意的是在给提示词增加权重时也不是加高越好的，加得太高了反而会适得其反，而是要根据整个提示词组，相对权重来增加，比如图2的提示词组中秋天这个提示词加了两个括号后，相对权重已经是最高的了，就没必要再给秋天这个提示词加七八个括号上去了。</p>
-<p>权重过高反而会使绘制的图崩坏：</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-05-31_18-32-11.png" srcset="/img/loading.gif"></p>
-<h2 id="3-提示词的形式"><a href="#3-提示词的形式" class="headerlink" title="3.提示词的形式"></a>3.提示词的形式</h2><p>我们在使用提示词描述一个画面的时候，有多种形式，可以用<strong>单个的词语组合</strong>、可以用<strong>一段完整的句子</strong>、也可以用<strong>单词与短句的结合</strong>，不同的提示词形式又有什么影响呢？我们还是通过实验来看看。</p>
-<p>我们来画一个“一个穿着白色运动衫和粉红色运动鞋的黄色短发的站在街上的女孩”，使用文生图的Prompts from file or textbox脚本分别生成三种类型的提示词的图。</p>
-<p>单词组：</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm"><span class="hljs-number">1</span>girl,<span class="hljs-keyword">short </span>yellow hair,white <span class="hljs-keyword">sweatshirt,pink </span>sneakers,standing,in street,full <span class="hljs-keyword">body,looking </span><span class="hljs-built_in">at</span> viewer,<br></code></pre></div></td></tr></table></figure>
-<p>完整长句：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livecodeserver">A girl <span class="hljs-keyword">with</span> <span class="hljs-keyword">short</span> yellow hair <span class="hljs-keyword">in</span> <span class="hljs-keyword">a</span> white sweatshirt <span class="hljs-keyword">and</span> pink sneakers standing <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> street,full body,looking <span class="hljs-keyword">at</span> viewer,<br></code></pre></div></td></tr></table></figure>
-<p>短语与单词组合：</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm"><span class="hljs-keyword">short </span>yellow hair,a  girl in a white <span class="hljs-keyword">sweatshirt </span><span class="hljs-keyword">and </span>pink sneakers,standing,in street,full <span class="hljs-keyword">body,looking </span><span class="hljs-built_in">at</span> viewer,<br></code></pre></div></td></tr></table></figure>
-<p>出图结果：</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-01_17-21-29.png" srcset="/img/loading.gif"></p>
-<p>第一列：使用的是单词组提示词，画的四张测试图里面头发颜色都画对了，衣服颜色全部被子鞋子颜色污染没有一张是正确的，鞋子颜色也只有三张是正确的；</p>
-<p>第二列：使用的是完整的长句提示词，画的四张测试图里面头发、衣服、鞋子颜色都正确；</p>
-<p>第三列：使用的短句和单词组合的提示词，画的四张测试图里面头发颜色都正确，衣服杨色全部被鞋子颜色污染，鞋子颜色都正确。</p>
-<p>现在不同类型的提示词的效果就出来了，很明显使用完整长句的提示词能很好的绑定物体的特征，短句与单词组合次之，单词组提示词绑定的最差。</p>
-<p>不过大多数情况一个画面是很难使用一句完整的长句描述出来的，所以三种类型的提示词多数需要根据实际情况来选择使用。</p>
-<h2 id="4-分步描绘"><a href="#4-分步描绘" class="headerlink" title="4.分步描绘"></a>4.分步描绘</h2><p>stable diffusion支持多种分步绘制的语法，如：<code>[a | b]</code>、<code>a | b</code>、<code>[a : b : 0.4]</code>、<code>[a : 10]</code>、<code>[a :: 10]</code>，<code>a:0.5 AND b:0.6</code>。</p>
-<h3 id="对主体的分步描绘"><a href="#对主体的分步描绘" class="headerlink" title="对主体的分步描绘"></a>对主体的分步描绘</h3><p>语法<code>[a:b:0.4]</code>，假设采样步数为20，那么这个语法的意思就是前8步绘制特征a，后12步绘制特征b，分步描绘可以将多个提示词融合到一个主体上；</p>
-<p>语法<code>[a | b]</code>和<code>a | b</code>，表示第一步画特征a，第二步画特征b，第三步画特征a，第四步画特征b，依次类推；</p>
-<p>还是先来看一下实验：</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-02_14-24-14.png" srcset="/img/loading.gif"></p>
-<p>不使用分步的<code>(panda:0.4),(goblin:0.6)</code>已经不知道在画什么了，使用可控分步的<code>[panda:goblin:0.4]</code>和均衡分步的<code>[panda | goblin]</code>的效果和我们先画大熊猫为整体画面定下结构然后往大熊猫身上添加哥布林的特征的预期比较接近，<code>panda:0.4 AND goblin:0.6</code>语法融合的感觉更加深入，有一种大熊猫和哥布林的杂交物种的感觉。</p>
-<h3 id="对修饰词的分布描绘"><a href="#对修饰词的分布描绘" class="headerlink" title="对修饰词的分布描绘"></a>对修饰词的分布描绘</h3><p>用于修饰某一主体的修饰词的混合和主体本身的混合又有一点细微的差别，我们渐变色头发为例，分步描绘渐变发色有两种方式，一种是分步描绘颜色，不分步头发，另一种是颜色和头发都分步描绘：</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/%E9%A2%9C%E8%89%B2%E5%88%86%E6%AD%A5%E6%B7%B7%E5%90%88.png" srcset="/img/loading.gif"></p>
-<p>可以看到在不使用分步绘制<code>1girl,red and blue hair,</code>和<code>1girl,red hair, blue hair,</code>的情况下ai也能画出相应的颜色混合的头发，但是发色是直接硬拼接起来的，无论是只分步颜色还是颜色和头发都分步，效果是一样的；</p>
-<p> 在使用<code>1girl,[red | blue] hair,</code>和<code>1girl,[red hair | blue hair],</code>均衡分步绘制语法绘制的头发更接近正常的渐变色的染发 ；</p>
-<p>在使用没有中括号的<code>1girl,red | blue hair,</code>和<code>1girl,red hair | blue hair,</code>均衡分步绘制语法绘制的头发 也有那么一点硬接的感觉，但是混合效果还可以，比不使用分步绘制的情况要好；</p>
-<p>对于修饰词的分步描绘使用可控步数的语法<code>1girl,[red:blue:0.5] hair,</code>和<code>1girl,[red hair:blue hair:0.5],</code>则完全不起作用了；</p>
-<p> 使用AND语法的分步描绘<code>1girl,red AND blue hair,</code>和<code>1girl,red hair AND blue hair,</code>在只有分步颜色的情况下，AI直接做了红色和蓝色的混合，用混合后的颜色来作为头发的颜色了，在颜色和头发都分步描绘的情况下， 效果和使用中括号的均衡分步描绘的效果差不多了。</p>
-<p>在我自己的使用过程中，分步描绘的混合效果很大程度上取决于大模型，比如测试发色混合时同一套提示词使用abyssorangemixAOM3模型混合的效果就很差，使用revAnimated模型混合的效果就很好。</p>
-<h3 id="指定开始步数和结束步数的分布描绘"><a href="#指定开始步数和结束步数的分布描绘" class="headerlink" title="指定开始步数和结束步数的分布描绘"></a>指定开始步数和结束步数的分布描绘</h3><p>语法<code>[a : 10]</code>，表示从第10步开始画特征a；</p>
-<p>语法<code>[a :: 10]</code>，表示从第10步开始结束画特征a；</p>
-<p>二者还可以结合<code>[[a :: 16] : 4]</code>，表示从第4步开始，到第16步结束画特征a；</p>
-<p>三者在出图效果上差别不大：</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-02_15-35-51.png" srcset="/img/loading.gif"></p>
-<h2 id="5-占位符"><a href="#5-占位符" class="headerlink" title="5.占位符"></a>5.占位符</h2><p>占位符指的是一些模型无法理解的符号或词语，这些符号或词语在模型中没有明确的特征与它们相关联，所以ai画不出这些符号或词语的特征，但是它们又会占用词元数量，这样的符号或词语对ai来说就是占位符，常见的占位符符号有：<code>\  *  + _</code>等，词语可以是任何模型不理解的自造词。</p>
-<p>占位词的一大作用就是拉开一个词元与另一个词元之间的距离，最常见的用法就是通过拉开词元距离来减少颜色污染，如：画一个<code>一个穿着白色运动衫和粉红色运动鞋的黄色短发的站在街上的女孩</code>，在使用的单词组的情况下颜色污染很严重，我们就可以使用占位词来拉开不用颜色词元之间的距离来避免颜色污染。</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-01_18-14-23.png" srcset="/img/loading.gif"></p>
-<p>可以看到在使用占位符将white sweatshirt和pink sneakers的词元距离拉开之后，颜色污染被有效的避免了。</p>
-<h2 id="6-Emoji表情"><a href="#6-Emoji表情" class="headerlink" title="6.Emoji表情"></a>6.Emoji表情</h2><p>Emoji表情也在stable diffusion webui的支持当中，并且能很精准的识别，比如在想让ai画出一些不太好描述的表情的时候，就可以使用emoji表情来控制。</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mathematica"><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span>😥<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-operator">,</span><span class="hljs-number">1</span><span class="hljs-variable">girl</span><span class="hljs-operator">,</span><span class="hljs-built_in">Head</span> <span class="hljs-built_in">Close</span><span class="hljs-operator">-</span><span class="hljs-variable">up</span><span class="hljs-operator">,</span><span class="hljs-variable">complete</span> <span class="hljs-variable">face</span><span class="hljs-operator">,</span><br><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span>😤<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-operator">,</span><span class="hljs-number">1</span><span class="hljs-variable">girl</span><span class="hljs-operator">,</span><span class="hljs-built_in">Head</span> <span class="hljs-built_in">Close</span><span class="hljs-operator">-</span><span class="hljs-variable">up</span><span class="hljs-operator">,</span><span class="hljs-variable">complete</span> <span class="hljs-variable">face</span><span class="hljs-operator">,</span><br><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span>🥺<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-operator">,</span><span class="hljs-number">1</span><span class="hljs-variable">girl</span><span class="hljs-operator">,</span><span class="hljs-built_in">Head</span> <span class="hljs-built_in">Close</span><span class="hljs-operator">-</span><span class="hljs-variable">up</span><span class="hljs-operator">,</span><span class="hljs-variable">complete</span> <span class="hljs-variable">face</span><span class="hljs-operator">,</span><br></code></pre></div></td></tr></table></figure>
-<p>😥：失望但又如释重负；</p>
-<p>😤：傲慢；</p>
-<p>🥺：恳求；</p>
-<p>出图的结果从左往右一次是😥、😤、🥺：</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-01_22-42-39.png" srcset="/img/loading.gif"></p>
-<p>当然除了描述表情的emoji表情，一些描述节日的也很好用：</p>
-<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">((🎃)),<span class="hljs-number">1</span>girl,full <span class="hljs-keyword">body</span>,standing,<br>((🎄)),<span class="hljs-number">1</span>girl,full <span class="hljs-keyword">body</span>,standing,<br>((🎁)),<span class="hljs-number">1</span>girl,full <span class="hljs-keyword">body</span>,standing,<br></code></pre></div></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-01_22-48-57.png" srcset="/img/loading.gif"></p>
-<h2 id="7-提示词分类"><a href="#7-提示词分类" class="headerlink" title="7.提示词分类"></a>7.提示词分类</h2><p>提示词也是分很多种类的，比如有专门描述画面质量的、有专门描述画面氛围的、有专门描述光照的、有专门描述渲染的、有专门描述镜头的、绘制画面主体的等等。</p>
-<p>描述词数量巨大，这里就不分类列出来了，提供几个我常用提示词收录网址：</p>
-<p><a target="_blank" rel="noopener" href="https://tags.novelai.dev/">Danbooru 标签超市 (novelai.dev)</a></p>
-<p><a target="_blank" rel="noopener" href="https://aitag.top/">魔咒百科词典 (aitag.top)</a></p>
-<p><a target="_blank" rel="noopener" href="https://aiguidebook.top/index.php/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E9%AD%94%E5%AF%BC%E4%B9%A6-%E5%85%83%E7%B4%A0%E6%B3%95%E5%85%B8/">从零开始的魔导书 元素法典 - AI绘图指南wiki (aiguidebook.top)</a></p>
-<p><a target="_blank" rel="noopener" href="https://wolfchen.top/tag/">NovelAI tag在线生成器 (wolfchen.top)</a></p>
-<p><a target="_blank" rel="noopener" href="https://safebooru.donmai.us/posts">Danbooru: Anime Image Board (donmai.us)</a></p>
-<h1 id="八、模型文件"><a href="#八、模型文件" class="headerlink" title="八、模型文件"></a>八、模型文件</h1><p>Stable-diffusion支持五种模型文件，Checkpoint、Embedding、Hypernetwork、Lora和VAE。</p>
-<h2 id="1-Checkpoint"><a href="#1-Checkpoint" class="headerlink" title="1.Checkpoint"></a>1.Checkpoint</h2><p>Checkpoint是深度学习领域模型训练中保存模型参数的一种术语，一个模型的训练是循序渐进的，训练到一定的阶段就可以使用Checkpoint来保存当前的训练结果，这个训练结果也就是我们常说的模型。</p>
-<p>Checkpoint模型就是我们在webui的Stable Diffusion checkpoint中选择的模型。Checkpoint模型我把它理解为AI的记忆，它控制着AI能画出什么，画出的东西长什么样。</p>
-<p>Checkpoint模型一般分为两种，一种是Stability.AI官方为Stable Diffusion训练的通用超大型模型，目前已经更新到v2.1版本，这种模型都非常大，基本是4-5G往上。</p>
-<p>官方提供的基础通用模型可以到HuggingFace下载：</p>
-<p>1.5版本：<a target="_blank" rel="noopener" href="https://huggingface.co/runwayml">runwayml (Runway) (huggingface.co)</a>；</p>
-<p>2.1版本：<a target="_blank" rel="noopener" href="https://huggingface.co/stabilityai?sort_spaces=likes#spaces">stabilityai (Stability AI) (huggingface.co)</a>。</p>
-<p>另一种则是在通用模型的基础上训练的针对某一方面的定制化模型，也是我们最常使用的、在各大模型网站下载的模型，都属于这个种类。Checkpoint在存储训练参数的同时也提供参数的载入，进行再训练，个人训练的Checkpoint模型都是基于官方提供的Checkpoint模型再训练得出的。</p>
-<p>定制化模型可以到C站下载：<a target="_blank" rel="noopener" href="https://civitai.com/">Civitai</a>。</p>
-<h3 id="大模型的使用"><a href="#大模型的使用" class="headerlink" title="大模型的使用"></a>大模型的使用</h3><p>大模型的使用就比较简单了，直接点击左上角的Stable Diffusion Model就可以切换大模型，也可以通过点击右上角的show/hide extra networks按钮通过点击预览图切换。</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-06-02_15-39-27.png" srcset="/img/loading.gif"></p>
-<h2 id="2-Lora"><a href="#2-Lora" class="headerlink" title="2.Lora"></a>2.Lora</h2><p>Lora模型是一种生成对抗网络模型，主要用对Checkpoint模型进行定向的微调。个人理解是用来做Checkpoint模型提示词重映射的。比如，在一个Checkpoint模型中，提示词“猫”对应形象是“加菲猫”，那么Lora就可以将“猫”这个提示词重映射，使其对应的形象变成HelloKitty，那么在加持Lora模型的Checkpoint模型上输入“猫”这个提示词后AI将不再生成加菲猫，而全部生成HelloKitty。</p>
-<p>Lora的使用目前有两种方式，一种是使用直接通过webui的Lora管理界面点击对应的Lora来应用，点击后webui会在正向提示词中添加一个形如：<code>&lt;lora:[lora名称]:[lora权重]&gt;</code>的标签，权重最大为1，最小为0，多个lora可以混合使用。</p>
-<p>另一种是通过<a target="_blank" rel="noopener" href="https://github.com/kohya-ss/sd-webui-additional-networks">sd-webui-additional-networks</a>插件来使用，通过这个插件来使用lora就不会像正向提示词中添加标签了，并且插件支持xyz plot脚本，可以很好的对比不同lora文件对画面的影响，尤其是在自己训练lora时对比不同epoches下的lora效果时很好用，但是使用这个插件需要将lora从webui的默认位置移动到插件位置中。</p>
-<h3 id="Lora的使用"><a href="#Lora的使用" class="headerlink" title="Lora的使用"></a>Lora的使用</h3><p>Lora的使用可以通过点击右上角的show/hide extra networks按钮在Lora标签中点击相应的预览图来使用，添加成功后webui会向正向提示词中添加一个类似<code> &lt;lora:lihui-repro-32-1e-4-noflip-re2-nonoise:1&gt;</code>的提示词，这个就表示使用了对应的lora，默认权重为1，Lora的使用权重最小为0最大为1，一般不使用两个极值，权重为0则Lora完全不会生效，权重为1则严重影响到出图效果，甚至可能会直接图lora训练时的原图。在C站上lora作者一般都会给出lora的最佳使用权重，最好根据作者的推荐权重来使用。</p>
-<p>有的lora会有触发词，有的lora没有触发词，触发词一般时lora作者的自创词，使用触发词能够有效的触发lora效果，触发词的具体使用和lora的不同有所差异，有的lora有触发词，但不使用也能触发效果，有的lora则必须使用触发词才能触发效果。</p>
-<p>多个不同的lora可以混合使用，lora和Embedding、Hypernetworks之间也可以混合使用</p>
-<h3 id="Lora的分层控制"><a href="#Lora的分层控制" class="headerlink" title="Lora的分层控制"></a>Lora的分层控制</h3><p><font color="red">后续更新计划</font></p>
-<h2 id="3-Embedding"><a href="#3-Embedding" class="headerlink" title="3.Embedding"></a>3.Embedding</h2><p>Embedding(嵌入层)也是深度学习中的一种模型，主要用来做编码映射，更深入的可以看这篇博文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/164502624">一文读懂Embedding的概念，以及它和深度学习的关系</a>。</p>
-<p>在Stable diffuion中，Embedding模型提供了一种向已有模型嵌入新内容的方式，Embedding模型可以使用很少的图片数据，来生成一个具有新的风格或者人物形象的模型，并且可以使用特定的提示词来映射这些特征。如，某一天有一个新猫猫形象叫git cat被创造出来，而原来的旧模型可能只有加菲猫或者HelloKitty，没有git cat这只猫猫的数据，那么我们想通过原有的模型让AI画出git cat那是做不到的，于是我们可以git cat的数据训练一个Embedding模型，在使用的时候将Embedding模型嵌入到原模型上，这样我们使用原模型就可以让AI画出git cat这只猫了。</p>
-<p>Embedding模型有两种称呼，国内大多就叫Embedding模型，也有叫TextualInversion模型，webui也是用TextualInversion来称呼。</p>
-<p>Embedding技术官网：<a target="_blank" rel="noopener" href="https://textual-inversion.github.io/">图像胜过一个词：使用文本反转个性化文本到图像生成 </a>。</p>
-<p>现在embedding模型已经很少使用了，目前最常用embeding模型就是用于配合三视图lora使用的<a target="_blank" rel="noopener" href="https://civitai.com/models/3036">CharTurner V2 </a>、用于反向提示词集合的<a target="_blank" rel="noopener" href="https://civitai.com/models/7808">EasyNegative</a>和用于美化脸部的<a target="_blank" rel="noopener" href="https://civitai.com/models/4514">PureErosFace_v1</a>。</p>
-<h2 id="4-Hypernetworks"><a href="#4-Hypernetworks" class="headerlink" title="4.Hypernetworks"></a>4.Hypernetworks</h2><p>Hypernetworks又叫超网络，Hypernetworks模型是一种风格化文件，可以为AI生成的图像应用指定画风。如，同样是画一个HelloKitty，在没有应用Hypernetworks模型的情况，画出来的HelloKitty就是一只正常的HelloKitty，如果给AI应用一个金享泰画风的Hypernetworks模型，那么AI画出来的HelloKitty就变成一只油腻的HelloKitty。</p>
-<h2 id="5-VAE"><a href="#5-VAE" class="headerlink" title="5.VAE"></a>5.VAE</h2><p>VAE的作用就是在第一章中讲到的将图片从潜空间的压缩数据解码变成一张正常的图片，不同的VAE会影响AI出图的色调，如果当我们不使用VAE时，AI生成的图片均会有一层灰蒙蒙的感觉，使用VAE会使图片的饱和度有所区别。</p>
-<p>目前网络上公开的VAE熟练还是比较少的，主要的来源有三个：</p>
-<p>Stability.AI官方提供的：<a target="_blank" rel="noopener" href="https://huggingface.co/stabilityai/sd-vae-ft-mse-original">stabilityai/sd-vae-ft-mse-original </a>；</p>
-<p>NovelAI模型泄露的：这个就没有网址了，可以使用秋叶的启动器下载；</p>
-<p>Reimu Hakurei提供的：<a target="_blank" rel="noopener" href="https://gist.github.com/harubaru/8581e780a1cf61352a739f2ec2eef09b">wd1-4-anime-release</a>。</p>
-<h2 id="6-AestheticGradients"><a href="#6-AestheticGradients" class="headerlink" title="6.AestheticGradients"></a>6.AestheticGradients</h2><p>AestheticGradients(美学渐变)是以插件的形式存在一种模型修改技术，AestheticGradients模型需要依赖AestheticGradients插件才能使用，效果和Hypernetworks差不多，但是基于AestheticGradients插件提供了更多的可调节参数，而Hypernetworks的参数是已经定死了不可更改的。</p>
-<p>AestheticGradients模型以<code>.pt</code>最为后缀，一般只有几K的大小。</p>
-<p>stable-diffusion-webui-aesthetic-gradients插件库地址：<a target="_blank" rel="noopener" href="https://github.com/AUTOMATIC1111/stable-diffusion-webui-aesthetic-gradients">AUTOMATIC1111/stable-diffusion-webui-aesthetic-gradients: Aesthetic gradients extension for web ui </a>；</p>
-<p>AestheticGradients库：<a target="_blank" rel="noopener" href="https://github.com/vicgalle/stable-diffusion-aesthetic-gradients">stable-diffusion-aesthetic-gradients/aivazovsky.pt at main · vicgalle/stable-diffusion-aesthetic-gradients</a>。</p>
-<p>在AestheticGradients库的aesthetic_embeddings文件夹下，作者提供了一些作者预制的AestheticGradients模型。</p>
 <h1 id="九、模型融合"><a href="#九、模型融合" class="headerlink" title="九、模型融合"></a>九、模型融合</h1><p><font color="red">后续更新计划</font></p>
 <h1 id="十、模型训练"><a href="#十、模型训练" class="headerlink" title="十、模型训练"></a>十、模型训练</h1><p>本章参考的资料：</p>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv22022392">【AI绘画】LoRA训练全参数讲解</a></p>
