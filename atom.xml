@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2023-01-31T12:26:09.211Z</updated>
+  <updated>2023-06-03T12:36:53.717Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【AI】Stable Diffusion WebUI使用指南</title>
+    <link href="http://yoursite.com/2023/06/03/%E3%80%90AI%E3%80%91Stable-Diffusion-WebUI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"/>
+    <id>http://yoursite.com/2023/06/03/%E3%80%90AI%E3%80%91Stable-Diffusion-WebUI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</id>
+    <published>2023-06-03T03:47:30.000Z</published>
+    <updated>2023-06-03T12:36:53.717Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;最近AI绘画实现了真人照片级绘画水准，导致AI绘画大火，公司也让我研究研究，借此机会正好了解一下深度学习在AIGC(AI Generated Content)—-人工智能自动内容生成领域的应用。&lt;/p&gt;
+&lt;p&gt;AI绘画是AIGC领域的一个方向，AIGC有技术方向，其中比较火的有Txet-to-Image，Text-to-Video，Text-to-Speech技术，这三种技术都已经有了比较成熟的落地产品，但AIGC对算力的要求极高，一般的消费级显卡根本玩不起，而Stable-Diffusion模型的出现使Text-to-Image技术进入消费级显卡成为了现实，我自己测试过的最低配置是NVIDIA GeForce GTX 1660 Ti 6G + Intel(R) Core(TM) i7-9750H可以实现512x512图像分级的出图速度，即根据步数的不同3-5分钟出一张，测试的最高配置是NVIDIA GeForce RTX 3080 Ti 12G + Gen Intel(R) Core(TM) i7-12700K可以实现512x512秒级的出图速度，即根据步数的不同2-10秒出一张图。这已经是吊炸天级别的优化了。&lt;/p&gt;
+&lt;p&gt;我们讨论的就是基于Stable-Diffusion模型实现的NovelAI，一款开源软件。&lt;/p&gt;
+&lt;p&gt;我一直认为要想用好一个工具首先要知道它是怎么工作的，所以我们从AI绘画原理来入手，当然本人在接触NovelAI之前没有接触过AI，所以本文只是一些自己在学习的过程中的一些浅显的理解。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="AI" scheme="http://yoursite.com/tags/AI/"/>
+    
+  </entry>
   
   <entry>
     <title>【UE5】动画系统</title>
@@ -413,25 +437,6 @@
     
     
     <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【C++】C++11新特性</title>
-    <link href="http://yoursite.com/2021/03/17/%E3%80%90C++%E3%80%91C++11%E6%96%B0%E7%89%B9%E6%80%A7/"/>
-    <id>http://yoursite.com/2021/03/17/%E3%80%90C++%E3%80%91C++11%E6%96%B0%E7%89%B9%E6%80%A7/</id>
-    <published>2021-03-17T07:12:33.000Z</published>
-    <updated>2021-03-18T09:23:18.369Z</updated>
-    
-    
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;</summary>
-    
-    
-    
-    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="CPlus" scheme="http://yoursite.com/tags/CPlus/"/>
     
   </entry>
   
