@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      34.5k 字
+      34.6k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      379
+      380
        分钟
     </span>
   
@@ -848,6 +848,7 @@
 <p>等待漫长的渲染过程之后，将序列帧转成视频，就可以看到效果了：</p>
 <p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/MultiFrameRender.gif" srcset="/img/loading.gif"></p>
 <p>效果是相当不错的，只是我在出图的时候忘记添加脸部的描述，AI把脸给画崩了，再画生成一次又要花4个小时，就将就着用着了。</p>
+<p>最近在更新了Controlnet1.1.217之后，发现图生图模式下使用多帧渲染已经不行了，12G的显存不够了，新版本的Controtnet模型更大更加吃显存，所以如果想要多帧渲染视频请确保controlnet版本在1.0之前，并且尽量使用裁剪之后的小模型。</p>
 <h3 id="生成奇特的缩放视频"><a href="#生成奇特的缩放视频" class="headerlink" title="生成奇特的缩放视频"></a>生成奇特的缩放视频</h3><p>先来看一下效果：</p>
 <p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/%E5%8A%A8%E7%94%BB.gif" srcset="/img/loading.gif"></p>
 <p>要制作这样的一个视频依赖于<a target="_blank" rel="noopener" href="https://github.com/Extraltodeus/infinite-zoom-stable-diffusion">Infinite Zoom</a>插件，安装好插件就可以在标签栏看到Infinite Zoom标签。</p>
