@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2023-06-08T09:12:19.899Z</updated>
+  <updated>2023-08-03T12:47:31.333Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【UE5】UE5与Python Socket通信中文数据接收不全</title>
+    <link href="http://yoursite.com/2023/08/03/%E3%80%90UE5%E3%80%91UE5%E4%B8%8EPython-Socket%E9%80%9A%E4%BF%A1%E4%B8%AD%E6%96%87%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E4%B8%8D%E5%85%A8/"/>
+    <id>http://yoursite.com/2023/08/03/%E3%80%90UE5%E3%80%91UE5%E4%B8%8EPython-Socket%E9%80%9A%E4%BF%A1%E4%B8%AD%E6%96%87%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E4%B8%8D%E5%85%A8/</id>
+    <published>2023-08-03T12:43:16.000Z</published>
+    <updated>2023-08-03T12:47:31.333Z</updated>
+    
+    
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+
+&lt;p&gt;最近在使用UE的Socket模块与Python服务器进行通信时遇到了一些坑，特此记录一下。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识记录" scheme="http://yoursite.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="UE5" scheme="http://yoursite.com/tags/UE5/"/>
+    
+  </entry>
   
   <entry>
     <title>【AI】Stable Diffusion WebUI使用指南</title>
@@ -408,25 +429,6 @@
     <id>http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E8%A7%92%E8%89%B2%E6%8E%A7%E5%88%B6/</id>
     <published>2021-05-14T09:27:32.000Z</published>
     <updated>2021-05-14T10:15:18.645Z</updated>
-    
-    
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;</summary>
-    
-    
-    
-    <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="UE4" scheme="http://yoursite.com/tags/UE4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【UE4】UE4Socket编程</title>
-    <link href="http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4Socket%E7%BC%96%E7%A8%8B/"/>
-    <id>http://yoursite.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4Socket%E7%BC%96%E7%A8%8B/</id>
-    <published>2021-05-14T09:26:00.000Z</published>
-    <updated>2021-05-14T10:14:39.411Z</updated>
     
     
     <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;</summary>
