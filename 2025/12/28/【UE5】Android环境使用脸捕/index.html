@@ -19,22 +19,24 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="【UE4】UE4使用蓝图动态修改粒子参数">
-<meta property="og:url" content="http://example.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9%E7%B2%92%E5%AD%90%E5%8F%82%E6%95%B0/index.html">
+    <meta name="description" content="最近项目上对虚拟人的脸捕、动捕、手捕等有所涉及，于是就想自己搞一套来玩玩，动捕手捕没有设备于是只好向脸捕下手了，现在世面上主流的也是效果最好的UE4脸捕方案是使用iphoneX以上的版本的iphone手机提供的深度摄像头加LiveLinkFace App可以很便捷的实现手机摄像头抓取面部特征并连接到UE实时提供给数字人，做到数字人实时跟随脸捕特征的效果。奈何我也没有iphone手机😂，于是只">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【UE5】Android环境使用脸捕">
+<meta property="og:url" content="http://example.com/2025/12/28/%E3%80%90UE5%E3%80%91Android%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8%E8%84%B8%E6%8D%95/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近项目上对虚拟人的脸捕、动捕、手捕等有所涉及，于是就想自己搞一套来玩玩，动捕手捕没有设备于是只好向脸捕下手了，现在世面上主流的也是效果最好的UE4脸捕方案是使用iphoneX以上的版本的iphone手机提供的深度摄像头加LiveLinkFace App可以很便捷的实现手机摄像头抓取面部特征并连接到UE实时提供给数字人，做到数字人实时跟随脸捕特征的效果。奈何我也没有iphone手机😂，于是只">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171051.png">
-<meta property="article:published_time" content="2021-05-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-23T14:30:52.215Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/MetaHuman1.gif">
+<meta property="article:published_time" content="2025-12-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-28T08:25:48.144Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="UE4">
+<meta property="article:tag" content="UE5">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171051.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/MetaHuman1.gif">
   
   
   
-  <title>【UE4】UE4使用蓝图动态修改粒子参数 - Hexo</title>
+  <title>【UE5】Android环境使用脸捕 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【UE4】UE4使用蓝图动态修改粒子参数"></span>
+            <span id="subtitle" data-typed-text="【UE5】Android环境使用脸捕"></span>
           
         </div>
 
@@ -211,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-05-14 00:00" pubdate>
-          2021年05月14日
+        <time datetime="2025-12-28 00:00" pubdate>
+          2025年12月28日
         </time>
       </span>
     
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          400 words
+          1.2k words
         
       </span>
     
@@ -234,7 +236,7 @@
         
         
         
-          4 mins
+          11 mins
         
       </span>
     
@@ -271,48 +273,56 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【UE4】UE4使用蓝图动态修改粒子参数</h1>
+            <h1 id="seo-header">【UE5】Android环境使用脸捕</h1>
             
             
               <div class="markdown-body">
                 
                 <meta name="referrer" content="no-referrer" />
 
+<p>最近项目上对虚拟人的脸捕、动捕、手捕等有所涉及，于是就想自己搞一套来玩玩，动捕手捕没有设备于是只好向脸捕下手了，现在世面上主流的也是效果最好的UE4脸捕方案是使用iphoneX以上的版本的iphone手机提供的深度摄像头加LiveLinkFace App可以很便捷的实现手机摄像头抓取面部特征并连接到UE实时提供给数字人，做到数字人实时跟随脸捕特征的效果。奈何我也没有iphone手机😂，于是只好在网上寻找Android的替代方案，最终找到一个大佬修改的插件。</p>
 <span id="more"></span>
 
-<p>如果对UE4联级粒子P_Water系统比较熟悉的可能对动态修改粒子参数不陌生。</p>
-<p>UE4的联级粒子系统大部分的模块都拥有一个 Distribution子栏，其中可以选择如下模式</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171010.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171010.png" alt="img"></a></p>
-<p>其中 Distribution Vector Particle Parameter就是参数模式，选择之后Distribution栏会变成这样</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171019.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171019.png" alt="img"></a></p>
-<p>其中Parameter Name就是参数的名字，在蓝图调用参数时需要用到。Min Input、Max Input、Min Output、Max Output分别限制参数的的最小输入、最大输入、最小输出、最大输出。</p>
-<p>UE4的粒子系统提供8中类型的参数供外部控制：</p>
-<ul>
-<li>Actor Parameters</li>
-<li>Auto Attachment Parameters</li>
-<li>Color Parameters</li>
-<li>Float Parameters</li>
-<li>Float Rand Parameters</li>
-<li>Material Parameters</li>
-<li>Vector Parameters</li>
-<li>Vector Rand Parameters</li>
-</ul>
-<p>8中参数类型的用法是一样的，这里我们以Vector Parameters，用以修改粒子的发射速度Initial Velocity为例。</p>
-<p>首先将Initial Velocity模块的的Velocity&#x2F;Start Velocity&#x2F;Distribution选择Distribution Vector Particle Parameter模式，在Parameter Name栏设置参数名字为WaterSpeed，再设置好输入输出限制。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171025.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171025.png" alt="img"></a></p>
-<p>然后就可以在蓝图中使用这个参数了，首先打开关卡蓝图，我这里创建一个专门的函数SetWaterSpeed用来修改这个参数，蓝图脚本如下：</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171031.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171031.png" alt="img"></a></p>
-<p>P_Water是放在场景中的粒子系统，获取粒子系统的ParticleSystemComponent粒子系统组件，这样就可以通过Set Vector Parameter函数来获取组上指定名字的参数了，由于Set Vector Parameter是按名字来获取参数的，所以同一种类型参数尽量不要重名。</p>
-<p>然后进行函数调用。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171037.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171037.png" alt="img"></a></p>
-<p>测试一下粒子发射速度是否改变</p>
-<p>初始状态</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171043.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171043.png" alt="img"></a></p>
-<p>按下Up键后</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171051.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171051.png" alt="img"></a></p>
-<p>按下Down键后</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171059.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171059.png" alt="img"></a></p>
-<p>目前尚未找到如何读取粒子系统的参数的方法。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/justdark/UE_Android_LiveLink">Github地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1u34y1r7mF/?vd_source=e979466844c4915a4200c496efb35cfb">B站教程</a></p>
+<h1 id="一、准备环境"><a href="#一、准备环境" class="headerlink" title="一、准备环境"></a>一、准备环境</h1><h2 id="1-配置环境"><a href="#1-配置环境" class="headerlink" title="1.配置环境"></a>1.配置环境</h2><p>我这里使用的是：</p>
+<p>UE4.27；</p>
+<p>Android11手机；</p>
+<p>facemoji.D.apk：安卓端的一款面部特征捕捉App；</p>
+<p>QuickBridge：一款数字资产软件，UE5已集成到引擎；</p>
+<h2 id="2-下载资产"><a href="#2-下载资产" class="headerlink" title="2.下载资产"></a>2.下载资产</h2><p>从上面的大佬的Github地址下载JSONLiveLink插件和facemoji.D App，如果上面地址失效了，可以从<a target="_blank" rel="noopener" href="https://github.com/Goulandis/MetaHuman">我的工程</a>里下载。</p>
+<p>下载好之后，插件直接丢项目目录Plugins目录下面，大佬的原插件是基于UE4.26制作的，我用UE4.27重新编译插件后可以直接使用，UE5没试过，笔记本太渣，跑不动UE5。App就直接装到手机上就好了。</p>
+<p>打开QuickBridge，这里可能需要科学上网，否则可能会很卡，直接进入MetaHumans&#x2F;MetaHuman Presets UE4，随便挑个看得上眼的数字下载。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2022-11-07_22-15-42.png"></p>
+<p>有的人物资产还完善，如：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2022-11-07_22-19-58.png"></p>
+<p>挑一个完整的就好了，当然这个好像也没啥影响，也就LOD少一点。看网上说资产是有2K、4K、8K的，不知道为啥我的只能选8K，本来想搞个2K的就够了 ，8K的资产下载实在是太久了，反正我是晚上挂机挂了一晚上来下载的。</p>
+<p>下载完之后在在Local&#x2F;MetaHuman就可以看到我们下载好的数字人了。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2022-11-07_22-23-11.png"></p>
+<h2 id="3-导入资产"><a href="#3-导入资产" class="headerlink" title="3.导入资产"></a>3.导入资产</h2><p>导入资产的时候，QuickBridge会提示我们要下载一个UE4插件，按提示下载就好了，我们也可以在Edit&#x2F;Export Setting中设置导入配置</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2022-11-07_22-25-11.png"></p>
+<p>下载插件的时候需要关闭引擎，导入资产的时候需要打开引擎。接下来就是漫长的插件下载、资产导入和Shader编译了。</p>
+<p>第一次导入数字人的时候会引擎会提示需要修改一些配置，全部按Enable missing就好了。</p>
+<p>可以跟着官方的导入<a target="_blank" rel="noopener" href="https://docs.metahuman.unrealengine.com/zh-CN/metahumans-unreal-engine/getting-started/">教程</a>走。</p>
+<h1 id="二、UE4连接脸捕数据"><a href="#二、UE4连接脸捕数据" class="headerlink" title="二、UE4连接脸捕数据"></a>二、UE4连接脸捕数据</h1><h2 id="1-接收脸捕数据"><a href="#1-接收脸捕数据" class="headerlink" title="1.接收脸捕数据"></a>1.接收脸捕数据</h2><p>启动插件，我们就可以在Window&#x2F;LiveLink窗口的Suorce中看到我们新加的插件了，点击OK就能创建一个数据源。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2022-11-07_22-32-09.png"></p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2022-11-07_22-39-57.png"></p>
+<p>可以看到数据源已经处于数据接收的监听状态了。</p>
+<p>然后关闭电脑的防火墙，一定要关闭防火墙，起初我就因为没有关闭防火墙导致手机一直连不上电脑ip，一度以为插件在UE4.27不行，后来一想会不会是防火墙把手机连接请求给拦截了，于是把防火墙关了，果然就连上了。</p>
+<p>手机打开facemoji.D App，在最上面输入电脑端的IP，然后点击CONFIRM，这里手机和电脑一定要在一个局域网内，看UE的官方文档说，目前LiveLink还只支持局域网传输。</p>
+<p>然后我们就可以看到在SubjectName下就多了一个Android源。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2022-11-07_22-41-53.png"></p>
+<p>这时UE就已经从App接收到脸捕的数据了。绿色圆圈代表现在有数据传入，黄色圆圈代表没有数据传入。</p>
+<h2 id="2-将脸捕数据引用到数字人"><a href="#2-将脸捕数据引用到数字人" class="headerlink" title="2.将脸捕数据引用到数字人"></a>2.将脸捕数据引用到数字人</h2><p>我们打开数字人的脸部动画蓝图<code>Face_AnimBP</code>，将<code>LLink_Face_Subj</code>变量的LLinkFaceSubj参数修改为我们自己的android源，这样脸捕数据就从手机传递到了动画蓝图中。当不同版本的数字人变量的名字可能不一样，找LiveLinckSubjectName类型的变量就好了。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2022-11-07_22-45-07.png"></p>
+<p>然后我们来看一下效果：</p>
+<p>![](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/%E5%BD%95%E5%88%B6_2022_11_07_22_51_04_71">https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/录制_2022_11_07_22_51_04_71</a> 00_00_00-00_00_30.gif)</p>
+<p>手机录频画面就不放了😁。</p>
+<p>这里有一点需要注意的是目前这个App有一个90s的时效，即单次连接时长超过90s就会断开，重启App，重新连接就可以再用90s，对于学习用的话90s已经够了。</p>
+<p>这时数据已经可以应用到动画蓝图了，但是还不能在运行时使用，这是因为角色蓝图中没有设置脸捕数据源，我们把角色拖入场景中，并设置好源，如果不设置角色蓝图在BeginPlay时会将一个空的数据源覆盖掉动画蓝图的数据源。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2022-11-23_22-47-15.png"></p>
+<p>然后再运行，面捕数据就应用上了。</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/MetaHuman1.gif"></p>
 
                 
               </div>
@@ -346,7 +356,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/UE4/" class="print-no-link">#UE4</a>
+        <a href="/tags/UE5/" class="print-no-link">#UE5</a>
       
     </div>
   
@@ -358,8 +368,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【UE4】UE4使用蓝图动态修改粒子参数</div>
-      <div>http://example.com/2021/05/14/【UE4】UE4使用蓝图动态修改粒子参数/</div>
+      <div>【UE5】Android环境使用脸捕</div>
+      <div>http://example.com/2025/12/28/【UE5】Android环境使用脸捕/</div>
     </div>
     <div class="license-meta">
       
@@ -371,7 +381,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 14, 2021</div>
+          <div>December 28, 2025</div>
         </div>
       
       
@@ -403,18 +413,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/05/14/%E3%80%90UE4%E3%80%91UE4Socket%E7%BC%96%E7%A8%8B/" title="【UE4】UE4Socket编程">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【UE4】UE4Socket编程</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A1%86%E9%80%89/" title="【UE4】UE4实现自定义框选">
-                        <span class="hidden-mobile">【UE4】UE4实现自定义框选</span>
+                      <a href="/2025/12/28/%E3%80%90UE5%E3%80%91%E5%8A%A8%E6%80%81%E6%92%AD%E6%94%BE%E5%AA%92%E4%BD%93/" title="【UE5】动态播放媒体">
+                        <span class="hidden-mobile">【UE5】动态播放媒体</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

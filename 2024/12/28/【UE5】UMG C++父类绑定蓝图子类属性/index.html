@@ -19,22 +19,24 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="【UE4】UE4使用蓝图动态修改粒子参数">
-<meta property="og:url" content="http://example.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9%E7%B2%92%E5%AD%90%E5%8F%82%E6%95%B0/index.html">
+    <meta name="description" content="有时我们在设计UMG时可能会使用到C++父类来处理一些通用逻辑，如果我们想要在C++父类中获取其派生子类的某个属性，如Image或Button等，我们可以通过使用UE提供的BindWidget元数据标签的方式来获取。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【UE5】UMG C++父类绑定蓝图子类属性">
+<meta property="og:url" content="http://example.com/2024/12/28/%E3%80%90UE5%E3%80%91UMG%20C++%E7%88%B6%E7%B1%BB%E7%BB%91%E5%AE%9A%E8%93%9D%E5%9B%BE%E5%AD%90%E7%B1%BB%E5%B1%9E%E6%80%A7/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="有时我们在设计UMG时可能会使用到C++父类来处理一些通用逻辑，如果我们想要在C++父类中获取其派生子类的某个属性，如Image或Button等，我们可以通过使用UE提供的BindWidget元数据标签的方式来获取。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171051.png">
-<meta property="article:published_time" content="2021-05-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-23T14:30:52.215Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/PixPin_2024-08-26_17-08-32.png">
+<meta property="article:published_time" content="2024-12-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-28T08:33:22.175Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="UE4">
+<meta property="article:tag" content="UE5">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171051.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/PixPin_2024-08-26_17-08-32.png">
   
   
   
-  <title>【UE4】UE4使用蓝图动态修改粒子参数 - Hexo</title>
+  <title>【UE5】UMG C++父类绑定蓝图子类属性 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【UE4】UE4使用蓝图动态修改粒子参数"></span>
+            <span id="subtitle" data-typed-text="【UE5】UMG C++父类绑定蓝图子类属性"></span>
           
         </div>
 
@@ -211,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-05-14 00:00" pubdate>
-          2021年05月14日
+        <time datetime="2024-12-28 00:00" pubdate>
+          2024年12月28日
         </time>
       </span>
     
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          400 words
+          743 words
         
       </span>
     
@@ -234,7 +236,7 @@
         
         
         
-          4 mins
+          7 mins
         
       </span>
     
@@ -271,48 +273,55 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【UE4】UE4使用蓝图动态修改粒子参数</h1>
+            <h1 id="seo-header">【UE5】UMG C++父类绑定蓝图子类属性</h1>
             
             
               <div class="markdown-body">
                 
                 <meta name="referrer" content="no-referrer" />
 
+
+
+
+
+<p>有时我们在设计UMG时可能会使用到C++父类来处理一些通用逻辑，如果我们想要在C++父类中获取其派生子类的某个属性，如Image或Button等，我们可以通过使用UE提供的<code>BindWidget</code>元数据标签的方式来获取。</p>
 <span id="more"></span>
 
-<p>如果对UE4联级粒子P_Water系统比较熟悉的可能对动态修改粒子参数不陌生。</p>
-<p>UE4的联级粒子系统大部分的模块都拥有一个 Distribution子栏，其中可以选择如下模式</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171010.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171010.png" alt="img"></a></p>
-<p>其中 Distribution Vector Particle Parameter就是参数模式，选择之后Distribution栏会变成这样</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171019.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171019.png" alt="img"></a></p>
-<p>其中Parameter Name就是参数的名字，在蓝图调用参数时需要用到。Min Input、Max Input、Min Output、Max Output分别限制参数的的最小输入、最大输入、最小输出、最大输出。</p>
-<p>UE4的粒子系统提供8中类型的参数供外部控制：</p>
+<h2 id="BindWidget"><a href="#BindWidget" class="headerlink" title="BindWidget"></a>BindWidget</h2><p>BindWidget元数据标签在官方文档中并没有出现，但引擎是支持这个标签的。</p>
+<p>在看例子之前我们需要注意一些BindWidget的要求：</p>
 <ul>
-<li>Actor Parameters</li>
-<li>Auto Attachment Parameters</li>
-<li>Color Parameters</li>
-<li>Float Parameters</li>
-<li>Float Rand Parameters</li>
-<li>Material Parameters</li>
-<li>Vector Parameters</li>
-<li>Vector Rand Parameters</li>
+<li>BindWidget标识的变量必须是public变量；</li>
+<li>BindWidget标识的变量必须是UWidget类型及其派生类型；</li>
+<li>BindWidget标识的变量必须是指针；</li>
+<li>蓝图子类中必须存在同类型的同名控件。</li>
 </ul>
-<p>8中参数类型的用法是一样的，这里我们以Vector Parameters，用以修改粒子的发射速度Initial Velocity为例。</p>
-<p>首先将Initial Velocity模块的的Velocity&#x2F;Start Velocity&#x2F;Distribution选择Distribution Vector Particle Parameter模式，在Parameter Name栏设置参数名字为WaterSpeed，再设置好输入输出限制。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171025.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171025.png" alt="img"></a></p>
-<p>然后就可以在蓝图中使用这个参数了，首先打开关卡蓝图，我这里创建一个专门的函数SetWaterSpeed用来修改这个参数，蓝图脚本如下：</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171031.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171031.png" alt="img"></a></p>
-<p>P_Water是放在场景中的粒子系统，获取粒子系统的ParticleSystemComponent粒子系统组件，这样就可以通过Set Vector Parameter函数来获取组上指定名字的参数了，由于Set Vector Parameter是按名字来获取参数的，所以同一种类型参数尽量不要重名。</p>
-<p>然后进行函数调用。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171037.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171037.png" alt="img"></a></p>
-<p>测试一下粒子发射速度是否改变</p>
-<p>初始状态</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171043.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171043.png" alt="img"></a></p>
-<p>按下Up键后</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171051.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171051.png" alt="img"></a></p>
-<p>按下Down键后</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171059.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171059.png" alt="img"></a></p>
-<p>目前尚未找到如何读取粒子系统的参数的方法。</p>
+<p>首先我们创建一个继承自UUserWidget的自定义C++类UCusWidget，然后创建一个public变量，然后在UPROPERTY中设置BindWidget元数据：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">UCLASS</span>()<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MYPROJECT_API</span> UCusWidget : <span class="hljs-keyword">public</span> UUserWidget<br>&#123;<br>	<span class="hljs-built_in">GENERATED_BODY</span>()<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, Meta = (BindWidget),Category = <span class="hljs-string">&quot;CusWidget&quot;</span>)<br>	UImage* CusImage;<br>	<span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, Meta = (BindWidget),Category = <span class="hljs-string">&quot;CusWidget&quot;</span>)<br>	UTextBlock* CusText;<br><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">NativeConstruct</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>然后创建一个继承自UCusWidget的UMG蓝图UW_Cus，为UI添加一个Image并命名为CusImage，添加一个TextBlock并命名为CusText：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/PixPin_2024-08-26_16-56-02.png"></p>
+<p>这样控件CusImage和CusText就和父类中的同名变量绑定了，如此父类便可以通过同名变量来控制子类的控件了。</p>
+<p>这里我们在Widget构造时给与CusImage一个随机颜色并在CusText中显示颜色的RGBA值：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UCusWidget::NativeConstruct</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	Super::<span class="hljs-built_in">NativeConstruct</span>();<br>	<span class="hljs-keyword">if</span>(CusImage)<br>	&#123;<br>		CusImage-&gt;<span class="hljs-built_in">SetColorAndOpacity</span>(FLinearColor::<span class="hljs-built_in">MakeRandomColor</span>());<br>	&#125;<br>	<span class="hljs-keyword">if</span>(CusText)<br>	&#123;<br>		CusText-&gt;<span class="hljs-built_in">SetText</span>(FText::<span class="hljs-built_in">FromString</span>(CusImage-&gt;ColorAndOpacity.<span class="hljs-built_in">ToString</span>()));<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>然后就可以看到结果了：</p>
+<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/PixPin_2024-08-26_17-08-32.png"></p>
+<p>这里我在另一个Widget中封装了多个UW_Cus以便观察。</p>
+<p>这里有一个坑需要注意，更新控件属性时应该使用对应的Set函数，如：<code>CusImage-&gt;SetColorAndOpacity(FLinearColor::MakeRandomColor())</code>，而不是直接赋值，如：<code>CusImage-&gt;ColorAndOpacity = FLinearColor::MakeRandomColor()</code>，直接赋值Widget不会更新样式。</p>
+<h2 id="BindWidgetOptional"><a href="#BindWidgetOptional" class="headerlink" title="BindWidgetOptional"></a>BindWidgetOptional</h2><p>BindWidget元数据需要强制绑定子蓝图的同名控件，而BindWidgetOptional功能上和BindWidget一致，但不需要强制绑定子蓝图中的同名控件，所以这就要求在书写C++代码时需要更严谨，因为它们修饰的变量都是指针，而使用BindWidgetOptional极容易出现空指针。</p>
+<h2 id="BindWidgetAnim"><a href="#BindWidgetAnim" class="headerlink" title="BindWidgetAnim"></a>BindWidgetAnim</h2><p>BindWidgetAnim是专门用来绑定UWidgetAnimation类型变量的元数据，和BindWidget一样，BindWidgetAnim对变量也有要求：</p>
+<ul>
+<li>BindWidgetAnim标识的变量必须是public变量；</li>
+<li>BindWidgetAnim标识的变量必须是UWidgetAnimation类型及其派生类型；</li>
+<li>BindWidgetAnim标识的变量必须是指针；</li>
+<li>BindWidgetAnim标识的变量必须是Transient变量；</li>
+<li>蓝图子类中必须存在同名的Widget动画。</li>
+</ul>
+<p>关于Transient，Transient也是一个UPROPERTY的标识符，用于标识变量是否是临时变量，被标识的变量会被禁止序列化，如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">UCLASS</span>()<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MYPROJECT_API</span> UCusWidget : <span class="hljs-keyword">public</span> UUserWidget<br>&#123;<br>	<span class="hljs-built_in">GENERATED_BODY</span>()<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, Meta = (BindWidgetOptional),Category = <span class="hljs-string">&quot;CusWidget&quot;</span>)<br>	UImage* CusImage;<br>	<span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, Meta = (BindWidgetOptional),Category = <span class="hljs-string">&quot;CusWidget&quot;</span>)<br>	UTextBlock* CusText;<br>	<span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite,Transient, Meta = (BindWidgetAnim),Category = <span class="hljs-string">&quot;CusWidget&quot;</span>)<br>	UWidgetAnimation* StartAnime;<br><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">NativeConstruct</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;	<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="BindWidgetAnimOptional"><a href="#BindWidgetAnimOptional" class="headerlink" title="BindWidgetAnimOptional"></a>BindWidgetAnimOptional</h2><p>BindWidgetAnimOptional功能和BindWidgetOptional一样，用于非强制绑定动画的情况；</p>
+<h2 id="UE元数据参考"><a href="#UE元数据参考" class="headerlink" title="UE元数据参考"></a>UE元数据参考</h2><p><a target="_blank" rel="noopener" href="https://benui.ca/unreal/uproperty/#umg">https://benui.ca/unreal/uproperty/#umg</a></p>
 
                 
               </div>
@@ -346,7 +355,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/UE4/" class="print-no-link">#UE4</a>
+        <a href="/tags/UE5/" class="print-no-link">#UE5</a>
       
     </div>
   
@@ -358,8 +367,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【UE4】UE4使用蓝图动态修改粒子参数</div>
-      <div>http://example.com/2021/05/14/【UE4】UE4使用蓝图动态修改粒子参数/</div>
+      <div>【UE5】UMG C++父类绑定蓝图子类属性</div>
+      <div>http://example.com/2024/12/28/【UE5】UMG C++父类绑定蓝图子类属性/</div>
     </div>
     <div class="license-meta">
       
@@ -371,7 +380,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 14, 2021</div>
+          <div>December 28, 2024</div>
         </div>
       
       
@@ -403,9 +412,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/05/14/%E3%80%90UE4%E3%80%91UE4Socket%E7%BC%96%E7%A8%8B/" title="【UE4】UE4Socket编程">
+                      <a href="/2025/12/28/%E3%80%90UE5%E3%80%91UE5%20PCG/" title="【UE5】UE5 PCG">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【UE4】UE4Socket编程</span>
+                        <span class="hidden-mobile">【UE5】UE5 PCG</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -413,8 +422,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A1%86%E9%80%89/" title="【UE4】UE4实现自定义框选">
-                        <span class="hidden-mobile">【UE4】UE4实现自定义框选</span>
+                      <a href="/2024/04/28/%E3%80%90UE5%E3%80%91%E6%95%B0%E5%AD%97%E4%BA%BA%E5%9F%BA%E7%A1%80/" title="【UE5】数字人基础">
+                        <span class="hidden-mobile">【UE5】数字人基础</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
