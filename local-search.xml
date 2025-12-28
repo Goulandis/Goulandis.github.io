@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title></title>
+    <link href="/2025/12/28/%E3%80%90UE5%E3%80%91%E5%8A%A8%E6%80%81%E6%92%AD%E6%94%BE%E5%AA%92%E4%BD%93/"/>
+    <url>/2025/12/28/%E3%80%90UE5%E3%80%91%E5%8A%A8%E6%80%81%E6%92%AD%E6%94%BE%E5%AA%92%E4%BD%93/</url>
+    
+    <content type="html"><![CDATA[<p>最近项目中有一个需求，需要将场景中的42块屏幕都显示媒体内容，想着如果每一块屏幕都创建一个MediaPlayer资产、一个MediaSource资产、一个MediaTexture资产及创建对应的Material，就是4*42&#x3D;168个资产需要维护了，所以想着就全部采用动态创建，动态管理的办法维护，其中碰到了一些问题，在此记录一下。</p><h2 id="动态创建媒体之后播放不显示内容"><a href="#动态创建媒体之后播放不显示内容" class="headerlink" title="动态创建媒体之后播放不显示内容"></a>动态创建媒体之后播放不显示内容</h2><p>首先看一下动态创建媒体资产，并播放的蓝图：</p><p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/PixPin_2024-04-28_10-44-57.png"></p><p>这里我播放的都是本地视频文件，所以采用FileMediaSource资产，构造了MediaSource、MediaPlayer和MediaTexture之后需要为MediaTexture设定对应的MediaPlayer，然后创建DynamicMaterialInstance，并为将MediaTexture设置到动态材质的贴图参数上，最后将材质设置到对应Mesh的材质插槽，整个流程就结束了，之后就可以通过MediaPlayer进行OpenSource，Play和Pause了。需要注意的是，在创建动态材质时，需要提供一个父材质，并且材质的贴图要设置为材质参数，以便可以使用蓝图动态的设置贴图。</p><p>这里碰到了第一个问题，就是一切都构建好之后，使用MediaPlayer播放视频时，MediaPlayer显示播放是成功的，但是视频却并没有播放，这是因为在为MediaTexture设置MediaPlayer之后，没有更新贴图资源，需要在MediaTexture更新了内容时，使用UpdateResource节点刷新贴图的资源。然后就可以正常播放视频了。</p><p><img src="/Pics/DynamicMedia/PixPin_2024-04-28_10-31-19.png"></p><h2 id="设置媒体音量后部分媒体不显示内容"><a href="#设置媒体音量后部分媒体不显示内容" class="headerlink" title="设置媒体音量后部分媒体不显示内容"></a>设置媒体音量后部分媒体不显示内容</h2><p>视频成功播放后就遇到了第二个问题，视频播放没有声音，这个好办，给屏幕蓝图添加一个MediaSoundComponent组件，然后为组件设置对应的MediaPlayer，这样在播放视频时，就有声音了。但是我这里有一个需求就是，这42块屏的视频内容不能都同时播放，不然场景中的声音将非常混乱，所以我需要在OpenSource之后将所有的MediaPlayer都使用Pause暂停，但是我不能OpenSource之后立刻就Pause，这样的话，场景中的屏幕内容将是一片黑，我需要显示一点视频内容到屏幕上，所以在OpenSource之后我需要播放个1-2秒然后再Pause，但是这段时间不能播放声音，所以这段时间需要将所有的MediaSoundComponent静音，其实说了那么多，目的就是要先将所有视频静音，然后再将音量调回来。视频静音的方式也很简单，使用MediaSoundCompoent组件的<font color=red>SetVolumeMultiplier</font>节点即可，到这一步，第二个问题就出来了，当我使用组件设置了静音之后，场景中的部分屏幕开始不显示内容了，所有资产都正常，只有MediaTexture没有更新视频内容，将SetVolumeMultiplier节点断掉，所有屏幕又会正常显示内容，在UE的论坛逛了一下，据说是UE5的一个并发的bug，具体什么原因我没有深究，我采用了动态添加组件的方式规避了这个问题：</p><p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/PixPin_2024-04-28_11-09-02.png"></p><p>在构造完媒体资产之后，在使用AddComponentByClass节点动态为屏幕蓝图创建MediaSoundComponent组件，并动态的为组件设置MediaPlayer，这样就可以使用SetVolumeMultiplier设置媒体音量而不影响内容显示了。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【UE5】数字人基础</title>
     <link href="/2024/04/28/%E3%80%90UE5%E3%80%91%E6%95%B0%E5%AD%97%E4%BA%BA%E5%9F%BA%E7%A1%80/"/>
     <url>/2024/04/28/%E3%80%90UE5%E3%80%91%E6%95%B0%E5%AD%97%E4%BA%BA%E5%9F%BA%E7%A1%80/</url>
