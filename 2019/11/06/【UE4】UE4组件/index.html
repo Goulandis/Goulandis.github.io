@@ -1,0 +1,912 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="article">
+<meta property="og:title" content="【UE4】UE4组件">
+<meta property="og:url" content="http://example.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E7%BB%84%E4%BB%B6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224830.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224834.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224837.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224840.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224844.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224847.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224850.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224853.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224857.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224900.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224905.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224909.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224916.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224919.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224923.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224927.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224931.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224933.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224936.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224939.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224942.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224945.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224947.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224951.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224954.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224957.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225001.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225005.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225009.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225012.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225027.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225031.png">
+<meta property="article:published_time" content="2019-11-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-12T14:20:39.117Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="UE4">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224830.png">
+  
+  
+  
+  <title>【UE4】UE4组件 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Goulandis</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/Page.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【UE4】UE4组件"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-11-06 00:00" pubdate>
+          2019年11月06日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【UE4】UE4组件</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <meta name="referrer" content="no-referrer" />
+
+<span id="more"></span>
+
+<p>不同的蓝图脚本拥有不同的组件集，蓝图脚本的组件集过于庞大，这里只对自己使用过的组件进行列举。</p>
+<p>说明：红色字体表示一级目录组件，绿色字体表示二级目录，黄色字体为三级目录(三级目录较为少见所以使用和二级目录相同的三级标题)，白色字体为具体组件说明。</p>
+<h1 id="一、材质蓝图组件"><a href="#一、材质蓝图组件" class="headerlink" title="一、材质蓝图组件"></a>一、材质蓝图组件</h1><h2 id="Constans-常量"><a href="#Constans-常量" class="headerlink" title="Constans(常量)"></a>Constans(常量)</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224830.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224830.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Constans</td>
+<td>一维量，可以表示任何一维数据，如：小数、整数等</td>
+</tr>
+<tr>
+<td>Constans2Vector</td>
+<td>二维量，可以表示任何二维数据，如：二维坐标</td>
+</tr>
+<tr>
+<td>Constans3Vector</td>
+<td>三维量，可以表示任何三维数据，如：三维坐标、RBG等</td>
+</tr>
+<tr>
+<td>Constans4Vector</td>
+<td>四维量，可以表示任何四维数据，如：四元数</td>
+</tr>
+</tbody></table>
+<h2 id="Math-数学函数"><a href="#Math-数学函数" class="headerlink" title="Math(数学函数)"></a>Math(数学函数)</h2><h4 id="Multiply-乘积"><a href="#Multiply-乘积" class="headerlink" title="Multiply(乘积)"></a><strong>Multiply(乘积)</strong></h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224834.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224834.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h3 id="Lerp-插值"><a href="#Lerp-插值" class="headerlink" title="Lerp(插值)"></a>Lerp(插值)</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224837.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224837.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>Lerp组件在Math的多个二级目录中存在，有各种类型的插值变化。</p>
+<p><strong>输入：</strong></p>
+<ul>
+<li>A：插值变化的起始值；</li>
+<li>B：插值变化的目标值；</li>
+<li>Alpha：插值的变化规则，连接Float的TimeLine插值将按照TimeLine的规则变化。</li>
+</ul>
+<p><strong>输出：</strong></p>
+<ul>
+<li>Return Value：返回变化后的插值，将Lerp放入帧函数中可以获得每帧变化的插值。</li>
+</ul>
+<h1 id="二、普通蓝图组件"><a href="#二、普通蓝图组件" class="headerlink" title="二、普通蓝图组件"></a>二、普通蓝图组件</h1><hr>
+<h2 id="Add-TimeLine-添加时间线"><a href="#Add-TimeLine-添加时间线" class="headerlink" title="Add TimeLine(添加时间线)"></a>Add TimeLine(添加时间线)</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224840.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224840.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><strong>输入：</strong></p>
+<ul>
+<li>Play：播放，播放完毕下一次触发时不会从头开始，而是会从上一次时间点继续开始；</li>
+<li>Play from Start：从头开始播放，每次触发都从时间线起点开始执行；</li>
+<li>Stop：暂停，触发后直接从当前时刻暂停；</li>
+<li>Reverse：倒序播放，从当前时刻开始倒叙播放；</li>
+<li>Reverse from End：从末尾开始倒序播放；</li>
+<li>Set New Time：设置新的时间起点，即时间线从新设置的时间点开始执行；</li>
+<li>New Time：新的时间起点由外部输入。</li>
+</ul>
+<p><strong>输出：</strong></p>
+<ul>
+<li>Update：在时间线内每帧执行；</li>
+<li>Finished：时间线结束时触发；</li>
+<li>Direction：返回时间线的执行方向，只有两个值“Forward”和“Backward”；</li>
+<li>New Track 0：自己创建的时间线，创建了才会有，显示的名字也是自己命名的时间线的名字。</li>
+</ul>
+<h2 id="Add-Event-添加事件"><a href="#Add-Event-添加事件" class="headerlink" title="Add Event(添加事件)"></a>Add Event(添加事件)</h2><h3 id="Collision-碰撞体组件"><a href="#Collision-碰撞体组件" class="headerlink" title="Collision(碰撞体组件)"></a>Collision(碰撞体组件)</h3><h4 id="Event-ActorBeginOverlap-自动触发触发器"><a href="#Event-ActorBeginOverlap-自动触发触发器" class="headerlink" title="Event ActorBeginOverlap(自动触发触发器)"></a><strong>Event ActorBeginOverlap(自动触发触发器)</strong></h4><p>每当有物体进入触发器时自动触发</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224844.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224844.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Other Actor：返回进入触发器的游戏物体的信息。</li>
+</ul>
+<h3 id="Game"><a href="#Game" class="headerlink" title="Game"></a>Game</h3><h3 id="Damage"><a href="#Damage" class="headerlink" title="Damage"></a>Damage</h3><h4 id="Event-AnyDamage"><a href="#Event-AnyDamage" class="headerlink" title="Event AnyDamage"></a><strong>Event AnyDamage</strong></h4><p>Event AnyDamage事件是配合Apply Damage组件一起使用的，当Apply Damage组件执行时，会自动触发Event AnyDamage事件。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224847.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224847.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><strong>输出：</strong></p>
+<ul>
+<li>Damage：从Apply Damage组件的Damage中传递过来的值；</li>
+<li>Damage Type：从Apply Damage组件传递过来的Damage Type Class；</li>
+<li>Instigated By：从Apply Damage组件传递过来的Event Instigateor；</li>
+<li>Damage Causer：从Apply Damage组件传递过来的Damage Causer；</li>
+</ul>
+<h2 id="Camera-Fades-相机渐变"><a href="#Camera-Fades-相机渐变" class="headerlink" title="Camera Fades(相机渐变)"></a>Camera Fades(相机渐变)</h2><p>Camera Fades组件是只有在Get Player Camera Menager组件的外拉中才能搜索到的专门服务于Get Player Camera Menager组件的相机组件集。</p>
+<h4 id="Start-Camera-Fade-开始渐变"><a href="#Start-Camera-Fade-开始渐变" class="headerlink" title="Start Camera Fade(开始渐变)"></a><strong>Start Camera Fade(开始渐变)</strong></h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224850.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224850.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Target：渐变目标相机，默认为当前相机；</li>
+<li>From Alpha：渐变起始Alpha；</li>
+<li>To Alpha：渐变目标Alpha；</li>
+<li>Duration：渐变持续时间；</li>
+<li>Color：渐变颜色；</li>
+<li>Should Fade Audio：启用声音渐变；</li>
+<li>Hold when Finished：渐变结束后保持当前Alpha值。</li>
+</ul>
+<h4 id="Stop-Camera-Fade-结束渐变"><a href="#Stop-Camera-Fade-结束渐变" class="headerlink" title="Stop Camera Fade(结束渐变)"></a><strong>Stop Camera Fade(结束渐变)</strong></h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224853.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224853.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>触发时立刻停止当前渐变。</p>
+<h2 id="Event-BeginPlay"><a href="#Event-BeginPlay" class="headerlink" title="Event BeginPlay"></a>Event BeginPlay</h2><p>游戏开始时自动触发</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224857.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224857.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h2 id="Execute-Console-Command-执行控制台命令"><a href="#Execute-Console-Command-执行控制台命令" class="headerlink" title="Execute Console Command(执行控制台命令)"></a>Execute Console Command(执行控制台命令)</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224900.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224900.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Command：控制台命令字符串</li>
+<li>Specific Player：执行控制台命令的执行器，默认为当前GameMode指定的Player</li>
+</ul>
+<h3 id="常见控制台命令"><a href="#常见控制台命令" class="headerlink" title="常见控制台命令"></a>常见控制台命令</h3><ul>
+<li><p>start fps：显示帧率</p>
+</li>
+<li><p>start unit：显示性能调试信息</p>
+</li>
+<li><p>start rhi：显示GPU上的消耗细则</p>
+<p><a target="_blank" rel="noopener" href="https://docs.unrealengine.com/zh-CN/TestingAndOptimization/PerformanceAndProfiling/StatCommands/index.html">更多start命令</a></p>
+</li>
+<li><p>r.MobileContentScaleFactor 0：控制内容在移动设备中的缩放方式，0表示使用设备原始分辨率，如将DPI缩放曲线用于UI缩放，必须设为0</p>
+</li>
+<li><p>DisableAllScreenMessages：禁用所有在运行中的屏幕提示</p>
+</li>
+</ul>
+<h2 id="Input-输入流"><a href="#Input-输入流" class="headerlink" title="Input(输入流)"></a>Input(输入流)</h2><h3 id="Keyboard-Events-按键触发事件"><a href="#Keyboard-Events-按键触发事件" class="headerlink" title="Keyboard Events(按键触发事件)"></a>Keyboard Events(按键触发事件)</h3><p>包含所有键盘按键出发事件</p>
+<h2 id="Game-1"><a href="#Game-1" class="headerlink" title="Game"></a>Game</h2><h4 id="Get-Player-Pawn-获取角色对象"><a href="#Get-Player-Pawn-获取角色对象" class="headerlink" title="Get Player Pawn(获取角色对象)"></a><strong>Get Player Pawn(获取角色对象)</strong></h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224905.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224905.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Play Index：输入角色索引，可以直接设置也可以外部输入；</li>
+<li>Return Value：返回获取的角色对象(Object)。</li>
+</ul>
+<h4 id="Get-Current-Level-Name-获取关卡名字"><a href="#Get-Current-Level-Name-获取关卡名字" class="headerlink" title="Get Current Level Name(获取关卡名字)"></a><strong>Get Current Level Name(获取关卡名字)</strong></h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224909.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224909.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Remove Prefix String：移除前缀字符串；</li>
+<li>Return Value：返回获取到的关卡名称(String)。</li>
+</ul>
+<h4 id="Get-Player-Camera-Manager-获取角色相机管理器"><a href="#Get-Player-Camera-Manager-获取角色相机管理器" class="headerlink" title="Get Player Camera Manager(获取角色相机管理器)"></a><strong>Get Player Camera Manager(获取角色相机管理器)</strong></h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224916.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224916.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Player Index：输入角色索引；</li>
+<li>Return Value：返回输入角色身上的相机对象。</li>
+</ul>
+<h3 id="Damage-1"><a href="#Damage-1" class="headerlink" title="Damage"></a>Damage</h3><h4 id="Apply-Damage"><a href="#Apply-Damage" class="headerlink" title="Apply Damage"></a><strong>Apply Damage</strong></h4><p>Apply Damage组件一般和Event AnyDamage组件配合使用，当Apply Damage组件触发时，UE4会自动调用Event AnyDamage事件。需要注意的是，只有在Base Daamge不为0时才能触发Event Damage事件。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224919.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224919.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><strong>输入：</strong></p>
+<ul>
+<li>Ddamaged Actor：受到伤害的对象；</li>
+<li>Base Damage：输入的伤害值；</li>
+<li>Event Instigator：引发伤害的对象，如：持枪的敌人；</li>
+<li>Damage Causer：实际造成伤害的对象，如：子弹；</li>
+<li>Damage Type Class：伤害的类型；</li>
+</ul>
+<p><strong>输出：</strong></p>
+<p>Return Value：最终造成的实际伤害。</p>
+<h3 id="Player-Controller-角色控制器组件"><a href="#Player-Controller-角色控制器组件" class="headerlink" title="Player Controller(角色控制器组件)"></a>Player Controller(角色控制器组件)</h3><h3 id="Set-View-Target-With-Blend-相机线性移动"><a href="#Set-View-Target-With-Blend-相机线性移动" class="headerlink" title="Set View Target With Blend(相机线性移动)"></a>Set View Target With Blend(相机线性移动)</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224923.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224923.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Target：目标是PlayerController</li>
+<li>New View Target：相机需要移动到的目的点</li>
+<li>Blend Time：相机聚焦过程所需时间</li>
+<li>Blend Func：聚焦方式</li>
+<li>Blend Exp：控制曲线形状的指数，（实测中好像也没什么效果）</li>
+<li>Lock Outgoing：为true时锁定视角移动，false则相机会转向</li>
+</ul>
+<h2 id="Rendering-渲染"><a href="#Rendering-渲染" class="headerlink" title="Rendering(渲染)"></a>Rendering(渲染)</h2><h3 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h3><h3 id="Light"><a href="#Light" class="headerlink" title="Light"></a>Light</h3><h4 id="Set-Intensity-设置光源强度"><a href="#Set-Intensity-设置光源强度" class="headerlink" title="Set Intensity(设置光源强度)"></a><strong>Set Intensity(设置光源强度)</strong></h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224927.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224927.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Target：目标光源；</li>
+<li>New Intensity：目标光源强度。</li>
+</ul>
+<h4 id="Get-Intensity-获取光源强度"><a href="#Get-Intensity-获取光源强度" class="headerlink" title="Get Intensity(获取光源强度)"></a><strong>Get Intensity(获取光源强度)</strong></h4><p>使用和Set Intensity一样。</p>
+<h2 id="String-字符串组件"><a href="#String-字符串组件" class="headerlink" title="String(字符串组件)"></a>String(字符串组件)</h2><h3 id="Append-字符串连接"><a href="#Append-字符串连接" class="headerlink" title="Append(字符串连接)"></a>Append(字符串连接)</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224931.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224931.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h3 id="Switch-On-String-字符串匹配"><a href="#Switch-On-String-字符串匹配" class="headerlink" title="Switch On String(字符串匹配)"></a>Switch On String(字符串匹配)</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224933.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224933.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Selection：输入字符串</li>
+<li>Default：默认输出端口</li>
+<li>Add pin：添加匹配端口</li>
+</ul>
+<h2 id="Utilities-通用组件"><a href="#Utilities-通用组件" class="headerlink" title="Utilities(通用组件)"></a>Utilities(通用组件)</h2><h3 id="Flow-Control"><a href="#Flow-Control" class="headerlink" title="Flow Control"></a>Flow Control</h3><h4 id="Branch-if语句"><a href="#Branch-if语句" class="headerlink" title="Branch(if语句)"></a>Branch(if语句)</h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224936.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224936.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>蓝图的if语句</p>
+<ul>
+<li>Condition：输入的判断条件，一般和各种判断组件的输出连接。</li>
+</ul>
+<h4 id="Delay-延迟函数"><a href="#Delay-延迟函数" class="headerlink" title="Delay(延迟函数)"></a>Delay(延迟函数)</h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224939.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224939.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Duration：延迟时间。</li>
+</ul>
+<h3 id="Keyboard-Events-按键触发事件-1"><a href="#Keyboard-Events-按键触发事件-1" class="headerlink" title="Keyboard Events(按键触发事件)"></a>Keyboard Events(按键触发事件)</h3><p>包含一些字符串操作函数。</p>
+<h3 id="Text"><a href="#Text" class="headerlink" title="Text"></a>Text</h3><h4 id="Equal"><a href="#Equal" class="headerlink" title="Equal"></a>Equal</h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224942.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224942.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>输入两个比较对象，输出判断结果(Bool)。</p>
+<p>各种其他的判断组件用法一致。</p>
+<h3 id="Transformation"><a href="#Transformation" class="headerlink" title="Transformation"></a>Transformation</h3><h4 id="Set-Actor-Scale-3D"><a href="#Set-Actor-Scale-3D" class="headerlink" title="Set Actor Scale 3D"></a>Set Actor Scale 3D</h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224945.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224945.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>设置Actor的Scale值</p>
+<ul>
+<li>Target：要设置的目标Actor；</li>
+<li>New Scale 3D：要设置的目标Scale值。</li>
+</ul>
+<h4 id="Get-Actor-Scale-3D"><a href="#Get-Actor-Scale-3D" class="headerlink" title="Get Actor Scale 3D"></a>Get Actor Scale 3D</h4><p>获取Actor的Scale值。</p>
+<h4 id="Set-Timer-By-Function-Name"><a href="#Set-Timer-By-Function-Name" class="headerlink" title="Set Timer By Function Name"></a>Set Timer By Function Name</h4><p>节点：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224947.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224947.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>描述：通过函数名定时调用函数</p>
+<p>输入：</p>
+<ul>
+<li>Object：调用函数所在蓝图，默认为节点所在蓝图</li>
+<li>Function Name：要调用的函数的名字</li>
+<li>Time：定时调用时间间隔</li>
+<li>Looping：是否循环调用</li>
+</ul>
+<p>输出：</p>
+<ul>
+<li>一个Timer Handle结构体，记录了一些函数调用的信息</li>
+</ul>
+<p><strong>关联节点：</strong></p>
+<h4 id="Pause-Timer-By-Function-Name"><a href="#Pause-Timer-By-Function-Name" class="headerlink" title="Pause Timer By Function Name"></a>Pause Timer By Function Name</h4><p>节点：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224951.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224951.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>描述：暂停有Set Timer By Function Name节点启用的函数定时调用过程</p>
+<p>输入：与Set Timer By Function Name类似</p>
+<h4 id="Unpause-Timer-By-Function-Name"><a href="#Unpause-Timer-By-Function-Name" class="headerlink" title="Unpause Timer By Function Name"></a>Unpause Timer By Function Name</h4><p>节点：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224954.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224954.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>描述：取消Pause Timer By Function Name的效果，继续Set Timer By Function Name的函数定时调用</p>
+<h4 id="Clear-Timer-By-Function-Name"><a href="#Clear-Timer-By-Function-Name" class="headerlink" title="Clear Timer By Function Name"></a>Clear Timer By Function Name</h4><p>节点：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224957.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224957.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>描述：清除Set Timer By Function Name的定时调用设置</p>
+<h4 id="Set-Timer-By-Event"><a href="#Set-Timer-By-Event" class="headerlink" title="Set Timer By Event"></a>Set Timer By Event</h4><p>节点：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225001.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225001.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>描述：设置定时调用事件，与Set Timer By Function Name不同Set Timer By Evnet没有对应的Pause和Unpause节点，且Set Timer By Event只能调用所在蓝图的事件</p>
+<p>输入：</p>
+<ul>
+<li>Evnet：绑定需要调用的蓝图事件</li>
+<li>Time：定时调用的时间间隔</li>
+<li>Looping：是否循环调用</li>
+</ul>
+<h4 id="Puase-Timer-By-Handle"><a href="#Puase-Timer-By-Handle" class="headerlink" title="Puase Timer By Handle"></a>Puase Timer By Handle</h4><p>节点：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225005.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225005.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>描述：通过Set Timer By Function Name和Set Timer By Evnet的Timer Handle返回值来控制调用流程，暂停函数调用</p>
+<p>输入：</p>
+<ul>
+<li>Handle：Timer Handle结构体，输入Set Timer By Function Name和Set Timer By Evnet的返回值</li>
+</ul>
+<h4 id="Upause-Timer-By-Handle"><a href="#Upause-Timer-By-Handle" class="headerlink" title="Upause Timer By Handle"></a>Upause Timer By Handle</h4><p>节点：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225009.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225009.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>描述：清除Pause Timer By Handle的暂定效果继续Set Timer By Function或Set Timer By Event的定时效果</p>
+<h4 id="Clear-And-Invalidate-Timer-By-Handle"><a href="#Clear-And-Invalidate-Timer-By-Handle" class="headerlink" title="Clear And Invalidate Timer By Handle"></a>Clear And Invalidate Timer By Handle</h4><p>节点：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225012.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225012.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>描述：通过Timer Handle值清除Set Timer By Function Name和Set Timer By Event的定时调用设置</p>
+<h1 id="三、物理组件"><a href="#三、物理组件" class="headerlink" title="三、物理组件"></a>三、物理组件</h1><p>UE4除了提供大量蓝图脚本函数组件来对蓝图类进行精细控制外还提供了一系列物理组件对蓝图类进行一些常规的复杂控制。</p>
+<h2 id="Camera"><a href="#Camera" class="headerlink" title="Camera"></a>Camera</h2><h4 id="Camera-1"><a href="#Camera-1" class="headerlink" title="Camera"></a><strong>Camera</strong></h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225027.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225027.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>相机，用于渲染视野，一般配合Spring Arm一起使用。</p>
+<h4 id="Spring-Arm"><a href="#Spring-Arm" class="headerlink" title="Spring Arm"></a><strong>Spring Arm</strong></h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225031.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811225031.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>弹簧悬臂，将相机附于其上可以实现相机跟随</p>
+<h2 id="Movement"><a href="#Movement" class="headerlink" title="Movement"></a>Movement</h2><h4 id="Rotating-Movement"><a href="#Rotating-Movement" class="headerlink" title="Rotating Movement"></a><strong>Rotating Movement</strong></h4><p>旋转控制，提供一系列参数对对蓝图类的旋转运动进行控制</p>
+<h2 id="Rendering"><a href="#Rendering" class="headerlink" title="Rendering"></a>Rendering</h2><h4 id="Static-Mesh"><a href="#Static-Mesh" class="headerlink" title="Static Mesh"></a><strong>Static Mesh</strong></h4><p>静态网格，网格控制蓝图的贴图材质、模型外观、阴影渲染等。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/" class="category-chain-item">知识记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/UE4/" class="print-no-link">#UE4</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【UE4】UE4组件</div>
+      <div>http://example.com/2019/11/06/【UE4】UE4组件/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 6, 2019</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/11/17/%E3%80%90UE4%E3%80%91UE4%E8%81%94%E7%BA%A7%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/" title="【UE4】UE4联级粒子系统">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【UE4】UE4联级粒子系统</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%AF%BB%E5%86%99Json%E6%96%87%E4%BB%B6/" title="【UE4】UE4读写Json文件">
+                        <span class="hidden-mobile">【UE4】UE4读写Json文件</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

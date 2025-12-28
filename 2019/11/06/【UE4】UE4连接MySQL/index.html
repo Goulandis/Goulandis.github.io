@@ -1,0 +1,746 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="article">
+<meta property="og:title" content="【UE4】UE4连接MySQL">
+<meta property="og:url" content="http://example.com/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%BF%9E%E6%8E%A5MySQL/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224542.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224546.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224549.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224602.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224607.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224613.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224619.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224624.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224631.png">
+<meta property="article:published_time" content="2019-11-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-12T14:23:01.689Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="UE4">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224542.png">
+  
+  
+  
+  <title>【UE4】UE4连接MySQL - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Goulandis</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/Page.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【UE4】UE4连接MySQL"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-11-06 00:00" pubdate>
+          2019年11月06日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【UE4】UE4连接MySQL</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <meta name="referrer" content="no-referrer" />
+
+<span id="more"></span>
+
+<h1 id="使用MySQLIntegration插件连接Mysql"><a href="#使用MySQLIntegration插件连接Mysql" class="headerlink" title="使用MySQLIntegration插件连接Mysql"></a>使用MySQLIntegration插件连接Mysql</h1><ul>
+<li>Update Data from Query Async组件后面必须再跟一个其他的节点，节点才能正常执行</li>
+<li>UE4 C++编程中不能出现私有私有变量？</li>
+<li>UE4 C++静态变量？</li>
+<li>MySQL Integration插件只支持sql语句，不支持存储过程</li>
+<li>在蓝图中实现的C++函数在蓝图中没法使用？</li>
+<li>暴露给蓝图的变量和函数必须是公有且非静态的</li>
+<li>UE4 C++类创建对象，大象无形31页</li>
+<li>UE4 C++编程中if else语句必须加{}</li>
+</ul>
+<h2 id="1-MySQL-Integration安装"><a href="#1-MySQL-Integration安装" class="headerlink" title="1.MySQL Integration安装"></a>1.MySQL Integration安装</h2><p>MySQL Integration插件可以直接在UE4商城中搜索到，直接下载安装即可，如何是从外部导入的离线包，直接将插件文件夹丢入UE4安装目录下的Engine\Plugins文件夹下即可。</p>
+<h2 id="2-激活MySQL-Integration"><a href="#2-激活MySQL-Integration" class="headerlink" title="2.激活MySQL Integration"></a>2.激活MySQL Integration</h2><p>激活插件直接在UE4中的Edit&#x2F;Plugins&#x2F;Installed下找到MySQL Integration勾选Enabled即可，勾选插件之后UE4会提示需要重启UE4才可激活，重启软件就可以激活插件了。</p>
+<h2 id="3-MySQL-Integration提供的蓝图组件"><a href="#3-MySQL-Integration提供的蓝图组件" class="headerlink" title="3.MySQL Integration提供的蓝图组件"></a>3.MySQL Integration提供的蓝图组件</h2><p>官方文档： <a target="_blank" rel="noopener" href="https://sameek4.github.io/KodeSpire/Pages/MySQLIntegration.html">https://sameek4.github.io/KodeSpire/Pages/MySQLIntegration.html</a></p>
+<h3 id="Set-Connection-Properties-Mysql连接"><a href="#Set-Connection-Properties-Mysql连接" class="headerlink" title="Set Connection Properties(Mysql连接)"></a>Set Connection Properties(Mysql连接)</h3><p>Set Connection Properties组件提供UE4对Mysql的连接服务。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224542.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224542.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><strong>输入：</strong></p>
+<ul>
+<li>server：数据库的连接ip；</li>
+<li>DBName：数据库的名字；</li>
+<li>User ID：登录数据库用户名；</li>
+<li>Password：登录数据库的用户密码；</li>
+<li>Extra Param：SetConnectionProperties提供的额外参数传入；</li>
+<li>Is Trusted：启用windows用户名和密码登录数据库。</li>
+</ul>
+<h3 id="Check-Connection-State-Mysql连接状态检查"><a href="#Check-Connection-State-Mysql连接状态检查" class="headerlink" title="Check Connection State(Mysql连接状态检查)"></a>Check Connection State(Mysql连接状态检查)</h3><p>此组件提供对Mysql连接的状态的查询服务。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224546.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224546.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><strong>输出：</strong></p>
+<ul>
+<li><p>Error Message：输出错误信息；</p>
+</li>
+<li><p>Return Value：输出连接状态；</p>
+<p>包含如下状态值(类型为插件定义的EMysqlConnectionStateEnum枚举)：</p>
+<ul>
+<li>Broken：数据库损坏；</li>
+<li>Closed：连接关闭；</li>
+<li>connecting：正在连接；</li>
+<li>Eecuting：正在发送命令；</li>
+<li>Fetching：数据库正在检索数据；</li>
+<li>Open：连接以正常打开，可以正常使用数据库。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Update-Data-from-Query-Async-异步发送非查询sql命令"><a href="#Update-Data-from-Query-Async-异步发送非查询sql命令" class="headerlink" title="Update Data from Query Async(异步发送非查询sql命令)"></a>Update Data from Query Async(异步发送非查询sql命令)</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224549.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224549.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>此组件提供非查询的sql命令发送服务，即发送insert，delete，create等命令。</p>
+<h3 id="Update-Data-from-Query-同步发送非查询sql命令"><a href="#Update-Data-from-Query-同步发送非查询sql命令" class="headerlink" title="Update Data from Query (同步发送非查询sql命令)"></a>Update Data from Query (同步发送非查询sql命令)</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224602.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224602.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><strong>输入：</strong></p>
+<ul>
+<li>Query：sql命令字符串；</li>
+</ul>
+<p><strong>输出：</strong></p>
+<ul>
+<li><p>Success Status：命令的执行状态</p>
+<p>有三种执行状态值，类型为插件自定义的EMysqlSuccessStateEnum枚举，</p>
+<ul>
+<li>Executing：sql命令正在发送；</li>
+<li>Success：sql命令执行成功；</li>
+<li>Failed：sql命令执行失败。</li>
+</ul>
+</li>
+<li><p>Error Message：输出错误信息。</p>
+</li>
+</ul>
+<h3 id="Check-Query-EXecution-State-检查上一条命令的执行状态"><a href="#Check-Query-EXecution-State-检查上一条命令的执行状态" class="headerlink" title="Check Query EXecution State(检查上一条命令的执行状态)"></a>Check Query EXecution State(检查上一条命令的执行状态)</h3><p>此组件提任何sql命令的执行状态检查，但仅限检查Check Query EXecution State执行前的上一条sql语句的状态检查。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224607.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224607.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>输出内容和Update Data from Query一致。</p>
+<h3 id="Select-Data-from-Query-Async-异步发送查询命令"><a href="#Select-Data-from-Query-Async-异步发送查询命令" class="headerlink" title="Select Data from Query Async(异步发送查询命令)"></a>Select Data from Query Async(异步发送查询命令)</h3><p>此组件仅限发送select语句，其他语句发送无效， 查询到的数据会存储到插件自带的数据结构中，可以使用下面介绍的Get Selected Table组件进行数据访问。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224613.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224613.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h2 id="Get-Selected-Table-读取数据表"><a href="#Get-Selected-Table-读取数据表" class="headerlink" title="Get Selected Table(读取数据表)"></a>Get Selected Table(读取数据表)</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224619.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224619.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><strong>输出:</strong></p>
+<ul>
+<li>Result by Column：以列的形式返回数据，返回一个MySQLDataTableStructures的结构体数据，每一个结构体就是一列，MySQLDataTableStructures结构体包含两个成员ColumnName(列名)和ColumnData(列数据)，其中ColumnData是一个FString类型的TArray数组，数组中每一个元数就是该列中某一行的数据。</li>
+<li>Result by Row：以行的形式返回数据，返回一个 返回一个MySQLDataRowStructures类型的结构体数组，每一个结构体就是一行，MySQLDataRowStructures结构体包含一个FString类型的TArray数组，数组中每一个元素就是该行中某一列的数据。</li>
+</ul>
+<h2 id="4-MySQL-Integration的注意事项"><a href="#4-MySQL-Integration的注意事项" class="headerlink" title="4.MySQL Integration的注意事项"></a>4.MySQL Integration的注意事项</h2><h3 id="MySQL-Integration不支持存储过程"><a href="#MySQL-Integration不支持存储过程" class="headerlink" title="MySQL Integration不支持存储过程"></a>MySQL Integration不支持存储过程</h3><p>MySQL Integration插件不支持数据库的存储过程的语法，在Query引脚输入“Call ProdureceName(ParameterList) ”是没有办法唤醒数据库中的存储过程的，所以很多的数据库中的查询和插入逻辑就需要在外部实现了。</p>
+<h3 id="MySQL-Integration不提供C-函数"><a href="#MySQL-Integration不提供C-函数" class="headerlink" title="MySQL Integration不提供C++函数"></a>MySQL Integration不提供C++函数</h3><p>MySQL Integration插件只提供蓝图组件不提供C++函数，也就是说数据库的连接查询等只能使用蓝图来实现，但大多数情况我们又必须在C++中访问数据库，在这钟情况下我们该如何做呢？</p>
+<p>目前，我只想到一种方法，就是在C++中创建访问数据库的类在类中声明数据库的访问函数，用这个类的蓝图子类来重写该数据库访问函数，以实现父类中该数据库访问函数，这是由C++继承中的重写的特性实现的。</p>
+<p>具体做法如下：</p>
+<p>首先在C++中创建一个专门负责连接数据库的类并在类中声明连接函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;MysqlJsonCpp.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;CoreMinimal.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;GameFramework/Actor.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;MysqlConnector.generated.h&quot;</span></span><br><br><span class="hljs-built_in">UCLASS</span>()<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">DATA_SYS_API</span> AMysqlConnector : <span class="hljs-keyword">public</span> AActor<br>&#123;<br>	<span class="hljs-built_in">GENERATED_BODY</span>()<br><span class="hljs-keyword">public</span>:	<br><br>	<span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite,Category = <span class="hljs-string">&quot;VariableRW&quot;</span>)<br>	FString errorMessage;<br>	<span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, Category = <span class="hljs-string">&quot;VariableRW&quot;</span>)<br>	FString stateMessage;<br><br><span class="hljs-keyword">protected</span>:<br><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">BeginPlay</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br><br><span class="hljs-keyword">public</span>:	<br><br>	<span class="hljs-built_in">AMysqlConnector</span>();<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">Tick</span><span class="hljs-params">(<span class="hljs-type">float</span> DeltaTime)</span> <span class="hljs-keyword">override</span></span>;<br><br>	<span class="hljs-comment">//从配置文件ConnectConfig.json中读取Mysql连接配置文件</span><br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ConnectMysqlByConfig</span><span class="hljs-params">()</span></span>;<br>    <br>	<span class="hljs-comment">//使用MySQLIntegration插件连接Mysql</span><br>	<span class="hljs-built_in">UFUNCTION</span>(BlueprintImplementableEvent,Category = <span class="hljs-string">&quot;OverridFunction&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Connect</span><span class="hljs-params">(FName server, FName dbName, FName userId, FName passwd)</span></span>;<br>    <br>	<span class="hljs-comment">//使用MySQLIntegration插件检查连接状态</span><br>	<span class="hljs-built_in">UFUNCTION</span>(BlueprintImplementableEvent, Category = <span class="hljs-string">&quot;OverridFunction&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">ConnectState</span><span class="hljs-params">(FString &amp;errorMessageParam,FString &amp;stateMessageParam)</span></span>;<br>	<span class="hljs-comment">//获取连接状态</span><br>	<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">GetConnectState</span><span class="hljs-params">()</span></span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>上面的void Connect(FName server, FName dbName, FName userId, FName passwd);函数就是需要用蓝图实现的数据库连接函数， 这里要注意，这个函数只能在C++中声明，不可以实现，否则父类调用此函数时将无法关联到子类的重写，并且这个函数需要使用<code>BlueprintImplementableEvent</code>参数暴露给蓝图。</p>
+<p> 这里还需要注意，如果这个函数中使用了变量的引用，那么这个变量也需要使用<code>UPROPERTY(BlueprintReadWrite, Category = &quot;VariableRW&quot;)</code>暴漏给蓝图，如上面的<code>FString errorMessage;</code>一样。</p>
+<p>这样我们就可以创建一个蓝图类来继承这个类，</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224624.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224624.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>然后在该蓝图类的MyBlueprint&#x2F;Functions&#x2F;Override下看到我们在C++类中声明的函数，直接重写实现即可，如：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224631.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224631.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>实现时候我们就可以在C++中调用这个函数了，这个函数就会通过重写关联到蓝图自类中的重写过程，如此数据库便连接上了。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/" class="category-chain-item">知识记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/UE4/" class="print-no-link">#UE4</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【UE4】UE4连接MySQL</div>
+      <div>http://example.com/2019/11/06/【UE4】UE4连接MySQL/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 6, 2019</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/11/06/%E3%80%90UE4%E3%80%91UE4%E8%AF%BB%E5%86%99Json%E6%96%87%E4%BB%B6/" title="【UE4】UE4读写Json文件">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【UE4】UE4读写Json文件</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/10/28/%E3%80%90UE4%E3%80%91UE4%E8%93%9D%E5%9B%BE%E5%9F%BA%E7%A1%80/" title="【UE4】UE4蓝图基础">
+                        <span class="hidden-mobile">【UE4】UE4蓝图基础</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

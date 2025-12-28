@@ -1,0 +1,1094 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="article">
+<meta property="og:title" content="【C++】C++STL标准模板库">
+<meta property="og:url" content="http://example.com/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://goulandis.github.io/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/Snipaste_2019-10-06_10-41-56.png">
+<meta property="og:image" content="https://goulandis.github.io/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/Snipaste_2019-10-06_10-41-56.png">
+<meta property="og:image" content="https://goulandis.github.io/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/Snipaste_2019-10-06_14-36-13.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210330094505.png">
+<meta property="article:published_time" content="2019-10-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-12T14:38:07.495Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CPlus">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://goulandis.github.io/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/Snipaste_2019-10-06_10-41-56.png">
+  
+  
+  
+  <title>【C++】C++STL标准模板库 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Goulandis</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/Page.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【C++】C++STL标准模板库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-10-06 00:00" pubdate>
+          2019年10月06日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          61 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【C++】C++STL标准模板库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <meta name="referrer" content="no-referrer" />
+
+<span id="more"></span>
+
+<h1 id="一、STL的基本概念"><a href="#一、STL的基本概念" class="headerlink" title="一、STL的基本概念"></a>一、STL的基本概念</h1><h2 id="1-什么是STL"><a href="#1-什么是STL" class="headerlink" title="1.什么是STL"></a>1.什么是STL</h2><p>STL (Standard Template Librany）标准准模板庠是惠普实验室开发的一系列软件的统称。现在主要出现在C++中，但在被引入C++之前该技木就已存在了很长一段吋间了。</p>
+<p>STL的从广义上讲分为三类: algorithm (算法)、container (容器)和iterator (迭代器)，容器和算法通过迭代器可以进行无缝链接。几乎所有的代码都釆用了模板类和模板函数的方式,这相比于传统的由函数和类组成的库来说提供了更好的代码重用机会。在C++标准中，STL 被组织为下面的13个尖文件:<code>&lt;algorithm&gt;</code>、<code>&lt;deque&gt;</code>、<code>&lt;functional&gt;</code>、<code>&lt;iterator&gt;</code>、<code>&lt;vector&gt;</code>、<code>&lt;list&gt;</code>、 <code>&lt;map&gt;</code>、<code>&lt;memory&gt;</code>、<code>&lt;numerio&gt;</code>、<code>&lt;queue&gt;</code>、<code>&lt;set&gt;</code>、 <code>&lt;stack&gt;</code> 和<code>&lt;utility&gt;</code>。</p>
+<p><a target="_blank" rel="noopener" href="https://goulandis.github.io/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/Snipaste_2019-10-06_10-41-56.png"><img src="https://goulandis.github.io/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/Snipaste_2019-10-06_10-41-56.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>我们详细的说六大组件：</p>
+<ul>
+<li>容器(Container)</li>
+<li>算法(Algorithm)</li>
+<li>迭代器(Iterator)</li>
+<li>仿函数(Function object)</li>
+<li>适配器(Adaptor)</li>
+<li>空间配置器(allocator)</li>
+</ul>
+<h2 id="2-STL的好处"><a href="#2-STL的好处" class="headerlink" title="2.STL的好处"></a>2.STL的好处</h2><ul>
+<li><p>STL是C++的一部分，因此不用额外安装什么，它被内建在你的编译器之内。</p>
+</li>
+<li><p>STL的一个重要特点是数据结构和算法的分离。尽管这是个简单的概念，但是这种分离确实使得STL变得非常通用。<br>例如，在STL 的vector容器中，可以放入元素、 基础数据类型变量、元素的地址;<br>STL的sort()函数可以用来操作vector,list等容器。</p>
+</li>
+<li><p>程序员可以不用思考STL具体的实现过程，只要能够熟综使用STL就OK了。这样他们就可以把精力放在程序开发的别的方面。</p>
+</li>
+<li><p>STL 具有高可重用性，高性能，高移植性，跨平台的优点。</p>
+<p>高可重用性: STL 中几乎所有的代码都采用了模板类和模版函数的方式实现，这相比于传统的由函数和类组成的库来说提供了更好的代码重用机会。关于模板的知识，已经给大家介绍了。</p>
+<p>高性能:如map可以高效地从十万条记录里面查找出指定的记录，因为map是采用红黑树的变体实现的。</p>
+<p>高移植性:如在项目A上用STL编写的模块，可以直接移植到项目B上。</p>
+<p>跨平台:如用windows的Visual Studio编写的代码可以在Mac OS的XCode上直接运行。</p>
+</li>
+<li><p>了解到STL的这些好处，我们知道STL无疑是最值得C++程序员骄傲的一部分。每一个C++程序员都应该好好学习STL.只有能够熟练使用STL的程序员，才是好的C++程序员。</p>
+</li>
+</ul>
+<h1 id="二、容器"><a href="#二、容器" class="headerlink" title="二、容器"></a>二、容器</h1><h2 id="1-容器"><a href="#1-容器" class="headerlink" title="1.容器"></a>1.容器</h2><p>在实际的开发过程中，数据结构本身的重要性不会逊于操作于数据结构的算法的重要性，当程序中存在着对时间要求很高的部分时，数据结构的选择就显得更加重要。</p>
+<p>经典的数据结构数量有限，但是我们常常重复着一些为了实现向量、链表等结构而编写的代码，这些代码都十分相似，只是为了适应不同数据的变化而在细节上有所出入。STL容器就为我们提供了这样的方便，它允许我们重复利用己有的实现构造自己的特定类型下的数据结构，通过设置-些模板，STL 容器对最常用的数据结构提供了支持，这些模板的参数允许我们指定容器中元素的数据类型，可以将我们许多重复而乏味的工作简化。</p>
+<p> 容器部分主要由头文件<code>&lt;vector&gt;</code>, <code>&lt;list&gt;</code>, <code>&lt;deque&gt;</code>, <code>&lt;set&gt;</code>, <code>&lt;map&gt;</code>, <code>&lt;stack&gt;</code>和<code>&lt;queue&gt;</code>组成。对于常用的一些容器和容器适配器(可以看作由其它容器实现的容器)，可以通过下表总结一:下它们和相应头文件的对应关系。</p>
+<p><a target="_blank" rel="noopener" href="https://goulandis.github.io/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/Snipaste_2019-10-06_10-41-56.png"><img src="https://goulandis.github.io/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/Snipaste_2019-10-06_10-41-56.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h2 id="2-容器的分类"><a href="#2-容器的分类" class="headerlink" title="2.容器的分类"></a>2.容器的分类</h2><h3 id="序列式容器-Sequence-containers"><a href="#序列式容器-Sequence-containers" class="headerlink" title="序列式容器(Sequence containers)"></a>序列式容器(Sequence containers)</h3><p>每个元素都有固定位置–取决于插入时机和地点，和元素值无关。如：vector、deque、 Iist。</p>
+<h3 id="关联式容器-Associated-containers"><a href="#关联式容器-Associated-containers" class="headerlink" title="关联式容器(Associated containers)"></a>关联式容器(Associated containers)</h3><p>元素位置取决于特定的排序准则，和插入顺序无关。如：sset、multiset、 map、multimapu。</p>
+<p><a target="_blank" rel="noopener" href="https://goulandis.github.io/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/Snipaste_2019-10-06_14-36-13.png"><img src="https://goulandis.github.io/2019/10/06/%E3%80%90C++%E3%80%91C++STL%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/Snipaste_2019-10-06_14-36-13.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h2 id="3-string类"><a href="#3-string类" class="headerlink" title="3.string类"></a>3.string类</h2><h3 id="string类的本质"><a href="#string类的本质" class="headerlink" title="string类的本质"></a>string类的本质</h3><p><code>string</code>类本质上其实就是<code>char*</code>的容器，是<code>cahr*</code>的封装。</p>
+<h3 id="string类的遍历"><a href="#string类的遍历" class="headerlink" title="string类的遍历"></a>string类的遍历</h3><p><strong>使用[]遍历：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs abnf">string str <span class="hljs-operator">=</span> <span class="hljs-string">&quot;string_str&quot;</span><span class="hljs-comment">;</span><br>for (int i <span class="hljs-operator">=</span> <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; str.length(); i++)</span><br>	cout &lt;&lt; str[i]<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>使用迭代器遍历：</strong></p>
+<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gml"><span class="hljs-built_in">string</span> str = <span class="hljs-string">&quot;string_str&quot;</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-built_in">string</span>::iteratori=str.<span class="hljs-keyword">begin</span>();i&lt;str.<span class="hljs-keyword">end</span>();i++)<br>	cout &lt;&lt;*i;<br></code></pre></td></tr></table></figure>
+
+<p> 注意这里的<code>i</code>是一个指向string::iterator类型的指针。</p>
+<p><strong>使用at()遍历：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs abnf">string str <span class="hljs-operator">=</span> <span class="hljs-string">&quot;string_str&quot;</span><span class="hljs-comment">;</span><br>for (int i <span class="hljs-operator">=</span> <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; str.length(); i++)</span><br>	cout &lt;&lt; str.at(i)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<p><code>at()</code>与<code>[]</code>不同的是，当访问发生越界等错误时，<code>at()</code>会自动抛出异常，而<code>[]</code>不会抛出异常而中断程序。</p>
+<h3 id="string解封成char"><a href="#string解封成char" class="headerlink" title="string解封成char*"></a>string解封成char*</h3><p>C++为string类提供了一个专门的函数 <strong>str.c_str()</strong>，str是string类型的对象，但是需要注意的是<code>str.c_str()</code>返回的是一个 const char*，不能再被赋值给其他非常量指针，但是我们可以直接将<code>str.c_str()</code>当作<code>char*</code>来使用，如：<code>str.c_str()[1]</code>，即通过<code>char*</code>指针访问str中的第二个元素。</p>
+<h3 id="string类中一些常用函数"><a href="#string类中一些常用函数" class="headerlink" title="string类中一些常用函数"></a>string类中一些常用函数</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>函数名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>复制</td>
+<td>str.copy(char *buf,int cout)</td>
+<td>从字符串str中拷贝cout个字符到char数组buf中</td>
+</tr>
+<tr>
+<td>连接</td>
+<td>str.append(string strs)</td>
+<td>将字符串strs连接到str之后，支持string和char*</td>
+</tr>
+<tr>
+<td>查找</td>
+<td>int str.find(char *strs,int index)</td>
+<td>从字符串str中的第index索引开始查找strs子串或字符，返回查找到的第一个匹配值的索引，返回的索引也可以使用迭代器来接收</td>
+</tr>
+<tr>
+<td>替换</td>
+<td>str.replace(int index,int length,char *strs)</td>
+<td>在字符串str中，从index索引开始用strs字符串替换length个长度的子串</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>str.erase(int index,int length)</td>
+<td>删除字符出str从index位置开始的length长度的字符</td>
+</tr>
+<tr>
+<td>插入</td>
+<td>str.insert(int index,char *strs)</td>
+<td>从str字符串的index位置开始插入字串strs</td>
+</tr>
+</tbody></table>
+<h3 id="string类中常用算法函数"><a href="#string类中常用算法函数" class="headerlink" title="string类中常用算法函数"></a>string类中常用算法函数</h3><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs axapta">string <span class="hljs-built_in">str</span> = <span class="hljs-string">&quot;string_str_io_stdsfx.h_iostream&quot;</span>;<br>transform(<span class="hljs-built_in">str</span>.begin(), <span class="hljs-built_in">str</span>.end(), <span class="hljs-built_in">str</span>.begin(), toupper);<br>cout &lt;&lt; <span class="hljs-built_in">str</span> &lt;&lt; endl;<br></code></pre></td></tr></table></figure>
+
+<p>transform算法包含在<code>#include &lt;algorithm&gt;</code>头文件中</p>
+<p><strong>transform算法的使用：</strong></p>
+<p>**原型：**transform(first,last,result,op);</p>
+<p>first是容器的首迭代器，last为容器的末迭代器，result为存放结果的容器，op为要进行操作的一元函数对象或sturct、class。</p>
+<p>**代码解释：**str.begin()返回一个指向str首部位置的迭代器，str.end()返回一个指向str尾部位置的迭代器，因为我们把输出结果继续存放在str中，且迭代器始于容器相联系的，所以存放结果的容器也是str.begin()，而我们对str做的操作是将小写字母装换为大写，C++提供了标准的转换函数,所以操作函数为toupper。</p>
+<p><strong>transform算法的另一个重载形式：</strong></p>
+<p>**原型：**transform(first1,last1,first2,result,binary_op);</p>
+<p>first1是第一个容器的首迭代 器，last1为第一个容器的末迭代器，first2为第二个容器的首迭代器，result为存放结果的容器，binary_op为要进行操作的二元函数 对象或sturct、class。</p>
+<p>需要注意的是，两个容器first1和first2中的元素数量必须相等，否则会抛异常。</p>
+<h2 id="4-vector容器"><a href="#4-vector容器" class="headerlink" title="4.vector容器"></a>4.vector容器</h2><ul>
+<li>vector是将元素置于一个 <strong>动态数组</strong>中加以管理的容器</li>
+<li>vector支持随机存取元素，支持索引存取（[],at()）和迭代器存取</li>
+<li>vector在尾部添加和移除元素速度快，在中部和头部速度慢</li>
+<li>使用vector容易需要包含<code>#include&lt;vector&gt;</code>头文件</li>
+</ul>
+<h3 id="vector常用方法"><a href="#vector常用方法" class="headerlink" title="vector常用方法"></a>vector常用方法</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读取与赋值</td>
+<td>front(void)</td>
+<td>获取容器首元素，既可以作左值也可以作右值</td>
+</tr>
+<tr>
+<td>back(void)</td>
+<td>获取容器尾元素，既可以作左值也可以作右值</td>
+<td></td>
+</tr>
+<tr>
+<td>push_back(T t)</td>
+<td>在容器的尾部添加元素</td>
+<td></td>
+</tr>
+<tr>
+<td>pop_back(T t)</td>
+<td>删除容器最后一个元素</td>
+<td></td>
+</tr>
+<tr>
+<td>只读</td>
+<td>begin(void)</td>
+<td>获取容器首部迭代器</td>
+</tr>
+<tr>
+<td>end(void)</td>
+<td>获取容器尾部迭代器</td>
+<td></td>
+</tr>
+<tr>
+<td>rbegin(void)</td>
+<td>获取逆序首部迭代器，实际指向容器的尾部，只能使用vector<int>::reverse_iterator逆序迭代器接收</td>
+<td></td>
+</tr>
+<tr>
+<td>rend(void)</td>
+<td>获取逆序尾部部迭代器，实际指向容器的首部，只能使用vector<int>::reverse_iterator逆序迭代器接收</td>
+<td></td>
+</tr>
+<tr>
+<td>删除</td>
+<td>erase(iterator pos)</td>
+<td>删除迭代器pos指向位置的元素</td>
+</tr>
+<tr>
+<td>erase(iterator begin,iterator end)</td>
+<td>从迭代器begin指向位置开始到end指向位置结束，区间删除元素</td>
+<td></td>
+</tr>
+<tr>
+<td>插入</td>
+<td>insert(iterator pos,T t)</td>
+<td>在pos迭代器指向的位置插入元素t，insert中的迭代器pos只能是begin()或end()否则会报错，似乎不止其他的迭代器</td>
+</tr>
+<tr>
+<td>判空</td>
+<td>empty(void)</td>
+<td>容器判空</td>
+</tr>
+</tbody></table>
+<p>### Vector浅析</p>
+<p>vector的最重要的实现组成其实只有三个指针，上源码：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-comment">// CLASS TEMPLATE vector</span><br>template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">_Ty,<span class="hljs-symbol">class</span></span> <span class="hljs-symbol">_Alloc</span> = <span class="hljs-symbol">allocator</span>&lt;<span class="hljs-symbol">_Ty</span>&gt;&gt;<br><span class="hljs-symbol">class</span> <span class="hljs-symbol">vector</span> : <span class="hljs-symbol">public</span> <span class="hljs-symbol">_Vector_alloc</span>&lt;<span class="hljs-symbol">_Vec_base_types</span>&lt;<span class="hljs-symbol">_Ty, <span class="hljs-symbol">_Alloc</span></span>&gt;&gt;<br>&#123;	<br>    <span class="hljs-comment">//...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>类体这里就省略了，如果仔细看源码就会发现vector的类体里主要实现的大多只是一些供外部调用的函数而已，而vector的最底层的一些实现其实在它的基类中就已经完成了，如<code>_Vector_alloc</code>类，而<code>_Vector_alloc</code>中也没有包含最重要的三个指针，我们在vector.cpp中搜索<code>_Myfirst</code>可以发现，<code>_Myfirst</code>,<code>_Mylast</code>,<code>_Myend</code>三个指针在<code>_Vector_val</code>这个类中，而<code>_Vector_alloc</code>中包含了对<code>_Vector_val</code>的操作。</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs sqf"><span class="hljs-comment">// CLASS TEMPLATE _Vector_val</span><br>template&lt;class <span class="hljs-variable">_Val_types</span>&gt;<br>class <span class="hljs-variable">_Vector_val</span> : public <span class="hljs-variable">_Container_base</span><br>&#123;	<span class="hljs-comment">// base class for vector to hold data</span><br>public:<br>	using value_type = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::value_type;<br>	using size_type = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::size_type;<br>	using difference_type = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::difference_type;<br>	using pointer = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::pointer;<br>	using const_pointer = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::const_pointer;<br>	using reference = value_type&amp;;<br>	using const_reference = const value_type&amp;;<br><br>	<span class="hljs-variable">_Vector_val</span>()<br>		: <span class="hljs-variable">_Myfirst</span>(),<br>		<span class="hljs-variable">_Mylast</span>(),<br>		<span class="hljs-variable">_Myend</span>()<br>		&#123;	<span class="hljs-comment">// initialize values</span><br>		&#125;<br><br>	pointer <span class="hljs-variable">_Myfirst</span>;	<span class="hljs-comment">// pointer to beginning of array</span><br>	pointer <span class="hljs-variable">_Mylast</span>;	<span class="hljs-comment">// pointer to current end of sequence</span><br>	pointer <span class="hljs-variable">_Myend</span>;	<span class="hljs-comment">// pointer to end of array</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>在vector中有两个关键的数字，size与capacity，其中<code>size=_Mylast-_Myfirst</code>，<code>capacity=_Myend-Myfirst</code>，三个指针指向的内存位置如下：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210330094505.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210330094505.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>size的计算源码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">_NODISCARD size_type size() <span class="hljs-keyword">const</span> noexcept<br>&#123;	<span class="hljs-comment">// return length of sequence</span><br>	<span class="hljs-keyword">return</span> (static_cast&lt;size_type&gt;(<span class="hljs-keyword">this</span>-&gt;_Mylast() - <span class="hljs-keyword">this</span>-&gt;_Myfirst()));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>capacity的计算源码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">_NODISCARD size_type capacity() <span class="hljs-keyword">const</span> noexcept<br>&#123;	<span class="hljs-comment">// return current length of allocated storage</span><br>	<span class="hljs-keyword">return</span> (static_cast&lt;size_type&gt;(<span class="hljs-keyword">this</span>-&gt;_Myend() - <span class="hljs-keyword">this</span>-&gt;_Myfirst()));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们都知道vector的性能优越，而支撑着vector的优越性能的就是这两数据，size和capacity，size是vector中实际元素的个数，即vector总容量中的已用容量(used部分)，而capacity则是vector初始化时设置的总容量(等于used部分加unsed部分)，C++分配给vector的实际内存总是比定义时的要大一点，这是因为vector占用的内存是一整块连续的内存，预分配多一些内存可以降低vector之后的二次分配时的时间成本。所以capacity&gt;&#x3D;size，档capacity&#x3D;size时表示容易已满，若需要继续添加元素则需要整体移动vector，此时花费的成本会较高，所以种情况应尽量避免。</p>
+<h2 id="5-deque容器"><a href="#5-deque容器" class="headerlink" title="5.deque容器"></a>5.deque容器</h2><ul>
+<li>deque容器是一个双端数组，在双端数组的两端均可以插入和删除元素</li>
+<li>使用deque容器需要包头文件<code>#include&lt;deque&gt;</code></li>
+</ul>
+<p>deque容器可以说是vector容器的升级版，deque的用法基本和vector一致，但是deque不仅提供push_back()，pop_back()还提供 <strong>push_front()</strong> 和 <strong>pop_front()</strong>。</p>
+<h2 id="6-stack容器"><a href="#6-stack容器" class="headerlink" title="6.stack容器"></a>6.stack容器</h2><ul>
+<li>stack容器是一个栈模型</li>
+<li>使用stack容器需要包含头文件<code>#include&lt;stack&gt;</code></li>
+</ul>
+<h3 id="stack常用方法"><a href="#stack常用方法" class="headerlink" title="stack常用方法"></a>stack常用方法</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>push(T t)</td>
+<td>元素入栈顶</td>
+</tr>
+<tr>
+<td>pop()</td>
+<td>栈顶元素出栈</td>
+</tr>
+<tr>
+<td>top()</td>
+<td>获取栈顶元素</td>
+</tr>
+</tbody></table>
+<h2 id="7-queue容器"><a href="#7-queue容器" class="headerlink" title="7.queue容器"></a>7.queue容器</h2><ul>
+<li>queue容器是一个队列模型</li>
+<li>使用queue容器需要包含头文件<code>#include&lt;queue&gt;</code></li>
+</ul>
+<h3 id="queue常用方法"><a href="#queue常用方法" class="headerlink" title="queue常用方法"></a>queue常用方法</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>push(T t)</td>
+<td>元素入队尾</td>
+</tr>
+<tr>
+<td>pop()</td>
+<td>队首元素出队</td>
+</tr>
+<tr>
+<td>front()</td>
+<td>获取队首元素，既可以作左值也可以作右值</td>
+</tr>
+<tr>
+<td>back()</td>
+<td>获取队尾元素，既可以作左值也可以作右值</td>
+</tr>
+</tbody></table>
+<h2 id="8-list容器"><a href="#8-list容器" class="headerlink" title="8.list容器"></a>8.list容器</h2><ul>
+<li>list容器是一个双向链表模型，可以高效的进行元素的插入和删除操作</li>
+<li>list容器不支持随机访问，即不支持[],at()和iterator + n(如：begin()+1)等形式的访问</li>
+<li>使用list容器需要包含头文件<code>#include&lt;list&gt;</code></li>
+</ul>
+<p>list容器除了不支持随机访问外，用法和deque容器的用法基本一致，除此之外list容器还提供一个 **remove(T t)**函数来根据元素内容删除元素</p>
+<p>使用list容器时有一点需要注意 <strong>list容器在使用erase删除元素时，遵循左闭右开的原则</strong>，如：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-built_in">list</span>&lt;<span class="hljs-built_in">int</span>&gt; li;<br><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++)<br>	li.push_back(i);<br><span class="hljs-keyword">for</span> (<span class="hljs-built_in">list</span>&lt;<span class="hljs-built_in">int</span>&gt;::iterator it = li.<span class="hljs-keyword">begin</span><span class="hljs-literal">()</span>; it != li.<span class="hljs-keyword">end</span><span class="hljs-literal">()</span>; it++)<br>	cout &lt;&lt; *it;<br>cout &lt;&lt; endl;<br><span class="hljs-built_in">list</span>&lt;<span class="hljs-built_in">int</span>&gt;::iterator it1 = li.<span class="hljs-keyword">begin</span><span class="hljs-literal">()</span>;<span class="hljs-comment">//it1指向元素0</span><br><span class="hljs-built_in">list</span>&lt;<span class="hljs-built_in">int</span>&gt;::iterator it2 = li.<span class="hljs-keyword">begin</span><span class="hljs-literal">()</span>;<br>it2++; it2++; it2++;<span class="hljs-comment">//此时it2指向元素3</span><br>li.erase(it1, it2);<br><span class="hljs-keyword">for</span> (<span class="hljs-built_in">list</span>&lt;<span class="hljs-built_in">int</span>&gt;::iterator it = li.<span class="hljs-keyword">begin</span><span class="hljs-literal">()</span>; it != li.<span class="hljs-keyword">end</span><span class="hljs-literal">()</span>; it++)<br>	cout &lt;&lt; *it;<br>cout &lt;&lt; endl;<br></code></pre></td></tr></table></figure>
+
+<p><strong>输出结果：</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">01234<br>34<br></code></pre></td></tr></table></figure>
+
+<p>可以看到erase在删除0-3的元素时删除了0，1，2而没有删除3，即左闭右开。</p>
+<h3 id="list浅析"><a href="#list浅析" class="headerlink" title="list浅析"></a>list浅析</h3><p>list在实现结构上和vector很类似，只是list比vector多了一个<code>_List_buy</code>中间层，list的实现的核心组成有两个，<code>_List_val</code>和<code>_List_node</code>前者主要与数据结构规模和头节点相关，后者主要与数据存储、prev和next相关。上<code>_List_val</code>的源码：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs sqf">template&lt;class <span class="hljs-variable">_Val_types</span>&gt;<br>class <span class="hljs-variable">_List_val</span> : public <span class="hljs-variable">_Container_base</span><br>&#123;	<span class="hljs-comment">// base class for list to hold data</span><br>public:<br>	using <span class="hljs-variable">_Nodeptr</span> = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::<span class="hljs-variable">_Nodeptr</span>;<br><br>	using value_type = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::value_type;<br>	using size_type = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::size_type;<br>	using difference_type = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::difference_type;<br>	using pointer = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::pointer;<br>	using const_pointer = <span class="hljs-built_in">typename</span> <span class="hljs-variable">_Val_types</span>::const_pointer;<br>	using reference = value_type&amp;;<br>	using const_reference = const value_type&amp;;<br><br>	<span class="hljs-variable">_List_val</span>()<br>		: <span class="hljs-variable">_Myhead</span>(),<br>		<span class="hljs-variable">_Mysize</span>(<span class="hljs-number">0</span>)<br>		&#123;	<span class="hljs-comment">// initialize data</span><br>		&#125;<br><br>	<span class="hljs-variable">_Nodeptr</span> <span class="hljs-variable">_Myhead</span>;	<span class="hljs-comment">// pointer to head node</span><br>	size_type <span class="hljs-variable">_Mysize</span>;	<span class="hljs-comment">// number of elements</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到list中包含了一个指向头节点的指针<code>_Myhead</code>，也就是说即使我们创建的一个空list也至少包含一个空的头节点，list使用头节点的目的就是更方便的构建容器，<code>_Mysize</code>记录的就是list的当前元素个数。</p>
+<p>list节点_List_node&#96;的底层数据结构是一个结构体：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs sqf">template&lt;class <span class="hljs-variable">_Value_type</span>,class <span class="hljs-variable">_Voidptr</span>&gt;<br>struct <span class="hljs-variable">_List_node</span><br>&#123;	<span class="hljs-comment">// list node</span><br>	using <span class="hljs-variable">_Nodeptr</span> = <span class="hljs-variable">_Rebind_pointer_t</span>&lt;<span class="hljs-variable">_Voidptr</span>, <span class="hljs-variable">_List_node</span>&gt;;<br>	<span class="hljs-variable">_Nodeptr</span> <span class="hljs-variable">_Next</span>;	<span class="hljs-comment">// successor node, or first element if head</span><br>	<span class="hljs-variable">_Nodeptr</span> <span class="hljs-variable">_Prev</span>;	<span class="hljs-comment">// predecessor node, or last element if head</span><br>	<span class="hljs-variable">_Value_type</span> <span class="hljs-variable">_Myval</span>;	<span class="hljs-comment">// the stored value, unused if head</span><br><br>	<span class="hljs-variable">_List_node</span>&amp; operator=(const <span class="hljs-variable">_List_node</span>&amp;) = delete;<br><br>	template&lt;class <span class="hljs-variable">_Alloc</span>&gt;<br>	static void <span class="hljs-variable">_Freenode0</span>(<span class="hljs-variable">_Alloc</span>&amp; <span class="hljs-variable">_Al</span>, <span class="hljs-variable">_Nodeptr</span> <span class="hljs-variable">_Ptr</span>) noexcept<br>	&#123;<br>		using <span class="hljs-variable">_Alnode</span> = <span class="hljs-variable">_Rebind_alloc_t</span>&lt;<span class="hljs-variable">_Alloc</span>, <span class="hljs-variable">_List_node</span>&gt;;<br>		using <span class="hljs-variable">_Alnode_traits</span> = allocator_traits&lt;<span class="hljs-variable">_Alnode</span>&gt;;<br>		<span class="hljs-variable">_Alnode</span> <span class="hljs-variable">_Node_alloc</span>(<span class="hljs-variable">_Al</span>);<br>		<span class="hljs-variable">_Alnode_traits</span>::destroy(<span class="hljs-variable">_Node_alloc</span>, <span class="hljs-variable">_STD</span> addressof(<span class="hljs-variable">_Ptr</span>-&gt;<span class="hljs-variable">_Next</span>));<br>		<span class="hljs-variable">_Alnode_traits</span>::destroy(<span class="hljs-variable">_Node_alloc</span>, <span class="hljs-variable">_STD</span> addressof(<span class="hljs-variable">_Ptr</span>-&gt;<span class="hljs-variable">_Prev</span>));<br>		<span class="hljs-variable">_Alnode_traits</span>::deallocate(<span class="hljs-variable">_Node_alloc</span>, <span class="hljs-variable">_Ptr</span>, <span class="hljs-number">1</span>);<br>	&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><code>_List_node</code>的核心组成就是<code>_Next</code>，<code>_Prev</code>，<code>_Myval</code>，<code>_Next</code>是下一个节点的指针，<code>_Prev</code>是指向上一个节点的指针，<code>_Myval</code>是存储数据的容器。</p>
+<h2 id="9-priority-queue容器"><a href="#9-priority-queue容器" class="headerlink" title="9.priority_queue容器"></a>9.priority_queue容器</h2><ul>
+<li><code>priority_queue</code>容器是一个具有优先级的队列，又叫优先级队列适配器，分为最大优先级队列和最小优先级队列两种</li>
+<li>priority_queue容器是一种特殊的queue容器，所以也需要包含头文件<code>#include&lt;queue&gt;</code></li>
+</ul>
+<p>默认的定义<code>priority_queue&lt;T&gt; pr</code>的优先级队列是最大优先级队列，显示定义最小优先级队列：<code>priority_queue&lt;int,vector&lt;int&gt;,less&lt;int&gt;&gt; pr</code>，<code>less</code>是一个谓词后面再学习，显示定义最大优先级队列：<code>priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt;&gt; pr</code>，其中使用<code>greater</code>需要包含头文件<code>#include&lt;functional&gt;</code>。</p>
+<p><code>priority_queue</code>容器的用法基本和<code>queue</code>一致，除此之外，<code>priority_queue</code>容器提供一个<code>top()</code>函数来获取队首元素，而<code>queue</code>容器没有这个方法。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs gradle">priority_queue&lt;<span class="hljs-keyword">int</span>,vector&lt;<span class="hljs-keyword">int</span>&gt;,greater&lt;<span class="hljs-keyword">int</span>&gt;&gt; pr;<br>pr.<span class="hljs-keyword">push</span>(<span class="hljs-number">12</span>);<br>pr.<span class="hljs-keyword">push</span>(<span class="hljs-number">4</span>);<br>pr.<span class="hljs-keyword">push</span>(<span class="hljs-number">10</span>);<br>pr.<span class="hljs-keyword">push</span>(<span class="hljs-number">20</span>);<br>cout &lt;&lt; <span class="hljs-string">&quot;最小元素：&quot;</span> &lt;&lt;pr.top() &lt;&lt; endl;<br><span class="hljs-keyword">while</span> (pr.<span class="hljs-keyword">size</span>() &gt; <span class="hljs-number">0</span>)<br>&#123;<br>	cout &lt;&lt; pr.top() &lt;&lt; <span class="hljs-string">&quot;,&quot;</span>;<br>	pr.<span class="hljs-keyword">pop</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>输出结果：</strong></p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">最小元素：<span class="hljs-number">4</span><br><span class="hljs-number">4,10,12,20</span>,<br></code></pre></td></tr></table></figure>
+
+<h2 id="10-set容器"><a href="#10-set容器" class="headerlink" title="10.set容器"></a>10.set容器</h2><ul>
+<li><code>set</code>是一个<strong>集合</strong>容器，其中所包含的元素是<strong>唯一</strong>的，<strong>集合中的元素按一定的顺序排序</strong>，元素的插入过程是按排序规则插入，所以不能指定位置插入</li>
+<li><code>set</code>采用红黑树变体的数据结构实现，红黑树属于平衡二叉树，在插入和删除操作上比<code>vector</code>容器速度更快</li>
+<li><code>set</code>容器不支持[]和at()来存取元素</li>
+<li><strong>set不支持直接修改容器中的元素</strong>，因为元素是自动排序的，如果希望修改一个元素值，就必须删除这个元素再插入新元素</li>
+<li>要使用<code>set</code>容器需要包含头文件<code>#include&lt;set&gt;</code></li>
+</ul>
+<h3 id="set容器的基本特性"><a href="#set容器的基本特性" class="headerlink" title="set容器的基本特性"></a>set容器的基本特性</h3><p>默认情况下，直接定义的set容器采用最小优先排序，和priority_queue容器恰好相反，<code>set&lt;T&gt; se</code>就是隐式的<code>set&lt;T,less&lt;T&gt;&gt; se</code>，定义最大优先排序的set容器需要显示定义：<code>set&lt;T,greater&lt;T&gt;&gt; se</code>。</p>
+<p>我们来看一个例子：</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs q"><span class="hljs-built_in">set</span>&lt;<span class="hljs-built_in">string</span>,greater&lt;<span class="hljs-built_in">string</span>&gt;&gt; se;<span class="hljs-comment">//采用最大优先排序</span><br>for (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++)<span class="hljs-comment">//生成随机字符串元素</span><br>&#123;<br>	<span class="hljs-type">int</span> tmp = <span class="hljs-built_in">rand</span>();<br>	<span class="hljs-built_in">string</span> str = <span class="hljs-string">&quot;&quot;</span>;<br>	<span class="hljs-keyword">while</span> (str.length()&lt;=<span class="hljs-number">3</span>)<br>	&#123;<br>		if(tmp &gt;= <span class="hljs-number">97</span> &amp;&amp; tmp &lt;= <span class="hljs-number">122</span>)<br>			str += tmp;<br>		tmp = <span class="hljs-built_in">rand</span>();<br>	&#125;<br>	se.insert(str);<br>&#125;<br>se.insert(<span class="hljs-string">&quot;strs&quot;</span>);<span class="hljs-comment">//插入相同的字符串元素</span><br>se.insert(<span class="hljs-string">&quot;strs&quot;</span>);<br>se.insert(<span class="hljs-string">&quot;strs&quot;</span>);<br>for (<span class="hljs-built_in">set</span>&lt;<span class="hljs-built_in">string</span>, greater&lt;<span class="hljs-built_in">string</span>&gt;&gt;::iterator it = se.begin(); it != se.end(); it++)<br>	cout &lt;&lt; *it &lt;&lt; endl;<br></code></pre></td></tr></table></figure>
+
+<p><strong>输出结果：</strong></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">wqye</span><br><span class="hljs-symbol">vfep</span><br><span class="hljs-keyword">strs</span><br><span class="hljs-symbol">omsk</span><br><span class="hljs-symbol">kfnm</span><br><span class="hljs-symbol">cdsb</span><br></code></pre></td></tr></table></figure>
+
+<p>可以看到，容器里的字符串确实按照字符串的比较规则按从大到小的顺序排列着，并且无论我们插入多少个相同的元素，在容器内只会存储一个相同的元素值。</p>
+<p>值得注意的是：</p>
+<p><code>set</code>容器只提供了<code>insert(T t)</code>函数来插入元素。</p>
+<h3 id="自定义元素的排序"><a href="#自定义元素的排序" class="headerlink" title="自定义元素的排序"></a>自定义元素的排序</h3><p>自定义类作元素可能会出现类中有多个字段，而我们需要其中的某一个字段来作为关键字在<code>set</code>容器中排序，要实现这样的行为，我们就需要用到<strong>仿函数</strong>了。</p>
+<h4 id="什么是仿函数？"><a href="#什么是仿函数？" class="headerlink" title="什么是仿函数？"></a>什么是仿函数？</h4><p>仿函数实质上就是一个做了<code>()</code>重载的结构体，因为重载了<code>()</code>使用起来类似函数，所以称之为仿函数。</p>
+<p>我们来看一个例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>	string name;<br>	<span class="hljs-type">int</span> age;<br>	<span class="hljs-type">bool</span> isStudent;<br>	<span class="hljs-built_in">Student</span>(<span class="hljs-type">const</span> string name, <span class="hljs-type">const</span> <span class="hljs-type">int</span> age, <span class="hljs-type">const</span> <span class="hljs-type">bool</span> isStudent)<br>	&#123;<br>		<span class="hljs-keyword">this</span>-&gt;age = age;<br>		<span class="hljs-keyword">this</span>-&gt;name = name;<br>		<span class="hljs-keyword">this</span>-&gt;isStudent = isStudent;<br>	&#125;<br>&#125;;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">AgeSort</span><span class="hljs-comment">//仿函数</span><br>&#123;<br>	<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">const</span> Student &amp;lift, <span class="hljs-type">const</span> Student &amp;right)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">return</span> (lift.age &lt; right.age);<br>	&#125;<br>&#125;;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	set&lt;Student, AgeSort&gt; se;<br>	<span class="hljs-function">Student <span class="hljs-title">s1</span><span class="hljs-params">(<span class="hljs-string">&quot;Alian&quot;</span>, <span class="hljs-number">23</span>, <span class="hljs-literal">true</span>)</span></span>;<br>	<span class="hljs-function">Student <span class="hljs-title">s2</span><span class="hljs-params">(<span class="hljs-string">&quot;Blank&quot;</span>, <span class="hljs-number">20</span>, <span class="hljs-literal">true</span>)</span></span>;<br>	<span class="hljs-function">Student <span class="hljs-title">s3</span><span class="hljs-params">(<span class="hljs-string">&quot;Cary&quot;</span>, <span class="hljs-number">43</span>, <span class="hljs-literal">false</span>)</span></span>;<br>	<span class="hljs-function">Student <span class="hljs-title">s4</span><span class="hljs-params">(<span class="hljs-string">&quot;Davel&quot;</span>, <span class="hljs-number">23</span>, <span class="hljs-literal">true</span>)</span></span>;<br>	se.<span class="hljs-built_in">insert</span>(s1); se.<span class="hljs-built_in">insert</span>(s2);<br>	se.<span class="hljs-built_in">insert</span>(s3); se.<span class="hljs-built_in">insert</span>(s4);<br>	<span class="hljs-keyword">for</span> (set&lt;Student, AgeSort&gt;::iterator it = se.<span class="hljs-built_in">begin</span>(); it != se.<span class="hljs-built_in">end</span>(); it++)<br>		cout &lt;&lt; it-&gt;name &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; it-&gt;age &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; it-&gt;isStudent &lt;&lt; endl;<br>	<span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>输出结果：</strong></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Blank</span>   <span class="hljs-number">20</span>      <span class="hljs-number">1</span><br><span class="hljs-attribute">Alian</span>   <span class="hljs-number">23</span>      <span class="hljs-number">1</span><br><span class="hljs-attribute">Cary</span>    <span class="hljs-number">43</span>      <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<p>其中<code>AgeSort</code>就是仿函数，它的比较关键字是<code>Student.age</code>，所以<code>set</code>容器对象se会以age作为排序关键字，其实我们之前使用的<code>less&lt;&gt;</code>和<code>greater&lt;&gt;</code>也是反函数，只不过是C++预定义好的仿函数。</p>
+<p>细心的朋友可能会发现，我们插入的s4对象居然不再容器里！！！这是因为set容器中的元素具有唯一性，而set容器是通过关键字来识别元素的，所当碰到关键字相同的元素时，set只会存储一个元素。</p>
+<p>那么这种情况该怎么解决呢？答案是set容器没有办法解决这种情况，如果有出现这种情况，就不能使用set容器而改用multiset容器。</p>
+<p>在后面的算法模块我们详细介绍仿函数。</p>
+<h3 id="set常用函数"><a href="#set常用函数" class="headerlink" title="set常用函数"></a>set常用函数</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>find(T t)</td>
+<td>查找元素t，返回指向t元素的迭代器，查找失败返回指向set.end()的迭代器</td>
+</tr>
+<tr>
+<td>count(T t)</td>
+<td>返回容器中元素t的个数，值要么是0，要么是1</td>
+</tr>
+<tr>
+<td>lower_bound(T t)</td>
+<td>返回一个指向&gt;&#x3D;t元素的迭代器，如果t存在则指向t，如果t不存在则指向t后面的一个元素</td>
+</tr>
+<tr>
+<td>upper_bound(T t)</td>
+<td>返回一个指向&gt;t元素的迭代器，即t元素后面的一个元素</td>
+</tr>
+<tr>
+<td>equal_range(T t)</td>
+<td>返回一个包含两个set类型的迭代器的对组pair<a href="set::iterator,set::iterator">set::iterator,set::iterator</a>第一个迭代器指向t元素，第二个迭代器指向t后面的一个元素，如果t不存在，则两个迭代器都指向t后面的一个元素</td>
+</tr>
+</tbody></table>
+<h3 id="小知识"><a href="#小知识" class="headerlink" title="小知识"></a>小知识</h3><p>事实上容器中的<code>insert</code>函数是有返回值的，<code>insert</code>的返回值是一个对组(pair)类型的泛型<code>pair&lt;set&lt;T&gt;::iterator, bool&gt;</code>的对象，<code>pair</code>是一个只有两个字段的模板，我们可以直接定义<code>pair&lt;set&lt;T&gt;::iterator, bool&gt;</code>类型对象来接收<code>insert</code>函数的返回值，如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">pair&lt;set&lt;Student,AgeSort&gt;::iterator, <span class="hljs-type">bool</span>&gt; pait=se.<span class="hljs-built_in">insert</span>(s1);<br></code></pre></td></tr></table></figure>
+
+<p> 我们可以通过<code>pair.first</code>和<code>pair.second</code>来访问对组中的两个元素，通过<code>pair.first</code>来访问对组中的第一个元素<code>set&lt;Student,AgeSort&gt;::iterator</code>类型的迭代器，通过<code>pair.first-&gt;first</code>，和<code>pair.first-&gt;second</code>可以访问迭代器所指向的容器元素，我们通过<code>pair.second</code>来访问对组中的第二个元素，bool型的元素记录的是insert函数插入是否成功，如果插入成功则记录true，否则记录false。</p>
+<h2 id="11-multiset容器"><a href="#11-multiset容器" class="headerlink" title="11.multiset容器"></a>11.multiset容器</h2><ul>
+<li><code>multiset</code>容器可以说是set容器的升级版，multiset容器支持多个相同键值的元素的存储，所以要使用<code>multiset</code>需要包含头文件<code>#include&lt;set&gt;</code></li>
+</ul>
+<p>multiset的用法和set一致。</p>
+<h2 id="12-map容器"><a href="#12-map容器" class="headerlink" title="12.map容器"></a>12.map容器</h2><ul>
+<li><code>map</code>是标准的关联式容器，一个<code>map</code>元素是一个键值对(key,value),<code>map</code>提供基于键值的快速检索能力</li>
+<li><code>map</code>中<code> key</code>值是唯一的</li>
+<li><code>map</code>容器中的元素也是按一定顺序排列的，元素插入过程是按排序规则插入的，所以不能指定位置插入</li>
+<li><code>map</code>容器的具体实现也是采用红黑二叉树变体的平衡二叉树的数据结构，在插入和删除的操作上比<code>vector</code>更快</li>
+<li>与<code>set</code>不同的是<code>map</code>支持直接存取<code>key</code>值对应的<code>value</code>，也支持[]操作符</li>
+<li>要使用<code>map</code>容器就需要包含头文件<code>#include&lt;map&gt;</code></li>
+</ul>
+<h3 id="map的元素插入"><a href="#map的元素插入" class="headerlink" title="map的元素插入"></a>map的元素插入</h3><figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs zephir"><span class="hljs-keyword">int</span> main()<br>&#123;<br>	map&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">string</span>&gt; ma;<br>	<span class="hljs-comment">//方法一</span><br>	ma.insert(pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">string</span>&gt;(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;pair&quot;</span>));<br>	ma.insert(pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">string</span>&gt;(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;pair_02&quot;</span>));<br>	<span class="hljs-comment">//方法二</span><br>	ma.insert(make_pair(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;make_pair&quot;</span>));<br>	ma.insert(make_pair(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;make_pair_02&quot;</span>));<br>	<span class="hljs-comment">//方法三</span><br>	ma.insert(map&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">string</span>&gt;::value_type(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;value_type&quot;</span>));<br>	ma.insert(map&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">string</span>&gt;::value_type(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;value_type_02&quot;</span>));<br>	<span class="hljs-comment">//方法四</span><br>	ma[<span class="hljs-number">4</span>] = <span class="hljs-string">&quot;map&quot;</span>;<br>	ma[<span class="hljs-number">4</span>] = <span class="hljs-string">&quot;map_02&quot;</span>;<br>	<span class="hljs-keyword">for</span> (map&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">string</span>&gt;::iterator it = ma.begin(); it != ma.end(); it++)<br>		cout &lt;&lt; it-&gt;first &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; it-&gt;second &lt;&lt; endl;<br>	system(<span class="hljs-string">&quot;pause&quot;</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>输出结果：</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span>      pair<br><span class="hljs-symbol">2 </span>      make_pair<br><span class="hljs-symbol">3 </span>      value_type<br><span class="hljs-symbol">4 </span>      map_02<br></code></pre></td></tr></table></figure>
+
+<p>上面四种方法都可以向map容器里添加元素，但是四者中也有一些微小的区别，前面三种方法在插入相同键值时，只会保存第一存储的结果，之后插入相同键值的元素时都会插入失败，而第四种方法则是后面赋值的元素覆盖前面赋值的元素。</p>
+<p>map似乎没办法来指定是从大到小排序或是从小到大排序</p>
+<p>map除了元素的形式不同，在其他方面map的用法基本和set一致</p>
+<h2 id="13-multimap容器"><a href="#13-multimap容器" class="headerlink" title="13.multimap容器"></a>13.multimap容器</h2><p><code>multimap</code>容器和<code>multiset</code>容器一样，是<code>map</code>容器的升级版，支持一个键对应多个值，所以<code>multimap</code>的一个重要应用场景就是数据分组。</p>
+<h2 id="14-容器在使用过程必须要注意的地方"><a href="#14-容器在使用过程必须要注意的地方" class="headerlink" title="14.容器在使用过程必须要注意的地方"></a>14.容器在使用过程必须要注意的地方</h2><p> 因为在将元素添加到容器里时，C++执行的是容器的默认的拷贝构造函数，将元素拷贝到容器里，这个过程是一个浅拷贝，既然是浅拷贝就会面临浅拷贝的两次内存释放的问题，尤其是类元素，所以在添加一些具有指针字段的元素到容器里时，一定在类里定义一个深拷贝的拷贝构造函数和&#x3D;的重载函数。</p>
+<h2 id="15-各个容器的比较"><a href="#15-各个容器的比较" class="headerlink" title="15.各个容器的比较"></a>15.各个容器的比较</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>vector</th>
+<th>deque</th>
+<th>list</th>
+<th>set</th>
+<th>multiset</th>
+<th>map</th>
+<th>multimap</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内存结构</td>
+<td>单端数组</td>
+<td>双端数组</td>
+<td>双向链表</td>
+<td>二叉树</td>
+<td>二叉树</td>
+<td>二叉树</td>
+<td>二叉树</td>
+</tr>
+<tr>
+<td>随机存取</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>对key而言是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>元素检索</td>
+<td>慢</td>
+<td>慢</td>
+<td>非常慢</td>
+<td>快</td>
+<td>快</td>
+<td>对key而言快</td>
+<td>对key而言快</td>
+</tr>
+<tr>
+<td>快速安插移除</td>
+<td>尾端</td>
+<td>头尾两端</td>
+<td>任何位置</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h1 id="三、算法"><a href="#三、算法" class="headerlink" title="三、算法"></a>三、算法</h1><h2 id="1-算法"><a href="#1-算法" class="headerlink" title="1.算法"></a>1.算法</h2><p> 函数库对数据类型的选择对其可重用性起着至关重要的作用。举例来说，一个求方根的函数，在使用浮点数作为其参数类型的情况下的可重用性肯定比使用整型作为它的参数类性要高。而C++通过模板的机制允许推迟对某些类型的选择，直到真正想使用模板或者说对模板进行特化的时候，STL就利用了这一点提供了相当多的有用算法。它是在一个有效的框架中完成这些算法的–可以将所有的类型划分为少数的几类，然后就可以在模版的参数中使用一种类型替换掉同一种类中的其他类型。</p>
+<p>STL提供了大约100个实现算法的模版函数，比如算法for_ each 将为指定序列中的每一个元素调用指定的函数，stable_ _sort 以你所指定的规则对序列进行稳定性排序等等，这样一-来,只要熟悉了STL之后，许多代码可以被大大的化简，只需要通过调用一-两个算法模板，就可以完成所需要的功能并大大地提升效率。</p>
+<p>算法部分主要由头文件<code>&lt;algorithm&gt;</code>, <code>&lt;numeric&gt;</code>和<code>&lt;functional&gt;</code>组成。<code>&lt;algorithm&gt;</code>是所 有STL头文件中最大的一个(尽管它很好理解)，它是由一大堆模版函数组成的，可以认为每个函数在很大程度上都是独立的，其中常用到的功能范围涉及到比较、交换、查找、遍历操作、复制、修改、移除、反转、排序、合并等等。<code>&lt;numeric&gt;</code>体积很小，只包括几个在序列上面进行简单数学运算的模板函数，包括加法和乘法在序列上的一些操作。<code>&lt;functional&gt;</code>中则定义了一些模板类，用以声明函数对象。</p>
+<h2 id="2-算法的分类"><a href="#2-算法的分类" class="headerlink" title="2.算法的分类"></a>2.算法的分类</h2><h3 id="非可变序列算法"><a href="#非可变序列算法" class="headerlink" title="非可变序列算法"></a>非可变序列算法</h3><p>计数算法：count,count_if等</p>
+<p>搜索算法：search,find,find_if,find_list_of等</p>
+<p>比较算法：equal,mismatch,lexicographical_compare等</p>
+<h3 id="可变排序算法"><a href="#可变排序算法" class="headerlink" title="可变排序算法"></a>可变排序算法</h3><p>删除算法：remove,remove_if,remove_copy等</p>
+<p>修改算法：for_each,transform等</p>
+<p>排序算法：sort,stable_sort,partial_sort等</p>
+<h2 id="3-仿函数"><a href="#3-仿函数" class="headerlink" title="3.仿函数"></a>3.仿函数</h2><h2 id="4-一些常用的算法模板"><a href="#4-一些常用的算法模板" class="headerlink" title="4.一些常用的算法模板"></a>4.一些常用的算法模板</h2><h3 id="find算法"><a href="#find算法" class="headerlink" title="find算法"></a>find算法</h3><p><strong>原型:</strong><code>iterator find(iterator begin,iterator end,T t)</code></p>
+<p>在容器的begin迭代器所指向的位置开始到end所指向的位置结束，查找元素t，如果找到了，则返回指向t的迭代器。</p>
+<h1 id="四、迭代器"><a href="#四、迭代器" class="headerlink" title="四、迭代器"></a>四、迭代器</h1><h2 id="1-迭代器"><a href="#1-迭代器" class="headerlink" title="1.迭代器"></a>1.迭代器</h2><p> 迭代器从作用上来说是最基本的部分，可是理解起来比前两者都要费力一些。软件设计有一个基本原则，所有的问题都可以通过引进一个间接层来简化，这种简化在 STL中就是用迭代器来完成的。概括来说，迭代器在STL中用来将算法和容器联系起来，起着一种黏和剂的作用。几乎STL提供的所有算法都是通过送代器存取元素序列进行工作的，每一个容器都定义了其本身所专有的选代器，用以存取容器中的元素。</p>
+<p> 迭代器部分主要由头文件<code>&lt;utility&gt;</code>,<code>&lt;iterator&gt;</code>和<code>&lt;memory&gt;</code>组成。<code>&lt;utility&gt;</code>是-一个很小的头文件，它包括了贯穿使用在STL中的几个模板的声明，<code>&lt;iterator&gt;</code>中提供 了迭代器使用的许多方法，而对于<code>&lt;memory&gt;</code>的描述则十分的困难，它以不同寻常的方式为容器中的元素分配存储空间，同时也为某些算法执行期间产生的临时对象提供机制,<code>&lt;memory&gt;</code>中的主要部分是模板类<code>alocator</code>,它负责产生所有容器中的默认分配器。</p>
+<h2 id="2-迭代器的基本原理"><a href="#2-迭代器的基本原理" class="headerlink" title="2.迭代器的基本原理"></a>2.迭代器的基本原理</h2><ul>
+<li>迭代器是一个“可遍历STL容器内全部或部分元素”的对象</li>
+<li>迭代器指出容器中的一个特定位置</li>
+<li>迭代器就如同一个指针</li>
+<li>迭代器提供对一个容器中的对象的访问方法，并且可以定义了容器中对象的范围</li>
+</ul>
+<h2 id="3-迭代器的分类"><a href="#3-迭代器的分类" class="headerlink" title="3.迭代器的分类"></a>3.迭代器的分类</h2><p><strong>输入迭代器</strong>:也有叫法称之为“只读迭代器”，它从容器中读取元素，只能一次读入一个元素向前移动，只支持一遍算法，同一个输入迭代器不能两遍遍历一个序列。</p>
+<p><strong>输出迭代器</strong>:也有叫法称之为“只写迭代器”，它往容器中写入元素，只能一次写入一个元素向前移动，只支持一遍算法，同一个输出迭代器不能两遍遍历一个序列。</p>
+<p><strong>正向迭代器</strong>:组合输入送代器和输出迭代器的功能,还可以多次解析一个迭代器指定的位置，可以对一个值进行多次读&#x2F;写。</p>
+<p><strong>双向达代器</strong>:组合正向迭代器的功能，还可以通过-操作符向后移动位置。</p>
+<p><strong>随机访问送代器</strong>:组合双向送代器的功能，还可以向前向后跳过任意个位置，可以直接访问容器中任何位置的元素。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CPlus/" class="print-no-link">#CPlus</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【C++】C++STL标准模板库</div>
+      <div>http://example.com/2019/10/06/【C++】C++STL标准模板库/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 6, 2019</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/10/08/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E4%B8%80%E4%BA%9B%E7%89%9B%E9%80%BC%E8%BD%B0%E8%BD%B0%E7%9A%84%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95/" title="【算法】一些牛逼轰轰的算法记录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【算法】一些牛逼轰轰的算法记录</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/10/03/%E3%80%90C%E3%80%91C%E7%9A%84typedef%E7%9A%84%E5%A6%99%E7%94%A8/" title="【C】C的typedef的妙用">
+                        <span class="hidden-mobile">【C】C的typedef的妙用</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,775 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这里主要记录一下自己在实现数字人得过程中涉及导XSens惯性动捕，视频动捕，LiveLinkFace表捕，GRoom物理头发等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【UE5】数字人基础">
+<meta property="og:url" content="http://example.com/2024/04/28/%E3%80%90UE5%E3%80%91%E6%95%B0%E5%AD%97%E4%BA%BA%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这里主要记录一下自己在实现数字人得过程中涉及导XSens惯性动捕，视频动捕，LiveLinkFace表捕，GRoom物理头发等。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/LiveLinkFace.gif">
+<meta property="article:published_time" content="2024-04-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-23T14:38:23.297Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="UE5">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/LiveLinkFace.gif">
+  
+  
+  
+  <title>【UE5】数字人基础 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Goulandis</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/Page.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【UE5】数字人基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-28 00:00" pubdate>
+          2024年04月28日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          39 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【UE5】数字人基础</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <meta name="referrer" content="no-referrer" />
+
+
+
+<p>这里主要记录一下自己在实现数字人得过程中涉及导XSens惯性动捕，视频动捕，LiveLinkFace表捕，GRoom物理头发等。</p>
+<span id="more"></span>
+
+<h1 id="一、导入骨骼网格体"><a href="#一、导入骨骼网格体" class="headerlink" title="一、导入骨骼网格体"></a>一、导入骨骼网格体</h1><p>骨骼网格体即模型要在模型雕刻阶段就要雕刻好表捕所需的表情体(blendshape)，后面表捕的效果直接由雕刻的表情体决定。</p>
+<p>导入fbx时，需要确保勾选了<code>导入变形目标</code>选项，一般UE默认是未勾选的，否则无法导入表情体。</p>
+<p>表情体在UE中称作变形目标，直接存储在骨骼网格体中，打开骨骼网格体编辑视图，点击<code>窗口/变形目标预览器</code>可以打开变形目标的预览视图，在视图中可以修改变形目标的权重值来查看变形目标的变形效果和多个变形目标的混合效果。</p>
+<p>变形目标在UE中不可再次修改，需要修改变形目标，只能到3D建模阶段中修改后再次导入。</p>
+<p>每一个变形目标都是一个动画曲线，导入后UE5会自动生成对应的动画曲线，我们可以在添加动画曲线时看到对应变形目标名称的曲线。对于动画曲线的定义，可以查看我的<a target="_blank" rel="noopener" href="https://goulandis.github.io/2023/01/31/[UE5]%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F/#1-%E5%8A%A8%E7%94%BB%E6%9B%B2%E7%BA%BF">这篇博文</a>。</p>
+<h1 id="二、表情捕捉"><a href="#二、表情捕捉" class="headerlink" title="二、表情捕捉"></a>二、表情捕捉</h1><h2 id="1-基于LiveLinkFace的表捕流程"><a href="#1-基于LiveLinkFace的表捕流程" class="headerlink" title="1.基于LiveLinkFace的表捕流程"></a>1.基于LiveLinkFace的表捕流程</h2><p>在开始开发表捕之前，我们应该首先要了解表捕的流程，了解全貌才能有条不紊。</p>
+<p>我这里使用的是苹果的LiveLinkFace来实现表情捕捉的，所以流程也是基于LiveLinkFace的流程，其他的实现方案可能会有所不同。</p>
+<p>首先我们要确保启动了UE5的LiveLink插件，一般UE5会默认启用LiveLink插件，当UE5启用了LiveLink插件后，在编辑器的<code>窗口/虚拟制片/LiveLink</code>可以打开LiveLink源管理视图。对于LiveLink源管理视图的具体参数即使用详情见<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/5.0/zh-CN/live-link-in-unreal-engine/">官方文档</a>。</p>
+<p>首先LiveLinkFace会使用ARKit标准识别人脸的52个表情，并计算出变化值存储到对应的52个参数中，然后由LiveLink协议将52个参数的参数名及参数值实时同步到UE编辑器中，然后在动画蓝图中使用LiveLinkPose节点接收指定源传送进来的数据，根据接收到数据修改对应的Pose权重，再通过Pose驱动对应的表情体(动画曲线)，然后通过PoseAssest将各个修改后的Pose融合成一个整体，于是一个完整的表情就被驱动起来了。</p>
+<p>苹果ARKit BlandShape：<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/arkit/arfaceanchor/blendshapelocation">ARFaceAnchor.BlendShapeLocation | Apple Developer Documentation</a>。</p>
+<h2 id="2-LiveLinkFace连接UE"><a href="#2-LiveLinkFace连接UE" class="headerlink" title="2.LiveLinkFace连接UE"></a>2.LiveLinkFace连接UE</h2><p>首先我们需要将LiveLinkFace连接到UE以便数据通信。</p>
+<p>在苹果应用商店下载LiveLinkFace，进入App后进入<code>设置/LiveLink</code>界面，点击添加，为LiveLinkFace添加数据发送地址，地址就是UE编辑器运行的电脑的IP地址，端口可以使用默认的1111端口。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_10-33-02.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_10-33-02.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>然后需要使苹果手机与UE编辑器所在电脑处于同一局域网中，因为目前LiveLink只支持同一局域网内的数据同步。</p>
+<p>LiveLinkFace在UE中没有单独的管理源，所以LiveLinkFace的数据源会直接通过UE的LiveLink消息总线进行传输，我们可以在LiveLink管理视图的<code>源/消息总线源</code>下看到接收到数据源，点击数据源后，就可以在<code>主题命名</code>下看到对应的数据源了，如果LiveLinkFace使用的不是默认端口，则我们需要在对应的源类型的Settings&#x2F;Advanced&#x2F;Port Number&#96;设置对应的端口。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_10-41-03.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_10-41-03.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>接收到数据源之后，管理视图看起来就是这样子的：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_10-42-08.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_10-42-08.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<ul>
+<li>Subject Name：数据同步的主体；</li>
+<li>Role：应用的LiveLink协议规则，LiveLink支持多个协议规则，包括用于动画或骨骼数据的LiveLinkAnimationRole、基础规则LiveLinkBasicRole、用于相机同步的LiveLinkCameraRole和LiveLinkTransformRole、专门用于相机镜头的LiveLinkLensRole、用于光源数据的LiveLinkLightRole等；</li>
+<li>带颜色的小圆点：小圆点有黄色和绿色两种状态，黄色状态表示数据主体有连接上，但是在规定时间段内没有接收到数据，绿色表示数据接收正常。</li>
+</ul>
+<p>需要注意，根据LiveLink的协议，LiveLink的数据传输只会传输给数据源端搜索到的第一个同一地址同一端口的接收端，及如果在一台主机上启动了两个UE使用同一个端口接收数据，只会有一个UE能接收到数据。</p>
+<h2 id="3-编辑动画曲线"><a href="#3-编辑动画曲线" class="headerlink" title="3.编辑动画曲线"></a>3.编辑动画曲线</h2><p>由于模型雕刻流程中可能为了更灵活的控制雕刻出来的表情体可能会多于ARKit的52个表情，或者可能表情体命名规范不符合ARKit标准，此时我们就需要UE中再做一层映射，其中编辑动画曲线就是其中一步。</p>
+<p>我们可以双击骨骼资产，再骨骼资产编辑视图中点击<code>创建资产/创建动画/当前姿势</code>，使用当前Pose创建一段空的动画序列，创建的空的动画序列只是一个Pose所以只有一帧。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-09-30.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-09-30.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>我们需要将序列扩充到52帧，一帧对应一个Pose，一个Pose对应一个ARKit表情，双击打开动画序列，在曲线编辑视图右键，选择<code>在开始处附加</code>，然后输入51，这样我们就得到了一个52帧的动画序列。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-16-35.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-16-35.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>然后单击曲线编辑视图的曲线下拉三角，在菜单中选择<code>添加曲线</code>，然后我们就能看到表情体名称对应的曲线了，把我们需要用的曲线全部添加进来。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-20-05.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-20-05.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>然后在每一帧使用需要的曲线K出我们需要的表情，以便后一步我们生成Pose资产：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-22-47.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-22-47.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>当然这一步其实也是可以直接由动画师一步到位，及动画直接提供一个52帧，每帧对应一个表亲Pose的动画序列，UE导入后可以直接使用这个动画序列生成Pose资产。</p>
+<h2 id="4-生成Pose资产"><a href="#4-生成Pose资产" class="headerlink" title="4.生成Pose资产"></a>4.生成Pose资产</h2><p>通过上一步，我们就拥有了一个有52个表情帧的动画序列，我们可以右键动画序列，在<code>创建/创建姿势资产</code>中，使用这个动画序列创建相应的姿势资产。</p>
+<p>在创建姿势资产视图中，提供一个Pose Name列表给我们指定每一个Pose的名称，一行为一个Pose名称，行序号与帧序号对应。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-31-19.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-31-19.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>需要注意，第一行必须师Default名称，或者任何无意义的名称，用于对应动画序列的第0帧。</p>
+<p>输入的Pose名称需要符合ARKit的标准命名，否者将无法正确映射。</p>
+<p>这里提供一份ARKit的标准表情Pose命名：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">Default<br>EyeBlinkLeft<br>EyeLookDownLeft<br>EyeLookInLeft<br>EyeLookOutLeft<br>EyeLookUpLeft<br>EyeSquintLeft<br>EyeWideLeft<br>EyeBlinkRight<br>EyeSquintRight<br>EyeLookDownRight<br>EyeLookInRight<br>EyeLookOutRight<br>EyeLookUpRight<br>EyeWideRight<br><span class="hljs-keyword">JawForward</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">JawLeft</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">JawRight</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">JawOpen</span><br><span class="hljs-keyword"></span>MouthFunnel<br>MouthPucker<br>MouthLeft<br>MouthRight<br>MouthSmileLeft<br>MouthSmileRight<br>MouthFrownLeft<br>MouthFrownRight<br>MouthDimpleLeft<br>MouthDimpleRight<br>MouthStretchLeft<br>MouthStretchRight<br>MouthRollLower<br>MouthRollUpper<br>MouthShrugLower<br>MouthShrugUpper<br>MouthPressLeft<br>MouthPressRight<br>MouthLowerDownLeft<br>MouthLowerDownRight<br>MouthUpperUpLeft<br>MouthUpperUpRight<br><span class="hljs-keyword">BrowDownLeft</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">BrowDownRight</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">BrowInnerUp</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">BrowOuterUpLeft</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">BrowOuterUpRight</span><br><span class="hljs-keyword"></span>CheekPuff<br>CheekSquintLeft<br>CheekSquintRight<br>NoseSneerLeft<br>NoseSneerRight<br>TongueOut<br></code></pre></td></tr></table></figure>
+
+<p>然后我们需要设置Pose资产的<code>Asset Details/Additive/Additive/Base Pose</code>为Default姿势，基础姿势设置的不对会导致表情映射错位，致使表情驱动异常。</p>
+<p>Pose资产配置好之后，我们就可以到动画蓝图中应用了。</p>
+<p>备注：</p>
+<p>其实第三第四步再UE中是可以省略的，只需要动画师提供一个包含了52个表情帧的动画序列，模型师在雕刻表情体时按照ARKit的命名标准来命名表情体，在导入时UE就会自动生成符合ARKit表情命名标准的曲线，这样在UE中也就不需要再做映射了。当然方便的代价就是丧失一定的灵活性，需要根据具体情况取舍。</p>
+<h2 id="5-驱动表情体"><a href="#5-驱动表情体" class="headerlink" title="5.驱动表情体"></a>5.驱动表情体</h2><p>在动画蓝图中使用LiveLinkPose接收LiveLinkFace的数据源，通过姿势资产映射数据到相应的表情体上，于是表情就被驱动了。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-45-37.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_11-45-37.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>当LiveLinkFace与UE连接上之后，可以直接在LiveLinkPose节点的LiveLinkSubjectName直接指定接收的数据源，也可以通过LiveLinkSubjectName变量来传入。</p>
+<p>然后将动画蓝图应用到角色上，就可以测试效果了：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/LiveLinkFace.gif"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/LiveLinkFace.gif" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h2 id="6-表情扩展"><a href="#6-表情扩展" class="headerlink" title="6.表情扩展"></a>6.表情扩展</h2><p>ARKit的52个标准表情都是一些人体的基础表情，有的时候因为一些需求，可能需要使用到一些较为夸张的表情，这些表情是真人做不出来的，此时我们就需要对表情进行扩展。</p>
+<p>扩展表情的方式有两种，一种是直接在雕刻表情体时就把表情调得夸张一些，然后直接驱动；另一种是将一个夸张的表情单独调一个表情体，然后在动画蓝图中使用程序驱动，通过条件触发。</p>
+<p>但是需要注意的是，过于夸张的表情在做融合的时候可能会产生比较诡异的效果，这个就需要具体情况具体调整了。</p>
+<p>第一种方式在UE中不需要再做调整，这里就略过了，这里主要记录第二种方式。</p>
+<p>首先我们需要导入一个带有夸张表情体的骨骼网格体，但由于ARKit的52个标准表情中没有与我们夸张表情对应的参数，所以我们需要自己涉及一套算法来分割组合52个参数，使用分割组合的参数来驱动夸张表情。如：我们有一个大笑的夸张表情，为了不影响原来的笑的表情，我们可以将MouthSmileLeft、MouthSmileRight两个参数分割成小于0.4的部分和大于0.4的部分，小于0.4的部分我们不做处理，大于0.4的部分用于驱动夸张表情。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_14-28-09.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_14-28-09.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>首先我们需要了解LiveLink协议传输数据的数据结构，根据<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/5.0/zh-CN/live-link-in-unreal-engine/">官方文档</a>的说明：</p>
+<blockquote>
+<p>主体由以下数据组成：</p>
+<ol>
+<li>名称。</li>
+<li>不会变更的静态数据（例如动画角色骨架）。</li>
+<li>一个或多个”帧”数据（例如动画角色的骨骼变换）。</li>
+</ol>
+</blockquote>
+<ul>
+<li>名称：用于使用LiveLinkSubjectName来获取对应的数据；</li>
+<li>静态数据：数据的键值，及参数名，不同的协议规则，数据类型不同；</li>
+<li>帧数据：与静态数据数量对应的参数值，不同的协议规则，数据类型不同；</li>
+</ul>
+<p>LiveLinkFace使用的是LiveLinkBasicRole协议规则，我们可以使用EvaluateLiveLinkFrame节点来获取指定名称的数据源传输过来的静态数据和帧数据：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_14-42-15.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_14-42-15.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>在LiveLinkFace传输过来的数据中，StaticData就是52个表情的参数名，FrameData则是参数名对应的参数值和元数据，参数值取值范围为0-1；</p>
+<p>如上面的逻辑，我拆分了MouthSmileLeft和MouthSmileRight用于驱动夸张表情，同时组合了JawOpen参数用于控制表情的触发，当三个参数满足触发条件之后，则取MouthSmileLeft和MouthSmileRight中最大值，将其0.6-1的取值映射到范围映射到0-0.5上，然后将值存储到对应的曲线上，但表情退出时使用插值进行平滑退出。</p>
+<p>当我们将所有的夸张表情曲线值更新关闭之后，就可以在AnimGraph视图中使用ModifyCurve节点将曲线值更新到实际的曲线上了，更新上去之后，表情就被驱动了。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_15-00-55.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_15-00-55.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>这种方式有个弊端，就是对平滑处理的要求比较高，否则很容易出现表情的跳跃，导致表情过渡不自然。</p>
+<p>还有一种比较好的处理方式，就是将一个表情拆分成标准部分和夸张部分，当要做夸张表情的时候将夸张表情叠加到标准表情之上，这样就算平滑处理的不是很好也不会出现表情的跳跃，但是这种方式又对表情雕刻有很高的要求，建模师要能够有这个能力把一个表情拆分成标准部分和夸张部分。</p>
+<h1 id="三、动作捕捉"><a href="#三、动作捕捉" class="headerlink" title="三、动作捕捉"></a>三、动作捕捉</h1><h2 id="1-基于Xsens惯性动捕的动作捕捉"><a href="#1-基于Xsens惯性动捕的动作捕捉" class="headerlink" title="1.基于Xsens惯性动捕的动作捕捉"></a>1.基于Xsens惯性动捕的动作捕捉</h2><p>和表捕一样我们也需要先了解动捕的整个流程。</p>
+<p>Xsens的动捕服在收集完动捕数据之后通过连在主机上的专门的接收天线传输到Xsens的动捕软件里，动捕软件再将数据应用到标准骨架上，然后动捕软件再通过LiveLink协议传输到UE编辑器上，这也要求运行动捕软件的主机和运行UE的主机在同一局域网内或是在同一主机上。XSens传输过来的数据再通过骨骼重定向，就可以直接映射到我们数字人的骨骼上了，然后就可以像动画序列驱动骨骼一样使用动捕数据驱动骨骼了。</p>
+<h2 id="2-Xsens动捕软件"><a href="#2-Xsens动捕软件" class="headerlink" title="2.Xsens动捕软件"></a>2.Xsens动捕软件</h2><p>Xsens动捕服连接Xsens动捕软件和Xsens动捕软件连接UE，我所用的环境是已经配置好的，也没有自己亲手配置过，就不臆想误导别人了，可以参参考这两篇文章：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/315093670">Xsens动捕使用说明 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/634355689">Xsens惯性动捕连接虚幻UE5教程 - 知乎 (zhihu.com)</a></p>
+<h2 id="3-安装MVN-Live-Link插件"><a href="#3-安装MVN-Live-Link插件" class="headerlink" title="3.安装MVN Live Link插件"></a>3.安装MVN Live Link插件</h2><p>Xsens的动捕数据有专门的接收总线，要能在UE中接Xsens动捕数据，需要MVN Live Link插件的支持，目前我发现Epic商城的MVN Live Link插件已经暂停提供了，这里提供了一份UE4.27、5.0和5.1版本的插件百度云地址：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1axao8Uf-0BSyqYzxqmuEug">https://pan.baidu.com/s/1axao8Uf-0BSyqYzxqmuEug</a> ?password&#x3D;vrmu。</p>
+<p>解压后将插件拷贝到引擎的<code>Engine\Plugins\Marketplace</code>目录下。</p>
+<p>弄好之后启动UE到插件管理视图启动LiveLinkMvnPlugin插件。</p>
+<p>需要注意的是Xsens动捕软件内置了MVN的支持，也需要设置一下。</p>
+<p>启动插件后，我们就可以在LiveLink管理视图的源处看到专门的Xsenx Live Source接收专线。通过设置好端口，就可以接收到XSens传输过来的数据了。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_16-16-37.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_16-16-37.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h2 id="4-骨骼重映射"><a href="#4-骨骼重映射" class="headerlink" title="4.骨骼重映射"></a>4.骨骼重映射</h2><p>MVN插件已经为我们设定好了映射资源，在启动了MVN插件之后，我们右键骨骼资产，可以在右键菜单中看到Xsens选项，选择Create Remap Asset可以直接创建对应骨骼的重映射资源。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_16-23-08.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_16-23-08.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>双击打开创建的资源，在细节面板中：</p>
+<ul>
+<li><code>Bones Names/Naming Convention</code>选项我们可以选择<code>Unreal/Metahuman</code>，这是MVN插件为UE的数字人标准骨骼映射好的映射资源，如果自己的数字人主要骨骼层级符合UE数字人标准，就可以直接使用，如果有差异，则可以在Live Link Mvn Remap处手动设置映射关系；</li>
+<li><code>Reference Pose/TPose Animation</code> 选项设置映射资源需要使用T-Pos资产，这里要注意，MVN插件必须使用T-Pos，如果骨骼资产是A-Pos，我们可以在骨骼资产编辑视图编辑骨骼到T-Pos，然后在<code>创建资产/创建动画/当前姿势</code>来创建一个T-Pos动画序列，当然也可以直接交由动画师提供一个T-Pos动画；</li>
+<li><code>Reference Pose/Is Forward Y</code>：在应用动捕数据后，出现方向不正确是勾选；</li>
+<li><code>Live Link Mvn Remap/Remapping Assets</code>：设置骨骼重映射；</li>
+<li><code>Live Link Mvn Remap/Skeleton</code>：设置映射资源所使用的骨骼资产，创建资产是会默认设置好。</li>
+</ul>
+<h2 id="5-驱动骨骼"><a href="#5-驱动骨骼" class="headerlink" title="5.驱动骨骼"></a>5.驱动骨骼</h2><p>然后直接使用LiveLinkPose节点，设置LiveLinkSubjectName到对应的数据源，设置LiveLinkPose节点的<code>Details/Retarget/Retarget Asset</code>为上一步创建的映射资产，然后就可以通过Xsens动捕数据驱动数字人骨骼运动了。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_17-53-24.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-11_17-53-24.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h1 id="四、物理发型"><a href="#四、物理发型" class="headerlink" title="四、物理发型"></a>四、物理发型</h1><h2 id="1-启动GRoom插件"><a href="#1-启动GRoom插件" class="headerlink" title="1.启动GRoom插件"></a>1.启动GRoom插件</h2><p>UE的物理发型功能由GRoom插件提供，一般UE引擎默认是未启用GRoom插件的，所以我们需要自己去启用。</p>
+<p>同时也要启动Alembic GRoom Importer插件来支持GRoom缓存的导入。</p>
+<p>为了使UE支持毛发渲染，我们还需要启用<code>Project Settings/Engine/Rendring/Support Compute Skin Cache</code>选项。</p>
+<h2 id="2-创建GRoom资产"><a href="#2-创建GRoom资产" class="headerlink" title="2.创建GRoom资产"></a>2.创建GRoom资产</h2><p>GRoom资产是在模型建模阶段制作好的头发资源，以abc缓存文件的格式导入到UE，GRoom插件读取到之后，会自动生成GRoom资产。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-12_11-20-06.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-12_11-20-06.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>上面第一个发丝图标的就是GRoom资产。</p>
+<p>进入GRoom编辑视图，在LOD选项卡中可以配置GRoom的LOD信息，在Strands选项卡中可以配置发丝的粗细等，在Physics选项卡中可以启用GRoom的物理模拟。</p>
+<h2 id="3-创建绑定"><a href="#3-创建绑定" class="headerlink" title="3.创建绑定"></a>3.创建绑定</h2><p>GRoomBinding资产可以让GRoom适配到骨骼网格体上，并且使GRoom跟随骨骼网格体运动。</p>
+<p>右键GRoom资产，<code>Create Binding</code>可以使用指定的GRoom资产创建GRoomBinding资产，创建时需要指定资产绑定的骨骼网格体。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-12_14-45-43.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/Snipaste_2023-10-12_14-45-43.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>在第二小节中右侧的资产图标就是GRoomBinding的图标。</p>
+<h2 id="4-应用GRoom资产"><a href="#4-应用GRoom资产" class="headerlink" title="4.应用GRoom资产"></a>4.应用GRoom资产</h2><p>创建角色蓝图，为角色添加Skeletal Mesh组件，并赋予骨骼网格体，然后再为角色添加GRoom组件，依附于Skeletal Mesh组件之下，在GRoom组件的<code>GRoom/GRoom Asset</code>设置GRoom资产，在<code>GRoom/Binding Asset</code>设置GRoomBinding资产，在<code>Materials</code>设置头发的材质。这样一个物理发型就应用到角色身上了。为了使骨骼网格体能应用绑定，还需要将骨骼网格体的<code>AssetData/LOD0/LOD Info/Skin Cache Usage</code>选项设置为Enabled。</p>
+<p>有时我们为发现设置了绑定资产之后，头发会消失，此时我们删掉原来的绑定资产，然后重新创建绑定资产，如果还是没有效果，则需要删掉GRoom资产，重新导入。</p>
+<h3 id="当相机离头发很近时头发消失"><a href="#当相机离头发很近时头发消失" class="headerlink" title="当相机离头发很近时头发消失"></a>当相机离头发很近时头发消失</h3><p>最近做虚拟人，遇到一个问题，即当相机靠进到虚拟人一定距离时，人物的头发直接不渲染了。</p>
+<p>如图：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/GRoom.gif"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/GRoom.gif" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>这可能是UE为了性能需求，为GRoom设置了渲染边界，超出阈值时就不渲染了，我们需要将所有的GRoom和GRoom所依附的骨骼网格体的Readering&#x2F;Bounds Scale，UE4是Readering&#x2F;Bounds Scale，UE5则是Readering&#x2F;Advanced&#x2F;Bounds Scale，设置到合适的值，设置这个值会影响到物体聚焦的距离，设置得太大，聚焦时相机会跑得非常远。</p>
+<p>这里我设置成了5，然后再看一下效果：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/GRoom2.gif"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/GRoom2.gif" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h3 id="GRoom在设置Binding-Asset后不显示"><a href="#GRoom在设置Binding-Asset后不显示" class="headerlink" title="GRoom在设置Binding Asset后不显示"></a>GRoom在设置Binding Asset后不显示</h3><p>有时在使用GRoom时发现配置了绑定资产后GRoom会消失，而去掉绑定资产后GRoom又会显示，导致这个问题的原因可能是骨骼网格体使用GRoom的必要配置项没启用。</p>
+<p>首先确保Project Settings&#x2F;Engine&#x2F;Tending&#x2F;Optimizations&#x2F;Support Compute Skin Cache设置是勾选上的；</p>
+<p>然后打开使用的骨骼网格体编辑视图，将Asset Details&#x2F;LOD 0&#x2F;LOD Info&#x2F;Skin Cache Usage设置为Enabled。</p>
+<p>然后绑定就生效了。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/UE5/" class="print-no-link">#UE5</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【UE5】数字人基础</div>
+      <div>http://example.com/2024/04/28/【UE5】数字人基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 28, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/03/%E3%80%90UE5%E3%80%91UE5%E4%B8%8EPython%20Socket%E9%80%9A%E4%BF%A1%E4%B8%AD%E6%96%87%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E4%B8%8D%E5%85%A8/" title="【UE5】UE5与Python Socket通信中文数据接收不全">
+                        <span class="hidden-mobile">【UE5】UE5与Python Socket通信中文数据接收不全</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

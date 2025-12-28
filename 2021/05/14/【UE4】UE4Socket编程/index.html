@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="article">
+<meta property="og:title" content="【UE4】UE4Socket编程">
+<meta property="og:url" content="http://example.com/2021/05/14/%E3%80%90UE4%E3%80%91UE4Socket%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171635.png">
+<meta property="article:published_time" content="2021-05-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-12T14:10:49.170Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="UE4">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171635.png">
+  
+  
+  
+  <title>【UE4】UE4Socket编程 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Goulandis</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/Page.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【UE4】UE4Socket编程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-05-14 00:00" pubdate>
+          2021年05月14日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【UE4】UE4Socket编程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <meta name="referrer" content="no-referrer" />
+
+<span id="more"></span>
+
+<h1 id="一、基于C-的服务器"><a href="#一、基于C-的服务器" class="headerlink" title="一、基于C++的服务器"></a>一、基于C++的服务器</h1><p>当然服务器也是可以使用UE4写的，不过对于一般的不需要UI的服务器来说，直接使用C++控制台程序编写要方便得多。</p>
+<h2 id="1-所需头文件和静态库"><a href="#1-所需头文件和静态库" class="headerlink" title="1.所需头文件和静态库"></a>1.所需头文件和静态库</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;winsock.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment(lib <span class="hljs-string">&quot;ws2_32.lib&quot;</span>)</span><br></code></pre></td></tr></table></figure>
+
+<p> 需要注意的是，winsock.h是Windows环境使用的头文件，对于其他的环境需要使用其他的头文件，如在Linux下使用的是socket.h。</p>
+<p>有的时候也是用winsock2.h，winsockt2.h是winsockt.h的升级版，一个文件中不可同时存在winsockt.h和winsockt2.h，因为winsockt2.h中有重定义winsockt.h中的内容。</p>
+<h2 id="2-创建套接字"><a href="#2-创建套接字" class="headerlink" title="2.创建套接字"></a>2.创建套接字</h2><p><strong>Server.h</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;winsock.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment(lib, <span class="hljs-string">&quot;ws2_32.lib&quot;</span>)</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Server</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>	WSADATA wsd;<span class="hljs-comment">//存放套接字的属性，如：版本信息等</span><br>	SOCKET serverSocket;<br>	SOCKET clientSocket;<br>	SOCKADDR_IN serverAddr;<span class="hljs-comment">//用于设置套接字使用的地址类型，端口和</span><br><br>	<span class="hljs-built_in">Server</span>(<span class="hljs-type">int</span> port);<br>	~<span class="hljs-built_in">Server</span>();<br><br>	<span class="hljs-function">SOCKET <span class="hljs-title">ClientListen</span><span class="hljs-params">()</span></span>;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Receive</span><span class="hljs-params">(SOCKET clientSocket)</span></span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>创建套接字</strong></p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-built_in">Server</span>::<span class="hljs-built_in">Server</span>(<span class="hljs-type">int</span> port)<br>&#123;<br>	<span class="hljs-comment">//打开2.2版本的套接字，注册套接字</span><br>	<span class="hljs-keyword">if</span> (<span class="hljs-built_in">WSAStartup</span>(<span class="hljs-built_in">MAKEWORD</span>(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>), &amp;wsd) != <span class="hljs-number">0</span>)<br>	&#123;<br>		cout &lt;&lt; <span class="hljs-string">&quot;初始化套接字动态库错误&quot;</span> &lt;&lt; endl;<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>	<span class="hljs-comment">//创建套接字，AF_INET--使用Inter使用，SOCK_STREAM--使用流式传输，IPPROTO_TCP--使用TCP连接</span><br>	serverSocket = <span class="hljs-built_in">socket</span>(AF_INET, SOCK_STREAM, IPPROTO_TCP);<br>	<span class="hljs-keyword">if</span> (serverSocket == INVALID_SOCKET)<br>	&#123;<br>		cout &lt;&lt; <span class="hljs-string">&quot;套接字创建失败&quot;</span> &lt;&lt; endl;<br>		<span class="hljs-built_in">WSACleanup</span>();<span class="hljs-comment">//注销套接字</span><br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br><br>	serverAddr.sin_family = AF_INET;<span class="hljs-comment">//配置地址类型为InterIP</span><br>	serverAddr.sin_port = <span class="hljs-built_in">htons</span>(port);<span class="hljs-comment">//配置占用端口</span><br>	serverAddr.sin_addr.S_un.S_addr = INADDR_ANY;<span class="hljs-comment">//接受任何IP类型</span><br>	<span class="hljs-comment">//将IP和端口与套接字绑定</span><br>	<span class="hljs-type">int</span> ret = <span class="hljs-built_in">bind</span>(serverSocket, (LPSOCKADDR)&amp;serverAddr, <span class="hljs-built_in">sizeof</span>(SOCKADDR_IN));<br>	<span class="hljs-keyword">if</span> (ret == SOCKET_ERROR)<br>	&#123;<br>		cout &lt;&lt; <span class="hljs-string">&quot;套接字绑定失败&quot;</span> &lt;&lt; endl;<br>		<span class="hljs-built_in">closesocket</span>(serverSocket);<span class="hljs-comment">//关闭套接字</span><br>		<span class="hljs-built_in">WSACleanup</span>();<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其间也可以加一个版本判断，判断注册的套接字是否是2.2版本的</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sas"><span class="hljs-keyword">if</span> (LO<span class="hljs-meta">BYTE</span>(wsd.wVersion != 2 || HI<span class="hljs-meta">BYTE</span>(wsd.wVersion) != 2))<br>&#123;<br>	cout &lt;&lt; <span class="hljs-string">&quot;套接字版本错误，需要打开2.2版本的套接字&quot;</span> &lt;&lt; endl;<br>	WSACleanup();<br>	<span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-套接字监听"><a href="#3-套接字监听" class="headerlink" title="3.套接字监听"></a>3.套接字监听</h2><p>C++没有提供专门的异步套接字监听方法，如果不想使用阻塞的方式，即同步方式监听套接字的话，就需要通过线程来实现异步监听了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">SOCKET <span class="hljs-title">Server::ClientListen</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> ret = <span class="hljs-built_in">listen</span>(serverSocket, SOMAXCONN);<span class="hljs-comment">//开启套接字监听，SOMAXCONN--监听队列设为最大</span><br>	<span class="hljs-keyword">if</span> (ret == SOCKET_ERROR)<br>	&#123;<br>		cout &lt;&lt; <span class="hljs-string">&quot;监听时发生错误&quot;</span> &lt;&lt; endl;<br>		<span class="hljs-built_in">closesocket</span>(serverSocket);<br>		<span class="hljs-built_in">WSACleanup</span>();<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	&#125;<br>	sockaddr_in clientAddr;<span class="hljs-comment">//用于存储接收到的客户端的地址信息</span><br>	<span class="hljs-type">int</span> clientAddrLen = <span class="hljs-built_in">sizeof</span>(clientAddr);<br>    <span class="hljs-comment">//接受serverSocket缓冲区里clientAddrlen长度的内容，即一个套接字</span><br>	SOCKET clientSocket = <span class="hljs-built_in">accept</span>(serverSocket, (sockaddr FAR*)&amp;clientAddr, &amp;clientAddrLen);<br>	<span class="hljs-keyword">if</span> (clientSocket == INVALID_SOCKET)<br>	&#123;<br>		cout &lt;&lt; <span class="hljs-string">&quot;接受客户端时发生错误&quot;</span> &lt;&lt; endl;<br>		<span class="hljs-built_in">closesocket</span>(serverSocket);<br>		<span class="hljs-built_in">WSACleanup</span>();<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	&#125;<br>	cout &lt;&lt; <span class="hljs-string">&quot;接受到客户端&quot;</span> &lt;&lt; endl;<br>	<span class="hljs-keyword">return</span> clientSocket;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="4-接受消息"><a href="#4-接受消息" class="headerlink" title="4.接受消息"></a>4.接受消息</h2><p>获取到客户端的套接字后，就可以就收客户端发送过来的消息了。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs scss">void Server::<span class="hljs-built_in">Receive</span>(SOCKET clientSocket)<br>&#123;<br>	char receiveBuff<span class="hljs-selector-attr">[50]</span>;<span class="hljs-comment">//接受消息内容缓冲数组</span><br>    <span class="hljs-comment">//接受消息</span><br>	<span class="hljs-built_in">recv</span>(clientSocket, receiveBuff, strlen(receiveBuff), <span class="hljs-number">0</span>);<br>	<span class="hljs-built_in">printf</span>(&quot;%s\n&quot;, receiveBuff);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-发送消息"><a href="#5-发送消息" class="headerlink" title="5.发送消息"></a>5.发送消息</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Server::Send</span><span class="hljs-params">(SOCKET clientSocket, <span class="hljs-type">char</span> * sendBuff)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//发送sendBuff发送消息数组钟的内容到clientSocket套接字</span><br>	<span class="hljs-built_in">send</span>(clientSocket, sendBuff, <span class="hljs-built_in">strlen</span>(sendBuff) + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="二、GameMode与GameInstance"><a href="#二、GameMode与GameInstance" class="headerlink" title="二、GameMode与GameInstance"></a>二、GameMode与GameInstance</h1><p>由于UE4在换关卡的时候会删除世界大纲中的上一关卡中的所有的内容，所以对于需要在整个游戏运行期间都必须工作的套接字来说，需要在一个从游戏开始运行到游戏程序关闭都存在的场所中工作，这个场所就是GameInstance，而使用自定义GameInstance需要用到GameMode，所以在写UE4客户端套接字之前，我们有必要先了解GameInstance和GameMode。</p>
+<h2 id="1-GameInstance"><a href="#1-GameInstance" class="headerlink" title="1.GameInstance"></a>1.GameInstance</h2><p>要了解GameInstance，首先我们要对UE的引擎结构有一点点的了解。</p>
+<p>UE的宇宙是由UEngine这个创世神管理的各个World组成的，每个World就是一个个平行世界，编辑模式是一个World，运行模式是一个World，而每个World又由各个Level组成，每个Level又由各个Actor组成，而每个Actor拥有各种不同Component从而形成了各式各样的Actor，于是多姿多彩的UE世界便展开了，而GameInstance就是凌驾于World之上的存在。</p>
+<p> GameInstance的生命周期就是整个游戏进程的生命周期，从游戏开始到游戏程序关闭，并且GameInstance在整个游戏进程中只存在一个对象，即单例，就如名字一般。所以任何凌驾于Level和World之上的逻辑都应该在GameInstance中保存和实现，比如游戏网络连接，因为Level在切换时UE4会清空上一个Level在世界大纲中所有内容，然后加载下一个Level的内容，此时如果把游戏网络连接的逻辑放在Level或World中，这些逻辑就会被清空，在上一个Level内容被清空到下一个Level中重新加载网络连接逻辑的期间游戏会处于网络孤立状态。在游戏运行期间World在任意时刻其实都是是唯一的，为什么网络连接的逻辑不能放在World中，而要放在GameInstance中呢?这是因为UE在加载新的Level时，其实是在销毁前一个World，创建了一个新的World。但是World依然只有一个。</p>
+<p><strong>使用GameInstance</strong></p>
+<p>使用GameInstance的方法很简单，就是创建一个类继承自UGameInstance的子类，这个子类就继承到了GameInstance的所有属性了。</p>
+<p>但是GameInstance不存在于世界大纲中该如何执行在其中实现的逻辑代码呢？这就是我们接下来要来了解的GameMode的事了。</p>
+<h2 id="2-GameMode"><a href="#2-GameMode" class="headerlink" title="2.GameMode"></a>2.GameMode</h2><p>首先我们需要知道什么是GameMode，在UE4里GameMode是对应World层存在的，UE4给予GameMode的职责就是处理与实现游戏逻辑，即游戏的玩法，这里我们要区分GameMode与LevelBlueptint，LevelBlueprint是对应Level存在在，每一个Level有且只有一个LevelBlueprint，而GameMode是对应World存在的，每一个World有且只有一个GameMode，但是一个UE4游戏中是可以有多个GameMode，就像一个游戏可以有多种规则玩法一样。</p>
+<p>在UE4里GameInstance里的内容可以被全局调用，那么我们为什么要使用GameMode来实现网络连接而不是用更易理解的LevelBlueprint呢？这是因为GameMode提供了内容在拥有不同GameMode的World中迁移的能力，加以大多数游戏一般只有一中游戏规则，即一个GameMode，所以在GameMode中做网络连接的逻辑是较为恰当的。</p>
+<p><strong>使用GameMode</strong></p>
+<p>GameMode实质上是一个继承自GameModeBase的蓝图类，我们只需创建一个继承自GameModeBase的GameMode，就可以在GameMode中编写蓝图脚本调用C++函数来实现游戏逻辑了，为什么在GameMode中只进行函数调用呢？因为如果所有的代码逻辑都在GameMode中实现就会显得GameMode过于臃肿，所以GameMode一般进行函数调用，而函数的实现则在C++类中处理。</p>
+<p>至此，客户端的网络部分的代码逻辑在什么地方编写就基本确定了。</p>
+<h1 id="三、UE4客户端"><a href="#三、UE4客户端" class="headerlink" title="三、UE4客户端"></a>三、UE4客户端</h1><h2 id="1-前提准备"><a href="#1-前提准备" class="headerlink" title="1.前提准备"></a>1.前提准备</h2><ul>
+<li><p>UE4编写网络模块的逻辑需要在.Build.cs文件里添加两个模块 “Sockets”, “Networking”；</p>
+</li>
+<li><p>创建一个继承自UGameInstance的类作为网络部分的代码实现模块；</p>
+</li>
+<li><p>创建一个继承自GameModeBase的GameMode，并在Settings&#x2F;Project Settings&#x2F;Maps&amp;Mode下设置项目默认的GameMode和GameInstance。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171635.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514171635.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+</li>
+</ul>
+<h2 id="2-连接服务器"><a href="#2-连接服务器" class="headerlink" title="2.连接服务器"></a>2.连接服务器</h2><p><strong>.h</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> once</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;FReceiveThread.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Runtime/NEtworking/Public/Networking.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;CoreMinimal.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Engine/GameInstance.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;ServerConnector.generated.h&quot;</span></span><br><br><span class="hljs-built_in">UCLASS</span>()<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MYGAME_API</span> UServerConnector : <span class="hljs-keyword">public</span> UGameInstance<br>&#123;<br>	<span class="hljs-built_in">GENERATED_BODY</span>()<br><span class="hljs-keyword">private</span>:<br><br>	FSocket *connectSocket;<br>	FIPv4Address ip;<br>	TSharedPtr&lt;FReceiveThread&gt; receiveThread;<br><br><span class="hljs-keyword">public</span>:<br><br>	FString msg;<br><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">UServerConnector</span>() &#123;&#125;<br>	<span class="hljs-comment">//create socket and connect server</span><br>	<span class="hljs-built_in">UFUNCTION</span>(BlueprintCallable,Category=<span class="hljs-string">&quot;ClientSocket&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">ServerConnect</span><span class="hljs-params">(FString ip,int32 port)</span></span>;<br>	<span class="hljs-comment">//send message to server</span><br>	<span class="hljs-built_in">UFUNCTION</span>(BlueprintCallable, Category = <span class="hljs-string">&quot;ClientSocket&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Send</span><span class="hljs-params">(FString msg)</span></span>;<br>	<span class="hljs-comment">//receive message from server</span><br>	<span class="hljs-built_in">UFUNCTION</span>(BlueprintCallable, Category = <span class="hljs-string">&quot;ClientSocket&quot;</span>)<br>	<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Receive</span><span class="hljs-params">()</span></span>;<br>	<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>连接Server</strong></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-type">bool</span> UServerConnector::<span class="hljs-title function_ invoke__">ServerConnect</span>(FString ip, int32 port)<br>&#123;<br>	FIPv4Address::<span class="hljs-title function_ invoke__">Parse</span>(ip,this<span class="hljs-punctuation">-&gt;</span>ip);<span class="hljs-comment">//将字符串表示的ip转换成点分十进制的ip</span><br>    <span class="hljs-comment">//创建服务器套接字地址，PLATFROM_SOCKTSUBSYSTEM--选择当前系统的套接字</span><br>	TSharedPtr&lt;FInternetAddr&gt; addr = ISocketSubsystem::<span class="hljs-title function_ invoke__">Get</span>(PLATFORM_SOCKETSUBSYSTEM)<span class="hljs-punctuation">-&gt;</span><span class="hljs-title function_ invoke__">CreateInternetAddr</span>();<br>	addr<span class="hljs-punctuation">-&gt;</span><span class="hljs-title function_ invoke__">SetIp</span>(this<span class="hljs-punctuation">-&gt;</span>ip.Value);<span class="hljs-comment">//向套接字地址绑定服务器ip</span><br>	addr<span class="hljs-punctuation">-&gt;</span><span class="hljs-title function_ invoke__">SetPort</span>(port);<span class="hljs-comment">//向套接字地址绑定服务器端口</span><br>    <span class="hljs-comment">//创建客户端套接字，NAME_Stream--使用流式传输，Default--套接字描述，false使用TCP，Ture使用UDP连接</span><br>	connectSocket = ISocketSubsystem::<span class="hljs-title function_ invoke__">Get</span>(PLATFORM_SOCKETSUBSYSTEM)<span class="hljs-punctuation">-&gt;</span><span class="hljs-title function_ invoke__">CreateSocket</span>(NAME_Stream, <span class="hljs-title function_ invoke__">TEXT</span>(<span class="hljs-string">&quot;Default&quot;</span>), <span class="hljs-literal">false</span>);<br>	<span class="hljs-keyword">if</span> (!connectSocket<span class="hljs-punctuation">-&gt;</span><span class="hljs-title function_ invoke__">Connect</span>(*addr))<span class="hljs-comment">//连接服务器</span><br>	&#123;<br>		<span class="hljs-title function_ invoke__">UE_LOG</span>(LogTemp, Error, <span class="hljs-title function_ invoke__">TEXT</span>(<span class="hljs-string">&quot;ServerConnector.cpp:Connect Failed&quot;</span>));<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>	<span class="hljs-title function_ invoke__">UE_LOG</span>(LogTemp, Error, <span class="hljs-title function_ invoke__">TEXT</span>(<span class="hljs-string">&quot;Connect Succeed&quot;</span>));<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-发送消息"><a href="#3-发送消息" class="headerlink" title="3.发送消息"></a>3.发送消息</h2><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">bool UServerConnector::Send(FString msg)&#123;    <span class="hljs-regexp">//将字符串形式的消息转换成TCHAR*类型，因为二进制流的转换只支持TCHAR类型	TCHAR *seriallizedChar = msg.GetCharArray().GetData();	int32 size = FCString::Strlen(seriallizedChar) + 1;//</span>计算消息的内存大小	int32 sent = <span class="hljs-number">0</span>;<span class="hljs-regexp">//这一行是Send函数的格式要求，提供给Send内部使用的参数    //</span>将消息转化成二进制流并向服务器发送消息	<span class="hljs-keyword">if</span> (!connectSocket-&gt;Send((uint8*)TCHAR_TO_UTF8(seriallizedChar), size, sent))	&#123;		UE_LOG(LogTemp, <span class="hljs-built_in">Error</span>, TEXT(<span class="hljs-string">&quot;Message Send Failly&quot;</span>));		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;	&#125;	UE_LOG(LogTemp, <span class="hljs-built_in">Error</span>, TEXT(<span class="hljs-string">&quot;Message Send Successlly&quot;</span>));	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="4接受消息"><a href="#4接受消息" class="headerlink" title="4接受消息"></a>4接受消息</h2><p>接受消息就需要使用到UE4线程了，那么首先我们就需要了解UE4线程。</p>
+<p>在UE4中线程就是一个继承自FRunnable的类，我们创建这个类的对象的同时就开启了线程， 要注意的是继承自FRunnable的类是一个自定义类，即以F开头的类，并且自定义类在UE4的内容浏览器中是不显示的。</p>
+<p><strong>需要包含的头文件</strong></p>
+<ul>
+<li><p>#include “Runnable.h”</p>
+</li>
+<li><p>#include “RunnableThread.h”</p>
+<p>或者我们也可以直接只包含#include “ThreadingBase.h”头文件，ThreadingBase.h里面就已经包含了线程所需要的所有的头文件</p>
+</li>
+</ul>
+<h3 id="h"><a href="#h" class="headerlink" title=".h"></a><strong>.h</strong></h3><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> once#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;CoreMinimal.h&quot;</span>#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Runnable.h&quot;</span>#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;RunnableThread.h&quot;</span>#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Networking.h&quot;</span>//#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;ThreadingBase.h&quot;</span>class MYGAME_API FReceiveThread : public FRunnable&#123;private:	FRunnableThread* thread = nullptr;		bool threadRuning;	FSocket* socket;//需要读取消息的线程public:	FString msg;private:			virtual uint32 Run() override;	virtual void Stop() override;public:	FReceiveThread(FSocket* socket);	~FReceiveThread();;&#125;;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>.cpp</strong></p>
+<figure class="highlight stan"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stan"><span class="hljs-meta">#include &quot;FR<span class="hljs-string">eceive</span>T<span class="hljs-string">hread.h</span>&quot;FR<span class="hljs-string">eceive</span>T<span class="hljs-string">hread</span>::FR<span class="hljs-string">eceive</span>T<span class="hljs-string">hread</span>(FS<span class="hljs-string">ocket</span>* <span class="hljs-string">socket</span>)&#123;	<span class="hljs-string">this-</span>&gt;<span class="hljs-string">socket</span> = <span class="hljs-string">socket</span>;	<span class="hljs-string">thread</span> = FR<span class="hljs-string">unnable</span>T<span class="hljs-string">hread</span>::C<span class="hljs-string">reate</span>(<span class="hljs-string">this</span>, TEXT(&quot;R<span class="hljs-string">eceive</span>T<span class="hljs-string">hread</span>&quot;), 0);	<span class="hljs-string">thread</span>R<span class="hljs-string">uning</span> = <span class="hljs-string">true</span>;&#125;<span class="hljs-string">uint</span>32 FR<span class="hljs-string">eceive</span>T<span class="hljs-string">hread</span>::R<span class="hljs-string">un</span>()&#123;	<span class="hljs-string">if</span> (!<span class="hljs-string">socket</span>) <span class="hljs-string">return</span> 0;	TA<span class="hljs-string">rray</span>&lt;<span class="hljs-string">uint</span>8&gt; <span class="hljs-string">buff</span>;	<span class="hljs-string">int</span>32 <span class="hljs-string">read</span>T<span class="hljs-string">ype</span> = 0;	<span class="hljs-string">while</span> (<span class="hljs-string">thread</span>R<span class="hljs-string">uning</span>)	&#123;		<span class="hljs-string">buff.</span>I<span class="hljs-string">nit</span>(0, 1024u);		<span class="hljs-string">socket-</span>&gt;R<span class="hljs-string">ecv</span>(<span class="hljs-string">buff.</span>G<span class="hljs-string">et</span>D<span class="hljs-string">ata</span>(), <span class="hljs-string">buff.</span>N<span class="hljs-string">um</span>(), <span class="hljs-string">read</span>T<span class="hljs-string">ype</span>);		<span class="hljs-string">msg</span> = FS<span class="hljs-string">tring</span>(ANSI_TO_TCHAR(<span class="hljs-string">reinterpret_cast</span>&lt;<span class="hljs-string">const</span> <span class="hljs-string">char</span>*&gt;(<span class="hljs-string">buff.</span>G<span class="hljs-string">et</span>D<span class="hljs-string">ata</span>())));		UE_LOG(L<span class="hljs-string">og</span>T<span class="hljs-string">emp</span>, E<span class="hljs-string">rror</span>, TEXT(&quot;%s&quot;), *<span class="hljs-string">msg</span>);	&#125;	<span class="hljs-string">return</span> 1;&#125;<span class="hljs-string">void</span> FR<span class="hljs-string">eceive</span>T<span class="hljs-string">hread</span>::S<span class="hljs-string">top</span>()&#123;	<span class="hljs-string">thread</span>R<span class="hljs-string">uning</span> = <span class="hljs-string">false</span>;	<span class="hljs-string">if</span> (<span class="hljs-string">thread</span>) <span class="hljs-string">thread-</span>&gt;W<span class="hljs-string">ait</span>F<span class="hljs-string">or</span>C<span class="hljs-string">ompletion</span>();&#125;FR<span class="hljs-string">eceive</span>T<span class="hljs-string">hread</span>::~FR<span class="hljs-string">eceive</span>T<span class="hljs-string">hread</span>()&#123;	<span class="hljs-string">thread</span>R<span class="hljs-string">uning</span> = <span class="hljs-string">false</span>;	<span class="hljs-string">delete</span> <span class="hljs-string">thread</span>;	<span class="hljs-string">thread</span> = NULL;&#125;</span><br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/UE4/" class="print-no-link">#UE4</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【UE4】UE4Socket编程</div>
+      <div>http://example.com/2021/05/14/【UE4】UE4Socket编程/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 14, 2021</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/14/%E3%80%90BAT%E3%80%91BATWindows%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5GitHub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" title="【BAT】BATWindows自动脚本同步GitHUb远程仓库">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【BAT】BATWindows自动脚本同步GitHUb远程仓库</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/14/%E3%80%90UE4%E3%80%91UE4%E5%86%85%E5%B5%8CWeb%E5%8F%8A%E4%B8%8EWeb%E9%80%9A%E4%BF%A1/" title="【UE4】UE4内嵌Web及与Web通信">
+                        <span class="hidden-mobile">【UE4】UE4内嵌Web及与Web通信</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

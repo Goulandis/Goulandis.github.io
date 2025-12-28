@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="article">
+<meta property="og:title" content="【C++】C++进阶">
+<meta property="og:url" content="http://example.com/2019/08/23/%E3%80%90C++%E3%80%91C++%E8%BF%9B%E9%98%B6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190623193001260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190623200228628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019062320111766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019062512243728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190625221621705.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190625222013457.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/201907121654256.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190712165857369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190712170749180.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019071310135053.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019071310150942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190713104139644.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190713105202141.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190623192350471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190712170853343.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2019-08-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-23T14:40:22.905Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CPlus">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190623193001260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">
+  
+  
+  
+  <title>【C++】C++进阶 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Goulandis</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/Page.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【C++】C++进阶"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-08-23 00:00" pubdate>
+          2019年08月23日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          37 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【C++】C++进阶</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <meta name="referrer" content="no-referrer" />
+
+<span id="more"></span>
+
+<h1 id="1-C-介绍"><a href="#1-C-介绍" class="headerlink" title="1.C++介绍"></a>1.C++介绍</h1><p> C语言作为结构化和模块化语言适合规模较小的程序，对于大规模的复杂程序，能够高度抽象和建模的C++则更加适合，C++是C语言的加强版，以C语言为基础，并且完全兼容C语言的特性。<br><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190623193001260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/20190623193001260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190623193001260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">在这里插入图片描述</a></p>
+<h1 id="2-C-对C语言的增强语法"><a href="#2-C-对C语言的增强语法" class="headerlink" title="2.C++对C语言的增强语法"></a>2.C++对C语言的增强语法</h1><p> 2.1.命名空间<br>​ 2.2.引用<br>​ 2.3.函数与运算符的重载<br>​ 2.4.面向对象的特性<br>​ 2.5.泛型编程<br>​ 2.6.异常处理<br>​ 2.7.标准模板库<br>下面笔者就者7个特性进行详细说明：</p>
+<h1 id="3-命名空间"><a href="#3-命名空间" class="headerlink" title="3.命名空间"></a>3.命名空间</h1><p> 命名空间是C++提供的一种解决不同文件互相调用时符号名字冲突的方法，一个命名空间就是一个作用域，在不同的命名空间下允许相同的名字符号代表不同的实体。</p>
+<h2 id="3-1命名空间的定义"><a href="#3-1命名空间的定义" class="headerlink" title="3.1命名空间的定义"></a>3.1命名空间的定义</h2><p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190623200228628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/20190623200228628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190623200228628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">在这里插入图片描述</a></p>
+<p>注意：命名空间的声明要在类和函数的外面定义，并且没有分号结束。</p>
+<h2 id="3-2-命名空间成员的引用"><a href="#3-2-命名空间成员的引用" class="headerlink" title="3.2.命名空间成员的引用"></a>3.2.命名空间成员的引用</h2><p>命名空间名::成员名<br>如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//1.cpp</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> namesapce std;<br><span class="hljs-keyword">namespace</span> A &#123;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span></span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span></span>;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">mian</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-type">int</span> a = <span class="hljs-number">1</span>,b = <span class="hljs-number">1</span>;<br>	cout &lt;&lt; <span class="hljs-built_in">add</span>(a,b)&lt;&lt;<span class="hljs-string">&quot;  &quot;</span>&lt;&lt;A::<span class="hljs-built_in">add</span>(a,b)&lt;&lt; endl;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>	&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span></span>&#123;<br>	<span class="hljs-keyword">return</span>(a + b);<br>&#125;<br><br><span class="hljs-comment">//2.cpp</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">namespace</span> A &#123;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span></span>&#123;<br>		<span class="hljs-keyword">return</span>(a + b)；<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>命名空间的声明方式，我们需要用到命名空间中的什么方法就在{}内加入什么方法的声明，当然直接使用“using namespace A”来声明A命名空间也是可以的，但是这种命名方法会将A命名空间下的所有方法都作声明，包括我们可能没有使用的方法，当工程很大时，这种做法会导致代码臃肿。</p>
+<p>在很多人编程的时候，如果各程序员之间不一直进行密切的交流，极容易出现变量名或方法名类名等相同的情况，这样 在多文档联合编译时，编译器会无法区分同名符号而报错，而命名空间就很好的解决了这种问题，我们为各个文档都定义一个唯一的命名空间，这样即使是相同符号也可以通过命名空间唯一标识了，命名空间的出现极大的改善了多人编程的困处。</p>
+<h2 id="3-3-命名空间的别名"><a href="#3-3-命名空间的别名" class="headerlink" title="3.3.命名空间的别名"></a>3.3.命名空间的别名</h2><p>命名空间是可以另起别命的，别命是已定义的命名空间的可代替的名字，一个命名空间可以有很多个别名，所有的别命和命名空间原名可以互换使用<br>别命的定义：namespace 别命 &#x3D; 命名空间原名;<br><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2019062320111766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/2019062320111766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2019062320111766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">在这里插入图片描述</a></p>
+<h2 id="3-4-命名空间的成员类型"><a href="#3-4-命名空间的成员类型" class="headerlink" title="3.4.命名空间的成员类型"></a>3.4.命名空间的成员类型</h2><p>命名空间的成员类型可以是变量、常量、函数、结构体、联合体、枚举、类、嵌套的命名空间</p>
+<h2 id="3-5-全局命名空间"><a href="#3-5-全局命名空间" class="headerlink" title="3.5.全局命名空间"></a>3.5.全局命名空间</h2><p>在全局作用域中定义的命名空间，大多数命名空间都属于全局命名空间。即自定义的命名空间是全局命名空间的扩张和细分。全局命名空间是隐式声明的，它存在于每一个程序中。<br>由于全局命名空间是隐含的，它没有名字，所以使用“::成员名字”引用全局命名空间。</p>
+<h2 id="3-6-匿名命名空间"><a href="#3-6-匿名命名空间" class="headerlink" title="3.6.匿名命名空间"></a>3.6.匿名命名空间</h2><p>匿名命名空间与全局命名空间类似，也没有名字，但是匿名命名空间定义在局部作用域，不能用于多文件编译。<br>匿名命名空间可以直接使用变量名引用成员。</p>
+<h1 id="4-引用"><a href="#4-引用" class="headerlink" title="4.引用"></a>4.引用</h1><h2 id="4-1-什么是引用？"><a href="#4-1-什么是引用？" class="headerlink" title="4.1.什么是引用？"></a>4.1.什么是引用？</h2><p>引用即别命，是某一个变量或对象的别命，绑定一个引用到一个变量或对象，即引用初始化，之后对引用的操作完全等价于对与其绑定的变量或对象的操作。</p>
+<h2 id="4-2-引用的定义"><a href="#4-2-引用的定义" class="headerlink" title="4.2.引用的定义"></a>4.2.引用的定义</h2><p>类型 &amp;引用名 &#x3D; 目标变量名;<br>需要注意的是：</p>
+<ul>
+<li>&amp;不是求地址运算符，而是起标志作用</li>
+<li>引用的类型必须和其所绑定的变量类型相同</li>
+<li>声明应用的同时必须对其初始化，否则系统会报错</li>
+<li>引用相当于变量或对象的别命，因此不可将已绑定的引用再绑定其他变量或对象，也不可将一个引用绑定另一个引用。</li>
+</ul>
+<h2 id="4-3-引用与指针的区别"><a href="#4-3-引用与指针的区别" class="headerlink" title="4.3.引用与指针的区别"></a>4.3.引用与指针的区别</h2><ul>
+<li>占用存储空间上：<br>引用占用一个地址空间，本地计算机的一个地址空间是多少位，引用就占多少位的地址空间。<br>而指针除了占用一个地址空间外，还占用一个数据空间用于存储其指向的变量或对象的地址。</li>
+<li>在操作上：<br>引用声明的同时必须对其初始化，且初始化后引用不可更改，引用不能为空。如：int &amp;a ;是错误的用法，正确的用法应该是：int &amp;a &#x3D; b;<br>指针的声明可以在任何时候初始化，且指针在后续操作中可以变更其指向的变量或对象，指针可以为空。</li>
+<li>存储内容上<br>“sizeof引用”得到的是引用所指向的变量或对象的大小<br>“sizeof指针”得到的是指针本身的大小</li>
+<li>层级上<br>引用只能有一级，引用不可以再指向引用<br>指针理论上对级数没有限制</li>
+<li>可以将引用理解为不可更改的指针，即：类型* const 指针变量</li>
+</ul>
+<h2 id="4-4-对数组的引用"><a href="#4-4-对数组的引用" class="headerlink" title="4.4.对数组的引用"></a>4.4.对数组的引用</h2><p>类型 （&amp;引用名）[数组下标] &#x3D; 数组名;<br>如：对int a[3]数组的引用为int (&amp;quote)[3] &#x3D; a;即将引用名替换成数组名。<br>这里要注意，“()”是不能省略的，因为如果省略()，则会改变优先级，变成int &amp;(quote[3]) &#x3D; a;而出现语法错误。</p>
+<h2 id="4-5-对指针的引用"><a href="#4-5-对指针的引用" class="headerlink" title="4.5.对指针的引用"></a>4.5.对指针的引用</h2><p>类型* &amp;引用名 &#x3D; 指针名;<br>如：int* &amp;quote &#x3D; p;</p>
+<h2 id="4-6-引用的作用"><a href="#4-6-引用的作用" class="headerlink" title="4.6.引用的作用"></a>4.6.引用的作用</h2><p>引用既可以作为别命使用，还可以作为函数的参数、函数的返回值使用。<br>需要注意的是，引用作为函数的返回值时不能返回局部变量的引用。<br>至此，我可能提出这样的疑问：引用能做的事指针也能做，引用不能做的事指针还能做，那么C++么什么要引入“引用”这个概念呢？<br>这是因为，指针的操作太过于强大，正因如此对指针的使用存在一定的风险，所谓“收益与风险并存”，在很多高版本的编译器中已经不能再操作指针了，如VS2015，而C++之所以还保留着指针，是因为指针的魅力无比诱人，尽管有风险却不愿意就此抛弃。<br>引用的另一个用处我们举一个例子来说明<br>如：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">add_1</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> b</span>)</span>&#123;<br>	b++;<br>&#125;<br><span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">add_2</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> &amp;c</span>)</span>&#123;<br>	c++;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mian</span>()</span>&#123;<br><span class="hljs-built_in">int</span> a = <span class="hljs-number">1</span>;<br><span class="hljs-built_in">int</span> &amp;a = a;<br>cout&lt;&lt;add_1(a)&lt;&lt;endl;<br>cout&lt;&lt;add_2(&amp;a)&lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们的输出结果是：1 2，为什么呢?因为普通的参数传递，传递的是参数的拷贝，如add_1我们对b++，实际进行运算的是形参b，而实参a却没有发生运算，所以cout&lt;&lt;add_1(a)输出1，而如果传递引用的话，我们在函数add_2中对引用的操作实质上就是对a进行运算，因为&amp;a就是a。</p>
+<h2 id="4-7-常引用"><a href="#4-7-常引用" class="headerlink" title="4.7.常引用"></a>4.7.常引用</h2><p>const 类型 &amp;引用名 &#x3D; 目标变量名<br>常引用可以引用常量也可以引用变量，常引用不允许通过引用对其绑定的变量或对象进行修改。</p>
+<h2 id="在这里插入图片描述"><a href="#在这里插入图片描述" class="headerlink" title="在这里插入图片描述"></a><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2019062512243728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/2019062512243728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述">在这里插入图片描述</a></h2><h1 id="5-函数重载"><a href="#5-函数重载" class="headerlink" title="5.函数重载"></a>5.函数重载</h1><h2 id="5-1-C-重载的实现"><a href="#5-1-C-重载的实现" class="headerlink" title="5.1.C++重载的实现"></a>5.1.C++重载的实现</h2><p>从本质上来说，C++之所以能实现函数的重载是因为C++编译器对函数名的处理方法进行了优化，我们来对比一下C语言编译器和C++编译器对函数名的编译</p>
+<ul>
+<li>C语言编译器<br>对函数 int add(int a);编译后的名字为：add</li>
+<li>C++编译器<br>对函数int add(int a);编译后的名字为：addi，对int add(int a,float b);编译后的名字为：addij，C++编译器使用函数名和参数类型的共同组合成编译后函数的唯一标识，即可实现函数的重载。</li>
+</ul>
+<h2 id="5-2-重载的定义"><a href="#5-2-重载的定义" class="headerlink" title="5.2.重载的定义"></a>5.2.重载的定义</h2><p>重载就是在相同的声明域中函数名相同而参数列表不同，通过函数的参数表唯一标识的函数。</p>
+<h2 id="5-3-函数的默认参数"><a href="#5-3-函数的默认参数" class="headerlink" title="5.3.函数的默认参数"></a>5.3.函数的默认参数</h2><p>C++可以使用默认参数，即在函数声明时为参数提供一个默认值，当函数调用时没有指定这个参数的值时，编译器会自动使用默认值替换。<br><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190625221621705.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/20190625221621705.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190625221621705.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">在这里插入图片描述</a></p>
+<p>需要注意的是，默认参数只能放在声明或定义处，能放在声明处就放在声明处。如果某个参数是默认参数，那么其后的参数也必须都是默认参数，如：<code>int add(int a = 1,int b,int c);</code>编译器将报错，而<code>int add(int a,int b = 1,int c = 2);</code>则不会报错，因为参数在传递的时候是从左到右的，首先使用无默认参数的参数列表，当遇到没有传入实参的形参时开始使用默认参数的参数列表。使用默认参数的情况仅限于用在没有没有重载冲突的函数上，如：重载add函数，<code>int add(){...} int add(int a = 1,int b = 2){...}</code>,此时调用add();将调用不带参数的add()函数。<br><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190625222013457.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/20190625222013457.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述">在这里插入图片描述</a></p>
+<h2 id="5-4-内联函数"><a href="#5-4-内联函数" class="headerlink" title="5.4.内联函数"></a>5.4.内联函数</h2><h3 id="5-4-1-为什么需要内联函数？"><a href="#5-4-1-为什么需要内联函数？" class="headerlink" title="5.4.1.为什么需要内联函数？"></a>5.4.1.为什么需要内联函数？</h3><p>在程序执行的过程中，当碰到函数调用时，系统要将程序当前状态保存到栈中，同时跳转到函数代码处执行函数体，此过程需要占用时间和空间，是的程序执行效率低下。当然我们声明一个内联函数只是建议编译器将此函数作为内联函数，但是编译器有自己的判断算法，在编译时编译器会自行判断我们声明的内联函数是否值得变为内联函数，以保证主程序体不会过于臃肿，所以我们声明的内联函数不一定会成为内联函数。</p>
+<h3 id="5-4-2-内联函数的定义"><a href="#5-4-2-内联函数的定义" class="headerlink" title="5.4.2.内联函数的定义"></a>5.4.2.内联函数的定义</h3><p>inline 返回值类型 函数名(参数列表){函数体;}</p>
+<h3 id="5-4-3-内联函数是一种用空间换时间的措施，通常只有较短的函数才定义为内联函数。"><a href="#5-4-3-内联函数是一种用空间换时间的措施，通常只有较短的函数才定义为内联函数。" class="headerlink" title="5.4.3.内联函数是一种用空间换时间的措施，通常只有较短的函数才定义为内联函数。"></a>5.4.3.内联函数是一种用空间换时间的措施，通常只有较短的函数才定义为内联函数。</h3><h1 id="6-new和delete运算符"><a href="#6-new和delete运算符" class="headerlink" title="6.new和delete运算符"></a>6.new和delete运算符</h1><h2 id="6-1-new运算符"><a href="#6-1-new运算符" class="headerlink" title="6.1.new运算符"></a>6.1.new运算符</h2><p>new运算符的功能是在堆区分配内存，通过new运算符获得的内存空间都处于堆上。delete运算符的功能正好与new相反，delete运算符的功能是释放new运算符的在堆区创建的内存，new运算符与delete运算符最好是配套出现，即使用new运算符创建了内存就一定要用delete运算符在不需要的时候此内存的时候将其释放，为什么呢？因为堆区的内存是不会随着程序结束而释放的，堆区的内存只要在操作系统关闭时才会释放，所以如果不手动释放new运算符在堆区创建的内存，则会造成大量无用数据占据着堆区内存，当堆区内存被占满时这会出现系统无堆区内存可用而出现系统死机。</p>
+<h2 id="6-2-new-delete运算符的使用"><a href="#6-2-new-delete运算符的使用" class="headerlink" title="6.2.new&#x2F;delete运算符的使用"></a>6.2.new&#x2F;delete运算符的使用</h2><p>new &lt;数据类型&gt; (参数)<br>delete &lt;对象指针&gt;&#x2F;delete &lt;对象数组指针&gt;<br><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/201907121654256.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/201907121654256.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/201907121654256.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">在这里插入图片描述</a></p>
+<h2 id="6-3-那么C-的new-delete与C语言的malloc-free有什么区别呢？"><a href="#6-3-那么C-的new-delete与C语言的malloc-free有什么区别呢？" class="headerlink" title="6.3.那么C++的new&#x2F;delete与C语言的malloc&#x2F;free有什么区别呢？"></a>6.3.那么C++的new&#x2F;delete与C语言的malloc&#x2F;free有什么区别呢？</h2><ul>
+<li>它们都是动态管理内存的入口</li>
+<li>malloc&#x2F;free是C&#x2F;C++标准库函数，而new&#x2F;delete是C++操作符</li>
+<li>malloc&#x2F;free只是动态分分配&#x2F;释放内存空间，而new&#x2F;delete除了分配内存空间还会调用构造&#x2F;析构函数进行初始化&#x2F;清理（清理成员）</li>
+<li>malloc&#x2F;free需要手动计算类型大小且返回值为void，而new&#x2F;delete可以自行计算类型大小返回对应类型的指针</li>
+<li>new&#x2F;delete在底层是调用了malloc&#x2F;free的。可以认为是C++对malloc&#x2F;free的封装</li>
+<li>malloc&#x2F;free申请空间后需要判空，new&#x2F;delete则不需要</li>
+<li>new直接跟类型，malloc跟字节数。<br>new&#x2F;delete和malloc&#x2F;free的区别是C++企业招聘时特别喜欢考的一项</li>
+</ul>
+<h1 id="7-程序的内存空间"><a href="#7-程序的内存空间" class="headerlink" title="7.程序的内存空间"></a>7.程序的内存空间</h1><h2 id="7-1-指针的内存操作"><a href="#7-1-指针的内存操作" class="headerlink" title="7.1.指针的内存操作"></a>7.1.指针的内存操作</h2><ul>
+<li>指针不仅可以可以指向变量还可以指向函数</li>
+<li>有new运算符在堆区创建的内存空间由位于栈区的指针确定入口</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190712165857369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/20190712165857369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190712165857369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">在这里插入图片描述</a></p>
+<p>说到这，我们有必要了解一下计算机程序的内存结构，供程序运行的内存空间分为：堆区、栈区、.data段、.bss段、.ro段、.txt段，我使用一张图来说明<br><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190712170749180.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/20190712170749180.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述">在这里插入图片描述</a></p>
+<h1 id="8-面向对象编程的特点"><a href="#8-面向对象编程的特点" class="headerlink" title="8.面向对象编程的特点"></a>8.面向对象编程的特点</h1><p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2019071310135053.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/2019071310135053.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2019071310135053.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">在这里插入图片描述</a></p>
+<h1 id="9-C-中的类"><a href="#9-C-中的类" class="headerlink" title="9.C++中的类"></a>9.C++中的类</h1><h2 id="9-1-类的定义"><a href="#9-1-类的定义" class="headerlink" title="9.1.类的定义"></a>9.1.类的定义</h2><p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2019071310150942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/2019071310150942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2019071310150942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">在这里插入图片描述</a></p>
+<h2 id="9-2-访问权限"><a href="#9-2-访问权限" class="headerlink" title="9.2.访问权限"></a>9.2.访问权限</h2><ul>
+<li>C++为类的成员添加了三种访问权限<br>public–公有成员：权限最高，在public修饰下的成员是类的外部接口，可以被类的成员函数和对象直接访问</li>
+<li>protected–保护成员：权限居中，可以被类的成员函数和其派生类的成员函数直接访问，但不能被类的对象和派生类的对象直接访问。</li>
+<li>private–私有成员：权限最低，只能通过类的成员函数访问。</li>
+</ul>
+<h2 id="9-3-类的成员"><a href="#9-3-类的成员" class="headerlink" title="9.3.类的成员"></a>9.3.类的成员</h2><ul>
+<li>成员变量：类的成员变量用以描述一个对象的属性信息，与一般的变量声明相同，但类的成员变量只能在类的声明体中定义，类的成员变量一般在类的构造函数中初始化，但这不是必须的。</li>
+<li>成员函数：用来描述一个对象的行为动作，与一般的函数声明相同，但只能放在类的声明体中声明，成员函数可以在类内实现也可以在类外实现，但在类内实现则形成内联的成员函数，会使类变得冗杂，所以成员函数的实现最好在类外实现，类成员函数可以重载和带默认参数。</li>
+</ul>
+<h2 id="9-4-类的成员函数与成员变量的声明与实现"><a href="#9-4-类的成员函数与成员变量的声明与实现" class="headerlink" title="9.4.类的成员函数与成员变量的声明与实现"></a>9.4.类的成员函数与成员变量的声明与实现</h2><p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190713104139644.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/20190713104139644.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190713104139644.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">在这里插入图片描述</a></p>
+<h2 id="9-5-struct和class的区别"><a href="#9-5-struct和class的区别" class="headerlink" title="9.5.struct和class的区别"></a>9.5.struct和class的区别</h2><ul>
+<li>C++对struct关键字扩展了其功能，和class的功能几乎等价</li>
+<li>struct的成员默认访问权限是public，而class是private</li>
+</ul>
+<h2 id="9-6-this指针"><a href="#9-6-this指针" class="headerlink" title="9.6.this指针"></a>9.6.this指针</h2><ul>
+<li>this指针是一个特殊的指针，指向对象的自身的首地址</li>
+<li>每一个对象的成员函数都有一个this指针，指向调用的对象，如果要引用整个对象则通过*this引用</li>
+<li>this指针仅能在类的内部使用，即只能在类的声明体或成员函数中使用</li>
+</ul>
+<h2 id="9-7-static关键字"><a href="#9-7-static关键字" class="headerlink" title="9.7.static关键字"></a>9.7.static关键字</h2><h3 id="9-7-1-static修饰的成员变量–静态成员变量"><a href="#9-7-1-static修饰的成员变量–静态成员变量" class="headerlink" title="9.7.1.static修饰的成员变量–静态成员变量"></a>9.7.1.static修饰的成员变量–静态成员变量</h3><ul>
+<li><p>static修饰的变量存储在静态变量区</p>
+</li>
+<li><p>在类中static关键字修饰的变量被此类的所有对象共享，即所有对象共享这一个变量</p>
+</li>
+<li><p>static修饰的变量必须在类外初始化，不可以在定义的时候直接初始化</p>
+</li>
+<li><p>static修饰的公有成员变量可以直接通过类名来访问，没有staic修饰的成员变量只能通过对象才能访问</p>
+<p><img src="https://img-blog.csdnimg.cn/20190713105202141.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>在这里插入图片描述</p>
+</li>
+</ul>
+<h3 id="9-7-2-static修饰的成员函数–静态成员函数"><a href="#9-7-2-static修饰的成员函数–静态成员函数" class="headerlink" title="9.7.2.static修饰的成员函数–静态成员函数"></a>9.7.2.static修饰的成员函数–静态成员函数</h3><ul>
+<li>static修饰的成员函数也可以直接通过类名访问</li>
+<li>静态成员函数只能访问静态成员变量</li>
+</ul>
+<h3 id="9-7-3-类的静态与非静态部分"><a href="#9-7-3-类的静态与非静态部分" class="headerlink" title="9.7.3.类的静态与非静态部分"></a>9.7.3.类的静态与非静态部分</h3><ul>
+<li>静态部分只属于类，与类一起存放在内存的静态区，被所有对象共享</li>
+<li>非静态部分属于对象，每个对象都有自己的非静态部分，互不影响</li>
+<li>静态部分只能直接访问静态部分，非静态部分可以访问所有部分</li>
+<li>那么为什么静态部分只能直接访问静态部分，而非静态部分却可以访问所有部分呢？<br>那是因为，非静态成员变量&#x2F;函数是属于对象的，只能通过对象来访问，而静态部分是属于类的，使用静态部分时</li>
+</ul>
+<p>没有确定对象的存在，所以不能确定静态部分应该访问哪个对象的非静态部分，而静态部分是属于类的，所有对象共享，所以通过对象使用非静态部分时，可以访问静态部分。<br>思导图：<br><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190623192350471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/20190623192350471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190623192350471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70">在这里插入图片描述</a></p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190712170853343.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70"><img src="https://img-blog.csdnimg.cn/20190712170853343.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTA4Mjkx,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述">在这里插入图片描述</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CPlus/" class="print-no-link">#CPlus</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【C++】C++进阶</div>
+      <div>http://example.com/2019/08/23/【C++】C++进阶/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 23, 2019</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/08/25/%E3%80%90Linux%E3%80%91Linux%E5%9F%BA%E7%A1%80/" title="【Linux】Linux基础">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【Linux】Linux基础</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/08/23/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E3%80%91%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%A1%AB%E5%85%85%E7%AE%97%E6%B3%95/" title="【计算机图形学】多边形填充算法">
+                        <span class="hidden-mobile">【计算机图形学】多边形填充算法</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

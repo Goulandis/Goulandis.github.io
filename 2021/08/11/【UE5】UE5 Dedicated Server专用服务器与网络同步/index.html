@@ -1,0 +1,892 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这篇文章是个人在学习UE4的网络同步方面的内容的一些记录，因为UE5出来了，顺带也一起熟悉熟悉UE5，所以也就直接使用UE5来实践了。说句实在话，UE4网络同步这块确实挺难的，我自己在网上搜索的博客的内容要么停留在很浅层面只搭建一个ds服务器，要么就直接深入源码去剖析UE4的网络机制，处在中间层面的内容少之又少，不得不自己好一阵研究，强烈推荐这几位博主的博文，我在学习的过程中也从中受益匪浅。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【UE5】UE5 Dedicated Server专用服务器与网络同步">
+<meta property="og:url" content="http://example.com/2021/08/11/%E3%80%90UE5%E3%80%91UE5%20Dedicated%20Server%E4%B8%93%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这篇文章是个人在学习UE4的网络同步方面的内容的一些记录，因为UE5出来了，顺带也一起熟悉熟悉UE5，所以也就直接使用UE5来实践了。说句实在话，UE4网络同步这块确实挺难的，我自己在网上搜索的博客的内容要么停留在很浅层面只搭建一个ds服务器，要么就直接深入源码去剖析UE4的网络机制，处在中间层面的内容少之又少，不得不自己好一阵研究，强烈推荐这几位博主的博文，我在学习的过程中也从中受益匪浅。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802213953.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225937.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802213959.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214005.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225931.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214045.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214056.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214103.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214112.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214120.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214127.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214134.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214141.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214151.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214200.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210804155737.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802215840.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802215842.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802220241.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802220405.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210804155737.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225948.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225951.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230015.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230012.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230019.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230245.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230039.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230039.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230136.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230154.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230159.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230207.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230210.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230214.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809235321.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809235324.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809235352.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811223042.gif">
+<meta property="article:published_time" content="2021-08-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-22T14:46:04.144Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="UE5">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802213953.png">
+  
+  
+  
+  <title>【UE5】UE5 Dedicated Server专用服务器与网络同步 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Goulandis</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/Page.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【UE5】UE5 Dedicated Server专用服务器与网络同步"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-08-11 00:00" pubdate>
+          2021年08月11日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          53 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【UE5】UE5 Dedicated Server专用服务器与网络同步</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <meta name="referrer" content="no-referrer" />
+
+<p>这篇文章是个人在学习UE4的网络同步方面的内容的一些记录，因为UE5出来了，顺带也一起熟悉熟悉UE5，所以也就直接使用UE5来实践了。说句实在话，UE4网络同步这块确实挺难的，我自己在网上搜索的博客的内容要么停留在很浅层面只搭建一个ds服务器，要么就直接深入源码去剖析UE4的网络机制，处在中间层面的内容少之又少，不得不自己好一阵研究，强烈推荐这几位博主的博文，我在学习的过程中也从中受益匪浅。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/AnKen/p/7897076.html">Ken_An</a>、<a target="_blank" rel="noopener" href="https://blog.ch-wind.com/ue4-multiplayer-and-network-overview/">风蚀之月</a>、 <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37864449/article/details/89096536">刘东无敌</a>还有我师傅推荐给我的一本<a target="_blank" rel="noopener" href="https://cedric-neukirchen.net/Downloads/Compendium/UE4_Network_Compendium_by_Cedric_eXi_Neukirchen.pdf">关于UE4网络的PDF</a>。</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="一、什么是Dedicated-Server"><a href="#一、什么是Dedicated-Server" class="headerlink" title="一、什么是Dedicated Server"></a>一、什么是Dedicated Server</h1><p>UE5除了<strong>Nanite</strong>和<strong>Lumen</strong>两个比较大的技术改动之外，其他的部分实际上和UE4基本是一致的，所以虽说使用的是UE5来搭建Dedicated Server，实际操作和UE4没什么区别。</p>
+<p>事实上UE5有提供两种服务器Dedicated Server和Listen Server，Dedicated Server是专用服务器，服务器和客户端是剥离开来的，而Listen Server则是类似局域网联机一般的，使用其中某一个客户端作为服务器的模式。</p>
+<p>这里就谈到游戏网络同步的方式了，游戏网络同步的方式一般分为两种方式，P2P和C&#x2F;S，P2P即每一台客户端之间互相直连，这种方式的同步极为复杂，对联机游戏来说基本已经淘汰了。C&#x2F;S即经典的客户端&#x2F;服务器模式，C&#x2F;S又可细分为两种，一种是由一个客户端做主机，其他的客户端连接这个主机来进行网络同步，主机即拥有服务器功能也拥有客户端功能，这种模式多用于局域网联机，这种模式中每一个客户端都可以成为主机；一种是单独剥离服务器的功能，服务端只处理服务器相关的业务，所有的客户端都通过连接服务器来进行网络同步，同时客户端只留下客户端相关的业务，这就是网游中最常用的模式了。</p>
+<p>首先我们需要明确一个认知—UE5的客户端代码和服务器代码是一体的，即两端的代码实际上是混杂在一起的。我们经常听到一种说法叫“前后端分离”，就是服务器干服务器的，客户端干客户端的，二者各为两个工程互不干扰，互相之间通过TCP或者UDP进行通信。而UE5的模式则是客户端和服务器不分离，同在一个工程之中，互相之间的代码使用宏来区分。两种方式各有各的好处。</p>
+<p>我们这里要学习的ds服务器就是从这个一体的工程中单独剥离出来的一个服务器，为什么要剥离呢？如果不剥离，网络同步就变成了C&#x2F;S模式的第一种情况了，但是大多数情况下服务器是不需要场景渲染，人物控制这些客户端业务的，剥离出来可以减轻服务器的运行压力。</p>
+<p>Dedicated Server服务器简称ds服务器，是UE5用于解决FPS同步问题的一种专用服务器，UE5在UDP上自己做了一层根据游戏特点专门优化的网络协议(epic不愧是fps起家的😂)，专门用于ds通信，ds服务器的一大特点就是客户端和服务器共享一份代码，因为高性能的同步需要各种客户端预测和回溯的方法，可以很好的解决同步延迟问题。但是UE5ds服务器承载量不高，不适合用于需要连接大量客户端的场景。</p>
+<hr>
+<h1 id="二、搭建DS服务器"><a href="#二、搭建DS服务器" class="headerlink" title="二、搭建DS服务器"></a>二、搭建DS服务器</h1><p>暂时我们先搭一个最简单的，只有客户端连接功能的ds服务器，后面我们再慢慢迭代的往里面加功能。</p>
+<h2 id="1-使用源码编译UE5引擎"><a href="#1-使用源码编译UE5引擎" class="headerlink" title="1.使用源码编译UE5引擎"></a>1.使用源码编译UE5引擎</h2><h3 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h3><p><a target="_blank" rel="noopener" href="https://github.com/EpicGames/UnrealEngine/releases/tag/5.0.0-early-access-1">直接zip下载</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/EpicGames/UnrealEngine">git克隆</a></p>
+<p>git clone记得要切换分支到ue5-early-access这是抢先体验版的源码。</p>
+<h3 id="下载依赖项"><a href="#下载依赖项" class="headerlink" title="下载依赖项"></a>下载依赖项</h3><p>运行Setup.bat，要下载挺多东西的，得等一段时间。</p>
+<h3 id="生成VS工程文件"><a href="#生成VS工程文件" class="headerlink" title="生成VS工程文件"></a>生成VS工程文件</h3><p>运行GenerateProjectFiles.bat生成VS工程文件</p>
+<p>需要注意的是，UE5只支持VS2019，所以编译源码之前得先把VS2019安装好。</p>
+<p>这时有可能会报路径过长的错误，只需要把引擎剪贴到盘符根目录去就行了。</p>
+<p>跑完之后工程目录下就会出现一个UE5.sln文件，使用VS2019打开即可编译了。</p>
+<h2 id="2-为什么需要使用源码编译的UE5"><a href="#2-为什么需要使用源码编译的UE5" class="headerlink" title="2.为什么需要使用源码编译的UE5"></a>2.为什么需要使用源码编译的UE5</h2><p>因为我们编译ds服务器需要使用<code>Development Server</code>模式编译，而使用epic启动器下载的UE5创建的工程没有这个模式，只有自己使用源码编译的UE5创建的工程才有这个模式</p>
+<h2 id="3-编译DS服务器"><a href="#3-编译DS服务器" class="headerlink" title="3.编译DS服务器"></a>3.编译DS服务器</h2><p>如果用UE5创建C++工程报.net版本过低，就去VS把对应的.net版本下下来即可。</p>
+<p>我们需要分别为Server端，Client端和过渡时分别创建一个默认地图，所以我们创建三个地图</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802213953.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802213953.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>然后再Project Setting&#x2F;Map&amp;Mod中分别如下配置</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225937.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225937.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>在关卡蓝图的tick事件上分别编写一些字符串打印，以便后面观察地图的切换。</p>
+<p>我这里直接打印了地图名字：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802213959.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802213959.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>顺带提一句，如果创建工程时不是创建的C++工程，而是空工程或者纯蓝图工程则需要随便创建一个C++类来打开VS工程。</p>
+<p>据说如果不创建一个C++类就直接去编译ds可能编译不过，我这里是直接创建了一个GameInstance再编译的，所以也就没有碰到这个问题，想想UE5应该把这个bug解决了吧，如果碰到了这个问题就去创建一个类再编译吧。</p>
+<p>在VS里把编译模式更换成Development Server，然后手动添加一个xx.Target.cs文件，目前内容比较简单，我们只需要拷贝一份UE5自动生成xxEditor.Target.cs文件更名为xxServer.Target.cs，然后把里面的Editor字样都换成Server就可以了。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">using</span> <span class="hljs-title class_">UnrealBuildTool</span>;<br><span class="hljs-keyword">using</span> <span class="hljs-title class_">System</span>.<span class="hljs-property">Collections</span>.<span class="hljs-property">Generic</span>;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LSPTetrisClientServerTarget</span> : <span class="hljs-title class_">TargetRules</span><br>&#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-title class_">LSPTetrisClientServerTarget</span>( <span class="hljs-title class_">TargetInfo</span> <span class="hljs-title class_">Target</span>) : <span class="hljs-title function_">base</span>(<span class="hljs-params"><span class="hljs-title class_">Target</span></span>)<br>	&#123;<br>		<span class="hljs-title class_">Type</span> = <span class="hljs-title class_">TargetType</span>.<span class="hljs-property">Editor</span>;<br>		<span class="hljs-title class_">DefaultBuildSettings</span> = <span class="hljs-title class_">BuildSettingsVersion</span>.<span class="hljs-property">V2</span>;<br>		<span class="hljs-title class_">ExtraModuleNames</span>.<span class="hljs-title class_">AddRange</span>( <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] &#123; <span class="hljs-string">&quot;LSPTetrisClient&quot;</span> &#125; );<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>然后我们手动将文件添加到工程里。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214005.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214005.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>最后编译，编译事件比较长，需要耐心等待一下，编译完之后我们就可以在工程目录<code>Binaries\Win64</code>下看到编译出来的exe文件了。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225931.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225931.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>如果编译出来没有的话，就重新选择一下<code>Switch Unreal Engine version</code>，然后再编译。</p>
+<p>此时的exe还是不能运行的，因为它需要依赖一些客户端的代码，所以需要等客户端打包出来之后，放到客户端的文件夹下运行。</p>
+<h2 id="4-打包客户端"><a href="#4-打包客户端" class="headerlink" title="4.打包客户端"></a>4.打包客户端</h2><p>把VS编译模式更改成Development Editor，可以直接从vs启动引擎，也可以通过uproject启动引擎，然后打包工程，顺带一提，UE5把打包选项更换到了这个位置</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214045.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214045.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>到这一步就可以把之前编译出来的ds服务器的exe拷贝到打包出来的客户端目录里了<code>..\Binaries\Windows\LSPTetrisClient\Binaries\Win64</code>。</p>
+<p>直接双击启动ds服务器，服务器是没有界面的，会直接在后台运行，如果想要关闭，就得去任务管理器关闭了，想要有界面有两种方式启动，其一，通过cmd启动，给exe传入log参数</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-built_in">start</span> LSPTetrisClientServer.exe -<span class="hljs-built_in">log</span><br></code></pre></td></tr></table></figure>
+
+<p>如果没有进入xxServer.exe所在文件夹记得使用绝对路径；</p>
+<p>其二，为xxServer.exe创建快捷方式，在右键&#x2F;属性&#x2F;快捷方式&#x2F;目标，后面加-log，需要用空格隔开，通过快捷方式启动。</p>
+<h2 id="5-客户端连接ds服务器"><a href="#5-客户端连接ds服务器" class="headerlink" title="5.客户端连接ds服务器"></a>5.客户端连接ds服务器</h2><p>启动ds服务器，再启动客户端，这里我在局域网里用两台电脑测试，做服务器的主机ip为10.14.32.50，做客户端的主机ip为10.14.99.156。</p>
+<p>将打出来的包拷贝到另一台电脑里，如果直接运行<code>Windows\LSPTetrisClient\Binaries\Win64</code>下的客户端exe，提示缺少dll无法运行的话，UE5还在包的根目录贴心的准备了一个安装运行环境的exe，双击把环境安装好就可以运行了。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214056.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214056.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><strong>测试结果：</strong></p>
+<p>启动ds服务器时，可以看到服务器加载了默认的ServerMap</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214103.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214103.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>然后我们再另一台电脑上启动客户端，此时客户端加载了在项目中配置的默认地图</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214112.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214112.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>由于我们没有在地图中加任何Actor，所以地图是一片黑，后面我们再往里面加东西，我们也没有写连接ds的逻辑，所以这里我们使用控制台来连接ds，在客户端窗口按下<code>~</code>这个键，输入</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">open <span class="hljs-number">10.14</span><span class="hljs-number">.32</span><span class="hljs-number">.50</span><span class="hljs-comment">//这是我的运行ds服务器主机的IP</span><br></code></pre></td></tr></table></figure>
+
+<p>然后我们就可以看到客户端同步到服务器的地图了</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214120.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214120.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>并且在ds服务器中也能看到有客户端连接进来</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214127.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214127.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h2 id="6-实现人物同步"><a href="#6-实现人物同步" class="headerlink" title="6.实现人物同步"></a>6.实现人物同步</h2><p>现在我们开始迭代下一个版本，最基础的人物控制的同步。首先向工程中添加第三人称模板进来。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214134.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214134.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>这时可能会添加不了或者添加进去了有一些东西找不到，这是因为我们在编译引擎时只编译了引擎没有编译Programs下面那一堆的东西，直接再编译一次整个解决方案就好了。</p>
+<h3 id="向场景中添加内容"><a href="#向场景中添加内容" class="headerlink" title="向场景中添加内容"></a>向场景中添加内容</h3><p>现在我们的场景还是一片黑，因为我们的场景里面啥都没有，打开预设面板</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214141.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214141.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>搜索<code>BP_Sky_Sphere</code>和<code>DirectionalLight</code>，将天空球和平行光添加到场景里，现在场景就变成了我们熟悉的界面了。分别把ClientMap和ServerMap都布置好，TransitionMap就不需要了，ServerMap里面还需要添加一个Plane以便人物生成之后有地方站立，和一个PlayerStart控制人物的生成位置。</p>
+<h3 id="编写连接ds服务器的逻辑"><a href="#编写连接ds服务器的逻辑" class="headerlink" title="编写连接ds服务器的逻辑"></a>编写连接ds服务器的逻辑</h3><p>然后我们在GameInstance里面编写连接ds服务器的逻辑，逻辑也很简单，直接调用一个内置api就好了。</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-literal">void</span> ULSPTetrisGameInstance::ConnectDs(FString ip)<br>&#123;<br>	GetWorld<span class="hljs-function"><span class="hljs-params">()</span>-&gt;</span>GetFirstPlayerController<span class="hljs-function"><span class="hljs-params">()</span>-&gt;</span>ClientTravel(ip, TRAVEL_Absolute); <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>ClientTravel是PlayerController里的一个函数，所以需要先通过World获取PlayerController来调用。</p>
+<p>ClientTravel有四种连接模式，我们这里使用绝对网址即IP，其他的模式可以直接去<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/4.26/en-US/API/Runtime/Engine/Engine/ETravelType/">官方文档</a>了解。</p>
+<p>然后我们再创建一个UMG来输入IP地址并可以点击登录。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214151.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214151.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214200.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802214200.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>SetFullscreenMode设置游戏以窗口模式运行。</p>
+<p>然后UMG的创建就直接放在ClientMap的关卡蓝图里了。</p>
+<p>然后我们再重新编译一个ds服务器和客户端，如果没有更改服务器相关的代码是不需要重新编译ds服务器的，这里保险起见我还是都重新编了一个。</p>
+<h3 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210804155737.gif"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210804155737.gif" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>机器有点不行，跑起来卡卡的。</p>
+<hr>
+<h1 id="三、Actor同步"><a href="#三、Actor同步" class="headerlink" title="三、Actor同步"></a>三、Actor同步</h1><h2 id="1-普通Actor的网络同步"><a href="#1-普通Actor的网络同步" class="headerlink" title="1.普通Actor的网络同步"></a>1.普通Actor的网络同步</h2><p>使用第三人称模板之所以这么容易就把人物同步给实现了，是因为里面很多设置模板都已经给我们设置好了，那么现在我们继续迭代，实现我们自定义的Actor的网络同步。</p>
+<p>比如我们按下E键在角色前方创建一个物理方块，如何将这个物理方块从创建到掉落的整个过程在所有客户端同步？</p>
+<p>首先我们为方块创建一个出生点，我在人物下面添加一个Sphere组件，去除Sphere的staticmesh使它不显示，然后将相对位置移动到人物前上方用于作为生成方块的位置，</p>
+<p>然后我们创建一个Actor，命名为Cube，给与一个cube的static mesh，给予一个box collision组件，box collision和static mesh都要勾选Simulate Physics和Mass给与Cube物理效果和重力效果。最重要的一步——–勾选Replication&#x2F;Replicates，使Cube可以在各个客户端之间复制，否则Actor是无法进行同步的。</p>
+<p>在Cube里只做一件事，就是生成后3秒自动销毁，给一个自定义事件执行销毁逻辑，并在构造函数里调用。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802215840.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802215840.png" srcset="/img/loading.gif" lazyload alt="image-20210802215806819"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802215840.png">image-20210802215806819</a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802215842.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802215842.png" srcset="/img/loading.gif" lazyload alt="image-20210802215735373"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802215842.png">image-20210802215735373</a></p>
+<p>然后我们在ThridPersonCharacter中也添加一个自定义事件，用于执行创建Cube的逻辑，然后在按键E的检测事件中调用这个事件。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802220241.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802220241.png" srcset="/img/loading.gif" lazyload alt="image-20210802220238583"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802220241.png">image-20210802220238583</a></p>
+<h3 id="蓝图的属性复制"><a href="#蓝图的属性复制" class="headerlink" title="蓝图的属性复制"></a>蓝图的属性复制</h3><p>为什么一定要将Cube的创建封装在一个自定义事件里？因为只有自定义事件才可以选择是事件的执行位置。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802220405.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802220405.png" srcset="/img/loading.gif" lazyload alt="image-20210802220402817"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210802220405.png">image-20210802220402817</a></p>
+<ul>
+<li>Not Replicated：不进行网络复制；</li>
+<li>Multicast：由服务器调用，在服务器和所有客户端执行；</li>
+<li>Run on Server：在客户端中调用，在服务器中执行；</li>
+<li>Run on owning Client：只在有所有权的客户端执行，执行结果不会同步到其他客户端。</li>
+</ul>
+<h3 id="执行效果"><a href="#执行效果" class="headerlink" title="执行效果"></a>执行效果</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210804155737.gif"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210804155737.gif" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>这里加了一个人物触碰时更改cube颜色的效果，以便同步时显示的更明显。</p>
+<h3 id="Actor的所有权—ROLE"><a href="#Actor的所有权—ROLE" class="headerlink" title="Actor的所有权—ROLE"></a>Actor的所有权—ROLE</h3><p>UE将Actor的控制权分成了三类，分别是：</p>
+<ul>
+<li>ROLE_None：这个None就是我们平常理解的None，不属于下面三种的都是None</li>
+<li>ROLE_Authority：服务器拥有所有Actor的控制权，即所有的Actor在服务器端的控制权都是ROLE_Authority</li>
+<li>ROLE_AutonomousProxy：客户端对本地Actor拥有这个控制权</li>
+<li>ROLE_SimulatedProxy：客户端对网络Actor，即其他端的Actor，拥有这个控制权</li>
+</ul>
+<p>这个三个属性是UE设计Actor时就为Actor设计好的固有属性，可以用于判断一个Actor所在位置，因为UE的服务器代码和客户端代码是一体的，所以Actor设计这个属性是十分必要的。</p>
+<p>我们可以用一个示例来具体观摩一下，我们将项目继续迭代，现在我们在角色的头顶添加一个TextRender，然后把GetLocalRole的控制权名称设置到TextRender上。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225948.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225948.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>然后运行起来</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225951.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809225951.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230015.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230015.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230012.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230012.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>可以看到，在服务器端的窗口上所有的人物都显示的是ROLE_Authority，而在两个客户端的窗口上只有自己控制的人物显示ROLE_AutonomousProxy，其他的都显示ROLE_SimulatedProxy，尽管其中有一个人物是服务器生成的，但对于这个客户端来说它也属于其他端的Actor。</p>
+<h2 id="2-自定义Pawn的网络同步"><a href="#2-自定义Pawn的网络同步" class="headerlink" title="2.自定义Pawn的网络同步"></a>2.自定义Pawn的网络同步</h2><p>关于自定义Pawn的网络同步，在网上的资料简直少得可怜，项目迭代到这里，也是磕磕绊绊搞了好一阵子。</p>
+<p>这里为了和第三人称模板完全脱离关系，我们创建一些自己的GamePlay。</p>
+<ul>
+<li>创建一个自己的GameMode：LSPGameMode</li>
+<li>创建一个自己的PlayerController：LSPPlayerController</li>
+<li>创建一个自己的可控制的Pawn：Ball</li>
+</ul>
+<p>然后把GameMode换成LSPGameMode，把LSPGameMode的PlayerControllerClass换成LSPPlayerController，把DefaultPawnClass换成Ball。</p>
+<h3 id="实现一个可控制滚动的Pawn"><a href="#实现一个可控制滚动的Pawn" class="headerlink" title="实现一个可控制滚动的Pawn"></a>实现一个可控制滚动的Pawn</h3><p>这里推荐跟着UE4中的Rolling模板来做，在UE5中这个模板已经被移除了。</p>
+<p>Pawn的结构</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230019.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230019.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>这里为了看起来滚动明显一点就给了一个Cube的Mesh。</p>
+<p>Pawn的蓝图</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230245.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230245.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>这里PlayerController的硬件输入配置还是沿用第三人称模板预定义好的那些配置。</p>
+<p>这里单独把角色控制封装在一个事件里也是为了让控制Pawn滚动的蓝图跑在服务器上，这样服务器才能把一个客户端的运动同步到其他的客户端。</p>
+<p>这里Speed和JumpImpulse的值要给大一点，否则滚跳起来没什么效果。</p>
+<p>在实现可滚动的方块时，出现了摄像机和方块一起滚动的问题，这是我们需要把SpringArm下的这些勾都取消掉。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230039.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230039.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>到这里一个可控制的滚动方块就成了，下面是运行效果</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230039.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230039.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>然后打包客户端，按理来说ds服务器是不需要再编译了的，因为服务器也是用的客户端的代码，编译出来的exe也就是提供一个服务器的入口，如果不行的话建议也再编译一次服务器。</p>
+<h3 id="运行效果-1"><a href="#运行效果-1" class="headerlink" title="运行效果"></a>运行效果</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230136.gif"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230136.gif" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h1 id="四、Actor的属性同步"><a href="#四、Actor的属性同步" class="headerlink" title="四、Actor的属性同步"></a>四、Actor的属性同步</h1><h2 id="1-简单属性的同步"><a href="#1-简单属性的同步" class="headerlink" title="1.简单属性的同步"></a>1.简单属性的同步</h2><p>前面我们都是停留在角色移动的网络同步上，而实际游戏中除了最基础移动同步外，还有很多其他的属性数据也需要同步，比如当某一个客户端的角色换了一个皮肤之后，其他的客户端里这个角色也应该同步显示新的皮肤。</p>
+<p>如果要实现客户端的属性发生改变的同时属性值同步到其他客户端中，我们需要铭记两点：</p>
+<ul>
+<li>属性的Replication应勾选Replicated或RepNotify；</li>
+<li>修改属性的代码或蓝图必须运行在服务器上。</li>
+</ul>
+<p><strong>Actor的Replication</strong></p>
+<p>Replication是任何派生于UObject的类的变量的固有属性，用于标识这个变量是否允许网络同步。在蓝图中Replication属性有三种可选值</p>
+<ul>
+<li>None：属性不允许网络同步；</li>
+<li>Replication：属性允许网络同步；</li>
+<li>RepNotify：属性允许网络同步，同时绑定一个回调函数，属性发生变化时回调，在蓝图中回调函数会自动创建在FUNCTION中并以<code>OnRep_</code>开头，以属性名结尾，如属性pos的回调函数为<code>OnRep_pos</code>。</li>
+</ul>
+<p>现在我们继续迭代项目，我们在自定义Pawn中添加一个整型变量Time，这里我选择将Time的Repliction属性设置成RepNotify，以便Time发生变化时修改TextRender的Text。然后在Pawn中添加一个TextRender用于显示Time的值，我们把TextRender放在SpringArm下，这样文字就不会跟着方块滚动。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230154.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230154.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>然后在Ball中添加如下蓝图：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230159.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230159.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>这里要注意的一点就是Time值得修改要运行在服务器上，所以SetTime节点我用来一个运行在服务器上的自定义事件封装。</p>
+<p>OnRep_Time函数</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230207.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230207.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>Client Widget的蓝图</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230210.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230210.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>这里使用的是Editable Text并添加了一个On Text Commited事件，这个事件在输入完成后按下Enter键触发。</p>
+<p>然后我们跑起来看一下效果，为了方便起见，这里我就直接使用Listen Server模式来运行了</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230214.gif"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809230214.gif" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h2 id="1-复杂属性的同步"><a href="#1-复杂属性的同步" class="headerlink" title="1.复杂属性的同步"></a>1.复杂属性的同步</h2><p>按理来说，将属性的Replication设置为Replicated或RepNotify，然后在服务器上修改属性值，属性就应该由服务器广播到所有客户端同步，然而我在测试同步一个UObject类作为Actor的属性时，发现仅仅通过上面的步骤无法在所有的客户端同步这个属性。如果将修改操作封装在一个Run on Server事件中，那么只有服务器中对应的Actor的值被修改了却没有同步到其他的客户端，如果将修改操作封装在一个Multicast事件中，则只有在服务器中做的修改才会被同步。我这里通过两层封装解决了这个问题，至于这个问题具体是什么原因造成的，暂时还没弄明白。</p>
+<p>具体迭代步骤：</p>
+<p>创建一个继承至UObject的类—BallData用于存储自定义Pawn—Ball的数据。</p>
+<p>在BallData中创建一个FString类型的数组—SpeekStr，初始化三组数据，并设置Replication为Replicated。</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809235321.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809235321.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>在Ball中创建一个BallData类型的变量，设置Replication为Replicated。</p>
+<p>在Ball中增加如下蓝图</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809235324.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809235324.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>我在BeginPlay中构建BallData对象，并启动每3秒读取一次数组值的循环事件。</p>
+<p>这里我们要同步的是BallData类型变量Data中的SpeekStr数组，对数组的元素增加操作我使用两成封装，第一层直接将操作封装在一个Multicast事件中，然后将Multicast事件封装在一个Run on Server事件中，这样MultiSpeek将运行在服务器中，然后再有服务器调用广播事件AddSpeek，将对数组的元素增加操作广播到所有的客户端中。</p>
+<p>执行效果</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809235352.gif"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210809235352.gif" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h1 id="五、C-中的网络同步"><a href="#五、C-中的网络同步" class="headerlink" title="五、C++中的网络同步"></a>五、C++中的网络同步</h1><p>C++的网络同步在函数层面主要就是UFUNCTION宏的三个参数Server、Client和NetMulticast，而在变量层面主要UPROPERTY宏的参数Replicated。</p>
+<p>一般情况下我们的网络同步都是在Actor中进行，这里我直接深一个层次，在继承自UObject的UActorComponent组件中来进行网络同步。其实大部分操作和Actor基本是一样的，只有一小部分的区别。</p>
+<p>这里我创建一个继承自UActorComponent的组件UChatComponent，并把ChatComponent组件添加到Ball身上。</p>
+<p>然后我这里先上一份源码：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">//ChatComponent.h</span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> once</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Components/TextRenderComponent.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Blueprint/UserWidget.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;CoreMinimal.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Components/ActorComponent.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;ChatComponent.generated.h&quot;</span></span><br><br><br><span class="hljs-built_in">UCLASS</span>( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">LSPTETRISCLIENT_API</span> UChatComponent : <span class="hljs-keyword">public</span> UActorComponent<br>&#123;<br>	<span class="hljs-built_in">GENERATED_BODY</span>()<br><br><span class="hljs-keyword">public</span>:	<br>	<span class="hljs-built_in">UChatComponent</span>();<br>	<span class="hljs-built_in">UPROPERTY</span>(Replicated)<br>	<span class="hljs-type">int</span> cubeCount = <span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">UPROPERTY</span>(ReplicatedUsing = OnRep_cubeCountTotal, EditAnywhere, BlueprintReadWrite)<br>	<span class="hljs-type">int</span> cubeCountTotal = <span class="hljs-number">20</span>;<br>	<span class="hljs-built_in">UPROPERTY</span>(EditAnywhere,BlueprintReadWrite)<br>	FColor TextColor = <span class="hljs-built_in">FColor</span>(<span class="hljs-number">0</span>);<br><span class="hljs-keyword">private</span>:<br>	APlayerController* playerPtr;<br>	UClass* Cube;<br><span class="hljs-keyword">protected</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">BeginPlay</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br><br><span class="hljs-keyword">public</span>:	<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">TickComponent</span><span class="hljs-params">(<span class="hljs-type">float</span> DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)</span> <span class="hljs-keyword">override</span></span>;<br>	<br>	<span class="hljs-built_in">UFUNCTION</span>(<span class="hljs-built_in">Server</span>,Reliable)<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">SpwanCube</span><span class="hljs-params">()</span></span>;<br>	<span class="hljs-built_in">UFUNCTION</span>(<span class="hljs-built_in">Client</span>,Reliable,BlueprintCallable)<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">SwitchTextRenderColor</span><span class="hljs-params">()</span></span>;<br>	<span class="hljs-built_in">UFUNCTION</span>(NetMulticast, Reliable)<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">NetMulticastSetTextRenderColor</span><span class="hljs-params">(UTextRenderComponent* textRender)</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">GetLifetimeReplicatedProps</span><span class="hljs-params">(TArray&lt;FLifetimeProperty&gt;&amp; OutLifetimeProps)</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span></span>;<br>    <span class="hljs-built_in">UFUNCTION</span>()<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">OnRep_cubeCountTotal</span><span class="hljs-params">()</span></span>;<br>&#125;;<br><span class="hljs-comment">//ChatComponent.cpp</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Replication/ChatComponent.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;InputCoreTypes.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Net/UnrealNetwork.h&quot;</span></span><br><br>UChatComponent::<span class="hljs-built_in">UChatComponent</span>()<br>&#123;<br>	PrimaryComponentTick.bCanEverTick = <span class="hljs-literal">true</span>;<br>	<span class="hljs-built_in">SetIsReplicated</span>(<span class="hljs-literal">true</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UChatComponent::BeginPlay</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	Super::<span class="hljs-built_in">BeginPlay</span>();<br>	playerPtr = <span class="hljs-built_in">GetWorld</span>()-&gt;<span class="hljs-built_in">GetFirstPlayerController</span>();<br>	Cube = <span class="hljs-built_in">LoadClass</span>&lt;AActor&gt;(<span class="hljs-literal">NULL</span>, <span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;Blueprint&#x27;/Game/Map/Cube.Cube_C&#x27;&quot;</span>));	<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UChatComponent::TickComponent</span><span class="hljs-params">(<span class="hljs-type">float</span> DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)</span></span><br><span class="hljs-function"></span>&#123;<br>	Super::<span class="hljs-built_in">TickComponent</span>(DeltaTime, TickType, ThisTickFunction);<br><br>	<span class="hljs-keyword">if</span> (playerPtr-&gt;<span class="hljs-built_in">IsInputKeyDown</span>(EKeys::LeftMouseButton))<br>	&#123;<br>		<span class="hljs-built_in">SpwanCube</span>();<br>	&#125;<br>	<span class="hljs-built_in">SwitchTextRenderColor</span>();<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UChatComponent::SwitchTextRenderColor_Implementation</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-built_in">GetWorld</span>()-&gt;<span class="hljs-built_in">IsServer</span>())<br>	&#123;<br>		<span class="hljs-keyword">if</span> (cubeCount &gt;= cubeCountTotal)<br>		&#123;<br>			cubeCount = <span class="hljs-number">0</span>;<br>			TArray&lt;UTextRenderComponent*&gt; comps;<br>			<span class="hljs-built_in">GetOwner</span>()-&gt;<span class="hljs-built_in">GetComponents</span>(comps);<br>			<span class="hljs-keyword">if</span> (comps.<span class="hljs-built_in">Num</span>() != <span class="hljs-number">1</span>)<br>			&#123;<br>				<span class="hljs-keyword">return</span>;<br>			&#125;<br>			UTextRenderComponent* textRender = comps[<span class="hljs-number">0</span>];<br>			<span class="hljs-built_in">NetMulticastSetTextRenderColor</span>(textRender);<br>		&#125;<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UChatComponent::SpwanCube_Implementation</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (Cube &amp;&amp; <span class="hljs-built_in">GetWorld</span>())<br>	&#123;<br>		<span class="hljs-built_in">GetWorld</span>()-&gt;<span class="hljs-built_in">SpawnActor</span>&lt;AActor&gt;(Cube, <span class="hljs-built_in">GetOwner</span>()-&gt;<span class="hljs-built_in">GetActorTransform</span>());<br>		cubeCount++;<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UChatComponent::NetMulticastSetTextRenderColor_Implementation</span><span class="hljs-params">(UTextRenderComponent* textRender)</span></span><br><span class="hljs-function"></span>&#123;<br>	textRender-&gt;<span class="hljs-built_in">SetTextRenderColor</span>(TextColor);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UChatComponent::GetLifetimeReplicatedProps</span><span class="hljs-params">(TArray&lt;FLifetimeProperty&gt;&amp; OutLifetimeProps)</span> <span class="hljs-type">const</span></span><br><span class="hljs-function"></span>&#123;<br>	Super::<span class="hljs-built_in">GetLifetimeReplicatedProps</span>(OutLifetimeProps);<br>	<span class="hljs-built_in">DOREPLIFETIME</span>(UChatComponent, cubeCount);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UChatComponent::OnRep_cubeCountTotal</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (cubeCountTotal &gt;= <span class="hljs-number">40</span>)<br>	&#123;<br>		FString msg = FString::<span class="hljs-built_in">FromInt</span>(cubeCountTotal);<br>		GEngine-&gt;<span class="hljs-built_in">AddOnScreenDebugMessage</span>(<span class="hljs-number">-1</span>, <span class="hljs-number">5</span>, FColor::Red, *msg);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>下面我们一行一行的来解析</p>
+<h2 id="1-UNFUNCTION-Server-Reliable"><a href="#1-UNFUNCTION-Server-Reliable" class="headerlink" title="1.UNFUNCTION(Server, Reliable)"></a>1.UNFUNCTION(Server, Reliable)</h2><p>Server表示这个函数在客户端调用在服务器执行，和前面的Run on Server蓝图事件对应。</p>
+<h2 id="2-UFUNCTION-Client-Reliable"><a href="#2-UFUNCTION-Client-Reliable" class="headerlink" title="2.UFUNCTION(Client, Reliable)"></a>2.UFUNCTION(Client, Reliable)</h2><p>Client表示这个函数在服务器调用在拥有这个Actor或UObject的客户端执行，函数执行的结果只在执行函数的客户端显示，不会同步到其他的客户端，和前面的Run on owning Client蓝图事件对应。</p>
+<h2 id="3-UFUNCTION-NetMulticast-Reliable"><a href="#3-UFUNCTION-NetMulticast-Reliable" class="headerlink" title="3.UFUNCTION(NetMulticast, Reliable)"></a>3.UFUNCTION(NetMulticast, Reliable)</h2><p>NetMulticast表示这个函数在服务器调用并在服务器和所有与服务器连接并拥有这个Actor或Object的客户端上执行，和前面的Multicast蓝图事件对应。</p>
+<h2 id="4-Reliable"><a href="#4-Reliable" class="headerlink" title="4.Reliable"></a>4.Reliable</h2><p>Server，Client和Multicast都需要搭配Reliable使用，否则编译无法通过，Reliable表示函数可以在网络空间进行复制，并会忽略带宽或网络错误而被确保送达，这保证了RPC的安全性。</p>
+<h2 id="5-RPC函数的实现"><a href="#5-RPC函数的实现" class="headerlink" title="5.RPC函数的实现"></a>5.RPC函数的实现</h2><p>当一个函数被标识了Server，Client或Multicast宏后，函数的实现就和普通函数不一样了，函数实现的函数名和函数定义的函数名发生了变化，函数实现的函数名需要加一个<code>_Implementation</code>后缀，否则编译会报错。</p>
+<h2 id="6-重写GetLifetimeReplicatedProps函数"><a href="#6-重写GetLifetimeReplicatedProps函数" class="headerlink" title="6.重写GetLifetimeReplicatedProps函数"></a>6.重写GetLifetimeReplicatedProps函数</h2><p>在UE5中，Actor是默认拥有网络同步能力的，但是UObject没有默认拥有网络同步，所以如果我们不重写GetLifetimeReplicatedProps函数，尽管成员函数标识了Server，Client或NetMulticast宏，UObject也依旧不具备网络同步的能力。</p>
+<h2 id="7-DOREPLIFETIME"><a href="#7-DOREPLIFETIME" class="headerlink" title="7.DOREPLIFETIME"></a>7.DOREPLIFETIME</h2><p>除了<code>DOREPLIFETIME</code>宏UE5还有一个<code>DOREPLIFETIME_CONDITION</code>宏，二者的实机作用都是一样的，都是用于注册属性的条件复制的，当我们类里的变量</p>
+<p>这里我在BeginPlay里加载了一个在前面第三节创建的Cube蓝图类，然后在SpawnCube函数中实现Cube的创建过程，这样Cube的创建过程就跑在了服务器上，而Cube勾选了Replicated，这样Cube的创建过程就可以通过服务器同步到所有的客户端中了。</p>
+<p>然后我在SwitchTextRenderColor函数中修改Ball下面的UTextRenderComponent组件的字体颜色。由于SwitchTextRenderColor是在服务器调用在客户端执行，所以函数里面使用了<code>GetWorld()-&gt;IsServer()</code>来判断执行端是否是服务器，如果不做判断的话，函数会在服务器上调用但是却会在所有拥有UChatComponent组件的Ball上执行，而我要的效果是当服务器中Ball发射了超过20个Cube时只修改服务器上的Ball的Textrender的字体颜色，并把这个效果同步到其他客户端中对应的Ball上。</p>
+<p>所以我在SwitchTextRenderColor中有调用了一个NetMulticast函数NetMulticastSetTextRenderColor以将这个执行结果的变化同步到其他的客户端中。</p>
+<p>我们来看一下效果</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811223042.gif"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811223042.gif" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>可以看到只有在服务器中Ball执行的时候颜色才会发生变化，并将变化同步到了所有的客户算中。</p>
+<p>这里在UI里加了一个可以更改cubeCountTotal值的蓝图，和颜色修改后自动恢复过来的蓝图，蓝图比较简单就不贴出来了。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/UE5/" class="print-no-link">#UE5</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【UE5】UE5 Dedicated Server专用服务器与网络同步</div>
+      <div>http://example.com/2021/08/11/【UE5】UE5 Dedicated Server专用服务器与网络同步/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 11, 2021</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/08/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%A1%86%E6%9E%B6/" title="【UE4】UE4GamePlay框架">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【UE4】UE4GamePlay框架</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/05/%E3%80%90UE4%E3%80%91UE4%E5%9C%A8%E7%BD%91%E9%A1%B5%E9%87%8C%E5%B1%95%E7%A4%BA%E8%99%9A%E6%8B%9F%E5%BD%A2%E8%B1%A1/" title="【UE4】UE4在网页里展示虚拟形象">
+                        <span class="hidden-mobile">【UE4】UE4在网页里展示虚拟形象</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
