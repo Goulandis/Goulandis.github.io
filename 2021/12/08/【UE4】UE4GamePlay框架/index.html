@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
@@ -16,27 +16,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
-  <meta name="keywords" content="">
+  <meta name="author" content="Goulandis">
+  <meta name="keywords" content="技术博客，Hexo，UE5，编程">
   
     <meta name="description" content="这篇博文主要记录一些自己在学习GamePlay的过程中一些心得记录，最开始使用的是UE5源码学习，后来不知道不小心改了啥，UE5源码崩了，就换回了UE4.26所以源码部分可能会有一部分来自UE5有一部分来自UE4，会有点出入。 参考博客：UE4官方文档、大钊、南京周润发、带带大师兄、yblackd、董国政、 Ken_An、张悟基、paprika">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【UE4】UE4GamePlay框架">
 <meta property="og:url" content="http://example.com/2021/12/08/%E3%80%90UE4%E3%80%91UE4GamePlay%E6%A1%86%E6%9E%B6/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Goulandis">
 <meta property="og:description" content="这篇博文主要记录一些自己在学习GamePlay的过程中一些心得记录，最开始使用的是UE5源码学习，后来不知道不小心改了啥，UE5源码崩了，就换回了UE4.26所以源码部分可能会有一部分来自UE5有一部分来自UE4，会有点出入。 参考博客：UE4官方文档、大钊、南京周润发、带带大师兄、yblackd、董国政、 Ken_An、张悟基、paprika">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20211208141236.jpeg">
 <meta property="article:published_time" content="2021-12-07T16:00:00.000Z">
 <meta property="article:modified_time" content="2025-12-23T14:33:00.711Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Goulandis">
 <meta property="article:tag" content="UE4">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20211208141236.jpeg">
   
   
   
-  <title>【UE4】UE4GamePlay框架 - Hexo</title>
+  <title>【UE4】UE4GamePlay框架 - Goulandis</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -120,7 +120,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                <span>Home</span>
+                <span>首页</span>
               </a>
             </li>
           
@@ -132,7 +132,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                <span>Archives</span>
+                <span>归档</span>
               </a>
             </li>
           
@@ -144,7 +144,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                <span>Categories</span>
+                <span>分类</span>
               </a>
             </li>
           
@@ -156,7 +156,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                <span>Tags</span>
+                <span>标签</span>
               </a>
             </li>
           
@@ -168,7 +168,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                <span>About</span>
+                <span>关于</span>
               </a>
             </li>
           
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          22k words
+          22k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          184 mins
+          184 分钟
         
       </span>
     
@@ -1050,26 +1050,26 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
-          <div>John Doe</div>
+          <div>作者</div>
+          <div>Goulandis</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
-          <div>December 8, 2021</div>
+          <div>发布于</div>
+          <div>2021年12月8日</div>
         </div>
       
       
       
         <div class="license-meta-item">
-          <div>Licensed under</div>
+          <div>许可协议</div>
           <div>
             
               
               
                 <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
                     <i class="iconfont icon-cc-by"></i>
                   </span>
                 </a>
@@ -1092,7 +1092,7 @@
                       <a href="/2022/01/27/%E3%80%90UE4%E3%80%91%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="【UE4】文件系统">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">【UE4】文件系统</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -1101,7 +1101,7 @@
                     
                       <a href="/2021/08/11/%E3%80%90UE5%E3%80%91UE5%20Dedicated%20Server%E4%B8%93%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5/" title="【UE5】UE5 Dedicated Server专用服务器与网络同步">
                         <span class="hidden-mobile">【UE5】UE5 Dedicated Server专用服务器与网络同步</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -1122,7 +1122,7 @@
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span>Table of Contents</span>
+    <span>目录</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -1178,7 +1178,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -1186,7 +1186,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -1360,7 +1360,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

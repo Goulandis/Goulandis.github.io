@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
@@ -16,27 +16,28 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
-  <meta name="keywords" content="">
+  <meta name="author" content="Goulandis">
+  <meta name="keywords" content="技术博客，Hexo，UE5，编程">
   
-    <meta name="description" content="有时我们在设计UMG时可能会使用到C++父类来处理一些通用逻辑，如果我们想要在C++父类中获取其派生子类的某个属性，如Image或Button等，我们可以通过使用UE提供的BindWidget元数据标签的方式来获取。">
+    <meta name="description" content="最近在使用UE的Socket模块与Python服务器进行通信时遇到了一些坑，特此记录一下。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【UE5】UMG C++父类绑定蓝图子类属性">
-<meta property="og:url" content="http://example.com/2024/12/28/%E3%80%90UE5%E3%80%91UMG%20C++%E7%88%B6%E7%B1%BB%E7%BB%91%E5%AE%9A%E8%93%9D%E5%9B%BE%E5%AD%90%E7%B1%BB%E5%B1%9E%E6%80%A7/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="有时我们在设计UMG时可能会使用到C++父类来处理一些通用逻辑，如果我们想要在C++父类中获取其派生子类的某个属性，如Image或Button等，我们可以通过使用UE提供的BindWidget元数据标签的方式来获取。">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/PixPin_2024-08-26_17-08-32.png">
-<meta property="article:published_time" content="2024-12-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-28T08:33:22.175Z">
-<meta property="article:author" content="John Doe">
+<meta property="og:url" content="http://example.com/2025/12/28/%E3%80%90UE5%E3%80%91UMG%20C++%E7%88%B6%E7%B1%BB%E7%BB%91%E5%AE%9A%E8%93%9D%E5%9B%BE%E5%AD%90%E7%B1%BB%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:site_name" content="Goulandis">
+<meta property="og:description" content="最近在使用UE的Socket模块与Python服务器进行通信时遇到了一些坑，特此记录一下。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/Pics/BindWidget/PixPin_2024-08-26_16-56-02.png">
+<meta property="og:image" content="http://example.com/Pics/BindWidget/PixPin_2024-08-26_17-08-32.png">
+<meta property="article:published_time" content="2025-12-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-28T08:51:22.976Z">
+<meta property="article:author" content="Goulandis">
 <meta property="article:tag" content="UE5">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/PixPin_2024-08-26_17-08-32.png">
+<meta name="twitter:image" content="http://example.com/Pics/BindWidget/PixPin_2024-08-26_16-56-02.png">
   
   
   
-  <title>【UE5】UMG C++父类绑定蓝图子类属性 - Hexo</title>
+  <title>【UE5】UMG C++父类绑定蓝图子类属性 - Goulandis</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -120,7 +121,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                <span>Home</span>
+                <span>首页</span>
               </a>
             </li>
           
@@ -132,7 +133,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                <span>Archives</span>
+                <span>归档</span>
               </a>
             </li>
           
@@ -144,7 +145,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                <span>Categories</span>
+                <span>分类</span>
               </a>
             </li>
           
@@ -156,7 +157,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                <span>Tags</span>
+                <span>标签</span>
               </a>
             </li>
           
@@ -168,7 +169,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                <span>About</span>
+                <span>关于</span>
               </a>
             </li>
           
@@ -213,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-12-28 00:00" pubdate>
-          2024年12月28日
+        <time datetime="2025-12-28 00:00" pubdate>
+          2025年12月28日
         </time>
       </span>
     
@@ -225,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          743 words
+          773 字
         
       </span>
     
@@ -236,7 +237,7 @@
         
         
         
-          7 mins
+          7 分钟
         
       </span>
     
@@ -280,13 +281,12 @@
                 
                 <meta name="referrer" content="no-referrer" />
 
-
+<p>最近在使用UE的Socket模块与Python服务器进行通信时遇到了一些坑，特此记录一下。</p>
+<span id="more"></span>
 
 
 
 <p>有时我们在设计UMG时可能会使用到C++父类来处理一些通用逻辑，如果我们想要在C++父类中获取其派生子类的某个属性，如Image或Button等，我们可以通过使用UE提供的<code>BindWidget</code>元数据标签的方式来获取。</p>
-<span id="more"></span>
-
 <h2 id="BindWidget"><a href="#BindWidget" class="headerlink" title="BindWidget"></a>BindWidget</h2><p>BindWidget元数据标签在官方文档中并没有出现，但引擎是支持这个标签的。</p>
 <p>在看例子之前我们需要注意一些BindWidget的要求：</p>
 <ul>
@@ -299,13 +299,13 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">UCLASS</span>()<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MYPROJECT_API</span> UCusWidget : <span class="hljs-keyword">public</span> UUserWidget<br>&#123;<br>	<span class="hljs-built_in">GENERATED_BODY</span>()<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, Meta = (BindWidget),Category = <span class="hljs-string">&quot;CusWidget&quot;</span>)<br>	UImage* CusImage;<br>	<span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, Meta = (BindWidget),Category = <span class="hljs-string">&quot;CusWidget&quot;</span>)<br>	UTextBlock* CusText;<br><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">NativeConstruct</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <p>然后创建一个继承自UCusWidget的UMG蓝图UW_Cus，为UI添加一个Image并命名为CusImage，添加一个TextBlock并命名为CusText：</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/PixPin_2024-08-26_16-56-02.png"></p>
+<p><img src="/Pics/BindWidget/PixPin_2024-08-26_16-56-02.png"></p>
 <p>这样控件CusImage和CusText就和父类中的同名变量绑定了，如此父类便可以通过同名变量来控制子类的控件了。</p>
 <p>这里我们在Widget构造时给与CusImage一个随机颜色并在CusText中显示颜色的RGBA值：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UCusWidget::NativeConstruct</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	Super::<span class="hljs-built_in">NativeConstruct</span>();<br>	<span class="hljs-keyword">if</span>(CusImage)<br>	&#123;<br>		CusImage-&gt;<span class="hljs-built_in">SetColorAndOpacity</span>(FLinearColor::<span class="hljs-built_in">MakeRandomColor</span>());<br>	&#125;<br>	<span class="hljs-keyword">if</span>(CusText)<br>	&#123;<br>		CusText-&gt;<span class="hljs-built_in">SetText</span>(FText::<span class="hljs-built_in">FromString</span>(CusImage-&gt;ColorAndOpacity.<span class="hljs-built_in">ToString</span>()));<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>然后就可以看到结果了：</p>
-<p><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/PixPin_2024-08-26_17-08-32.png"></p>
+<p><img src="/Pics/BindWidget/PixPin_2024-08-26_17-08-32.png"></p>
 <p>这里我在另一个Widget中封装了多个UW_Cus以便观察。</p>
 <p>这里有一个坑需要注意，更新控件属性时应该使用对应的Set函数，如：<code>CusImage-&gt;SetColorAndOpacity(FLinearColor::MakeRandomColor())</code>，而不是直接赋值，如：<code>CusImage-&gt;ColorAndOpacity = FLinearColor::MakeRandomColor()</code>，直接赋值Widget不会更新样式。</p>
 <h2 id="BindWidgetOptional"><a href="#BindWidgetOptional" class="headerlink" title="BindWidgetOptional"></a>BindWidgetOptional</h2><p>BindWidget元数据需要强制绑定子蓝图的同名控件，而BindWidgetOptional功能上和BindWidget一致，但不需要强制绑定子蓝图中的同名控件，所以这就要求在书写C++代码时需要更严谨，因为它们修饰的变量都是指针，而使用BindWidgetOptional极容易出现空指针。</p>
@@ -368,31 +368,31 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>【UE5】UMG C++父类绑定蓝图子类属性</div>
-      <div>http://example.com/2024/12/28/【UE5】UMG C++父类绑定蓝图子类属性/</div>
+      <div>http://example.com/2025/12/28/【UE5】UMG C++父类绑定蓝图子类属性/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
-          <div>John Doe</div>
+          <div>作者</div>
+          <div>Goulandis</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
-          <div>December 28, 2024</div>
+          <div>发布于</div>
+          <div>2025年12月28日</div>
         </div>
       
       
       
         <div class="license-meta-item">
-          <div>Licensed under</div>
+          <div>许可协议</div>
           <div>
             
               
               
                 <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
                     <i class="iconfont icon-cc-by"></i>
                   </span>
                 </a>
@@ -412,19 +412,19 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/12/28/%E3%80%90UE5%E3%80%91UE5%20PCG/" title="【UE5】UE5 PCG">
+                      <a href="/2025/12/28/%E3%80%90UE5%E3%80%91Android%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8%E8%84%B8%E6%8D%95/" title="【UE5】Android环境使用脸捕">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【UE5】UE5 PCG</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="hidden-mobile">【UE5】Android环境使用脸捕</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/28/%E3%80%90UE5%E3%80%91%E6%95%B0%E5%AD%97%E4%BA%BA%E5%9F%BA%E7%A1%80/" title="【UE5】数字人基础">
-                        <span class="hidden-mobile">【UE5】数字人基础</span>
-                        <span class="visible-mobile">Next</span>
+                      <a href="/2025/12/28/%E3%80%90UE5%E3%80%91%E5%8A%A8%E6%80%81%E6%92%AD%E6%94%BE%E5%AA%92%E4%BD%93/" title="【UE5】动态播放媒体">
+                        <span class="hidden-mobile">【UE5】动态播放媒体</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -445,7 +445,7 @@
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span>Table of Contents</span>
+    <span>目录</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -501,7 +501,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -509,7 +509,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -683,7 +683,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

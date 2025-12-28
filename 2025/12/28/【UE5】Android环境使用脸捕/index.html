@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
@@ -16,27 +16,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
-  <meta name="keywords" content="">
+  <meta name="author" content="Goulandis">
+  <meta name="keywords" content="技术博客，Hexo，UE5，编程">
   
     <meta name="description" content="最近项目上对虚拟人的脸捕、动捕、手捕等有所涉及，于是就想自己搞一套来玩玩，动捕手捕没有设备于是只好向脸捕下手了，现在世面上主流的也是效果最好的UE4脸捕方案是使用iphoneX以上的版本的iphone手机提供的深度摄像头加LiveLinkFace App可以很便捷的实现手机摄像头抓取面部特征并连接到UE实时提供给数字人，做到数字人实时跟随脸捕特征的效果。奈何我也没有iphone手机😂，于是只">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【UE5】Android环境使用脸捕">
 <meta property="og:url" content="http://example.com/2025/12/28/%E3%80%90UE5%E3%80%91Android%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8%E8%84%B8%E6%8D%95/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Goulandis">
 <meta property="og:description" content="最近项目上对虚拟人的脸捕、动捕、手捕等有所涉及，于是就想自己搞一套来玩玩，动捕手捕没有设备于是只好向脸捕下手了，现在世面上主流的也是效果最好的UE4脸捕方案是使用iphoneX以上的版本的iphone手机提供的深度摄像头加LiveLinkFace App可以很便捷的实现手机摄像头抓取面部特征并连接到UE实时提供给数字人，做到数字人实时跟随脸捕特征的效果。奈何我也没有iphone手机😂，于是只">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/MetaHuman1.gif">
 <meta property="article:published_time" content="2025-12-27T16:00:00.000Z">
 <meta property="article:modified_time" content="2025-12-28T08:25:48.144Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Goulandis">
 <meta property="article:tag" content="UE5">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/MetaHuman1.gif">
   
   
   
-  <title>【UE5】Android环境使用脸捕 - Hexo</title>
+  <title>【UE5】Android环境使用脸捕 - Goulandis</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -120,7 +120,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                <span>Home</span>
+                <span>首页</span>
               </a>
             </li>
           
@@ -132,7 +132,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                <span>Archives</span>
+                <span>归档</span>
               </a>
             </li>
           
@@ -144,7 +144,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                <span>Categories</span>
+                <span>分类</span>
               </a>
             </li>
           
@@ -156,7 +156,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                <span>Tags</span>
+                <span>标签</span>
               </a>
             </li>
           
@@ -168,7 +168,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                <span>About</span>
+                <span>关于</span>
               </a>
             </li>
           
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k words
+          1.2k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          11 mins
+          11 分钟
         
       </span>
     
@@ -374,26 +374,26 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
-          <div>John Doe</div>
+          <div>作者</div>
+          <div>Goulandis</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
-          <div>December 28, 2025</div>
+          <div>发布于</div>
+          <div>2025年12月28日</div>
         </div>
       
       
       
         <div class="license-meta-item">
-          <div>Licensed under</div>
+          <div>许可协议</div>
           <div>
             
               
               
                 <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
                     <i class="iconfont icon-cc-by"></i>
                   </span>
                 </a>
@@ -417,9 +417,9 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/12/28/%E3%80%90UE5%E3%80%91%E5%8A%A8%E6%80%81%E6%92%AD%E6%94%BE%E5%AA%92%E4%BD%93/" title="【UE5】动态播放媒体">
-                        <span class="hidden-mobile">【UE5】动态播放媒体</span>
-                        <span class="visible-mobile">Next</span>
+                      <a href="/2025/12/28/%E3%80%90UE5%E3%80%91UMG%20C++%E7%88%B6%E7%B1%BB%E7%BB%91%E5%AE%9A%E8%93%9D%E5%9B%BE%E5%AD%90%E7%B1%BB%E5%B1%9E%E6%80%A7/" title="【UE5】UMG C++父类绑定蓝图子类属性">
+                        <span class="hidden-mobile">【UE5】UMG C++父类绑定蓝图子类属性</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -440,7 +440,7 @@
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span>Table of Contents</span>
+    <span>目录</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -496,7 +496,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -504,7 +504,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -678,7 +678,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>
