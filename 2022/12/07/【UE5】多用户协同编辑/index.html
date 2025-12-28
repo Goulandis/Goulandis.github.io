@@ -79,7 +79,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -293,10 +293,10 @@
 <span id="more"></span>
 
 <h2 id="1-启用插件"><a href="#1-启用插件" class="headerlink" title="1.启用插件"></a>1.启用插件</h2><p>首先打开Multi-User Editing插件，插件会要求重启，重启之后，在Project Settings&#x2F;Plugins下会多出一个Multi-User Editing选项。</p>
-<h2 id="2-多用户协同配置"><a href="#2-多用户协同配置" class="headerlink" title="2.多用户协同配置"></a>2.多用户协同配置</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238897.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238897.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h2 id="2-多用户协同配置"><a href="#2-多用户协同配置" class="headerlink" title="2.多用户协同配置"></a>2.多用户协同配置</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238897.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238897.png" alt="img"></a></p>
 <ul>
 <li><p>Enable Multi-User Toolbar Button：勾选之后需要重启编辑器，在编辑器的菜单栏会多出一个多用户协同的按钮。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238240.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238240.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238240.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238240.png" alt="img"></a></p>
 <p>点击按钮会打开Multi-User Browser视图。</p>
 </li>
 <li><p>Auto Connect、Default Server URL和Default Session Name：这三个是配合使用的，勾选Auto Connect(实际使用勾不勾选好像都一样)，Default Server URL设置默认的服务器地址，Default Session Name设置连上服务器后默认加入的会话。</p>
@@ -305,17 +305,17 @@
 <li><p>Display Name：在多人协同中显示的名字，不设置就会使用Windows登录用户的名称。</p>
 </li>
 <li><p>Avatar Color：用户连上服务器是显示的标识颜色，再会话和修改历时中都会显示。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238807.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238807.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238807.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238807.png" alt="img"></a></p>
 </li>
 </ul>
 <h2 id="3-配置UDP消息"><a href="#3-配置UDP消息" class="headerlink" title="3.配置UDP消息"></a>3.配置UDP消息</h2><p>在Project Settings&#x2F;UDP Messaging下还需要设置Transport&#x2F;Unicast Endpoint为本机IP地址，端口固定设置为0，在Static EndPoints下新增一个元素，填入服务器的IP地址，端口固定为6666，如：</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238554.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238554.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238554.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238554.png" alt="img"></a></p>
 <h2 id="4-创建服务器"><a href="#4-创建服务器" class="headerlink" title="4.创建服务器"></a>4.创建服务器</h2><p>UE的多人协同服务器可以支持局域网和公网，公网需要使用公网IP启动服务器，我这里没有条件，就使用局域网了。</p>
 <p>打开Multi-User Browser视图，点击Launch a Server或左上角第一个图标可以启动多人协同服务器，UE会启动一个命令行窗口。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238533.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238533.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238533.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238533.png" alt="img"></a></p>
 <h2 id="5-创建会话"><a href="#5-创建会话" class="headerlink" title="5.创建会话"></a>5.创建会话</h2><p>点击Multi-User Browser视图左上角第二个按钮，可以创建一个会话，双击或者右键可以加入会话，加入同一个会话的多个用户就可以在同一个场景中进行协同编辑了。</p>
 <p>加入会话之后在History栏会显示操作历时。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238080.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238080.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238080.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/202212072238080.png" alt="img"></a></p>
 <h2 id="6-其他UE加入会话"><a href="#6-其他UE加入会话" class="headerlink" title="6.其他UE加入会话"></a>6.其他UE加入会话</h2><p>在其他的电脑上，配置也基本一样，只要两个电脑是互通的，配置好后打开Multi-User Browser视图UE会自动搜索可用的服务器，连上服务器之后就可以加入会话，开启实时协同编辑了。</p>
 
                 
@@ -567,10 +567,6 @@
 
 
 
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
 
 
 

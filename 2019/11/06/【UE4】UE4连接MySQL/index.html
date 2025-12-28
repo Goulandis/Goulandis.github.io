@@ -80,7 +80,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -302,7 +302,7 @@
 <h2 id="2-激活MySQL-Integration"><a href="#2-激活MySQL-Integration" class="headerlink" title="2.激活MySQL Integration"></a>2.激活MySQL Integration</h2><p>激活插件直接在UE4中的Edit&#x2F;Plugins&#x2F;Installed下找到MySQL Integration勾选Enabled即可，勾选插件之后UE4会提示需要重启UE4才可激活，重启软件就可以激活插件了。</p>
 <h2 id="3-MySQL-Integration提供的蓝图组件"><a href="#3-MySQL-Integration提供的蓝图组件" class="headerlink" title="3.MySQL Integration提供的蓝图组件"></a>3.MySQL Integration提供的蓝图组件</h2><p>官方文档： <a target="_blank" rel="noopener" href="https://sameek4.github.io/KodeSpire/Pages/MySQLIntegration.html">https://sameek4.github.io/KodeSpire/Pages/MySQLIntegration.html</a></p>
 <h3 id="Set-Connection-Properties-Mysql连接"><a href="#Set-Connection-Properties-Mysql连接" class="headerlink" title="Set Connection Properties(Mysql连接)"></a>Set Connection Properties(Mysql连接)</h3><p>Set Connection Properties组件提供UE4对Mysql的连接服务。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224542.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224542.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224542.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224542.png" alt="img"></a></p>
 <p><strong>输入：</strong></p>
 <ul>
 <li>server：数据库的连接ip；</li>
@@ -313,7 +313,7 @@
 <li>Is Trusted：启用windows用户名和密码登录数据库。</li>
 </ul>
 <h3 id="Check-Connection-State-Mysql连接状态检查"><a href="#Check-Connection-State-Mysql连接状态检查" class="headerlink" title="Check Connection State(Mysql连接状态检查)"></a>Check Connection State(Mysql连接状态检查)</h3><p>此组件提供对Mysql连接的状态的查询服务。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224546.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224546.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224546.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224546.png" alt="img"></a></p>
 <p><strong>输出：</strong></p>
 <ul>
 <li><p>Error Message：输出错误信息；</p>
@@ -330,9 +330,9 @@
 </ul>
 </li>
 </ul>
-<h3 id="Update-Data-from-Query-Async-异步发送非查询sql命令"><a href="#Update-Data-from-Query-Async-异步发送非查询sql命令" class="headerlink" title="Update Data from Query Async(异步发送非查询sql命令)"></a>Update Data from Query Async(异步发送非查询sql命令)</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224549.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224549.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h3 id="Update-Data-from-Query-Async-异步发送非查询sql命令"><a href="#Update-Data-from-Query-Async-异步发送非查询sql命令" class="headerlink" title="Update Data from Query Async(异步发送非查询sql命令)"></a>Update Data from Query Async(异步发送非查询sql命令)</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224549.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224549.png" alt="img"></a></p>
 <p>此组件提供非查询的sql命令发送服务，即发送insert，delete，create等命令。</p>
-<h3 id="Update-Data-from-Query-同步发送非查询sql命令"><a href="#Update-Data-from-Query-同步发送非查询sql命令" class="headerlink" title="Update Data from Query (同步发送非查询sql命令)"></a>Update Data from Query (同步发送非查询sql命令)</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224602.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224602.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h3 id="Update-Data-from-Query-同步发送非查询sql命令"><a href="#Update-Data-from-Query-同步发送非查询sql命令" class="headerlink" title="Update Data from Query (同步发送非查询sql命令)"></a>Update Data from Query (同步发送非查询sql命令)</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224602.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224602.png" alt="img"></a></p>
 <p><strong>输入：</strong></p>
 <ul>
 <li>Query：sql命令字符串；</li>
@@ -351,11 +351,11 @@
 </li>
 </ul>
 <h3 id="Check-Query-EXecution-State-检查上一条命令的执行状态"><a href="#Check-Query-EXecution-State-检查上一条命令的执行状态" class="headerlink" title="Check Query EXecution State(检查上一条命令的执行状态)"></a>Check Query EXecution State(检查上一条命令的执行状态)</h3><p>此组件提任何sql命令的执行状态检查，但仅限检查Check Query EXecution State执行前的上一条sql语句的状态检查。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224607.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224607.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224607.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224607.png" alt="img"></a></p>
 <p>输出内容和Update Data from Query一致。</p>
 <h3 id="Select-Data-from-Query-Async-异步发送查询命令"><a href="#Select-Data-from-Query-Async-异步发送查询命令" class="headerlink" title="Select Data from Query Async(异步发送查询命令)"></a>Select Data from Query Async(异步发送查询命令)</h3><p>此组件仅限发送select语句，其他语句发送无效， 查询到的数据会存储到插件自带的数据结构中，可以使用下面介绍的Get Selected Table组件进行数据访问。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224613.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224613.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
-<h2 id="Get-Selected-Table-读取数据表"><a href="#Get-Selected-Table-读取数据表" class="headerlink" title="Get Selected Table(读取数据表)"></a>Get Selected Table(读取数据表)</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224619.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224619.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224613.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224613.png" alt="img"></a></p>
+<h2 id="Get-Selected-Table-读取数据表"><a href="#Get-Selected-Table-读取数据表" class="headerlink" title="Get Selected Table(读取数据表)"></a>Get Selected Table(读取数据表)</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224619.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224619.png" alt="img"></a></p>
 <p><strong>输出:</strong></p>
 <ul>
 <li>Result by Column：以列的形式返回数据，返回一个MySQLDataTableStructures的结构体数据，每一个结构体就是一列，MySQLDataTableStructures结构体包含两个成员ColumnName(列名)和ColumnData(列数据)，其中ColumnData是一个FString类型的TArray数组，数组中每一个元数就是该列中某一行的数据。</li>
@@ -371,9 +371,9 @@
 <p>上面的void Connect(FName server, FName dbName, FName userId, FName passwd);函数就是需要用蓝图实现的数据库连接函数， 这里要注意，这个函数只能在C++中声明，不可以实现，否则父类调用此函数时将无法关联到子类的重写，并且这个函数需要使用<code>BlueprintImplementableEvent</code>参数暴露给蓝图。</p>
 <p> 这里还需要注意，如果这个函数中使用了变量的引用，那么这个变量也需要使用<code>UPROPERTY(BlueprintReadWrite, Category = &quot;VariableRW&quot;)</code>暴漏给蓝图，如上面的<code>FString errorMessage;</code>一样。</p>
 <p>这样我们就可以创建一个蓝图类来继承这个类，</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224624.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224624.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224624.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224624.png" alt="img"></a></p>
 <p>然后在该蓝图类的MyBlueprint&#x2F;Functions&#x2F;Override下看到我们在C++类中声明的函数，直接重写实现即可，如：</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224631.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224631.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224631.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210811224631.png" alt="img"></a></p>
 <p>实现时候我们就可以在C++中调用这个函数了，这个函数就会通过重写关联到蓝图自类中的重写过程，如此数据库便连接上了。</p>
 
                 
@@ -625,10 +625,6 @@
 
 
 
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
 
 
 

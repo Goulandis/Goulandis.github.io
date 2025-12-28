@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -297,22 +297,22 @@
 <h2 id="1-创建Wedgit作为显示载体"><a href="#1-创建Wedgit作为显示载体" class="headerlink" title="1.创建Wedgit作为显示载体"></a>1.创建Wedgit作为显示载体</h2><p>UE4绘制直线的方式很多，这里我使用DrawLine在RenderTarget里绘制，绘制的实现放在后面说。</p>
 <p>然后我们需要让自定义框选的线显示在屏幕上，那么使用<code>wedgit</code>来显示是比较理想的，所以我们来创建一个widget，命名为<code>CustomSelectUI</code>，并为CustomSelectUI添加一个<code>image</code>作为显示的载体，命名为Background。</p>
 <h2 id="2-创建Material作为RenderTarget的显示载体"><a href="#2-创建Material作为RenderTarget的显示载体" class="headerlink" title="2.创建Material作为RenderTarget的显示载体"></a>2.创建Material作为RenderTarget的显示载体</h2><p>光一个image也是无法显示我们绘制的线的，因为我们的线是画在RenderTarget里的，而image没法直接使用RenderTarget，所以我们还需要创建一个Material来承载RenderTarget。这里创建一个Material命名为Mat_Paint。</p>
-<h2 id="3-为Material创建一个Texture"><a href="#3-为Material创建一个Texture" class="headerlink" title="3.为Material创建一个Texture"></a>3.为Material创建一个Texture</h2><p>创建的Texture是有讲究的，Texture必须是存黑色的即RPG(0,0,0)，然后分辨率可自定义。这里我使用PS制作了一个纯黑的PNG图片，并设置分辨率为2048x2048，并导入到UE4生成Texture，并命名为Mat_Transparent_Max。<br><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180719.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180719.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<h2 id="3-为Material创建一个Texture"><a href="#3-为Material创建一个Texture" class="headerlink" title="3.为Material创建一个Texture"></a>3.为Material创建一个Texture</h2><p>创建的Texture是有讲究的，Texture必须是存黑色的即RPG(0,0,0)，然后分辨率可自定义。这里我使用PS制作了一个纯黑的PNG图片，并设置分辨率为2048x2048，并导入到UE4生成Texture，并命名为Mat_Transparent_Max。<br><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180719.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180719.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180719.png">在这里插入图片描述</a></p>
 <p>使用纯黑色的原因在第四小节说明。</p>
 <h2 id="4-实现Material的作用"><a href="#4-实现Material的作用" class="headerlink" title="4.实现Material的作用"></a>4.实现Material的作用</h2><p>Material出来作为RenerTarget的载体外，还有设置笔刷的颜色，以及使背景透明的作用。</p>
 <p>先来看一下Mat_Paint的蓝图</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180725.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180725.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180725.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180725.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180725.png">在这里插入图片描述</a></p>
 <p>首先将Mat_Paint节点的<code>Details/Material/Material Domain</code>更换为User Interface，即将Material改为Material Interface。</p>
 <p>并未Mat_Paint添加一个Texture，将之前创建的Mat_Transparent_Max拖入Mat_Paint中，右键节点选择Convert to Parameter将节点参数化，并取名<code>RT_Texture</code>，这是为了后面动态设置做的准备。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180731.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180731.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180731.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180731.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180731.png">在这里插入图片描述</a></p>
 <p>然后将RT_Texture连接到Mat_Paint中的Opacity上，Opacity节点是Material控制材质透明度的接口，在Opacity中RGB(0,0,0)表示全透明，RGB(1,1,1)表示不透明，即纯黑色表示全透明，纯白色表示不透明，这就是为什么我们需要一张纯黑色的Texture的原因。因为我们需要一个透明的材质赋予image这样我们才能看到Wedgit后面的场景，使场景不会被我们的image遮挡。</p>
 <p>然后创建一个Constant3Vector，并且也将其参数化，命名为PaintColor，这为之后修改画笔颜色预留接口。将PaintColor连接到Mat_Paint的Final Color上。Final Color接口控制着材质最终显示的颜色。</p>
 <p>到这里，擦材质我们就做好了。</p>
 <h2 id="5-显示"><a href="#5-显示" class="headerlink" title="5.显示"></a>5.显示</h2><p>这里我在CustomSelectUI构造时为Background添加Mat_Paint动态材质。我们来看一下蓝图</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180738.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180738.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180738.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180738.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180738.png">在这里插入图片描述</a></p>
 <ul>
 <li>RenderMat变量是Material Instance Dynamic类型用于存储动态创建的Mat_Paint，方便之后使用；</li>
@@ -321,9 +321,9 @@
 <p>到这里显示部分就完成了。</p>
 <h1 id="二、绘制模块"><a href="#二、绘制模块" class="headerlink" title="二、绘制模块"></a>二、绘制模块</h1><h2 id="1-获取鼠标在屏幕中的位置坐标"><a href="#1-获取鼠标在屏幕中的位置坐标" class="headerlink" title="1.获取鼠标在屏幕中的位置坐标"></a>1.获取鼠标在屏幕中的位置坐标</h2><p>线的绘制我使用DrawLine函数根据鼠标点击的点来绘制点与点之间的直线，绘制模块最终要的两个步骤就是获取鼠标点击的屏幕上的点和根据点集绘制多边形。</p>
 <p>实现获取鼠标在屏幕上的位置，这里我们需要重写两个函数，OnMouseButtonUp和OnMouseButtonDown,我们来看一下蓝图。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180748.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180748.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180748.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180748.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180748.png">在这里插入图片描述</a></p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180754.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180754.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180754.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180754.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180754.png">在这里插入图片描述</a></p>
 <ul>
 <li>MouseDown用于标识鼠标的按下与抬起，true表示按下，false表示抬起。</li>
@@ -334,50 +334,50 @@
 <li>StartPoint存储绘制直线的起点的屏幕坐标。</li>
 <li>MousePositionAdaptDPI是自己封装的获取鼠标屏幕坐标的函数，之所以封装是为例修改方便。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180801.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180801.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180801.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180801.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180801.png">在这里插入图片描述</a></p>
 <p>到此，获取鼠标的屏幕坐标就实现了，接下来要根据鼠标点击确定的点集PolygonPoints绘制直线。</p>
 <h2 id="2-绘制直线"><a href="#2-绘制直线" class="headerlink" title="2.绘制直线"></a>2.绘制直线</h2><p>再绘制直线之前，需要做一些准备工作，即创建直线绘制的载体RenderTarget并用之前创建好的RenderMat承载，然后将RenderMat绑定到Background上显示。这里我绑定到Setup按钮的OnClicked事件下。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180807.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180807.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180807.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180807.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180807.png">在这里插入图片描述</a></p>
 <ul>
 <li><p>CreateCanvasRenderTarget2D函数负责创建RenderTarget，RenderTarget可以直接使用引擎默认的，也可以自己创建自定义的，这里我使用引擎默认的。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180812.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180812.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180812.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180812.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180812.png">在这里插入图片描述</a></p>
 <p>Width和Height控制着RenderTarget的长宽比例，超出这个比例的部分屏幕将无法绘制，如：</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180820.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180820.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180820.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180820.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180820.png">在这里插入图片描述</a></p>
 <p>红框部分的屏幕比例就是1920：1080，超出着部分的屏幕将无法绘制，当然在全屏运行的情况下不会出现这种问题。出现这个问题是因为我的计算机屏幕尺寸就是1920：1080，运行时，UE4的实际运行窗口是蓝色部分，很明显由于windows菜单栏和UE运行窗口的菜单栏占据了屏幕的部分像素，所以UE的实际运行窗口是蓝色部分，其比例显然不是1920：1080，所以超出部分就没办法绘制了。这个RenderTarget的比例可以根据自己的实际需求更改。</p>
 </li>
 <li><p>SetupCustomSelect函数负责绘制的启动与关闭</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180828.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180828.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180828.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180828.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180828.png">在这里插入图片描述</a></p>
 <p>准备工作结束后便可以开始绘制直线了，直线的绘制放在Tick函数下，每帧绘制。</p>
 </li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180834.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180834.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180834.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180834.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180834.png">在这里插入图片描述</a></p>
 <ul>
 <li><p>LineThickness控制直线绘制时的粗细程度。</p>
 </li>
 <li><p>StartPaint是具体的直线绘制函数。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180840.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180840.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180840.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180840.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180840.png">在这里插入图片描述</a></p>
 <p>其中RenderColor必须设置纯白色，只有这样绘制出来的直线才是不透明的。</p>
 </li>
 </ul>
 <p>绘制直线这里有一点需要注意，即需要设置我们Background的锚点为左上角，因为RenderTarget的原点在左上角，只有这样鼠标点击的位置才会和绘制的位置匹配，否则会出现位置偏移的问题。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180848.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180848.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180848.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180848.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180848.png">在这里插入图片描述</a></p>
 <h2 id="3-清除绘制内容"><a href="#3-清除绘制内容" class="headerlink" title="3.清除绘制内容"></a>3.清除绘制内容</h2><p>考虑到会有绘制出错的情况，所以添加一个清除绘制内容的功能。清除绘制内容原理比较简单，只需要清除RenderTarget缓存和PolygonPoints点击即可。</p>
 <p>这里我绑定在Delete按钮的OnClicked事件下。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180854.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180854.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180854.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180854.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180854.png">在这里插入图片描述</a></p>
-<h2 id="4-结束绘制"><a href="#4-结束绘制" class="headerlink" title="4.结束绘制"></a>4.结束绘制</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180859.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180859.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<h2 id="4-结束绘制"><a href="#4-结束绘制" class="headerlink" title="4.结束绘制"></a>4.结束绘制</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180859.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180859.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180859.png">在这里插入图片描述</a></p>
 <p>结束绘制之后就要开始计算框选内容了，SureSelect函数负责这方面的实现，计算后面讲解。</p>
 <p>结束绘制之后需要将最后一个点和第一个点连接来，确保多边形是一个封闭的多边形。EndPaint函数负责这个功能的实现。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180904.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180904.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180904.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180904.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180904.png">在这里插入图片描述</a></p>
 <h1 id="三、计算"><a href="#三、计算" class="headerlink" title="三、计算"></a>三、计算</h1><p>计算这里需要用到C++了，在蓝图的SureSelect函数里调用C++的计算函数。</p>
 <p>创建一个继承自Actor的C++类，并命名为CustomSelectActor，下面贴出C++源码：</p>
@@ -395,7 +395,7 @@
 <li><p>PNPoly函数使用PNPoly算法判断一个点是否在多边形内部。</p>
 </li>
 <li><p>ProjectWorldLocationToWidgetPosition函数是一个由C++父类声明，由蓝图子类实现的函数，负责将场景中的Actor的边界盒子的点的空间坐标投影到屏幕坐标。之所以使用这种方式是因为ProjectWorldLocationToWidgetPosition蓝图节点没有C++版本，而必须使用ProjectWorldLocationToWidgetPosition蓝图节点的原因是ProjectWorldLocationToWidgetPosition蓝图节点投影出来的坐标会根据屏幕尺寸变化而自动适应，其他的空间坐标转屏幕坐标的蓝图节点在非全屏与全屏下会出现位置偏移。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180923.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180923.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180923.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180923.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180923.png">在这里插入图片描述</a></p>
 <p>所以这里需要创建一个继承自CustomSelectActor的蓝图子类来重写ProjectWorldLocationToWidgetPosition函数。</p>
 </li>
@@ -409,20 +409,20 @@
 </li>
 </ul>
 <p>至此多边形框选功能就完全实现了。来看一下效果：</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180929.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180929.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180929.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180929.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180929.png">在这里插入图片描述</a></p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180935.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180935.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述">在这里插入图片描述</a><br><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180942.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180942.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述">在这里插入图片描述</a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180935.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180935.png" alt="在这里插入图片描述">在这里插入图片描述</a><br><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180942.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180942.png" alt="在这里插入图片描述">在这里插入图片描述</a></p>
 <h1 id="四、将功能包成UE4插件"><a href="#四、将功能包成UE4插件" class="headerlink" title="四、将功能包成UE4插件"></a>四、将功能包成UE4插件</h1><p>如果需要将功能打包成插件，那么就需要将CustomSelectActor的C++类创建在插件里。</p>
-<h2 id="1-创建一个空插件"><a href="#1-创建一个空插件" class="headerlink" title="1.创建一个空插件"></a>1.创建一个空插件</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180952.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180952.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<h2 id="1-创建一个空插件"><a href="#1-创建一个空插件" class="headerlink" title="1.创建一个空插件"></a>1.创建一个空插件</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180952.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180952.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180952.png">在这里插入图片描述</a></p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180958.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180958.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述">在这里插入图片描述</a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180958.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514180958.png" alt="在这里插入图片描述">在这里插入图片描述</a></p>
 <p>创建之后需要在VS中编一下项目，然后关闭引擎，重新打开项目，以便引擎重新加载dll文件，因为插件不属于引擎的一部分，所以引擎没办法直接热加载插件内容。</p>
 <h2 id="2-在插件文件夹下创建C-类"><a href="#2-在插件文件夹下创建C-类" class="headerlink" title="2.在插件文件夹下创建C++类"></a>2.在插件文件夹下创建C++类</h2><p>我们需要将CustomSelectActor类创建在插件文件夹下，创建好空插件后，再创建C++类时可以选择创建文件夹。</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514181004.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514181004.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514181004.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514181004.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514181004.png">在这里插入图片描述</a></p>
 <p>然后按一、二、三的步骤实现功能即可。</p>
 <h2 id="3-打包插件"><a href="#3-打包插件" class="headerlink" title="3.打包插件"></a>3.打包插件</h2><p>进入插件管理点集打包</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514181009.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514181009.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514181009.png"><img src="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514181009.png" alt="在这里插入图片描述"></a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Goulandis/ImgLib/main/img/20210514181009.png">在这里插入图片描述</a></p>
 <p>至此插件就打包好了。</p>
 <p>参考博客：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36369675/article/details/88419361">https://blog.csdn.net/weixin_36369675/article/details/88419361</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/anningwang/p/7581545.html">https://www.cnblogs.com/anningwang/p/7581545.html</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/TenosDoIt/p/4047211.html">https://www.cnblogs.com/TenosDoIt/p/4047211.html</a></p>
@@ -676,10 +676,6 @@
 
 
 
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
 
 
 
